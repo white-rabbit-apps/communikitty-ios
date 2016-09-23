@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Walkthrough View Controller-->
+        <scene sceneID="fy0-C2-3my">
+            <objects>
+                <viewController storyboardIdentifier="walk" id="H2S-Sd-doW" customClass="BWWalkthroughViewController" customModule="BWWalkthrough" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eTc-Le-aKh"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cns-xt-niI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GGf-Yk-TIz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="UMj-xb-Wu4">
+                                <rect key="frame" x="280" y="540" width="39" height="37"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ici-5n-Gqu">
+                                <rect key="frame" x="536" y="30" width="48" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Skip">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="H2S-Sd-doW" eventType="touchUpInside" id="m8i-X4-klX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="UMj-xb-Wu4" secondAttribute="centerX" id="6De-D9-yOE"/>
+                            <constraint firstItem="eTc-Le-aKh" firstAttribute="top" secondItem="UMj-xb-Wu4" secondAttribute="bottom" constant="-280" id="8vO-Qx-MTd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ici-5n-Gqu" secondAttribute="trailing" constant="-5" id="Eye-cg-7tc"/>
+                            <constraint firstItem="Cns-xt-niI" firstAttribute="top" secondItem="UMj-xb-Wu4" secondAttribute="bottom" constant="22.5" id="u7y-9V-o6e"/>
+                            <constraint firstItem="ici-5n-Gqu" firstAttribute="top" secondItem="eTc-Le-aKh" secondAttribute="bottom" constant="8" id="zQN-mB-Qsi"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="ici-5n-Gqu"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="u7y-9V-o6e"/>
+                                <exclude reference="Eye-cg-7tc"/>
+                                <exclude reference="zQN-mB-Qsi"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="ici-5n-Gqu"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="u7y-9V-o6e"/>
+                                <include reference="Eye-cg-7tc"/>
+                                <include reference="zQN-mB-Qsi"/>
+                                <exclude reference="8vO-Qx-MTd"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="ici-5n-Gqu" id="jjr-uo-zCw"/>
+                        <outlet property="pageControl" destination="UMj-xb-Wu4" id="dNf-5z-8Fo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="88h-l0-u1n" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3489" y="-2620.5"/>
+        </scene>
+        <!--Walkthrough Page View Controller-->
+        <scene sceneID="d2p-Wi-Cg3">
+            <objects>
+                <viewController storyboardIdentifier="walk2" id="q9m-Lm-aqG" customClass="BWWalkthroughPageViewController" customModule="BWWalkthrough" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZDt-9j-QwY"/>
+                        <viewControllerLayoutGuide type="bottom" id="VZN-Y0-0Zl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="s2v-FS-4Px">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="bg_walkthrough_b" translatesAutoresizingMaskIntoConstraints="NO" id="HdC-d5-s0q">
+                                <rect key="frame" x="1" y="0.0" width="400" height="600"/>
+                                <color key="backgroundColor" red="0.83921568629999999" green="0.37647058820000001" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HdC-d5-s0q" secondAttribute="height" multiplier="9:16" id="fZ4-dy-wrg"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fZ4-dy-wrg"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="fZ4-dy-wrg"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.44996994410000002" blue="0.59837911109999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="HdC-d5-s0q" firstAttribute="height" secondItem="s2v-FS-4Px" secondAttribute="height" id="88V-3h-V6E"/>
+                            <constraint firstAttribute="centerX" secondItem="HdC-d5-s0q" secondAttribute="centerX" id="KaD-Tg-2dr"/>
+                            <constraint firstItem="HdC-d5-s0q" firstAttribute="centerY" secondItem="s2v-FS-4Px" secondAttribute="centerY" id="Zde-nj-pJO"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="88V-3h-V6E"/>
+                                <exclude reference="Zde-nj-pJO"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="88V-3h-V6E"/>
+                                <include reference="Zde-nj-pJO"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6yq-UI-vqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2122.5" y="-2626.5"/>
+        </scene>
+        <!--Walkthrough Page-->
+        <scene sceneID="3II-ae-7L8">
+            <objects>
+                <viewController storyboardIdentifier="walk0" id="zvZ-0K-1iO" customClass="WalkthroughPage" customModule="CommuniKitty" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Tb-5F-swm"/>
+                        <viewControllerLayoutGuide type="bottom" id="mdc-vo-ghg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rhq-VN-S5L">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walkthrough_bg5" translatesAutoresizingMaskIntoConstraints="NO" id="LKP-u1-WFk">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="LKP-u1-WFk" secondAttribute="height" multiplier="9:16" id="eEa-o4-srY"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="eEa-o4-srY"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="eEa-o4-srY"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CxT-8a-QxX">
+                                <rect key="frame" x="4" y="407" width="592" height="193"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RnG-xG-jFV">
+                                        <rect key="frame" x="536" y="30" width="48" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="Log In Right Meow!">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeWalkthrough:" destination="zvZ-0K-1iO" eventType="touchUpInside" id="dcW-b4-swR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.85067111559999997" green="0.94226300600000001" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="RnG-xG-jFV" firstAttribute="centerY" secondItem="CxT-8a-QxX" secondAttribute="centerY" id="ZOM-Dk-1ec"/>
+                                    <constraint firstItem="RnG-xG-jFV" firstAttribute="centerX" secondItem="CxT-8a-QxX" secondAttribute="centerX" id="h32-Z3-Q68"/>
+                                    <constraint firstAttribute="height" constant="193" id="mJl-1e-rzO"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="RnG-xG-jFV"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="ZOM-Dk-1ec"/>
+                                        <exclude reference="h32-Z3-Q68"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="RnG-xG-jFV"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="ZOM-Dk-1ec"/>
+                                        <include reference="h32-Z3-Q68"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.32980523950000001" green="0.74408280770000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="LKP-u1-WFk" firstAttribute="centerY" secondItem="rhq-VN-S5L" secondAttribute="centerY" id="4yI-vy-pDq"/>
+                            <constraint firstItem="mdc-vo-ghg" firstAttribute="top" secondItem="CxT-8a-QxX" secondAttribute="bottom" id="7Ub-Ud-LeF"/>
+                            <constraint firstItem="CxT-8a-QxX" firstAttribute="leading" secondItem="rhq-VN-S5L" secondAttribute="leadingMargin" constant="-16" id="9Bu-y3-UEK"/>
+                            <constraint firstItem="LKP-u1-WFk" firstAttribute="centerX" secondItem="rhq-VN-S5L" secondAttribute="centerX" id="XMD-dY-XTi"/>
+                            <constraint firstItem="LKP-u1-WFk" firstAttribute="height" secondItem="rhq-VN-S5L" secondAttribute="height" id="pNH-sW-YIf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CxT-8a-QxX" secondAttribute="trailing" constant="-16" id="tD7-NZ-3bL"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="LKP-u1-WFk"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="4yI-vy-pDq"/>
+                                <exclude reference="XMD-dY-XTi"/>
+                                <exclude reference="pNH-sW-YIf"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="LKP-u1-WFk"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="4yI-vy-pDq"/>
+                                <include reference="XMD-dY-XTi"/>
+                                <include reference="pNH-sW-YIf"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K9H-Cv-C5u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-12" y="-2620.5"/>
+        </scene>
+        <!--Walkthrough Page View Controller-->
+        <scene sceneID="Tox-k2-krK">
+            <objects>
+                <viewController storyboardIdentifier="walk3" id="5pp-2w-Faf" customClass="BWWalkthroughPageViewController" customModule="BWWalkthrough" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6B1-eZ-1oT"/>
+                        <viewControllerLayoutGuide type="bottom" id="vjL-iD-VAm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="f36-cm-3h2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="bg_walkthrough_c" translatesAutoresizingMaskIntoConstraints="NO" id="EAc-57-mXv">
+                                <rect key="frame" x="131" y="0.0" width="337.5" height="600"/>
+                                <color key="backgroundColor" red="0.48627450979999998" green="0.1450980392" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EAc-57-mXv" secondAttribute="height" multiplier="9:16" id="19W-VT-4yg"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="19W-VT-4yg"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="19W-VT-4yg"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.39651343319999999" blue="0.3770228987" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="EAc-57-mXv" firstAttribute="centerY" secondItem="f36-cm-3h2" secondAttribute="centerY" id="90d-VJ-nqG"/>
+                            <constraint firstAttribute="centerX" secondItem="EAc-57-mXv" secondAttribute="centerX" id="e5F-qd-Y4E"/>
+                            <constraint firstItem="EAc-57-mXv" firstAttribute="height" secondItem="f36-cm-3h2" secondAttribute="height" id="exa-JW-7rN"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="90d-VJ-nqG"/>
+                                <exclude reference="exa-JW-7rN"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="90d-VJ-nqG"/>
+                                <include reference="exa-JW-7rN"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RAv-ch-46g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1438.5" y="-2626.5"/>
+        </scene>
+        <!--Walkthrough Page View Controller-->
+        <scene sceneID="Owe-YB-Wcg">
+            <objects>
+                <viewController storyboardIdentifier="walk1" id="rfc-tn-fh7" customClass="BWWalkthroughPageViewController" customModule="BWWalkthrough" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DhA-Sq-1Ik"/>
+                        <viewControllerLayoutGuide type="bottom" id="efG-xM-RdV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XWm-MC-f85">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_walkthrough_a" translatesAutoresizingMaskIntoConstraints="NO" id="s6z-qM-Xf9">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.90980392160000001" green="0.76862745099999996" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="s6z-qM-Xf9" secondAttribute="height" multiplier="400:711" id="Pd6-h2-abo"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Pd6-h2-abo"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Pd6-h2-abo"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.32980523950000001" green="0.74408280770000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="s6z-qM-Xf9" firstAttribute="height" secondItem="XWm-MC-f85" secondAttribute="height" id="Pbj-wW-SsM"/>
+                            <constraint firstItem="s6z-qM-Xf9" firstAttribute="centerX" secondItem="XWm-MC-f85" secondAttribute="centerX" id="ka5-Su-UrO"/>
+                            <constraint firstItem="s6z-qM-Xf9" firstAttribute="centerY" secondItem="XWm-MC-f85" secondAttribute="centerY" id="zZ9-o5-xeQ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="s6z-qM-Xf9"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Pbj-wW-SsM"/>
+                                <exclude reference="ka5-Su-UrO"/>
+                                <exclude reference="zZ9-o5-xeQ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="s6z-qM-Xf9"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Pbj-wW-SsM"/>
+                                <include reference="ka5-Su-UrO"/>
+                                <include reference="zZ9-o5-xeQ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E1j-lg-SnF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2800.5" y="-2626.5"/>
+        </scene>
+        <!--Walkthrough Page View Controller-->
+        <scene sceneID="Q1G-8M-ieC">
+            <objects>
+                <viewController storyboardIdentifier="walk4" id="JP0-rs-wcN" customClass="BWWalkthroughPageViewController" customModule="BWWalkthrough" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="guf-Gm-UOB"/>
+                        <viewControllerLayoutGuide type="bottom" id="gz5-1s-YTV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x5v-nP-C8L">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="bg_walkthrough_d" translatesAutoresizingMaskIntoConstraints="NO" id="X5y-pz-3Zg">
+                                <rect key="frame" x="131" y="0.0" width="337.5" height="600"/>
+                                <color key="backgroundColor" red="0.25098039220000001" green="0.1450980392" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="X5y-pz-3Zg" secondAttribute="height" multiplier="9:16" id="5fU-dQ-WsP"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5fU-dQ-WsP"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="5fU-dQ-WsP"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.39651343319999999" blue="0.3770228987" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="X5y-pz-3Zg" firstAttribute="centerY" secondItem="x5v-nP-C8L" secondAttribute="centerY" id="CQo-MZ-K8h"/>
+                            <constraint firstAttribute="centerX" secondItem="X5y-pz-3Zg" secondAttribute="centerX" id="HWM-t9-CES"/>
+                            <constraint firstItem="X5y-pz-3Zg" firstAttribute="height" secondItem="x5v-nP-C8L" secondAttribute="height" id="UAx-Ey-7Xf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="CQo-MZ-K8h"/>
+                                <exclude reference="UAx-Ey-7Xf"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="CQo-MZ-K8h"/>
+                                <include reference="UAx-Ey-7Xf"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sqc-Nr-Fjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-706.5" y="-2620.5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bg_walkthrough_a" width="375" height="667"/>
+        <image name="bg_walkthrough_b" width="375" height="667"/>
+        <image name="bg_walkthrough_c" width="375" height="667"/>
+        <image name="bg_walkthrough_d" width="375" height="667"/>
+        <image name="walkthrough_bg5" width="375" height="667"/>
+    </resources>
+</document>
