@@ -180,21 +180,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         PFFacebookUtils.facebookLoginManager().loginBehavior = FBSDKLoginBehavior.systemAccount
         
         PFFacebookUtils.logInInBackground(withReadPermissions: self.permissions) { (user: PFUser?, error: Error?) in
-            if user == nil {
-                NSLog("Uh oh. The user cancelled the Facebook login.")
+            self.hideLoader()
+            if error != nil {
+                self.showError(message: error!.localizedDescription)
             } else if user!.isNew {
                 NSLog("User signed up and logged in through Facebook! \(user!.username)")
                 self.saveUserDataFromFacebook()
             } else {
                 NSLog("User logged in through Facebook! \(user!.username)")
-                self.goToHome()
+                self.closeAndRun(completion: {
+                    self.completionBlock()
+                    AppDelegate.getAppDelegate().postLogin()
+                })
+//                self.goToHome()
                 //                self.saveUserDataFromFacebook()
             }
-            self.hideLoader()
-            self.closeAndRun(completion: {
-                self.completionBlock()
-                AppDelegate.getAppDelegate().postLogin()
-            })
         }
         
     }

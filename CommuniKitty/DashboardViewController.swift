@@ -206,7 +206,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
         dashboard.showRefreshControl = true
         dashboard.parentView = self
         
-//        self.dashboard.tableView.reloadData()
+        self.dashboard.tableView.reloadData()
     }
 
     

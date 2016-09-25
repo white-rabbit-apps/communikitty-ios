@@ -154,6 +154,7 @@
 		ED4F8EB61D9353EF00BEB208 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-ExtraLight.ttf"; path = "CommuniKitty/Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
 		ED4F8EB71D9353EF00BEB208 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Light.ttf"; path = "CommuniKitty/Nunito-Light.ttf"; sourceTree = "<group>"; };
 		ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Regular.ttf"; path = "CommuniKitty/Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommuniKitty.entitlements; sourceTree = "<group>"; };
 		EDEC77A31D91A703007CF613 /* CommuniKitty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommuniKitty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEC77A61D91A703007CF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEC77AD1D91A703007CF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -332,6 +333,7 @@
 		EDEC77A51D91A703007CF613 /* CommuniKitty */ = {
 			isa = PBXGroup;
 			children = (
+				ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */,
 				EDEC77A61D91A703007CF613 /* AppDelegate.swift */,
 				ED4F8EA81D93503000BEB208 /* Main.storyboard */,
 				EDEC77AD1D91A703007CF613 /* Assets.xcassets */,
@@ -504,6 +506,14 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = AZC38JWQNP;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					EDEC77B61D91A704007CF613 = {
 						CreatedOnToolsVersion = 8.0;
@@ -835,10 +845,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CommuniKitty/CommuniKitty.entitlements;
 				DEVELOPMENT_TEAM = AZC38JWQNP;
 				INFOPLIST_FILE = CommuniKitty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communiKitty;
+				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -851,10 +862,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CommuniKitty/CommuniKitty.entitlements;
 				DEVELOPMENT_TEAM = AZC38JWQNP;
 				INFOPLIST_FILE = CommuniKitty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communiKitty;
+				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

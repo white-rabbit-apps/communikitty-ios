@@ -15,11 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Kitty photos!</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Take photos of your kitty!</string>
+	<string>0.4</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -40,6 +36,13 @@
 	<string>597512767097778</string>
 	<key>FacebookDisplayName</key>
 	<string>CommuniKitty</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -115,6 +118,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Take photos of your kitty!</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Kitty photos!</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Nunito-Regular.ttf</string>

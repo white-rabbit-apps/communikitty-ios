@@ -55,6 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         initializeLibraries(launchOptions: launchOptions as [NSObject : AnyObject]?)
         
+        if(WRUser.current() != nil) {
+            self.postLogin()
+        }
+        
         initializeView()
         loadMainController()
         
@@ -125,10 +129,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func loadBackgroundData() {
         DispatchQueue.main.async() { [unowned self] in
-            if(WRUser.current() != nil) {
-                self.postLogin()
-            }
-            
             self.loadBreeds()
             self.loadCoats()
             self.loadShelters()
