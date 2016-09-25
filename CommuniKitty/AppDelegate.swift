@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var hasMemorial: Bool = false
     var hasFosters: Bool = false
-    
+    var hasRegisteredForPush = false
     
     public static func getAppDelegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
@@ -125,6 +125,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func loadBackgroundData() {
         DispatchQueue.main.async() { [unowned self] in
+            if(WRUser.current() != nil) {
+                self.postLogin()
+            }
+            
             self.loadBreeds()
             self.loadCoats()
             self.loadShelters()
@@ -292,6 +296,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+    func postLogin() {
+        if self.myAnimalsArray == nil {
+            self.loadMyAnimals()
+        }
+
+        if(!self.hasRegisteredForPush) {
+            self.registerForPushNotifications()
+            self.hasRegisteredForPush = true
+        }
+    }
+    
     
     func loadMainController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -349,12 +364,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window.makeKeyAndVisible()
     }
     
+    
+    
     ///
     /// Data Loaders
     /// ==========
     ///
-    
-    
     
     /**
      Load all animals that the current user is an owner or foster of.

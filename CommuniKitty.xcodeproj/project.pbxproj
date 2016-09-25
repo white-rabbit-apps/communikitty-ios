@@ -23,6 +23,7 @@
 		ED36AF131D928042007CC1F9 /* BreedsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36AF121D928042007CC1F9 /* BreedsTableViewController.swift */; };
 		ED36AF151D928219007CC1F9 /* BreedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36AF141D928219007CC1F9 /* BreedDetailViewController.swift */; };
 		ED36AF171D92DA8E007CC1F9 /* CoatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36AF161D92DA8E007CC1F9 /* CoatsTableViewController.swift */; };
+		ED3A845E1D9750BE00EDED2A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A845D1D9750BE00EDED2A /* HomeViewController.swift */; };
 		ED4512201D92530500B95BB5 /* AnimalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45121F1D92530500B95BB5 /* AnimalDetailViewController.swift */; };
 		ED4512221D9255CF00B95BB5 /* AnimalTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512211D9255CF00B95BB5 /* AnimalTimelineTableViewController.swift */; };
 		ED4512241D92561200B95BB5 /* AnimalAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512231D92561200B95BB5 /* AnimalAboutViewController.swift */; };
@@ -120,6 +121,7 @@
 		ED36AF121D928042007CC1F9 /* BreedsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreedsTableViewController.swift; sourceTree = "<group>"; };
 		ED36AF141D928219007CC1F9 /* BreedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreedDetailViewController.swift; sourceTree = "<group>"; };
 		ED36AF161D92DA8E007CC1F9 /* CoatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoatsTableViewController.swift; sourceTree = "<group>"; };
+		ED3A845D1D9750BE00EDED2A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ED45121F1D92530500B95BB5 /* AnimalDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalDetailViewController.swift; sourceTree = "<group>"; };
 		ED4512211D9255CF00B95BB5 /* AnimalTimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalTimelineTableViewController.swift; sourceTree = "<group>"; };
 		ED4512231D92561200B95BB5 /* AnimalAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalAboutViewController.swift; sourceTree = "<group>"; };
@@ -147,11 +149,11 @@
 		ED4F8EAC1D9351BB00BEB208 /* Store.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
 		ED4F8EAD1D9351BB00BEB208 /* Learn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Learn.storyboard; sourceTree = "<group>"; };
 		ED4F8EAE1D9351BB00BEB208 /* Walkthrough.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Walkthrough.storyboard; sourceTree = "<group>"; };
-		ED4F8EB41D9353EF00BEB208 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
-		ED4F8EB51D9353EF00BEB208 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
-		ED4F8EB61D9353EF00BEB208 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
-		ED4F8EB71D9353EF00BEB208 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Light.ttf"; sourceTree = "<group>"; };
-		ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		ED4F8EB41D9353EF00BEB208 /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Black.ttf"; path = "CommuniKitty/Nunito-Black.ttf"; sourceTree = "<group>"; };
+		ED4F8EB51D9353EF00BEB208 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Bold.ttf"; path = "CommuniKitty/Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		ED4F8EB61D9353EF00BEB208 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-ExtraLight.ttf"; path = "CommuniKitty/Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
+		ED4F8EB71D9353EF00BEB208 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Light.ttf"; path = "CommuniKitty/Nunito-Light.ttf"; sourceTree = "<group>"; };
+		ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Regular.ttf"; path = "CommuniKitty/Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		EDEC77A31D91A703007CF613 /* CommuniKitty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommuniKitty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEC77A61D91A703007CF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEC77AD1D91A703007CF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -261,6 +263,15 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
+		ED3A84601D97843200EDED2A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ED15C1491D94AA7900B1B895 /* Sounds */,
+				ED4F8EBE1D9353F700BEB208 /* Fonts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		ED4512491D926FCF00B95BB5 /* Locations */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,12 +304,12 @@
 				ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */,
 			);
 			name = Fonts;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		EDEC779A1D91A703007CF613 = {
 			isa = PBXGroup;
 			children = (
-				ED4F8EBE1D9353F700BEB208 /* Fonts */,
 				EDEC77A51D91A703007CF613 /* CommuniKitty */,
 				EDEC77BA1D91A704007CF613 /* CommuniKittyTests */,
 				EDEC77C51D91A704007CF613 /* CommuniKittyUITests */,
@@ -331,8 +342,8 @@
 				ED4512491D926FCF00B95BB5 /* Locations */,
 				ED3483741D93A59300632D90 /* Storyboards */,
 				EDEC78041D9224C0007CF613 /* Models */,
-				ED15C1491D94AA7900B1B895 /* Sounds */,
 				EDEC77E11D92224C007CF613 /* Extensions */,
+				ED3A84601D97843200EDED2A /* Resources */,
 			);
 			path = CommuniKitty;
 			sourceTree = "<group>";
@@ -408,6 +419,7 @@
 				ED4512381D926A7400B95BB5 /* DashboardTableViewController.swift */,
 				ED4512391D926A7400B95BB5 /* DashboardWidgets.swift */,
 				ED4512351D9267B000B95BB5 /* ExploreViewController.swift */,
+				ED3A845D1D9750BE00EDED2A /* HomeViewController.swift */,
 				ED4512251D925BC500B95BB5 /* TimelineEntryFormViewController.swift */,
 				ED36AF101D927B28007CC1F9 /* TimelineEntryCommentsViewController.swift */,
 				ED45122F1D92631A00B95BB5 /* TimelineEntryDetailViewController.swift */,
@@ -645,6 +657,7 @@
 				ED36AF171D92DA8E007CC1F9 /* CoatsTableViewController.swift in Sources */,
 				EDEC78011D9224BB007CF613 /* WRUser.swift in Sources */,
 				ED36AF151D928219007CC1F9 /* BreedDetailViewController.swift in Sources */,
+				ED3A845E1D9750BE00EDED2A /* HomeViewController.swift in Sources */,
 				EDEC77DC1D922246007CF613 /* Extensions.swift in Sources */,
 				ED4512321D92661700B95BB5 /* UserFormViewController.swift in Sources */,
 				ED45123B1D926A7400B95BB5 /* DashboardTableViewController.swift in Sources */,

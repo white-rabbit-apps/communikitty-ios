@@ -11,7 +11,7 @@ pod 'CLImageEditor', :git => 'https://github.com/white-rabbit-apps/CLImageEditor
     pod 'CLImageEditor/SplashTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
 #    pod 'GooglePlacesRow', :git => 'https://github.com/white-rabbit-apps/GooglePlacesRow', :branch => 'master'
 
-    pod 'Fusuma', :git => 'https://github.com/pruthvikar/Fusuma.git', :branch => 'swift3'
+    pod 'Fusuma', :git => 'https://github.com/andreyrd/Fusuma.git', :branch => 'swift3'
 
     pod 'Parse', '~> 1.13.0'
     pod 'ParseUI'

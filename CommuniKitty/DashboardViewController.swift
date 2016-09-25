@@ -70,31 +70,41 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
     override func viewWillAppear(_ animated: Bool) {
         self.setUpMenuBarController(title: "CommuniKitty")
         self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "button_notifications", action: #selector(DashboardViewController.showNotifications), height: 25, width: 20)
+        
+        if(self.isLoggedIn()) {
+            self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "button_settings", action: #selector(DashboardViewController.openUserSettings), height: 25, width: 25)
+            self.dashboard.refresh(self)
+        }
     }
     
     /**
      Show the notifications screen
      */
     func showNotifications() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let activityNav = storyboard.instantiateViewController(withIdentifier: "ActivityNavigation") as! UINavigationController
-        self.present(activityNav, animated: true, completion: nil)
+        self.checkForUser {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let activityNav = storyboard.instantiateViewController(withIdentifier: "ActivityNavigation") as! UINavigationController
+            self.present(activityNav, animated: true, completion: nil)
+        }
     }
     
     /**
      Open the camera screen
      */
     @IBAction func takeFusumaPhoto() {
-        let fusuma = FusumaViewController()
-       
-        fusuma.delegate = self
-        
-        fusuma.modeOrder = .cameraFirst
-        
-        fusuma.transitioningDelegate = transitioningDelegate
-        fusuma.modalPresentationStyle = .custom
-        
-        present(fusuma, animated: true, completion: nil)
+        self.checkForUser {
+            self.checkCameraAuth()
+            
+            let fusuma = FusumaViewController()
+            fusuma.delegate = self
+            
+            fusuma.modeOrder = .CameraFirst
+            
+            fusuma.transitioningDelegate = self.transitioningDelegate
+            fusuma.modalPresentationStyle = .custom
+            
+            self.present(fusuma, animated: true, completion: nil)
+        }
     }
     
     /**
@@ -111,6 +121,10 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
     }
     
     func fusumaImageSelected(_ image: UIImage) {
+        self.modalTransitionStyle = .coverVertical
+        self.dismiss(animated: false, completion: { () -> Void in
+            self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
+        })
     }
     
     
@@ -166,7 +180,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
     }
     
     func loadDashboard() {
-        var widgets: [DashboardWidget] = [FeaturedPhotosDashboardWidget(), FollowingPhotosDashboardWidget()]
+        var widgets: [DashboardWidget] = [FeaturedPhotosDashboardWidget(), FollowingPhotosDashboardWidget(), MyAnimalsDashboardWidget()]
         
         if AppDelegate.getAppDelegate().hasFosters {
             let fostersWidget = UserAnimalsDashboardWidget()

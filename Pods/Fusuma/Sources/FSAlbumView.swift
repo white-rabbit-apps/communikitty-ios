@@ -14,7 +14,7 @@ import Photos
     func albumViewCameraRollUnauthorized()
 }
 
-final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, PHPhotoLibraryChangeObserver, UIGestureRecognizerDelegate {
+final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PHPhotoLibraryChangeObserver, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageCropView: FSImageCropView!
@@ -92,7 +92,7 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
             
             changeImage(images[0])
             collectionView.reloadData()
-            collectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UICollectionViewScrollPosition())
+            collectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: [])
         }
         
         PHPhotoLibrary.shared().register(self)
@@ -237,7 +237,7 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
         let currentTag = cell.tag + 1
         cell.tag = currentTag
         
-        let asset = self.images[(indexPath as NSIndexPath).item]
+        let asset = self.images[indexPath.item]
         self.imageManager?.requestImage(for: asset,
             targetSize: cellSize,
             contentMode: .aspectFill,
@@ -263,7 +263,7 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
         return images == nil ? 0 : images.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = (collectionView.frame.width - 3) / 4
         return CGSize(width: width, height: width)
@@ -271,7 +271,7 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        changeImage(images[(indexPath as NSIndexPath).row])
+        changeImage(images[indexPath.row])
         
         imageCropView.changeScrollable(true)
         
@@ -302,7 +302,7 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         
         DispatchQueue.main.async {
-            
+
             let collectionChanges = changeInstance.changeDetails(for: self.images)
             if collectionChanges != nil {
                 
@@ -358,14 +358,14 @@ internal extension IndexSet {
     func aapl_indexPathsFromIndexesWithSection(_ section: Int) -> [IndexPath] {
         var indexPaths: [IndexPath] = []
         indexPaths.reserveCapacity(self.count)
-        (self as NSIndexSet).enumerate({idx, stop in
+        self.forEach({ idx in
             indexPaths.append(IndexPath(item: idx, section: section))
         })
         return indexPaths
     }
 }
 
-private extension FSAlbumView {
+fileprivate extension FSAlbumView {
     
     func changeImage(_ asset: PHAsset) {
         
@@ -393,7 +393,7 @@ private extension FSAlbumView {
     }
     
     // Check the status of authorization for PHPhotoLibrary
-    func checkPhotoAuth() {
+    fileprivate func checkPhotoAuth() {
         
         PHPhotoLibrary.requestAuthorization { (status) -> Void in
             switch status {
@@ -405,7 +405,7 @@ private extension FSAlbumView {
                 }
                 
             case .restricted, .denied:
-                DispatchQueue.main.async(execute: { () -> Void in
+                DispatchQueue.main.async(execute: {
                     
                     self.delegate?.albumViewCameraRollUnauthorized()
                     
@@ -493,7 +493,7 @@ private extension FSAlbumView {
         var assets: [PHAsset] = []
         assets.reserveCapacity(indexPaths.count)
         for indexPath in indexPaths {
-            let asset = self.images[(indexPath as NSIndexPath).item]
+            let asset = self.images[indexPath.item]
             assets.append(asset)
         }
         return assets

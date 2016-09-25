@@ -16,6 +16,10 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Kitty photos!</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Take photos of your kitty!</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

@@ -17,6 +17,7 @@ import Contacts
 import ActiveLabel
 import MessageUI
 import PagingMenuController
+import AVFoundation
 
 
 struct SocialMediaUrl {
@@ -351,8 +352,10 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
      Show the create animal form
      */
     func showAddAnimalForm() {
-        let animalForm = AnimalFormViewController()
-        self.present(UINavigationController(rootViewController: animalForm), animated: true, completion: nil)
+        self.checkForUser { 
+            let animalForm = AnimalFormViewController()
+            self.present(UINavigationController(rootViewController: animalForm), animated: true, completion: nil)
+        }
     }
     
     func getToastOptions(message: String, type: String, timeToShow: Double) -> [NSObject : AnyObject] {
@@ -672,6 +675,60 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
     }
     
+    func openUserSettings() {
+        self.checkForUser {
+            let userSettingsVC = UserFormViewController()
+            
+            userSettingsVC.userObject = WRUser.current()
+            
+            self.present(UINavigationController(rootViewController: userSettingsVC), animated: true, completion: nil)
+        }
+    }
+    
+    func checkCameraAuth() {
+        let cameraMediaType = AVMediaTypeVideo
+        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: cameraMediaType)
+        
+        switch cameraAuthorizationStatus {
+        case .denied: break
+        case .authorized: break
+        case .restricted: break
+            
+        case .notDetermined:
+            // Prompting user for the permission to use the camera.
+            AVCaptureDevice.requestAccess(forMediaType: cameraMediaType) { granted in
+                if granted {
+                    print("Granted access to \(cameraMediaType)")
+                } else {
+                    print("Denied access to \(cameraMediaType)")
+                }
+            }
+        }
+    }
+    
+    func isLoggedIn() -> Bool {
+        return WRUser.current() != nil
+    }
+    
+    func checkForUser(completionBlock: @escaping () -> Void) {
+        let currentUser = WRUser.current()
+        
+        if (currentUser != nil) {
+//
+//            self.checkForTransfer()
+            completionBlock()
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            // Navigate to the LoginViewController
+            let lvc = storyboard.instantiateViewController(withIdentifier: "lvc") as! LoginViewController
+            lvc.completionBlock = completionBlock
+            //            lvc.menuController = self
+            
+            self.present(lvc, animated: true, completion: nil)
+        }
+    }
+    
     func getImageThumbnailFrame(image: UIImage, index: Int, parentFrame: CGRect, previewWidth: Int, previewPadding: Int) -> CGRect {
         let extra = ((index + 1) * (previewPadding / 2))
         var minX:CGFloat = CGFloat(((index * previewWidth) + extra))
@@ -876,6 +933,10 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             } else {
                 let appDelegate = AppDelegate.getAppDelegate()
                 appDelegate.myAnimalsArray = nil
+                appDelegate.myAnimalsWithDeceasedArray = nil
+                appDelegate.hasFosters = false
+                appDelegate.hasMemorial = false
+                appDelegate.hasRegisteredForPush = false
                 
                 completionBlock(true, nil)
                 

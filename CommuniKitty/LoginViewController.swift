@@ -9,27 +9,6 @@
 import ParseFacebookUtilsV4
 import ParseTwitterUtils
 
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
-
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     let permissions = ["public_profile", "email", "user_location", "user_friends"]
@@ -40,6 +19,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordField: UITextField!
     var viewWasMoved: Bool = false
     var activeTextField: UITextField!
+    
+    var completionBlock: () -> Void
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.completionBlock = {}
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,19 +145,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.goToHome()
                     }
                     self.hideLoader()
+                    self.closeAndRun(completion: {
+                        self.completionBlock()
+                    })
                 }
                 
             } else {
                 let email = self.usernameField.text!.lowercased()
                 WRUser.logInWithUsername(inBackground: email, password: self.passwordField.text!) { (user: PFUser?, error: Error?) -> Void in
+                    self.hideLoader()
                     if error != nil {
                         self.showError(message: error!.localizedDescription)
                     }
                     if user != nil {
                         self.view.endEditing(true)
-                        self.goToHome()
+//                        self.goToHome()
+                        self.closeAndRun(completion: {
+                            self.completionBlock()
+                            AppDelegate.getAppDelegate().postLogin()
+                        })
                     }
-                    self.hideLoader()
                 }
             }
         }
@@ -186,7 +179,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.showLoader()
         PFFacebookUtils.facebookLoginManager().loginBehavior = FBSDKLoginBehavior.systemAccount
         
-        PFFacebookUtils.logInInBackground(withReadPermissions: self.permissions, block: { (user: PFUser?, error: Error?) -> Void in
+        PFFacebookUtils.logInInBackground(withReadPermissions: self.permissions) { (user: PFUser?, error: Error?) in
             if user == nil {
                 NSLog("Uh oh. The user cancelled the Facebook login.")
             } else if user!.isNew {
@@ -198,7 +191,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 //                self.saveUserDataFromFacebook()
             }
             self.hideLoader()
-        })
+            self.closeAndRun(completion: {
+                self.completionBlock()
+                AppDelegate.getAppDelegate().postLogin()
+            })
+        }
+        
     }
     
     @IBAction func loginWithTwitter(_ sender: UIButton) {
@@ -292,7 +290,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 userQuery.whereKey("email", equalTo: email!)
                 userQuery.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) -> Void in
                     
-                    if objects?.count > 0 {
+                    if (objects?.count)! > 0 {
                         // delete the user that was created as part of Parse's Facebook login
                         user.deleteInBackground(block: { (success: Bool, error: Error?) -> Void in
                             if success {

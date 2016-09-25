@@ -40,7 +40,7 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.14.0):
     - FBSDKCoreKit
-  - Fusuma (0.5.3)
+  - Fusuma (0.5.2)
   - Hoko (2.3.0)
   - Instabug (5.3.1)
   - Kingfisher (3.0.1)
@@ -80,7 +80,7 @@ DEPENDENCIES:
   - Eureka (from `https://github.com/xmartlabs/Eureka.git`, branch `Swift3`)
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - Fusuma (from `https://github.com/pruthvikar/Fusuma.git`, branch `swift3`)
+  - Fusuma (from `https://github.com/andreyrd/Fusuma.git`, branch `swift3`)
   - Hoko
   - Instabug
   - Kingfisher (from `https://github.com/onevcat/Kingfisher.git`, tag `3.0.1`)
@@ -110,7 +110,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/xmartlabs/Eureka.git
   Fusuma:
     :branch: swift3
-    :git: https://github.com/pruthvikar/Fusuma.git
+    :git: https://github.com/andreyrd/Fusuma.git
   Kingfisher:
     :git: https://github.com/onevcat/Kingfisher.git
     :tag: 3.0.1
@@ -144,8 +144,8 @@ CHECKOUT OPTIONS:
     :commit: afa5c507fb65e518bc2dd19de8b6c024acf0aae0
     :git: https://github.com/xmartlabs/Eureka.git
   Fusuma:
-    :commit: 503865a12b19b942e395845c91d4dbf1ebc7db54
-    :git: https://github.com/pruthvikar/Fusuma.git
+    :commit: f6e2003086a5ed522b9fdc63e720cabf2a9e19e4
+    :git: https://github.com/andreyrd/Fusuma.git
   Kingfisher:
     :git: https://github.com/onevcat/Kingfisher.git
     :tag: 3.0.1
@@ -178,7 +178,7 @@ SPEC CHECKSUMS:
   Eureka: 2020d9faeef7b7e9adeb9e3d8af779e5931c1897
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
-  Fusuma: 02ffb3a9943792519f2c0972263b750acb550a49
+  Fusuma: 7cdf6d3ee8e0e09335118a807408795523e20de8
   Hoko: b015751f406d455da0c8acb9404d7c617cb66877
   Instabug: b77626dcf1baf66534521a400d0680a2e914b241
   Kingfisher: d5a491b45ea453d90a31bd2c0831d5243e73a73f
@@ -193,6 +193,6 @@ SPEC CHECKSUMS:
   SlideMenuControllerSwift: 9c0a84f9a3fba51681debd7be77617094562ebcc
   SwiftDate: fa487d9b7d8c3070ea2553486902494f4915465d
 
-PODFILE CHECKSUM: 2b79e3cd981700cf24a349e69be432bb913430bc
+PODFILE CHECKSUM: 8f1ed136f6b65a1860e39df486ca2df1a871a3cd
 
 COCOAPODS: 1.0.1

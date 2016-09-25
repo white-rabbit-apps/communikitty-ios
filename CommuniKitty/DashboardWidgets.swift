@@ -26,7 +26,7 @@ class UserAnimalsDashboardWidget : DashboardWidget {
         } else if(self.foster) {
             cell.titleLabel?.text = "Foster Kitties"
             cell.titleLabel?.backgroundColor = UIColor.lightBlueColor()
-        } else if(self.user != nil) {
+        } else if(self.user != nil && self.user == WRUser.current()) {
             cell.titleLabel?.text = "\(self.user!.firstName!)'s Kitties"
             cell.titleLabel?.backgroundColor = UIColor.lightOrangeColor()
         } else {
@@ -67,10 +67,13 @@ class UserAnimalsDashboardWidget : DashboardWidget {
             query.whereKeyExists("deceasedDate")
         }
         
-        
-        
         return query
     }
+}
+
+class MyAnimalsDashboardWidget : UserAnimalsDashboardWidget {
+    override var requiresLogin: Bool { return true }
+    
 }
 
 class ShelterAnimalsDashboardWidget : DashboardWidget {
