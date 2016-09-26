@@ -922,7 +922,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
     }
     
     // Return the image which is selected from camera roll or is taken via the camera.
-    func fusumaImageSelected(_ image: UIImage, creationDate: NSDate?) {
+    func fusumaImageSelected(_ image: UIImage, creationDate: Date?) {
         self.modalTransitionStyle = .coverVertical
         
         self.dismiss(animated: false, completion: { () -> Void in

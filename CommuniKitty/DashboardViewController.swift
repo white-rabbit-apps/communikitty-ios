@@ -36,7 +36,7 @@ enum CollectionType {
 //
 class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDelegate {
     
-    var pickedImageDate: NSDate?
+    var pickedImageDate: Date?
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     
@@ -114,7 +114,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
      Handle the image that is returned from the camera
         - implements FusumaDelegate
      */
-    func fusumaImageSelected(_ image: UIImage, creationDate: NSDate?) {
+    func fusumaImageSelected(_ image: UIImage, creationDate: Date?) {
         self.pickedImageDate = creationDate
         
         self.modalTransitionStyle = .coverVertical

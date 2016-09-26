@@ -591,8 +591,8 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
      Handle the image that is returned from the camera
      - implements FusumaDelegate
      */
-    var pickedImageDate: NSDate?
-    func fusumaImageSelected(image: UIImage, creationDate: NSDate?) {
+    var pickedImageDate: Date?
+    func fusumaImageSelected(_ image: UIImage, creationDate: Date?) {
         self.pickedImageDate = creationDate
         
         self.modalTransitionStyle = .coverVertical

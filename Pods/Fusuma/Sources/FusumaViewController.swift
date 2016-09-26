@@ -12,7 +12,7 @@ import Photos
 
 @objc public protocol FusumaDelegate: class {
     
-    func fusumaImageSelected(_ image: UIImage)
+    func fusumaImageSelected(_ image: UIImage, creationDate:Date?)
     @objc optional func fusumaDismissedWithImage(_ image: UIImage)
     func fusumaVideoCompleted(withFileURL fileURL: URL)
     func fusumaCameraRollUnauthorized()
@@ -284,7 +284,7 @@ public final class FusumaViewController: UIViewController {
                     result, info in
                     
                     DispatchQueue.main.async(execute: {
-                        self.delegate?.fusumaImageSelected(result!)
+                        self.delegate?.fusumaImageSelected(result!, creationDate: self.albumView.selectedImageCreationDate)
                         
                         self.dismiss(animated: true, completion: {
                             self.delegate?.fusumaDismissedWithImage?(result!)
@@ -294,7 +294,7 @@ public final class FusumaViewController: UIViewController {
             })
         } else {
             print("no image crop ")
-            delegate?.fusumaImageSelected((view?.image)!)
+            delegate?.fusumaImageSelected((view?.image)!, creationDate: self.albumView.selectedImageCreationDate)
             
             self.dismiss(animated: true, completion: {
                 self.delegate?.fusumaDismissedWithImage?((view?.image)!)
@@ -309,7 +309,9 @@ extension FusumaViewController: FSAlbumViewDelegate, FSCameraViewDelegate, FSVid
     // MARK: FSCameraViewDelegate
     func cameraShotFinished(_ image: UIImage) {
         
-        delegate?.fusumaImageSelected(image)
+        let date = albumView.selectedImageCreationDate
+        
+        delegate?.fusumaImageSelected(image, creationDate: date)
         self.dismiss(animated: true, completion: {
             
             self.delegate?.fusumaDismissedWithImage?(image)
