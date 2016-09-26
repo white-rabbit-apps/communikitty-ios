@@ -336,13 +336,13 @@ class PhotosCollectionViewLayout: UICollectionViewLayout {
         var index = 0
         var shorestHeight = MAXFLOAT
         
-        self.columnHeights.enumerateObjects({(object : AnyObject, idx : NSInteger,pointer :UnsafeMutablePointer<ObjCBool>) in
-            let height = object.floatValue
+        self.columnHeights.enumerateObjects(({(object : Any, idx : Int, pointer :UnsafeMutablePointer<ObjCBool>) in
+            let height = (object as AnyObject).floatValue
             if (height<shorestHeight){
                 shorestHeight = height!
-                index = idx
+                index = idx 
             }
-        } as! (Any, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+            } ))
         return index
     }
     
@@ -356,13 +356,13 @@ class PhotosCollectionViewLayout: UICollectionViewLayout {
         var index = 0
         var longestHeight:CGFloat = 0.0
         
-        self.columnHeights.enumerateObjects({(object : AnyObject, idx : NSInteger,pointer :UnsafeMutablePointer<ObjCBool>) in
-            let height = CGFloat(object.floatValue)
+        self.columnHeights.enumerateObjects({(object : Any, idx : Int, pointer :UnsafeMutablePointer<ObjCBool>) in
+            let height = CGFloat((object as AnyObject).floatValue)
             if (height > longestHeight){
                 longestHeight = height
                 index = idx
             }
-        } as! (Any, Int, UnsafeMutablePointer<ObjCBool>) -> Void)
+        } )
         return index
     }
     
