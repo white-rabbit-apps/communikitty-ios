@@ -9,7 +9,6 @@
 import ParseUI
 import ActiveLabel
 import Device
-import SwiftDate
 
 class PostsTableViewCell: EntryCell {
     @IBOutlet weak var usernameLink: UIButton!
@@ -309,9 +308,7 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
 //        cell!.largeImageView.addGestureRecognizer(doubleTapRecognizer)
         
         if let date = entry.createdAt {
-            let dateR = DateInRegion(absoluteTime: date, region: Region())
-            let formatted = dateR.toString(fromDate: DateInRegion(), style: .abbreviated)
-            
+            let formatted = DateFormatter().timeSince(from: date, numericDates: true)
             cell!.timeLabel.setTitle(formatted, for: .normal)
         }
         

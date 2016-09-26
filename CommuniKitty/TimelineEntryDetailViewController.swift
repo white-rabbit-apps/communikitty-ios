@@ -8,27 +8,6 @@
 
 import ActiveLabel
 import Device
-import SwiftDate
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var commentAnimalProfilePhoto: UIButton!
@@ -187,7 +166,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     func addComment(_ text: String) {
         self.showLoader()
         let appDelegate = AppDelegate.getAppDelegate()
-        if(appDelegate.myAnimalsArray?.count > 0) {
+        if((appDelegate.myAnimalsArray?.count)! > 0) {
             let comment = WRComment()
             comment.entry = self.entryObject!
             

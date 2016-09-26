@@ -109,8 +109,8 @@ class UserFormViewController : FormViewController {
         
         if(self.isEditMode()) {
             
-            form +++ Section("Account") { section  in
-                section.color   = UIColor.lightBlueColor()
+            form +++ Section("Connections") { section  in
+                section.color   = UIColor.lightGreenColor()
             }
                 <<< ButtonRow(FACEBOOK_TAG) {
                     if(PFFacebookUtils.isLinked(with: WRUser.current()!)) {
@@ -131,31 +131,37 @@ class UserFormViewController : FormViewController {
             let appVersion: String = (infoDict["CFBundleShortVersionString"] as! String)
             let buildNumber: String = (infoDict["CFBundleVersion"] as! String)
 
-            form +++ Section(header: "", footer: "")
+            form +++ Section("Account") { section  in
+                section.color   = UIColor.lightBlueColor()
+            }
                 <<< ButtonRow("password") {
                         $0.title = "Change Password"
                     }.onCellSelection { cell, row in
                         NSLog("Deleting user")
                         self.showChangePasswordForm()
                     }
-                <<< ButtonRow("remove") {
-                        $0.title = "Delete Account"
-                        // $0.isHidden = .Function(["admin"], { form -> Bool in
-                        //     return !(self.userObject?.valueForKey(self.ADMIN_TAG) as! Bool)
-                        // })
-                    }.onCellSelection { cell, row in
-                        NSLog("Deleting user")
-                        self.removeUser()
-                    }
+//                <<< ButtonRow("remove") {
+//                        $0.title = "Delete Account"
+//                        // $0.isHidden = .Function(["admin"], { form -> Bool in
+//                        //     return !(self.userObject?.valueForKey(self.ADMIN_TAG) as! Bool)
+//                        // })
+//                    }.onCellSelection { cell, row in
+//                        NSLog("Deleting user")
+//                        self.removeUser()
+//                    }
                 <<< ButtonRow("logout") { $0.title = "Log Out" }.onCellSelection { cell, row in print("Cell was selected")
                     self.logout()
                 }
         
-            
-            form +++ Section(header: "", footer: "v\(appVersion) (\(buildNumber))")
-                <<< ButtonRow("about") { $0.title = "About" }.onCellSelection { cell, row in
+            form +++ Section("About") { section  in
+                section.color   = UIColor.lightPinkColor()
+            }
+                <<< ButtonRow("about") { $0.title = "About CommuniKitty" }.onCellSelection { cell, row in
                     self.openAboutScreen()
             }
+            
+            form +++ Section(header: "", footer: "v\(appVersion) (\(buildNumber))")
+            
         }
     
     

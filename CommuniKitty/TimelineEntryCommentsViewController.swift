@@ -9,7 +9,6 @@
 import ParseUI
 import ActiveLabel
 import BGTableViewRowActionWithImage
-import SwiftDate
 import Device
 
 class TimelineEntryCommentViewCell: PFTableViewCell {
@@ -77,8 +76,7 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
         }
         
         if let date = entryObject?.createdAt {
-            let dateR = DateInRegion(absoluteTime: date, region: Region())
-            let formatted = dateR.toString(fromDate: DateInRegion(), style: .abbreviated)
+            let formatted = DateFormatter().timeSince(from: date, numericDates: true)
             self.timeLabel.text = formatted
         }
         
@@ -219,8 +217,7 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
 //            cell!.gifImageView.image = UIImage.gifWithName(name: "gif/\(gifName)")
             
             if let date = comment?.createdAt {
-                let dateR = DateInRegion(absoluteTime: date, region: Region())
-                let formatted = dateR.toString(fromDate: DateInRegion(), style: .abbreviated)
+                let formatted = DateFormatter().timeSince(from: date, numericDates: true)
                 cell!.timeLabel.text = formatted
             }
             
@@ -251,8 +248,7 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
             self.initActiveLabel(label: cell!.commentLabel)
             
             if let date = comment?.createdAt {
-                let dateR = DateInRegion(absoluteTime: date, region: Region())
-                let formatted = dateR.toString(fromDate: DateInRegion(), style: .abbreviated)
+                let formatted = DateFormatter().timeSince(from: date, numericDates: true)
                 cell!.timeLabel.text = formatted
             }
             

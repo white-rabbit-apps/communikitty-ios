@@ -63,7 +63,6 @@ PODS:
     - Parse (~> 1.9)
   - SKPhotoBrowser (3.1.0)
   - SlideMenuControllerSwift (3.0.0)
-  - SwiftDate (3.0.9)
 
 DEPENDENCIES:
   - ActiveLabel (from `https://github.com/optonaut/ActiveLabel.swift.git`, branch `swift-3`)
@@ -93,7 +92,6 @@ DEPENDENCIES:
   - ParseUI
   - SKPhotoBrowser (from `https://github.com/suzuki-0000/SKPhotoBrowser.git`, branch `swift3`)
   - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, tag `3.0.0`)
-  - SwiftDate (from `https://github.com/malcommac/SwiftDate.git`, branch `feature/swift-3.0`)
 
 EXTERNAL SOURCES:
   ActiveLabel:
@@ -126,9 +124,6 @@ EXTERNAL SOURCES:
   SlideMenuControllerSwift:
     :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
     :tag: 3.0.0
-  SwiftDate:
-    :branch: feature/swift-3.0
-    :git: https://github.com/malcommac/SwiftDate.git
 
 CHECKOUT OPTIONS:
   ActiveLabel:
@@ -161,9 +156,6 @@ CHECKOUT OPTIONS:
   SlideMenuControllerSwift:
     :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
     :tag: 3.0.0
-  SwiftDate:
-    :commit: 644a4615c77dc70d7861ddadb2c59f5c45f4c235
-    :git: https://github.com/malcommac/SwiftDate.git
 
 SPEC CHECKSUMS:
   ActiveLabel: f1670bbd4d6bba563ffeec423120f6d708c4784f
@@ -191,8 +183,7 @@ SPEC CHECKSUMS:
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   SKPhotoBrowser: 48717c1e2602e6e99a5b1df9d6b43889aaa70e9f
   SlideMenuControllerSwift: 9c0a84f9a3fba51681debd7be77617094562ebcc
-  SwiftDate: fa487d9b7d8c3070ea2553486902494f4915465d
 
-PODFILE CHECKSUM: 6135cb43b6cb205d71cda90131d0c2f41ed04e79
+PODFILE CHECKSUM: f750ba233c545297e513f293768f558a5bc27e32
 
 COCOAPODS: 1.0.1

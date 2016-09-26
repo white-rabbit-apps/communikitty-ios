@@ -8,7 +8,6 @@
 
 import ParseUI
 import ActiveLabel
-import SwiftDate
 
 class ActivityViewCell: PFTableViewCell {
     var activityObject: WRActivity?
@@ -288,9 +287,7 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
         self.initActiveLabel(label: cell!.activityLabel)
         
         if let date = activity.createdAt {
-            let dateR = DateInRegion(absoluteTime: date, region: Region())
-            
-            let formatted = dateR.toString(fromDate: DateInRegion(), style: .abbreviated)
+            let formatted = DateFormatter().timeSince(from: date, numericDates: true)
             cell!.timeLabel.text = formatted
         }
         
