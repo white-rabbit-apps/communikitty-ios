@@ -578,7 +578,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         
         fusuma.delegate = self
         
-        fusuma.modeOrder = .CameraFirst
+        fusuma.modeOrder = .cameraFirst
         
         fusuma.transitioningDelegate = transitioningDelegate
         fusuma.modalPresentationStyle = .custom

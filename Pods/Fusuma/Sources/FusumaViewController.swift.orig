@@ -213,29 +213,29 @@ public final class FusumaViewController: UIViewController {
         return true
     }
     
-    @IBAction func closeButtonPressed(_ sender: UIButton) {
+    @IBAction func closeButtonPressed(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: {
             
             self.delegate?.fusumaClosed?()
         })
     }
     
-    @IBAction func libraryButtonPressed(_ sender: UIButton) {
+    @IBAction func libraryButtonPressed(sender: UIButton) {
         
         changeMode(Mode.Library)
     }
     
-    @IBAction func photoButtonPressed(_ sender: UIButton) {
+    @IBAction func photoButtonPressed(sender: UIButton) {
     
         changeMode(Mode.Camera)
     }
     
-    @IBAction func videoButtonPressed(_ sender: UIButton) {
+    @IBAction func videoButtonPressed(sender: UIButton) {
         
         changeMode(Mode.Video)
     }
     
-    @IBAction func doneButtonPressed(_ sender: UIButton) {
+    @IBAction func doneButtonPressed(sender: UIButton) {
         
         let view = albumView.imageCropView
         let image:UIImage

@@ -12,7 +12,7 @@ pod 'CLImageEditor', :git => 'https://github.com/white-rabbit-apps/CLImageEditor
     pod 'Eureka', :git => 'https://github.com/white-rabbit-apps/Eureka.git', :branch => 'master'
 #    pod 'GooglePlacesRow', :git => 'https://github.com/white-rabbit-apps/GooglePlacesRow', :branch => 'master'
 
-    pod 'Fusuma', :git => 'https://github.com/andreyrd/Fusuma.git', :branch => 'swift3'
+    pod 'Fusuma', :git => 'https://github.com/Ferrick90/Fusuma.git', :branch => 'swift3'
 #    pod 'Fusuma', :git => 'https://github.com/white-rabbit-apps/Fusuma', :branch => 'master'
 
     pod 'Parse', '~> 1.13.0'

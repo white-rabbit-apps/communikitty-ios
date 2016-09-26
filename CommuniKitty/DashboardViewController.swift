@@ -100,12 +100,13 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
             let fusuma = FusumaViewController()
             fusuma.delegate = self
             
-            fusuma.modeOrder = .CameraFirst
+            fusuma.hasVideo = false
             
             fusuma.transitioningDelegate = self.transitioningDelegate
             fusuma.modalPresentationStyle = .custom
             
-            self.present(fusuma, animated: true, completion: nil)
+            self.present(fusuma, animated: true, completion: { 
+            })
         }
     }
     
