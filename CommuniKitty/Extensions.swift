@@ -2250,7 +2250,7 @@ public struct MenuItemCustom: MenuItemViewCustomizable {
             title.textColor = .gray
             title.backgroundColor = .clear
           
-            let width = (UIApplication.shared.keyWindow?.bounds.width)!/CGFloat(numberOfPages)+2 
+            let width = UIScreen.main.bounds.width/CGFloat(numberOfPages)+2
             
             let bottomImageView = UIImageView(frame: CGRect(x: 0, y: 49, width: width, height: 1))
             bottomImageView.backgroundColor = UIColor.lightGray
