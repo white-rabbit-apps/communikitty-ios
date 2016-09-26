@@ -149,7 +149,7 @@ final class FSCameraView: UIView, UIGestureRecognizerDelegate {
         let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         
         if status == AVAuthorizationStatus.authorized {
-            session?.startRunning()
+//            session?.startRunning()
         } else if status == AVAuthorizationStatus.denied || status == AVAuthorizationStatus.restricted {
             session?.stopRunning()
         }

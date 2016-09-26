@@ -30,7 +30,7 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
     var images: PHFetchResult<PHAsset>!
     var imageManager: PHCachingImageManager?
     var previousPreheatRect: CGRect = CGRect.zero
-    let cellSize = CGSize(width: 100, height: 100)
+    let cellSize = CGSize(width: 50, height: 50)
     var phAsset: PHAsset!
     
     // Variables for calculating the position
@@ -269,7 +269,9 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         
-        let width = (collectionView.frame.width - 3) / 4
+        let test = UIScreen.main.bounds.width
+        
+        let width = (UIScreen.main.bounds.width - 3) / 4
         return CGSize(width: width, height: width)
     }
     
