@@ -67,7 +67,7 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
         panGesture.delegate = self
         self.addGestureRecognizer(panGesture)
         
-        collectionViewConstraintHeight.constant = self.frame.height - imageCropView.frame.height - imageCropViewOriginalConstraintTop
+        collectionViewConstraintHeight.constant += imageCropViewOriginalConstraintTop - 3
         imageCropViewConstraintTop.constant = 50
         dragDirection = Direction.up
         
@@ -96,6 +96,7 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
             self.selectedImageCreationDate = (images[0] as! PHAsset).creationDate
             collectionView.reloadData()
             collectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UICollectionViewScrollPosition())
+        
         }
         
         PHPhotoLibrary.shared().register(self)
@@ -268,8 +269,6 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        
-        let test = UIScreen.main.bounds.width
         
         let width = (UIScreen.main.bounds.width - 3) / 4
         return CGSize(width: width, height: width)
