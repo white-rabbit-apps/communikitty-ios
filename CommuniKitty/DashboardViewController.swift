@@ -55,12 +55,19 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
      - hide or show the camera button
      */
     func finishedGettingMyAnimals(notifiation: NSNotification) -> Void {
-        let animalCount = AppDelegate.getAppDelegate().myAnimalsArray?.count
         
-        if animalCount! > 0 {
-            self.cameraButton.isHidden = false
-        } else {
-            self.cameraButton.isHidden = true
+        //if there are no list of Animals yet, check it again after login
+        if AppDelegate.getAppDelegate().myAnimalsArray == nil {
+            AppDelegate.getAppDelegate().postLogin()
+         }
+        //check if myAnimalsArray updated after login
+        if let animalCount = AppDelegate.getAppDelegate().myAnimalsArray?.count {
+        
+            if animalCount > 0 {
+                self.cameraButton.isHidden = false
+            } else {
+                self.cameraButton.isHidden = true
+            }
         }
     }
     
