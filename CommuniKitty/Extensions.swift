@@ -54,9 +54,9 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
      Show the GifHUD loader window
      */
     func showLoader() {
-        self.hideLoader()
-        let filename = Int.random(lower: 1, upper: 20)
+//        self.hideLoader()
         
+        let filename = Int.random(lower: 1, upper: 20)
         GiFHUD.setGif("gif/" + String(filename) + ".gif")
         GiFHUD.show()
     }

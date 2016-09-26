@@ -16,6 +16,9 @@ class BreedsTableViewCell: PFTableViewCell {
 
 open
 class BreedsTableViewController: PFQueryTableViewController, TypedRowControllerType, UISearchBarDelegate {
+    /// A closure to be called when the controller disappears.
+    public var onDismissCallback: ((UIViewController) -> ())?
+
 
     @IBOutlet weak var searchBar: UISearchBar!
     

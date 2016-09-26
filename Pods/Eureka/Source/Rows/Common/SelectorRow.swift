@@ -65,10 +65,10 @@ open class SelectorRow<Cell: CellType, VCType: TypedRowControllerType>: OptionsR
             controller.row = self
             controller.title = selectorTitle ?? controller.title
             onPresentCallback?(cell.formViewController()!, controller)
-            presentationMode.present(controller, row: self, presentingViewController: self.cell.formViewController()!)
+            presentationMode.present(controller, row: self, presentingController: self.cell.formViewController()!)
         }
         else{
-            presentationMode.present(nil, row: self, presentingViewController: self.cell.formViewController()!)
+            presentationMode.present(nil, row: self, presentingController: self.cell.formViewController()!)
         }
     }
     
@@ -79,7 +79,7 @@ open class SelectorRow<Cell: CellType, VCType: TypedRowControllerType>: OptionsR
         super.prepare(for: segue)
         guard let rowVC = segue.destination as? VCType else { return }
         rowVC.title = selectorTitle ?? rowVC.title
-        rowVC.completionCallback = presentationMode?.completionHandler ?? rowVC.completionCallback
+        rowVC.onDismissCallback = presentationMode?.onDismissCallback ?? rowVC.onDismissCallback
         onPresentCallback?(cell.formViewController()!, rowVC)
         rowVC.row = self
     }

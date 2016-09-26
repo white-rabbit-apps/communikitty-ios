@@ -208,8 +208,6 @@ extension Form : RangeReplaceableCollection {
         }
     }
     
-    public func reserveCapacity(_ n: Int){}
-    
     public func replaceSubrange<C : Collection>(_ subRange: Range<Int>, with newElements: C) where C.Iterator.Element == Section {
         for i in subRange.lowerBound..<subRange.upperBound {
             if let section = kvoWrapper.sections.object(at: i) as? Section {
@@ -218,7 +216,7 @@ extension Form : RangeReplaceableCollection {
             }
         }
         kvoWrapper.sections.replaceObjects(in: NSMakeRange(subRange.lowerBound, subRange.upperBound - subRange.lowerBound), withObjectsFrom: newElements.map { $0 })
-        kvoWrapper._allSections.insert(contentsOf: newElements, at: indexForInsertionAtIndex(subRange.lowerBound))
+        kvoWrapper._allSections.insert(contentsOf: newElements, at: indexForInsertion(at: subRange.lowerBound))
         
         for section in newElements{
             section.wasAddedTo(form: self)
@@ -234,7 +232,7 @@ extension Form : RangeReplaceableCollection {
         kvoWrapper._allSections.removeAll()
     }
     
-    private func indexForInsertionAtIndex(_ index: Int) -> Int {
+    private func indexForInsertion(at index: Int) -> Int {
         guard index != 0 else { return 0 }
         
         let row = kvoWrapper.sections[index-1]

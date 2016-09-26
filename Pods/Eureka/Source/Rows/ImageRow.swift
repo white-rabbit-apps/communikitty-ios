@@ -76,7 +76,7 @@ open class _ImageRow<Cell: CellType>: SelectorRow<Cell, ImagePickerController> w
     public required init(tag: String?) {
         sourceTypes = .All
         super.init(tag: tag)
-        presentationMode = .presentModally(controllerProvider: ControllerProvider.callback { return ImagePickerController() }, completion: { [weak self] vc in
+        presentationMode = .presentModally(controllerProvider: ControllerProvider.callback { return ImagePickerController() }, onDismiss: { [weak self] vc in
             self?.select()
             vc.dismiss(animated: true)
             })
@@ -91,11 +91,11 @@ open class _ImageRow<Cell: CellType>: SelectorRow<Cell, ImagePickerController> w
                 controller.row = self
                 controller.sourceType = sourceType
                 onPresentCallback?(cell.formViewController()!, controller)
-                presentationMode.present(controller, row: self, presentingViewController: cell.formViewController()!)
+                presentationMode.present(controller, row: self, presentingController: cell.formViewController()!)
             }
             else{
                 _sourceType = sourceType
-                presentationMode.present(nil, row: self, presentingViewController: cell.formViewController()!)
+                presentationMode.present(nil, row: self, presentingController: cell.formViewController()!)
             }
         }
     }

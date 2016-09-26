@@ -77,7 +77,7 @@ DEPENDENCIES:
   - CRToast
   - Device
   - DZNEmptyDataSet
-  - Eureka (from `https://github.com/xmartlabs/Eureka.git`, branch `Swift3`)
+  - Eureka (from `https://github.com/white-rabbit-apps/Eureka.git`, branch `master`)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - Fusuma (from `https://github.com/andreyrd/Fusuma.git`, branch `swift3`)
@@ -106,8 +106,8 @@ EXTERNAL SOURCES:
     :branch: master
     :git: https://github.com/white-rabbit-apps/CLImageEditor.git
   Eureka:
-    :branch: Swift3
-    :git: https://github.com/xmartlabs/Eureka.git
+    :branch: master
+    :git: https://github.com/white-rabbit-apps/Eureka.git
   Fusuma:
     :branch: swift3
     :git: https://github.com/andreyrd/Fusuma.git
@@ -141,8 +141,8 @@ CHECKOUT OPTIONS:
     :commit: 9ef59f7752ffa47df8d6a4d402991d3ced46642d
     :git: https://github.com/white-rabbit-apps/CLImageEditor.git
   Eureka:
-    :commit: afa5c507fb65e518bc2dd19de8b6c024acf0aae0
-    :git: https://github.com/xmartlabs/Eureka.git
+    :commit: a1e389631123166a27d87afc16f5e3c1e9263923
+    :git: https://github.com/white-rabbit-apps/Eureka.git
   Fusuma:
     :commit: f6e2003086a5ed522b9fdc63e720cabf2a9e19e4
     :git: https://github.com/andreyrd/Fusuma.git
@@ -193,6 +193,6 @@ SPEC CHECKSUMS:
   SlideMenuControllerSwift: 9c0a84f9a3fba51681debd7be77617094562ebcc
   SwiftDate: fa487d9b7d8c3070ea2553486902494f4915465d
 
-PODFILE CHECKSUM: 8f1ed136f6b65a1860e39df486ca2df1a871a3cd
+PODFILE CHECKSUM: 6135cb43b6cb205d71cda90131d0c2f41ed04e79
 
 COCOAPODS: 1.0.1

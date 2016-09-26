@@ -51,7 +51,7 @@ open class GenericMultipleSelectorRow<T: Hashable, Cell: CellType, VCType: Typed
         displayValueFor = { (rowValue: Set<T>?) in
             return rowValue?.map({ String(describing: $0) }).sorted().joined(separator: ", ")
         }
-        presentationMode = .show(controllerProvider: ControllerProvider.callback { return VCType() }, completion: { vc in
+        presentationMode = .show(controllerProvider: ControllerProvider.callback { return VCType() }, onDismiss: { vc in
             let _ = vc.navigationController?.popViewController(animated: true) })
     }
     
@@ -65,10 +65,10 @@ open class GenericMultipleSelectorRow<T: Hashable, Cell: CellType, VCType: Typed
             controller.row = self
             controller.title = selectorTitle ?? controller.title
             onPresentCallback?(cell.formViewController()!, controller)
-            presentationMode.present(controller, row: self, presentingViewController: self.cell.formViewController()!)
+            presentationMode.present(controller, row: self, presentingController: self.cell.formViewController()!)
         }
         else{
-            presentationMode.present(nil, row: self, presentingViewController: self.cell.formViewController()!)
+            presentationMode.present(nil, row: self, presentingController: self.cell.formViewController()!)
         }
     }
     
@@ -79,7 +79,7 @@ open class GenericMultipleSelectorRow<T: Hashable, Cell: CellType, VCType: Typed
         super.prepare(for: segue)
         guard let rowVC = segue.destination as? VCType else { return }
         rowVC.title = selectorTitle ?? rowVC.title
-        rowVC.completionCallback = presentationMode?.completionHandler ?? rowVC.completionCallback
+        rowVC.onDismissCallback = presentationMode?.onDismissCallback ?? rowVC.onDismissCallback
         onPresentCallback?(cell.formViewController()!, rowVC)
         rowVC.row = self
     }

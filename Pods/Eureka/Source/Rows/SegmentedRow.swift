@@ -105,7 +105,28 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
     
     func updateSegmentedControl() {
         segmentedControl.removeAllSegments()
-        items().enumerated().forEach { segmentedControl.insertSegment(withTitle: $0.element, at: $0.offset, animated: false) }
+        //check if images or text should be in segmentedControl
+        if row.optionImages != nil {
+            //set custom color for segmentedControl
+            segmentedControl.tintColor = UIColor(colorLiteralRed: 198/255.0, green: 198/255.0, blue: 198/255.0, alpha: 1.0)
+            items().enumerated().forEach {
+                segmentedControl.insertSegment(with: $0.element as? UIImage, at: $0.offset, animated: false)
+                //set constraints for segmentedControl
+                segmentedControl.setWidth(60, forSegmentAt: $0.offset)
+                contentView.addConstraint(NSLayoutConstraint(item: segmentedControl, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: 20))
+                //check the screen size
+                let screenSize: CGRect = UIScreen.main.bounds
+                if screenSize.width < 400{
+                    contentView.addConstraint(NSLayoutConstraint(item: segmentedControl, attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: contentView, attribute: .leading, multiplier: 1, constant: 240))
+                } else {
+                    contentView.addConstraint(NSLayoutConstraint(item: segmentedControl, attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: contentView, attribute: .leading, multiplier: 1, constant: 275))
+                }
+                
+            }
+            
+        } else {
+            items().enumerated().forEach { segmentedControl.insertSegment(withTitle: $0.element as? String, at: $0.offset, animated: false) }
+        }
     }
     
     open override func updateConstraints() {
@@ -146,10 +167,14 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
         super.updateConstraints()
     }
     
-    func items() -> [String] {// or create protocol for options
-        var result = [String]()
-        for object in (row as! SegmentedRow<T>).options {
-            result.append(row.displayValueFor?(object) ?? "")
+    func items() -> [Any] {// or create protocol for options
+        var result = [Any]()
+        for (index, object) in (row as! SegmentedRow<T>).options.enumerated() {
+            if row.optionImages != nil {
+                result.append(row.optionImages![index].withRenderingMode(.alwaysOriginal) )
+            } else {
+                result.append(row.displayValueFor?(object) ?? "")
+            }
         }
         return result
     }

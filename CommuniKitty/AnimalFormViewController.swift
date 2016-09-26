@@ -293,7 +293,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         //        }
         
         form +++ Section("Info") { section  in
-//            section.color   = UIColor.lightOrangeColor()
+            section.color   = UIColor.lightOrangeColor()
         }
 
         <<< NameRow(NAME_TAG) {
@@ -317,7 +317,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             
             $0.title = "Gender"
             $0.options = ["Male", "Female"]
-//            $0.optionImages = [UIImage(named: "icon_gender_male")!, UIImage(named: "icon_gender_female")!]
+            $0.optionImages = [UIImage(named: "icon_gender_male")!, UIImage(named: "icon_gender_female")!]
             if self.isEditMode() {
                 $0.value = self.animalObject?.gender
             }
@@ -363,8 +363,8 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         }
         
         form +++ Section("Details"){ section  in
-            //            section.color   = UIColor.lightYellowColor()
-            }
+                        section.color   = UIColor.lightYellowColor()
+        }
             
 //            <<< BreedsPushRow(BREED_TAG) {
 //                $0.title = "Breed"
@@ -401,8 +401,8 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         
         
         form +++ Section("Personality") { section  in
-//            section.color   = UIColor.lightGreenColor()
-            }
+            section.color   = UIColor.lightGreenColor()
+        }
             
             <<< MultipleSelectorRow<String>(TRAITS_TAG) {
                 $0.title = "Traits"
@@ -455,9 +455,9 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
 //                cell.imageView?.image = UIImage(named: "form_hates")
 //            }
         
-        form +++ Section("Social Media") { section  in
-//            section.color   = UIColor.lightBlueColor()
-            }
+        form +++ Section("Soshul Meowdia") { section  in
+            section.color   = UIColor.lightBlueColor()
+        }
             
             <<< TwitterRow(TWITTER_TAG) {
                 $0.title = "Twitter"
@@ -513,7 +513,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         
         if(self.isEditMode()) {
             form +++ Section("Memorial") { section  in
-                //                section.color   = UIColor.orangeColor()
+                section.color   = UIColor.orange
             }
                 
             <<< DateInlineRow(DECEASED_TAG) {
@@ -540,7 +540,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             }
             
             form +++ Section("Adoption") { section  in
-            //                section.color   = UIColor.lightRedColor()
+                section.color   = UIColor.lightRedColor()
             }
                 <<< SwitchRow(ADOPTABLE_TAG) {
                     $0.title = "Adoptable"
@@ -576,7 +576,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         
         if(isAdmin) {
             form +++ Section("Admin") { section  in
-            //                section.color   = UIColor.lightPinkColor()
+                section.color   = UIColor.lightPinkColor()
             }
                 
             <<< SwitchRow(FEATURED_TAG) {
@@ -590,7 +590,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         
         if(self.isEditMode()) {
             form +++ Section("Options") { section  in
-            //                section.color   = UIColor.facebookThemeColor()
+                section.color   = UIColor.facebookThemeColor()
             }
                 
             <<< ButtonRow("transfer") { $0.title = "Transfer Profile" }.onCellSelection { cell, row in

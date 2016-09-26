@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Cem Olcay. All rights reserved.
 //
 
-import UIKit
 import ImageIO
 import MobileCoreServices
 
@@ -36,13 +35,13 @@ extension UIImageView {
     
     // MARK: Method Overrides
     
-//    override public func displayLayer(_ layer: CALayer) {
-//        if let image = animatableImage {
-//            if let frame = image.currentFrame {
-//                layer.contents = frame.cgImage
-//            }
-//        }
-//    }
+    override open func display(_ layer: CALayer) {
+        if let image = animatableImage {
+            if let frame = image.currentFrame {
+                layer.contents = frame.cgImage
+            }
+        }
+    }
     
     
     // MARK: Setter Methods
@@ -90,16 +89,16 @@ class AnimatedImage: UIImage {
         if !containsAnimatedGIF { return 0.0 }
         
         var duration = 0.0
-//        let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, Int(index), nil)! as Dictionary
-//        let GIFProperties: NSDictionary? = imageProperties[String(kCGImagePropertyGIFDictionary)] as? NSDictionary
+        let imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, Int(index), nil)! as Dictionary
+        let GIFProperties: NSDictionary? = imageProperties[kCGImagePropertyGIFDictionary] as? NSDictionary
         
-//        if let properties = GIFProperties {
-//            duration = properties[String(kCGImagePropertyGIFUnclampedDelayTime)] as! Double
-//            
-//            if duration <= 0 {
-//                duration = properties[String(kCGImagePropertyGIFDelayTime)] as! Double
-//            }
-//        }
+        if let properties = GIFProperties {
+            duration = properties[String(kCGImagePropertyGIFUnclampedDelayTime)] as! Double
+            
+            if duration <= 0 {
+                duration = properties[String(kCGImagePropertyGIFDelayTime)] as! Double
+            }
+        }
         
         let threshold = 0.02 - Double(FLT_EPSILON)
         
@@ -160,11 +159,11 @@ class AnimatedImage: UIImage {
         prepareFrames(imageSource)
         pauseAnimation()
     }
-
+    
     required convenience init(imageLiteral name: String) {
         fatalError("init(imageLiteral:) has not been implemented")
     }
-
+    
     required convenience init(imageLiteralResourceName name: String) {
         fatalError("init(imageLiteralResourceName:) has not been implemented")
     }
@@ -288,7 +287,7 @@ class GiFHUD: UIView {
     let FadeDuration    : TimeInterval    = 0.3
     let GifSpeed        : CGFloat           = 0.3
     let OverlayAlpha    : CGFloat           = 0.3
-    let Window          : UIWindow = (UIApplication.shared.delegate as! AppDelegate).window!
+    let Window          : UIWindow = (AppDelegate.getAppDelegate()).window!
     
     
     // MARK: Variables
@@ -335,7 +334,7 @@ class GiFHUD: UIView {
     }
     
     func reframe() {
-//        self.frame = CGRectMake(0, 0, Width, Height)
+        //        self.frame = CGRectMake(0, 0, Width, Height)
     }
     
     
@@ -378,7 +377,7 @@ class GiFHUD: UIView {
         self.instance.addGestureRecognizer(self.instance.tapGesture!)
         self.instance.didTapClosure = didTap
     }
-
+    
     @objc fileprivate class func userTapped () {
         GiFHUD.dismiss()
         self.instance.tapGesture = nil
@@ -397,7 +396,7 @@ class GiFHUD: UIView {
         self.instance.didSwipeClosure?()
         self.instance.didSwipeClosure = nil
     }
-
+    
     class func dismiss () {
         if (!self.instance.shown) {
             return

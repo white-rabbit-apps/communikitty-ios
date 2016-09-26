@@ -56,6 +56,8 @@
 		ED4F8EBB1D9353EF00BEB208 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB61D9353EF00BEB208 /* Nunito-ExtraLight.ttf */; };
 		ED4F8EBC1D9353EF00BEB208 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB71D9353EF00BEB208 /* Nunito-Light.ttf */; };
 		ED4F8EBD1D9353EF00BEB208 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */; };
+		ED51266C1D9883AA00EB9027 /* gif in Resources */ = {isa = PBXBuildFile; fileRef = ED51266B1D9883AA00EB9027 /* gif */; };
+		ED51266E1D9890EA00EB9027 /* CLImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED51266D1D9890EA00EB9027 /* CLImageEditor.bundle */; };
 		EDEC77A71D91A703007CF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77A61D91A703007CF613 /* AppDelegate.swift */; };
 		EDEC77AE1D91A703007CF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AD1D91A703007CF613 /* Assets.xcassets */; };
 		EDEC77B11D91A703007CF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AF1D91A703007CF613 /* LaunchScreen.storyboard */; };
@@ -155,6 +157,8 @@
 		ED4F8EB71D9353EF00BEB208 /* Nunito-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Light.ttf"; path = "CommuniKitty/Nunito-Light.ttf"; sourceTree = "<group>"; };
 		ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Regular.ttf"; path = "CommuniKitty/Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommuniKitty.entitlements; sourceTree = "<group>"; };
+		ED51266B1D9883AA00EB9027 /* gif */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gif; sourceTree = "<group>"; };
+		ED51266D1D9890EA00EB9027 /* CLImageEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLImageEditor.bundle; sourceTree = "<group>"; };
 		EDEC77A31D91A703007CF613 /* CommuniKitty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommuniKitty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEC77A61D91A703007CF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEC77AD1D91A703007CF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -267,6 +271,8 @@
 		ED3A84601D97843200EDED2A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED51266D1D9890EA00EB9027 /* CLImageEditor.bundle */,
+				ED51266B1D9883AA00EB9027 /* gif */,
 				ED15C1491D94AA7900B1B895 /* Sounds */,
 				ED4F8EBE1D9353F700BEB208 /* Fonts */,
 			);
@@ -333,12 +339,12 @@
 		EDEC77A51D91A703007CF613 /* CommuniKitty */ = {
 			isa = PBXGroup;
 			children = (
-				ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */,
 				EDEC77A61D91A703007CF613 /* AppDelegate.swift */,
 				ED4F8EA81D93503000BEB208 /* Main.storyboard */,
 				EDEC77AD1D91A703007CF613 /* Assets.xcassets */,
 				EDEC77B21D91A703007CF613 /* Info.plist */,
 				EDEC77D41D9221C7007CF613 /* CommuniKitty-Bridging-Header.h */,
+				ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */,
 				ED45124C1D92752C00B95BB5 /* Account */,
 				EDEC78091D923AEB007CF613 /* Social Network */,
 				ED4512491D926FCF00B95BB5 /* Locations */,
@@ -563,6 +569,7 @@
 				ED4F8EBB1D9353EF00BEB208 /* Nunito-ExtraLight.ttf in Resources */,
 				ED4F8EBD1D9353EF00BEB208 /* Nunito-Regular.ttf in Resources */,
 				ED15C1431D94AA7200B1B895 /* lick2.caf in Resources */,
+				ED51266E1D9890EA00EB9027 /* CLImageEditor.bundle in Resources */,
 				ED4F8EAF1D9351BB00BEB208 /* Locations.storyboard in Resources */,
 				ED4F8EB31D9351BB00BEB208 /* Walkthrough.storyboard in Resources */,
 				ED15C1451D94AA7200B1B895 /* meow2.caf in Resources */,
@@ -571,6 +578,7 @@
 				ED15C1481D94AA7200B1B895 /* chirp1.caf in Resources */,
 				EDEC77AE1D91A703007CF613 /* Assets.xcassets in Resources */,
 				ED4F8EBC1D9353EF00BEB208 /* Nunito-Light.ttf in Resources */,
+				ED51266C1D9883AA00EB9027 /* gif in Resources */,
 				ED4F8EB11D9351BB00BEB208 /* Store.storyboard in Resources */,
 				ED15C1441D94AA7200B1B895 /* meow1.caf in Resources */,
 				ED4F8EA91D93503000BEB208 /* Main.storyboard in Resources */,

@@ -57,10 +57,10 @@ open class _ButtonRowWithPresent<VCType: TypedRowControllerType>: Row<ButtonCell
             if let controller = presentationMode.makeController(){
                 controller.row = self
                 onPresentCallback?(cell.formViewController()!, controller)
-                presentationMode.present(controller, row: self, presentingViewController: cell.formViewController()!)
+                presentationMode.present(controller, row: self, presentingController: cell.formViewController()!)
             }
             else{
-                presentationMode.present(nil, row: self, presentingViewController: cell.formViewController()!)
+                presentationMode.present(nil, row: self, presentingController: cell.formViewController()!)
             }
         }
     }
@@ -70,8 +70,8 @@ open class _ButtonRowWithPresent<VCType: TypedRowControllerType>: Row<ButtonCell
         guard let rowVC = segue.destination as? VCType else {
             return
         }
-        if let callback = self.presentationMode?.completionHandler{
-            rowVC.completionCallback = callback
+        if let callback = presentationMode?.onDismissCallback{
+            rowVC.onDismissCallback = callback
         }
         rowVC.row = self
         onPresentCallback?(cell.formViewController()!, rowVC)

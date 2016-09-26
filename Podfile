@@ -9,9 +9,11 @@ pod 'CLImageEditor', :git => 'https://github.com/white-rabbit-apps/CLImageEditor
     pod 'CLImageEditor/StickerTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
     pod 'CLImageEditor/TextTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
     pod 'CLImageEditor/SplashTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
+    pod 'Eureka', :git => 'https://github.com/white-rabbit-apps/Eureka.git', :branch => 'master'
 #    pod 'GooglePlacesRow', :git => 'https://github.com/white-rabbit-apps/GooglePlacesRow', :branch => 'master'
 
     pod 'Fusuma', :git => 'https://github.com/andreyrd/Fusuma.git', :branch => 'swift3'
+#    pod 'Fusuma', :git => 'https://github.com/white-rabbit-apps/Fusuma', :branch => 'master'
 
     pod 'Parse', '~> 1.13.0'
     pod 'ParseUI'
@@ -25,7 +27,6 @@ pod 'CLImageEditor', :git => 'https://github.com/white-rabbit-apps/CLImageEditor
     pod 'CRToast'
     pod 'Device'
     pod 'DZNEmptyDataSet'
-    pod 'Eureka', :git => 'https://github.com/xmartlabs/Eureka.git', :branch => 'Swift3'
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'Hoko'

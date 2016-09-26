@@ -146,10 +146,10 @@ extension BaseRow {
             hiddenCache = predicate.evaluate(with: self, substitutionVariables: form.dictionaryValuesToEvaluatePredicate())
         }
         if hiddenCache {
-            section?.hideRow(self)
+            section?.hide(row: self)
         }
         else{
-            section?.showRow(self)
+            section?.show(row: self)
         }
     }
     

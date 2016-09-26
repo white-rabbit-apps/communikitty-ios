@@ -66,11 +66,11 @@ public struct CellProvider<Cell: BaseCell> where Cell: CellType {
      
      - returns: the cell
      */
-    func createCell(_ cellStyle: UITableViewCellStyle) -> Cell {
+    func makeCell(style: UITableViewCellStyle) -> Cell {
         if let nibName = self.nibName {
             return bundle.loadNibNamed(nibName, owner: nil, options: nil)!.first as! Cell
         }
-        return Cell.init(style: cellStyle, reuseIdentifier: nil)
+        return Cell.init(style: style, reuseIdentifier: nil)
     }
 }
 
@@ -98,7 +98,7 @@ public enum ControllerProvider<VCType: UIViewController>{
      */
     case storyBoard(storyboardId: String, storyboardName: String, bundle: Bundle?)
     
-    func createController() -> VCType {
+    func makeController() -> VCType {
         switch self {
             case .callback(let builder):
                 return builder()
@@ -136,28 +136,28 @@ public enum PresentationMode<VCType: UIViewController> {
     /**
      *  Shows the controller, created by the specified provider, with `showViewController(...)`.
      */
-    case show(controllerProvider: ControllerProvider<VCType>, completion: ((UIViewController)->())?)
+    case show(controllerProvider: ControllerProvider<VCType>, onDismiss: ((UIViewController)->())?)
     
     /**
      *  Presents the controller, created by the specified provider, modally.
      */
-    case presentModally(controllerProvider: ControllerProvider<VCType>, completion: ((UIViewController)->())?)
+    case presentModally(controllerProvider: ControllerProvider<VCType>, onDismiss: ((UIViewController)->())?)
     
     /**
      *  Performs the segue with the specified identifier (name).
      */
-    case segueName(segueName: String, completion: ((UIViewController)->())?)
+    case segueName(segueName: String, onDismiss: ((UIViewController)->())?)
     
     /**
      *  Performs a segue from a segue class.
      */
-    case segueClass(segueClass: UIStoryboardSegue.Type, completion: ((UIViewController)->())?)
+    case segueClass(segueClass: UIStoryboardSegue.Type, onDismiss: ((UIViewController)->())?)
     
     
-    case popover(controllerProvider: ControllerProvider<VCType>, completion: ((UIViewController)->())?)
+    case popover(controllerProvider: ControllerProvider<VCType>, onDismiss: ((UIViewController)->())?)
     
     
-    public var completionHandler: ((UIViewController) ->())? {
+    public var onDismissCallback: ((UIViewController) ->())? {
         switch self{
             case .show(_, let completion):
                 return completion
@@ -176,28 +176,28 @@ public enum PresentationMode<VCType: UIViewController> {
     /**
      Present the view controller provided by PresentationMode. Should only be used from custom row implementation.
      
-     - parameter viewController:           viewController to present if it makes sense (normally provided by createController method)
+     - parameter viewController:           viewController to present if it makes sense (normally provided by makeController method)
      - parameter row:                      associated row
      - parameter presentingViewController: form view controller
      */
-    public func present(_ viewController: VCType!, row: BaseRow, presentingViewController:FormViewController){
+    public func present(_ viewController: VCType!, row: BaseRow, presentingController: FormViewController){
         switch self {
             case .show(_, _):
-                presentingViewController.show(viewController, sender: row)
+                presentingController.show(viewController, sender: row)
             case .presentModally(_, _):
-                presentingViewController.present(viewController, animated: true)
+                presentingController.present(viewController, animated: true)
             case .segueName(let segueName, _):
-                presentingViewController.performSegue(withIdentifier: segueName, sender: row)
+                presentingController.performSegue(withIdentifier: segueName, sender: row)
             case .segueClass(let segueClass, _):
-                let segue = segueClass.init(identifier: row.tag, source: presentingViewController, destination: viewController)
-                presentingViewController.prepare(for: segue, sender: row)
+                let segue = segueClass.init(identifier: row.tag, source: presentingController, destination: viewController)
+                presentingController.prepare(for: segue, sender: row)
                 segue.perform()
             case .popover(_, _):
                 guard let porpoverController = viewController.popoverPresentationController else {
                     fatalError()
                 }
-                porpoverController.sourceView = porpoverController.sourceView ?? presentingViewController.tableView
-                presentingViewController.present(viewController, animated: true)
+                porpoverController.sourceView = porpoverController.sourceView ?? presentingController.tableView
+                presentingController.present(viewController, animated: true)
             }
         
     }
@@ -210,25 +210,25 @@ public enum PresentationMode<VCType: UIViewController> {
     public func makeController() -> VCType? {
         switch self {
             case .show(let controllerProvider, let completionCallback):
-                let controller = controllerProvider.createController()
+                let controller = controllerProvider.makeController()
                 let completionController = controller as? RowControllerType
                 if let callback = completionCallback {
-                    completionController?.completionCallback = callback
+                    completionController?.onDismissCallback = callback
                 }
                 return controller
             case .presentModally(let controllerProvider, let completionCallback):
-                let controller = controllerProvider.createController()
+                let controller = controllerProvider.makeController()
                 let completionController = controller as? RowControllerType
                 if let callback = completionCallback {
-                    completionController?.completionCallback = callback
+                    completionController?.onDismissCallback = callback
                 }
                 return controller
             case .popover(let controllerProvider, let completionCallback):
-                let controller = controllerProvider.createController()
+                let controller = controllerProvider.makeController()
                 controller.modalPresentationStyle = .popover
                 let completionController = controller as? RowControllerType
                 if let callback = completionCallback {
-                    completionController?.completionCallback = callback
+                    completionController?.onDismissCallback = callback
                 }
                 return controller
             default:
@@ -539,10 +539,6 @@ open class FormViewController : UIViewController, FormViewControllerProtocol {
         return navigationAccessoryView
     }
     
-    //MARK: FormDelegate
-    
-    open func rowValueHasBeenChanged(_ row: BaseRow, oldValue: Any?, newValue: Any?) {}
-    
     //MARK: FormViewControllerProtocol
     
     /**
@@ -663,6 +659,10 @@ open class FormViewController : UIViewController, FormViewControllerProtocol {
         tableView?.endEditing(true)
         return true
     }
+    
+    //MARK: FormDelegate
+    
+    open func valueHasBeenChanged(for: BaseRow, oldValue: Any?, newValue: Any?) {}
     
     //MARK: Private
     
@@ -801,8 +801,6 @@ extension FormViewController: FormDelegate {
         tableView?.reloadRows(at: indexes, with: reloadAnimation(oldRows: oldRows, newRows: newRows))
         tableView?.endUpdates()
     }
-    
-    open func valueHasBeenChanged(for: BaseRow, oldValue: Any?, newValue: Any?) {}
 }
 
 

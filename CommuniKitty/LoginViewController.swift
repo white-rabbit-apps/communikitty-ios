@@ -93,6 +93,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.present(nav, animated: true, completion: nil)
     }
     
+    @IBAction func closeView() {
+        self.close()
+    }
+    
     @IBAction func showWalkthrough(){
         // Get view controllers and build the walkthrough
         let userDefaults = UserDefaults.standard

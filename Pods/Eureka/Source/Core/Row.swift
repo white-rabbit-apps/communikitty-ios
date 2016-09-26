@@ -79,7 +79,17 @@ open class RowOf<T: Equatable>: BaseRow {
     public var displayValueFor : ((T?) -> String?)? = {
         return $0.map { String(describing: $0) }
     }
-
+    
+    public var optionImages: [UIImage]?
+    
+    //Block variable used to get the UIImage that should be displayed in segmentedControl.
+    public var displayImageFor : ((T?) -> UIImage?)? = {
+        if let t = $0 {
+            return UIImage(named:"\(String(describing: t))")
+        }
+        return nil
+    }
+    
     public required init(tag: String?){
         super.init(tag: tag)
     }
@@ -92,18 +102,18 @@ open class RowOf<T: Equatable>: BaseRow {
         return validationErrors
     }
 
-    public func addRule<Rule: RuleType>(rule: Rule) where T == Rule.RowValueType{
+    public func add<Rule: RuleType>(rule: Rule) where T == Rule.RowValueType{
         let validFn: ((T?) -> ValidationError?) = { (val: T?) in
             return rule.isValid(value: val)
         }
         rules.append(ValidationRuleHelper(validateFn: validFn, rule: rule))
     }
 
-    public func addRuleSet(set: RuleSet<T>){
-        rules.append(contentsOf: set.rules)
+    public func add(ruleSet: RuleSet<T>){
+        rules.append(contentsOf: ruleSet.rules)
     }
 
-    public func removeRuleWith(identifier: String) {
+    public func remove(ruleWithIdentifier identifier: String) {
         if let index = rules.index(where: { (validationRuleHelper) -> Bool in
             return validationRuleHelper.rule.id == identifier
         }){
@@ -137,7 +147,7 @@ open class Row<Cell: CellType>: RowOf<Cell.Value>, TypedRowType where Cell: Base
     /// The cell associated to this row.
     public var cell : Cell! {
         return _cell ?? {
-            let result = cellProvider.createCell(self.cellStyle)
+            let result = cellProvider.makeCell(style: self.cellStyle)
             result.row = self
             result.setup()
             _cell = result

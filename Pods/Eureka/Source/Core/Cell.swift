@@ -92,7 +92,8 @@ open class Cell<T: Equatable> : BaseCell, TypedCellType {
 
     /// The row associated to this cell
     public weak var row : RowOf<T>!
-
+    private var firstLoad: Bool = true
+    
     /// Returns the navigationAccessoryView if it is defined or calls super if not.
     override open var inputAccessoryView: UIView? {
         if let v = formViewController()?.inputAccessoryView(for: row){
@@ -122,7 +123,44 @@ open class Cell<T: Equatable> : BaseCell, TypedCellType {
      */
     open override func update(){
         super.update()
-        textLabel?.text = row.title
+        if type(of: self) == Eureka.ButtonCell || type(of: self) == Eureka.TextAreaCell {
+            textLabel?.text = row.title
+        } else {
+            let numberOfSpace = row.title?.characters.count
+            if numberOfSpace! > 0{
+                var text = ""
+                for _ in 0...numberOfSpace!{
+                    text += "  "
+                    textLabel?.text = text
+                }
+            }
+            
+            imageView?.isHidden = true
+            let text = row.title
+            let width = UIScreen.main.bounds.width
+            let height = self.frame.height
+            let labelView = UILabel(frame: CGRect(x: 50, y: 0, width: width/2 , height: height))
+            labelView.text = text
+            
+            let imgView = UIImageView()
+            if width > 400{
+                imgView.frame = CGRect(x: 17, y: (height-25)/2, width: 25 , height: height)
+            } else {
+                imgView.frame = CGRect(x: 13, y: (height-25)/2, width: 25 , height: height)
+            }
+            
+            imgView.image = imageView?.image
+            imgView.sizeToFit()
+            
+            if firstLoad{
+                self.addSubview(imgView)
+                self.addSubview(labelView)
+            }
+            
+            firstLoad = false
+            
+        }
+        
         textLabel?.textColor = row.isDisabled ? .gray : .black
         detailTextLabel?.text = row.displayValueFor?(row.value) ?? (row as? NoValueDisplayTextConformance)?.noValueDisplayText
     }

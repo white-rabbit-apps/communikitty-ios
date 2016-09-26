@@ -76,7 +76,7 @@ class TimelineEntryFormViewController: FormViewController {
         let appDelegate = AppDelegate.getAppDelegate()
         
         form +++ Section("Info") { section  in
-//            section.color   = UIColor.lightOrangeColor()
+            section.color   = UIColor.lightOrangeColor()
         }
             <<< ActionSheetRow<String>("animal") {
                 $0.title = "Cat"
@@ -127,8 +127,8 @@ class TimelineEntryFormViewController: FormViewController {
         
         if(!isEditMode()) {
             form +++ Section("Share") { section  in
-//                section.color   = UIColor.lightYellowColor()
-                }
+                section.color   = UIColor.lightYellowColor()
+            }
                 <<< SwitchRow("facebook") {
                     $0.title = "Share to Facebook"
                     }.cellSetup { cell, row in

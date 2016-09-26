@@ -257,23 +257,24 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Pagin
     }
     
     @IBAction func followButtonPressed(_ sender: AnyObject) {
-        self.followButton.isEnabled = false
-        
-        if(isFollowing) {
-            self.stopFollowing({ () -> () in
-                self.followButton.isEnabled = true
-                self.followButton.setImage(UIImage(named: "button_follow"), for: UIControlState())
-                self.isFollowing = false
-                self.loadFollowerCount()
-            })
-        } else {
-            self.playASound(soundName: "chirp1")
-            self.startFollowing({ () -> () in
-                self.followButton.isEnabled = true
-                self.followButton.setImage(UIImage(named: "button_following"), for: UIControlState())
-                self.isFollowing = true
-                self.loadFollowerCount()
-            })
+        self.checkForUser {
+            self.followButton.isEnabled = false
+            if(self.isFollowing) {
+                self.stopFollowing({ () -> () in
+                    self.followButton.isEnabled = true
+                    self.followButton.setImage(UIImage(named: "button_follow"), for: UIControlState())
+                    self.isFollowing = false
+                    self.loadFollowerCount()
+                })
+            } else {
+                self.playASound(soundName: "chirp1")
+                self.startFollowing({ () -> () in
+                    self.followButton.isEnabled = true
+                    self.followButton.setImage(UIImage(named: "button_following"), for: UIControlState())
+                    self.isFollowing = true
+                    self.loadFollowerCount()
+                })
+            }
         }
     }
     

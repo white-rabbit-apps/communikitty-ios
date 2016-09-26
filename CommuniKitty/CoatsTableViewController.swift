@@ -16,6 +16,9 @@ class CoatsTableViewCell: PFTableViewCell {
 
 open
 class CoatsTableViewController: PFQueryTableViewController, TypedRowControllerType {
+    /// A closure to be called when the controller disappears.
+    public var onDismissCallback: ((UIViewController) -> ())?
+
     
     open var row: RowOf<Coat>!
     open var completionCallback : ((UIViewController) -> ())?

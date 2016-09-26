@@ -99,10 +99,27 @@ public struct HeaderFooterView<ViewType: UIView> : ExpressibleByStringLiteral, H
         var view: ViewType?
         if type == .header {
             view = section.headerView as? ViewType ?? {
-                            let result = viewProvider?.createView()
-                            section.headerView = result
-                            return result
-                        }()
+                
+                let result = viewProvider?.createView()
+                
+                /**
+                 Add subview  in header view
+                 */
+                let view = UIView(frame: CGRect.zero)
+                let x = UIScreen.main.bounds.width/3 - 40
+                view.backgroundColor = UIColor.gray
+                let label = UILabel(frame: CGRect(x: x, y: 0, width: 200, height: 50))
+                label.textColor = UIColor.white
+                label.textAlignment = .center
+                label.text = self.title
+//                label.font = UIFont(name: "Nunito-Bold", size: 18)
+                label.font = UIFont.boldSystemFont(ofSize: 18)
+                view.addSubview(label)
+                
+                section.headerView = result
+                section.headerView?.addSubview(view)
+                return result
+            }()
         }
         else {
             view = section.footerView as? ViewType ?? {
