@@ -364,51 +364,50 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             fontSize = 12.0
         }
         
-        let options: [NSObject : AnyObject] = [
+        var options: [NSObject : AnyObject] = [
             kCRToastSubtitleTextKey as NSObject: message as AnyObject,
             kCRToastUnderStatusBarKey as NSObject: false as AnyObject,
             kCRToastTimeIntervalKey as NSObject: timeToShow as AnyObject,
             kCRToastNotificationPreferredPaddingKey as NSObject: 15.0 as AnyObject,
-            //            kCRToastNotificationPreferredHeightKey: 150.0,
+            kCRToastNotificationPreferredHeightKey as NSObject: 150.0 as AnyObject,
             kCRToastFontKey as NSObject: UIFont.italicSystemFont(ofSize: 16),
             kCRToastSubtitleFontKey as NSObject: UIFont(name: "Nunito-Regular", size: CGFloat(fontSize))!,
-//            kCRToastNotificationTypeKey : CRToastType.NavigationBar.rawValue,
-//            kCRToastSubtitleTextAlignmentKey: NSTextAlignment.Left.rawValue,
-//            kCRToastTextAlignmentKey: NSTextAlignment.Left.rawValue,
-//            kCRToastAnimationInTypeKey: CRToastAnimationType.Spring.rawValue,
-//            kCRToastAnimationOutTypeKey: CRToastAnimationType.Spring.rawValue,
-//            kCRToastAnimationInDirectionKey: CRToastAnimationDirection.Top.rawValue,
-//            kCRToastAnimationOutDirectionKey: CRToastAnimationDirection.Top.rawValue
+            kCRToastNotificationTypeKey as NSObject : CRToastType.navigationBar.rawValue as AnyObject,
+            kCRToastSubtitleTextAlignmentKey as NSObject: NSTextAlignment.left.rawValue as AnyObject,
+            kCRToastTextAlignmentKey as NSObject: NSTextAlignment.left.rawValue as AnyObject,
+            kCRToastAnimationInTypeKey as NSObject: CRToastAnimationType.spring.rawValue as AnyObject,
+            kCRToastAnimationOutTypeKey as NSObject: CRToastAnimationType.spring.rawValue as AnyObject,
+            kCRToastAnimationInDirectionKey as NSObject: CRToastAnimationDirection.top.rawValue as AnyObject,
+            kCRToastAnimationOutDirectionKey as NSObject: CRToastAnimationDirection.top.rawValue as AnyObject
         ]
         
 //        let interactionResponder = CRToastInteractionResponder(interactionType: CRToastInteractionType.tap, automaticallyDismiss: false) { (type: CRToastInteractionType) -> Void in
 //            CRToastManager.dismissNotification(true)
 //        }
-//        options[kCRToastInteractionRespondersKey] = Array([interactionResponder])
+//        options[kCRToastInteractionRespondersKey as NSObject] = Array([interactionResponder]) as AnyObject
 //        
 //        if(type == "error") {
-//            options[kCRToastBackgroundColorKey] = UIColor(red: 0.80, green:0.25, blue:0.15, alpha:1.0)
+//            options[kCRToastBackgroundColorKey as NSObject] = UIColor.lightRedColor() as AnyObject
 //            
-//            options[kCRToastTextKey] = ["Taht dint werk.", "Ruh roh.", "Ar yoo kitten me?"].randomItem()
+//            options[kCRToastTextKey as NSObject] = ["Taht dint werk.", "Ruh roh.", "Ar yoo kitten me?"].randomItem() as AnyObject
 //            
 //            let filename = Int.random(lower: 1, upper: 8)
-//            options[kCRToastImageKey] = UIImage(named: "error" + String(filename))
+//            options[kCRToastImageKey as NSObject] = UIImage(named: "error" + String(filename)) as AnyObject
 //        } else if(type == "success") {
-//            options[kCRToastBackgroundColorKey] = UIColor(red: 0.58, green: 0.77, blue: 0.49, alpha: 1.0)
+//            options[kCRToastBackgroundColorKey as NSObject] = UIColor.lightGreenColor() as AnyObject
 //            
-//            options[kCRToastTextKey] = ["Errrmahgerd!", "Pawesum.", "It werkd.", "Clawesome!"].randomItem()
+//            options[kCRToastTextKey as NSObject] = ["Errrmahgerd!", "Pawesum.", "It werkd.", "Clawesome!"].randomItem() as AnyObject
 //            
 //            let filename = Int.random(lower: 1, upper: 5)
-//            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
+//            options[kCRToastImageKey as NSObject] = UIImage(named: "success" + String(filename)) as AnyObject
 //        } else if(type == "info") {
-//            options[kCRToastBackgroundColorKey] = UIColor(red: 98/255, green: 81/255, blue: 255/255, alpha: 1.0)
+//            options[kCRToastBackgroundColorKey as NSObject] = UIColor.lightBlueColor() as AnyObject
 //            
-//            options[kCRToastTextKey] = ["Oh hai."].randomItem()
+//            options[kCRToastTextKey as NSObject] = ["Oh hai."].randomItem() as AnyObject
 //            
 //            let filename = Int.random(lower: 1, upper: 5)
-//            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
+//            options[kCRToastImageKey as NSObject] = UIImage(named: "success" + String(filename)) as AnyObject
 //        }
-//        
         
         return options
     }
