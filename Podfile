@@ -5,7 +5,7 @@ inhibit_all_warnings!
 
 def shared_pods
 
-pod 'CLImageEditor', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
+    pod 'CLImageEditor', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
     pod 'CLImageEditor/StickerTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
     pod 'CLImageEditor/TextTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
     pod 'CLImageEditor/SplashTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'

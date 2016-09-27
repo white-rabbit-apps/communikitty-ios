@@ -1,11 +1,11 @@
 {
   "name": "CLImageEditor",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "summary": "CLImageEditor provides basic image editing features to iPhone apps.",
   "homepage": "https://github.com/white-rabbit-apps/CLImageEditor",
   "source": {
     "git": "https://github.com/white-rabbit-apps/CLImageEditor.git",
-    "tag": "v0.1.5"
+    "tag": "v0.1.6"
   },
   "license": {
     "type": "MIT",
@@ -42,6 +42,12 @@
 
         ]
       },
+      "source_files": [
+        "CLImageEditor/*/*.h",
+        "CLImageEditor/ImageTools/ToolSettings/*.h",
+        "CLImageEditor/ImageTools/CLFilterTool/CLFilterBase.h",
+        "CLImageEditor/ImageTools/CLEffectTool/CLEffectBase.h"
+      ],
       "public_header_files": [
         "CLImageEditor/*/*.h",
         "CLImageEditor/ImageTools/ToolSettings/*.h",
@@ -80,7 +86,8 @@
         ]
       },
       "source_files": "OptionalImageTools/CLStickerTool/*.{h,m,mm}",
-      "private_header_files": "OptionalImageTools/CLStickerTool/**.h"
+      "private_header_files": "OptionalImageTools/CLStickerTool/**.h",
+      "header_mappings_dir": "OptionalImageTools/CLStickerTool/"
     },
     {
       "name": "EmoticonTool",
@@ -90,7 +97,8 @@
         ]
       },
       "source_files": "OptionalImageTools/CLEmoticonTool/*.{h,m,mm}",
-      "private_header_files": "OptionalImageTools/CLEmoticonTool/**.h"
+      "private_header_files": "OptionalImageTools/CLEmoticonTool/**.h",
+      "header_mappings_dir": "OptionalImageTools/CLEmoticonTool/"
     },
     {
       "name": "ResizeTool",
@@ -100,7 +108,8 @@
         ]
       },
       "source_files": "OptionalImageTools/CLResizeTool/*.{h,m,mm}",
-      "private_header_files": "OptionalImageTools/CLResizeTool/**.h"
+      "private_header_files": "OptionalImageTools/CLResizeTool/**.h",
+      "header_mappings_dir": "OptionalImageTools/CLResizeTool/"
     },
     {
       "name": "TextTool",
@@ -110,7 +119,8 @@
         ]
       },
       "source_files": "OptionalImageTools/CLTextTool/*.{h,m,mm}",
-      "private_header_files": "OptionalImageTools/CLTextTool/**.h"
+      "private_header_files": "OptionalImageTools/CLTextTool/**.h",
+      "header_mappings_dir": "OptionalImageTools/CLTextTool/"
     },
     {
       "name": "SplashTool",
@@ -120,7 +130,8 @@
         ]
       },
       "source_files": "OptionalImageTools/CLSplashTool/*.{h,m,mm}",
-      "private_header_files": "OptionalImageTools/CLSplashTool/**.h"
+      "private_header_files": "OptionalImageTools/CLSplashTool/**.h",
+      "header_mappings_dir": "OptionalImageTools/CLSplashTool/"
     }
   ]
 }

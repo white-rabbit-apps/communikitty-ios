@@ -17,14 +17,15 @@
 
 @interface CLImageEditor : UIViewController
 {
-    
+
 }
 @property (nonatomic, weak) id<CLImageEditorDelegate> delegate;
 @property (nonatomic, readonly) CLImageEditorTheme *theme;
 @property (nonatomic, readonly) CLImageToolInfo *toolInfo;
+@property BOOL forceToCrop;
 
 - (id)initWithImage:(UIImage*)image;
-- (id)initWithImage:(UIImage*)image delegate:(id<CLImageEditorDelegate>)delegate;
+- (id)initWithImage:(UIImage*)image delegate:(id<CLImageEditorDelegate>)delegate forceToCrop:(BOOL)forceToCrop;
 - (id)initWithDelegate:(id<CLImageEditorDelegate>)delegate;
 
 - (void)setCurrentTool:(CLImageToolBase *)currentTool;
@@ -48,4 +49,3 @@
 - (void)imageEditor:(CLImageEditor*)editor didDismissWithImageView:(UIImageView*)imageView canceled:(BOOL)canceled;
 
 @end
-

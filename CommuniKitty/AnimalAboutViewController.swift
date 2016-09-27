@@ -345,12 +345,7 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
     
     func setSeparator(view:UIView){
         
-        DispatchQueue.main.async(
-            
-            
-            
-            ) {
-            
+        DispatchQueue.main.async() {
             switch view {
             case self.introView:
                 if self.introSeparator {

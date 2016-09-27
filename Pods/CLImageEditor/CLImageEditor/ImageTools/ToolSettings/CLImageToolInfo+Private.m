@@ -25,11 +25,12 @@
         info.toolName  = NSStringFromClass(toolClass);
         info.title     = [toolClass defaultTitle];
         info.available = YES;
+        info.customIcon = NULL;
         info.dockedNumber = [toolClass defaultDockedNumber];
         info.iconImagePath = [toolClass defaultIconImagePath];
         info.subtools = [toolClass subtools];
         info.optionalInfo = [[toolClass optionalInfo] mutableCopy];
-        
+
         return info;
     }
     return nil;
@@ -38,12 +39,12 @@
 + (NSArray*)toolsWithToolClass:(Class<CLImageToolProtocol>)toolClass
 {
     NSMutableArray *array = [NSMutableArray array];
-    
+
     CLImageToolInfo *info = [CLImageToolInfo toolInfoForToolClass:toolClass];
     if(info){
         [array addObject:info];
     }
-    
+
     NSArray *list = [CLClassList subclassesOfClass:toolClass];
     for(Class subtool in list){
         info = [CLImageToolInfo toolInfoForToolClass:subtool];

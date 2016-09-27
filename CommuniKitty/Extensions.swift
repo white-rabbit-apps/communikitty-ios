@@ -685,27 +685,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
     }
     
-    func checkCameraAuth() {
-        let cameraMediaType = AVMediaTypeVideo
-        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: cameraMediaType)
-        
-        switch cameraAuthorizationStatus {
-        case .denied: break
-        case .authorized: break
-        case .restricted: break
-            
-        case .notDetermined:
-            // Prompting user for the permission to use the camera.
-            AVCaptureDevice.requestAccess(forMediaType: cameraMediaType) { granted in
-                if granted {
-                    print("Granted access to \(cameraMediaType)")
-                } else {
-                    print("Denied access to \(cameraMediaType)")
-                }
-            }
-        }
-    }
-    
     func isLoggedIn() -> Bool {
         return WRUser.current() != nil
     }
@@ -793,29 +772,27 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
      - forceCrop: Boolean value to force CropView opening
      */
     func showEditor(image : UIImage, delegate: CLImageEditorDelegate, ratios: [Int]?, fromController: UIViewController, forceCrop: Bool = false) {
-        let editor = CLImageEditor(image: image, delegate: delegate)!
-//        let editor = CLImageEditor(image: image, delegate: delegate, forceToCrop: forceCrop)
+        let editor = CLImageEditor(image: image, delegate: delegate, forceToCrop: forceCrop)
         
-        let stickerTool = editor.toolInfo.subToolInfo(withToolName: "CLStickerTool", recursive: false)
-        stickerTool?.optionalInfo["flipHorizontalIconAssetsName"] = "button_stickers"
+        let stickerTool = editor?.toolInfo.subToolInfo(withToolName: "CLStickerTool", recursive: false)
         stickerTool?.available = true
-//        stickerTool.customIcon = "icon_stickers"
-        //        stickerTool.optionalInfo["stickerPath"] = "stickers/"
+        stickerTool?.customIcon = "icon_stickers"
+//        stickerTool?.optionalInfo["stickerPath"] = "stickers/"
         stickerTool?.optionalInfo["deleteIconAssetsName"] = "button_delete"
         stickerTool?.optionalInfo["resizeIconAssetsName"] = "icon_resize"
         
-        let splashTool = editor.toolInfo.subToolInfo(withToolName: "CLSplashTool", recursive: false)
+        let splashTool = editor?.toolInfo.subToolInfo(withToolName: "CLSplashTool", recursive: false)
         splashTool?.available = false
-        let curveTool = editor.toolInfo.subToolInfo(withToolName: "CLToneCurveTool", recursive: false)
+        let curveTool = editor?.toolInfo.subToolInfo(withToolName: "CLToneCurveTool", recursive: false)
         curveTool?.available = false
-        let blurTool = editor.toolInfo.subToolInfo(withToolName: "CLBlurTool", recursive: false)
+        let blurTool = editor?.toolInfo.subToolInfo(withToolName: "CLBlurTool", recursive: false)
         blurTool?.available = false
-        let drawTool = editor.toolInfo.subToolInfo(withToolName: "CLDrawTool", recursive: false)
+        let drawTool = editor?.toolInfo.subToolInfo(withToolName: "CLDrawTool", recursive: false)
         drawTool?.available = false
-        let adjustmentTool = editor.toolInfo.subToolInfo(withToolName: "CLAdjustmentTool", recursive: false)
+        let adjustmentTool = editor?.toolInfo.subToolInfo(withToolName: "CLAdjustmentTool", recursive: false)
         adjustmentTool?.available = false
         
-        let effectTool = editor.toolInfo.subToolInfo(withToolName: "CLEffectTool", recursive: false)
+        let effectTool = editor?.toolInfo.subToolInfo(withToolName: "CLEffectTool", recursive: false)
         effectTool?.available = false
         let pixelateFilter = effectTool?.subToolInfo(withToolName: "CLPixellateEffect", recursive: false)
         pixelateFilter?.available = false
@@ -823,24 +800,24 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         posterizeFilter?.available = false
         
         
-        let filterTool = editor.toolInfo.subToolInfo(withToolName: "CLFilterTool", recursive: false)
+        let filterTool = editor?.toolInfo.subToolInfo(withToolName: "CLFilterTool", recursive: false)
         //        filterTool.optionalInfo["flipHorizontalIconAssetsName"] = "button_filter"
         filterTool?.available = true
-//        filterTool.customIcon = "icon_filters"
+        filterTool?.customIcon = "icon_filters"
         let invertFilter = filterTool?.subToolInfo(withToolName: "CLDefaultInvertFilter", recursive: false)
         invertFilter?.available = false
         
-        let rotateTool = editor.toolInfo.subToolInfo(withToolName: "CLRotateTool", recursive: false)
+        let rotateTool = editor?.toolInfo.subToolInfo(withToolName: "CLRotateTool", recursive: false)
         rotateTool?.available = true
         rotateTool?.dockedNumber = -1
-//        rotateTool.customIcon = "icon_rotate"
+        rotateTool?.customIcon = "icon_rotate"
         
         rotateTool?.optionalInfo["rotateIconAssetsName"] = "icon_rotate"
         rotateTool?.optionalInfo["flipHorizontalIconAssetsName"] = "icon_flip_horizontal"
         rotateTool?.optionalInfo["flipVerticalIconAssetsName"] = "icon_flip_vertical"
         
-        let textTool = editor.toolInfo.subToolInfo(withToolName: "CLTextTool", recursive: false)
-//        textTool.customIcon = "icon_text"
+        let textTool = editor?.toolInfo.subToolInfo(withToolName: "CLTextTool", recursive: false)
+        textTool?.customIcon = "icon_text"
         textTool?.optionalInfo["newTextIconAssetsName"] = "button_add_small"
         textTool?.optionalInfo["editTextIconAssetsName"] = "icon_text_edit"
         textTool?.optionalInfo["deleteIconAssetsName"] = "button_delete"
@@ -849,25 +826,25 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         textTool?.optionalInfo["alignCenterIconAssetsName"] = "icon_align_center"
         textTool?.optionalInfo["alignRightIconAssetsName"] = "icon_align_right"
         
-        let cropTool = editor.toolInfo.subToolInfo(withToolName: "CLClippingTool", recursive: false)
+        let cropTool = editor?.toolInfo.subToolInfo(withToolName: "CLClippingTool", recursive: false)
         cropTool?.optionalInfo["flipHorizontalIconAssetsName"] = "button_crop"
         cropTool?.available = true
-//        cropTool.customIcon = "icon_crop"
+        cropTool?.customIcon = "icon_crop"
         cropTool?.dockedNumber = -2
         cropTool?.optionalInfo["swapButtonHidden"] = true
         
         cropTool?.optionalInfo["ratios"] = ratios != nil ? ratios : [["value1": 1, "value2": 1]]
         
         // set the custom style for the toolbar
-        editor.theme!.toolbarColor = UIColor.mainColor()
-        editor.theme!.backgroundColor = UIColor.black
-        editor.theme!.toolbarTextColor = UIColor.white
-        editor.theme!.toolIconColor = "white"
-        editor.theme!.toolbarTextFont = UIFont(name:"Nunito-Regular", size: 16)!
+        editor?.theme!.toolbarColor = UIColor.mainColor()
+        editor?.theme!.backgroundColor = UIColor.black
+        editor?.theme!.toolbarTextColor = UIColor.white
+        editor?.theme!.toolIconColor = "white"
+        editor?.theme!.toolbarTextFont = UIFont(name:"Nunito-Regular", size: 16)!
         
         // find the navigation bar in the editor's subviews and set custom style
         var nav = UINavigationBar()
-        for subview in editor.view.subviews {
+        for subview in (editor?.view.subviews)! {
             if subview is UINavigationBar {
                 nav = subview as! UINavigationBar
                 nav.barStyle = UIBarStyle.default
@@ -883,11 +860,11 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             }
         }
         
-        editor.modalTransitionStyle = .coverVertical
+        editor?.modalTransitionStyle = .coverVertical
         
         currentEditor = editor
         
-        self.present(editor, animated: false) { () -> Void in
+        self.present(editor!, animated: false) { () -> Void in
             self.hideLoader()
             UIView.animate(withDuration: 0.2, animations: {
                 nav.frame = CGRect(x: 0, y: nav.frame.origin.y, width: nav.frame.size.width, height: nav.frame.size.height)

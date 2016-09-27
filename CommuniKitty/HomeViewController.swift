@@ -142,7 +142,7 @@ class HomeViewController: UIViewController,BWWalkthroughViewControllerDelegate {
     }
     
     func showTransferForm(transferObject: WRAnimalTransfer) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        let acceptForm = storyboard.instantiateViewControllerWithIdentifier("AnimalTransferAccept") as! AnimalTransferAcceptFormViewController
 //
 //        acceptForm.transferObject = transferObject

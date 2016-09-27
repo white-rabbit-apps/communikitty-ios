@@ -23,14 +23,14 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
   - BWWalkthrough (1.1.0)
-  - CLImageEditor (0.1.5):
-    - CLImageEditor/Core (= 0.1.5)
-  - CLImageEditor/Core (0.1.5)
-  - CLImageEditor/SplashTool (0.1.5):
+  - CLImageEditor (0.1.6):
+    - CLImageEditor/Core (= 0.1.6)
+  - CLImageEditor/Core (0.1.6)
+  - CLImageEditor/SplashTool (0.1.6):
     - CLImageEditor/Core
-  - CLImageEditor/StickerTool (0.1.5):
+  - CLImageEditor/StickerTool (0.1.6):
     - CLImageEditor/Core
-  - CLImageEditor/TextTool (0.1.5):
+  - CLImageEditor/TextTool (0.1.6):
     - CLImageEditor/Core
   - CRToast (0.0.9)
   - Device (1.0.1)
@@ -133,7 +133,7 @@ CHECKOUT OPTIONS:
     :commit: f4ecfc4f588e2bd3fccc6f447913b1758710a19f
     :git: https://github.com/willeeklund/BWWalkthrough.git
   CLImageEditor:
-    :commit: 9ef59f7752ffa47df8d6a4d402991d3ced46642d
+    :commit: 577e0af315dc6ff5952d5e8711c90a3f7172b96f
     :git: https://github.com/white-rabbit-apps/CLImageEditor.git
   Eureka:
     :commit: a1e389631123166a27d87afc16f5e3c1e9263923
@@ -163,7 +163,7 @@ SPEC CHECKSUMS:
   BGTableViewRowActionWithImage: 4871f575342221f67645ec937e4db2a7258ed47c
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BWWalkthrough: 0c27ad2773a25c8f4fb9004bc7d6685deb35fecc
-  CLImageEditor: 9796736b9c19f84b5d2ddf3b9d6b0ea886c53764
+  CLImageEditor: a8a0f4059fe851e89173783c18a4fb311c3fd8de
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   Device: 7ed5b87db148886e8c3cbcdde5dc997baddbe10b
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -184,6 +184,6 @@ SPEC CHECKSUMS:
   SKPhotoBrowser: 48717c1e2602e6e99a5b1df9d6b43889aaa70e9f
   SlideMenuControllerSwift: 9c0a84f9a3fba51681debd7be77617094562ebcc
 
-PODFILE CHECKSUM: 7a77312518254830525afc0e06a0931d39b67a21
+PODFILE CHECKSUM: 72ff4681475b5f8d2571a2705f5d6f85555a3bcb
 
 COCOAPODS: 1.0.1
