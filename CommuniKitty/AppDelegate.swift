@@ -89,9 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    
-    
-    
     func initializeUI() {
         UILabel.appearance().substituteFontName = "Nunito-Regular"
         UITabBar.appearance().barTintColor = UIColor.mainColor()
@@ -132,7 +129,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.loadBreeds()
             self.loadCoats()
             self.loadShelters()
-//            self.loadVets()
             self.loadTraits()
             self.loadLoves()
             self.loadHates()
@@ -206,20 +202,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fusumaTintIcons = false
     }
     
+    /**
+     Ask the user to authorize the ability to receive push notifications
+     */
     func registerForPushNotifications() {
-        let application = UIApplication.shared
-        
         if Device.type() == .Simulator {
-            //            NSLog("registering for local push notifications")
-            //            application.listenForRemoteNotifications()
         } else {
             print("registering for push notifications")
-//            let settings = UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (result: Bool, error: Error?) in
-//            })
-//            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
+            DispatchQueue.main.async {
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+                    // Enable or disable features based on authorization
+                }
+                UIApplication.shared.registerForRemoteNotifications()
+            }
         }
     }
+    
+    /**
+     Called when the user accepts the ability to receive push notifications
+     */
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+        let currentInstallation = PFInstallation.current()
+        
+        currentInstallation.setDeviceTokenFrom(deviceToken)
+        currentInstallation.setValue(WRUser.current(), forKey: "user")
+        currentInstallation.saveInBackground { (succeeded, e) -> Void in
+            NSLog("Successfully registered for push notifications")
+        }
+    }
+    
+    /**
+     Called when the user rejects the ability to receive push notifications or there is a failure
+     */
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("failed to register for notifications: \(error)")
+    }
+    
     
     /**
      Register uris for deeplink handling
