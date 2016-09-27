@@ -107,26 +107,39 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     func setAnimalToComment(_ index: Int) {
-        let appDelegate = AppDelegate.getAppDelegate()
-        if(appDelegate.myAnimalsArray!.count > 0) {
-            let animalName = appDelegate.myAnimalsArray![index]
-            let animalToComment = appDelegate.myAnimalByName![animalName]
+
+        
             
-            if let profilePhotoFile = animalToComment!.profilePhoto {
-                profilePhotoFile.getDataInBackground(block: {
-                    (imageData: Data?, error: Error?) -> Void in
-                    if(error == nil) {
-                        let image = UIImage(data:imageData!)
-                        self.commentAnimalProfilePhoto.setImage(image?.circle, for: UIControlState())
-                    }
-                })
-            } else {
-                self.commentAnimalProfilePhoto.setImage(UIImage(named: "animal_profile_photo_empty"), for: UIControlState())
+            if AppDelegate.getAppDelegate().myAnimalsArray == nil {
+                AppDelegate.getAppDelegate().postLogin()
             }
+            //check if myAnimalsArray updated after login
+            if let myAnimalsArray = AppDelegate.getAppDelegate().myAnimalsArray {
+                if myAnimalsArray.count > 0{
+                let animalName = myAnimalsArray[index]
+                let animalToComment = AppDelegate.getAppDelegate().myAnimalByName![animalName]
+                
+                if let profilePhotoFile = animalToComment!.profilePhoto {
+                    profilePhotoFile.getDataInBackground(block: {
+                        (imageData: Data?, error: Error?) -> Void in
+                        if(error == nil) {
+                            let image = UIImage(data:imageData!)
+                            self.commentAnimalProfilePhoto.setImage(image?.circle, for: UIControlState())
+                        }
+                    })
+                } else {
+                    self.commentAnimalProfilePhoto.setImage(UIImage(named: "animal_profile_photo_empty"), for: UIControlState())
+                }
+                
+                self.commentAnimalProfilePhoto.tag = index
+                }
+            }
+           
             
-            self.commentAnimalProfilePhoto.tag = index
-        }
-    }
+            
+        
+
+            }
     
     func showAnimalToCommentSheet() {
         let optionMenu = UIAlertController(title: nil, message: "Comment as:", preferredStyle: .actionSheet)
@@ -202,7 +215,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(rawValue: curve), animations: {
-            self.commentToolbarBottomContraint.constant = keyboardFrame.size.height - 50
+            self.commentToolbarBottomContraint.constant = keyboardFrame.size.height
             self.view.layoutIfNeeded()
         }, completion: { (value: Bool) in
         })

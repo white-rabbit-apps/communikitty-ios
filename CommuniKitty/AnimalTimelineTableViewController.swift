@@ -176,10 +176,12 @@ class AnimalTimelineTableViewCell: EntryCell {
 //        })
 //    }
 //    
-//    @IBAction func commentButtonPressed(sender: AnyObject) {
-//        parentTable!.selectedIndexPath = self.indexPath!
-//        parentTable!.performSegue(withIdentifier: "TimelineToEntryDetail", sender: self)
-//    }
+    @IBAction func commentButtonPressed(_ sender: AnyObject) {
+        parentTable!.checkForUser {
+            self.parentTable!.selectedIndexPath = self.indexPath!
+            self.parentTable!.performSegue(withIdentifier: "TimelineToEntryDetail", sender: self)
+        }
+    }
 //    
 //    @IBAction func shareButtonPressed(sender: AnyObject) {
 //        parentTable!.showShareActionSheet(sender: sender, indexPath: self.indexPath!)
@@ -845,7 +847,6 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "TimelineToEntryDetail") {
             let detailScene =  segue.destination as! TimelineEntryDetailViewController
-
             detailScene.entryObject = self.object(at: self.selectedIndexPath) as? WRTimelineEntry
         }
     }
