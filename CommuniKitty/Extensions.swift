@@ -358,28 +358,28 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
     }
     
-    func getToastOptions(message: String, type: String, timeToShow: Double) -> [NSObject : AnyObject] {
+    func getToastOptions(message: String, type: String, timeToShow: Double) -> [AnyHashable : Any] {
         var fontSize = 14.0
         if(message.characters.count > 60) {
             fontSize = 12.0
         }
         
-        var options: [NSObject : AnyObject] = [
-            kCRToastSubtitleTextKey as NSObject: message as AnyObject,
-            kCRToastUnderStatusBarKey as NSObject: false as AnyObject,
-            kCRToastTimeIntervalKey as NSObject: timeToShow as AnyObject,
-            kCRToastNotificationPreferredPaddingKey as NSObject: 15.0 as AnyObject,
-            kCRToastNotificationPreferredHeightKey as NSObject: 150.0 as AnyObject,
-            kCRToastFontKey as NSObject: UIFont.italicSystemFont(ofSize: 16),
-            kCRToastSubtitleFontKey as NSObject: UIFont(name: "Nunito-Regular", size: CGFloat(fontSize))!,
-            kCRToastNotificationTypeKey as NSObject : CRToastType.navigationBar.rawValue as AnyObject,
-            kCRToastSubtitleTextAlignmentKey as NSObject: NSTextAlignment.left.rawValue as AnyObject,
-            kCRToastTextAlignmentKey as NSObject: NSTextAlignment.left.rawValue as AnyObject,
-            kCRToastAnimationInTypeKey as NSObject: CRToastAnimationType.spring.rawValue as AnyObject,
-            kCRToastAnimationOutTypeKey as NSObject: CRToastAnimationType.spring.rawValue as AnyObject,
-            kCRToastAnimationInDirectionKey as NSObject: CRToastAnimationDirection.top.rawValue as AnyObject,
-            kCRToastAnimationOutDirectionKey as NSObject: CRToastAnimationDirection.top.rawValue as AnyObject
-        ]
+        let options = [
+            kCRToastSubtitleTextKey : message,
+            kCRToastUnderStatusBarKey : NSNumber(value: false),
+            kCRToastTimeIntervalKey : NSNumber(value:timeToShow),
+            kCRToastNotificationPreferredPaddingKey: 15 as NSNumber,
+            kCRToastNotificationPreferredHeightKey : 150 as NSNumber,
+            kCRToastFontKey: UIFont.italicSystemFont(ofSize: 16),
+            kCRToastSubtitleFontKey : UIFont(name: "Nunito-Regular", size: CGFloat(fontSize))!,
+            kCRToastNotificationTypeKey  : NSNumber(value:CRToastType.navigationBar.rawValue),
+            kCRToastSubtitleTextAlignmentKey : NSNumber(value:NSTextAlignment.left.rawValue),
+            kCRToastTextAlignmentKey : NSNumber(value:NSTextAlignment.left.rawValue),
+            kCRToastAnimationInTypeKey : NSNumber(value:CRToastAnimationType.spring.rawValue),
+            kCRToastAnimationOutTypeKey : NSNumber(value:CRToastAnimationType.spring.rawValue),
+            kCRToastAnimationInDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue),
+            kCRToastAnimationOutDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue)
+        ] as [AnyHashable : Any]
         
 //        let interactionResponder = CRToastInteractionResponder(interactionType: CRToastInteractionType.tap, automaticallyDismiss: false) { (type: CRToastInteractionType) -> Void in
 //            CRToastManager.dismissNotification(true)
