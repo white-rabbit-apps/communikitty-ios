@@ -187,13 +187,11 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
     CGFloat maxW = MIN(imgSize.width, imgSize.height);
     UIImage *iconImage = [self.editor.imageView.image resize:CGSizeMake(W * imgSize.width/maxW, W * imgSize.height/maxW)];
     
-    for(NSDictionary *info in ratios){
-        CGFloat val1 = [info[kCLClippingToolRatioValue1] floatValue];
-        CGFloat val2 = [info[kCLClippingToolRatioValue2] floatValue];
+        int val1 = [ratios[0] integerValue];
+        int val2 = [ratios[1] integerValue];
         
         CLRatio *ratio = [[CLRatio alloc] initWithValue1:val1 value2:val2];
-        ratio.titleFormat = info[kCLClippingToolRatioTitleFormat];
-        
+    
         if(swapBtnHidden){
             ratio.isLandscape = (val1 > val2);
         }
@@ -213,7 +211,7 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
         if(self.selectedMenu==nil){
             self.selectedMenu = view;
         }
-    }
+//    }
     _menuScroll.contentSize = CGSizeMake(MAX(x, _menuScroll.frame.size.width+1), 0);
 }
 
