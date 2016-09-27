@@ -832,7 +832,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         cropTool?.dockedNumber = -2
         cropTool?.optionalInfo["swapButtonHidden"] = true
         
-        cropTool?.optionalInfo["ratios"] = ratios != nil ? ratios : [["value1": 1, "value2": 1]]
+        cropTool?.optionalInfo["ratios"] = ratios != nil ? ratios : [1,1]
         
         // set the custom style for the toolbar
         editor?.theme!.toolbarColor = UIColor.mainColor()
