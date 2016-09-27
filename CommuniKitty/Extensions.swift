@@ -364,7 +364,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             fontSize = 12.0
         }
         
-        let options = [
+        var options = [
             kCRToastSubtitleTextKey : message,
             kCRToastUnderStatusBarKey : NSNumber(value: false),
             kCRToastTimeIntervalKey : NSNumber(value:timeToShow),
@@ -381,33 +381,28 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             kCRToastAnimationOutDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue)
         ] as [AnyHashable : Any]
         
-//        let interactionResponder = CRToastInteractionResponder(interactionType: CRToastInteractionType.tap, automaticallyDismiss: false) { (type: CRToastInteractionType) -> Void in
-//            CRToastManager.dismissNotification(true)
-//        }
-//        options[kCRToastInteractionRespondersKey as NSObject] = Array([interactionResponder]) as AnyObject
-//        
-//        if(type == "error") {
-//            options[kCRToastBackgroundColorKey as NSObject] = UIColor.lightRedColor() as AnyObject
-//            
-//            options[kCRToastTextKey as NSObject] = ["Taht dint werk.", "Ruh roh.", "Ar yoo kitten me?"].randomItem() as AnyObject
-//            
-//            let filename = Int.random(lower: 1, upper: 8)
-//            options[kCRToastImageKey as NSObject] = UIImage(named: "error" + String(filename)) as AnyObject
-//        } else if(type == "success") {
-//            options[kCRToastBackgroundColorKey as NSObject] = UIColor.lightGreenColor() as AnyObject
-//            
-//            options[kCRToastTextKey as NSObject] = ["Errrmahgerd!", "Pawesum.", "It werkd.", "Clawesome!"].randomItem() as AnyObject
-//            
-//            let filename = Int.random(lower: 1, upper: 5)
-//            options[kCRToastImageKey as NSObject] = UIImage(named: "success" + String(filename)) as AnyObject
-//        } else if(type == "info") {
-//            options[kCRToastBackgroundColorKey as NSObject] = UIColor.lightBlueColor() as AnyObject
-//            
-//            options[kCRToastTextKey as NSObject] = ["Oh hai."].randomItem() as AnyObject
-//            
-//            let filename = Int.random(lower: 1, upper: 5)
-//            options[kCRToastImageKey as NSObject] = UIImage(named: "success" + String(filename)) as AnyObject
-//        }
+        if(type == "error") {
+            options[kCRToastBackgroundColorKey] = UIColor.lightRedColor()
+            
+            options[kCRToastTextKey] = ["Taht dint werk.", "Ruh roh.", "Ar yoo kitten me?"].randomItem()
+            
+            let filename = Int.random(lower: 1, upper: 8)
+            options[kCRToastImageKey] = UIImage(named: "error" + String(filename))
+        } else if(type == "success") {
+            options[kCRToastBackgroundColorKey] = UIColor.lightGreenColor()
+            
+            options[kCRToastTextKey] = ["Errrmahgerd!", "Pawesum.", "It werkd.", "Clawesome!"].randomItem()
+            
+            let filename = Int.random(lower: 1, upper: 5)
+            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
+        } else if(type == "info") {
+            options[kCRToastBackgroundColorKey] = UIColor.lightBlueColor()
+            
+            options[kCRToastTextKey] = ["Oh hai."].randomItem()
+            
+            let filename = Int.random(lower: 1, upper: 5)
+            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
+        }
         
         return options
     }
