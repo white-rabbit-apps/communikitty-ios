@@ -671,6 +671,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     
     func openUserSettings() {
         self.checkForUser {
+            
             let userSettingsVC = UserFormViewController()
             
             userSettingsVC.userObject = WRUser.current()

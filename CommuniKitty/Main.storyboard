@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A320" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VDF-2e-27L">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VDF-2e-27L">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -37,7 +37,7 @@
                         <viewControllerLayoutGuide type="bottom" id="5hq-8z-tN6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UTM-DJ-hrm">
-                        <rect key="frame" x="0.0" y="64" width="400" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F9x-iw-w8d" userLabel="Documents Scroll View">
@@ -755,7 +755,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gel-Jh-gKG" id="3jx-sf-Xmv">
-                                    <frame key="frameInset" width="375" height="75"/>
+                                    <frame key="frameInset" width="375" height="74"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3SN-Fx-ojJ">
@@ -1057,7 +1057,7 @@
                                 <rect key="frame" x="0.0" y="28" width="383" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eFn-KC-OLf" id="aT6-hN-5eC">
-                                    <frame key="frameInset" width="383" height="43.5"/>
+                                    <frame key="frameInset" width="383" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="km8-3A-PfR" userLabel="textLabel">
@@ -1754,7 +1754,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jtu-nP-UoT" id="jIF-Op-8fX">
-                                    <frame key="frameInset" width="375" height="58"/>
+                                    <frame key="frameInset" width="375" height="57"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ova-wQ-DaR" customClass="PFImageView">
@@ -2487,7 +2487,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GOy-Id-cuG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8370" y="-631"/>
+            <point key="canvasLocation" x="7938" y="-649"/>
         </scene>
         <!--Posts-->
         <scene sceneID="uYF-IG-RKp">
@@ -4048,7 +4048,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKF-Lw-6WV" userLabel="Comment Button">
                                             <state key="normal" image="button_comments"/>
                                             <connections>
-                                                <action selector="commentButtonPressed:" destination="ANJ-g2-s51" eventType="touchUpInside" id="y8d-fp-sZU"/>
+                                                <action selector="commentButtonPressed:" destination="ANJ-g2-s51" eventType="touchUpInside" id="dJG-yT-8f5"/>
                                             </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HHO-5e-p6H" userLabel="Image">
@@ -6596,7 +6596,7 @@
                         <viewControllerLayoutGuide type="bottom" id="cHD-ge-k9X"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="O1Q-4K-xxP">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" bounces="NO" canCancelContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqA-jE-TXG">
@@ -7110,7 +7110,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Xar-E1-Cie"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="a52-ZW-GAh">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="383" height="608.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -7125,7 +7125,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RlW-pc-oHP" userLabel="Animals Navigation" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Me" image="form_cat_name" id="NfE-rO-bgB"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tif-17-PQS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tif-17-PQS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7143,7 +7143,7 @@
             <objects>
                 <navigationController storyboardIdentifier="BreedsTable" automaticallyAdjustsScrollViewInsets="NO" id="3JW-hH-bBl" userLabel="Breeds Navigation" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Woq-84-9HD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Woq-84-9HD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7161,7 +7161,7 @@
             <objects>
                 <navigationController storyboardIdentifier="UserNavigation" automaticallyAdjustsScrollViewInsets="NO" id="Myd-0m-M1h" userLabel="User Settings Navigation" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kpS-1L-uVR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kpS-1L-uVR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7182,7 +7182,7 @@
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dE3-8V-aSa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="dE3-8V-aSa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7200,7 +7200,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PKI-iw-wGn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Cjo-k4-MtC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Cjo-k4-MtC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7221,7 +7221,7 @@
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4QM-iJ-tBO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4QM-iJ-tBO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7247,7 +7247,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QlJ-2d-xa7" id="FLH-xk-NuJ">
-                                    <frame key="frameInset" width="375" height="71"/>
+                                    <frame key="frameInset" width="375" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pr6-Wh-fiI" userLabel="Profile Photo Button">
@@ -7345,7 +7345,7 @@
                                 <rect key="frame" x="0.0" y="163" width="375" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UEI-cR-bHw" id="Q9f-k2-ynW">
-                                    <frame key="frameInset" width="375" height="71"/>
+                                    <frame key="frameInset" width="375" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8T-Ik-Jyv" userLabel="Profile Photo Button">
@@ -7602,7 +7602,7 @@
             <objects>
                 <navigationController storyboardIdentifier="UsersNav" automaticallyAdjustsScrollViewInsets="NO" id="0IJ-5N-bUW" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aXV-32-dYg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aXV-32-dYg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7620,7 +7620,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AnimalTransferAcceptNav" automaticallyAdjustsScrollViewInsets="NO" id="ECS-Ru-aHr" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AnI-jg-vWa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AnI-jg-vWa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7949,7 +7949,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mf2-df-XNN" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="icon_close" id="TmW-G9-q8U">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" backIndicatorImage="icon_close" id="TmW-G9-q8U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7971,7 +7971,7 @@
             <objects>
                 <navigationController storyboardIdentifier="DashboardNav" automaticallyAdjustsScrollViewInsets="NO" id="VDF-2e-27L" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ohG-W0-UDa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ohG-W0-UDa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -8123,10 +8123,10 @@
         <image name="translate_button" width="20" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dTB-sd-TCY"/>
-        <segue reference="5v7-7c-y7N"/>
-        <segue reference="URV-Nz-LDN"/>
         <segue reference="Svm-iF-eOk"/>
+        <segue reference="rrQ-9U-VEM"/>
+        <segue reference="URV-Nz-LDN"/>
+        <segue reference="QQL-V2-i5x"/>
         <segue reference="8rK-L8-7KM"/>
     </inferredMetricsTieBreakers>
 </document>
