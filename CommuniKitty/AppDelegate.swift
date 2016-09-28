@@ -239,6 +239,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("failed to register for notifications: \(error)")
     }
     
+    /**
+     Called when the user receives a push notification while the app is open
+     */
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("didReceiveRemoteNotification")
+        
+        let state = application.applicationState
+        
+        if (state == .inactive || state == .background) {
+            // App was inactive or in the background when the notification was received
+            
+            if let uri = userInfo["uri"] as? String {
+                print("has uri: " + uri)
+                Hoko.deeplinking().handleOpen(URL(string: uri))
+            }
+        } else {
+            // App was already running
+            // Show a notification
+            
+            if let aps = userInfo["aps"] as? NSDictionary {
+                if let alert = aps["alert"] as? NSDictionary {
+                    if let message = alert["message"] as? String {
+                        self.showNotification(message: message)
+                    }
+                } else if let alert = aps["alert"] as? String {
+                    let sound = aps["sound"] as? String
+                    if sound != nil {
+                        let soundName = sound!.replacingOccurrences(of: ".caf", with: "")
+                        self.showNotification(message: alert, sound: soundName)
+                    } else {
+                        self.showNotification(message: alert)
+                    }
+                }
+            }
+        }
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        return Hoko.deeplinking().continue(userActivity, restorationHandler:restorationHandler)
+    }
+    
     
     /**
      Register uris for deeplink handling
