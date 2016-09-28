@@ -171,9 +171,9 @@ class UserTableViewController: PFQueryTableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "On White Rabbit"
+            return "On CommuniKitty"
         case 1:
-            return "Invite to White Rabbit"
+            return "Invite to CommuniKitty"
         default:
             return ""
         }

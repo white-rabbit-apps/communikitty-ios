@@ -235,7 +235,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /**
      Called when the user rejects the ability to receive push notifications or there is a failure
      */
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("failed to register for notifications: \(error)")
     }
     
