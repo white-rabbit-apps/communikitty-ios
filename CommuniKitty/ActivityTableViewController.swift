@@ -97,14 +97,19 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
         return query
     }
     
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        if indexPath.row > self.objects!.count - 1 {
+    
+    @IBAction func entryPhotoTap(gesture: UIGestureRecognizer){
+        let button = gesture.view as! PFImageView
+        let cell = button.superview!.superview as! ActivityViewCell
+        let indexPath = self.tableView.indexPath(for: cell)
+
+        if (indexPath?.row)! > self.objects!.count - 1 {
             self.loadNextPage()
             return
         }
         
-        if let activity = self.object(at: indexPath as IndexPath) as? WRActivity {
-            let cell = tableView.cellForRow(at: indexPath as IndexPath) as! ActivityViewCell
+        if let activity = self.object(at: indexPath! as IndexPath) as? WRActivity {
+            let cell = tableView.cellForRow(at: indexPath! as IndexPath) as! ActivityViewCell
             
             let action = activity.actionValue
             if(action == .Follow || action == .Like || action == .Comment) {
@@ -174,6 +179,9 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
 
         let activity = object as! WRActivity
         cell!.activityObject = activity
+        
+        let entryImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(entryPhotoTap))
+        cell!.entryPFImage.addGestureRecognizer(entryImageTapGesture)
         
         let action = activity.actionValue
         if(action == .Follow) {
