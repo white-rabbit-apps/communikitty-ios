@@ -451,6 +451,11 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         CRToastManager.showNotification(options: options, completionBlock: nil)
     }
     
+    func showShareActionSheet(image: UIImage) {
+        let activityVC = UIActivityViewController(activityItems: ["http://www.communikitty.com", image], applicationActivities: nil)
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
 //    func showFlagActionSheet(entryCell: EntryCell?, flaggedObject: PFObject?) {
 //        var objectToFlag = flaggedObject
 //        if objectToFlag == nil {
@@ -940,11 +945,11 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     func showImagesBrowser(entries: [WRTimelineEntry], startIndex: Int?, animatedFromView: UIView?, displayUser: Bool = false) {
         var idmImages = Array<SKPhoto>()
         entries.forEach { (entry) -> Void in
-            let idmPhoto : SKPhoto = SKPhoto.photoWithImageURL(entry.getImageUrl()!) //, holder: entry)
+            let idmPhoto : SKPhoto = SKPhoto.photoWithImageURL(url: entry.getImageUrl()!, object: entry)
             idmPhoto.shouldCachePhotoURLImage = true
             idmPhoto.caption = entry.text
-//            idmPhoto.commentCount = entry.getCommentCount()
-//            idmPhoto.likeCount = entry.getLikeCount()
+            idmPhoto.commentCount = entry.getCommentCount()
+            idmPhoto.likeCount = entry.getLikeCount()
             idmImages.append(idmPhoto)
         }
         
@@ -958,20 +963,17 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         if(startIndex != nil) {
             browser.initializePageIndex(startIndex!)
         }
-//        browser.displayBackAndForwardButton = false
-//        browser.displayCounterLabel = false
-//        browser.displayAction = true
-//        browser.displayToolbar = true
-//        
-//        browser.displayCommentButton = true
-//        browser.displayLikeButton = true
-//        browser.displayMoreButton = true
-//        
+        
+        SKPhotoBrowserOptions.displayToolbar = false
+        SKPhotoBrowserOptions.displayAction = true
+        SKPhotoBrowserOptions.displayDeleteButton = false
+        
 //        browser.callingViewController = self
-//        
-//        if(displayUser) {
-//            browser.displayUserButton = true
-//            browser.updateUserInfoHandler = { (object: NSObject?)->Void in
+
+        
+        if(displayUser) {
+            SKPhotoBrowserOptions.displayUserButton = true
+//            SKPhotoBrowserOptions.updateUserInfoHandler = { (object: NSObject?)->Void in
 //                NSLog("comment button pressed")
 //                if let entry = object as? WRTimelineEntry {
 //                    if let animal = entry.animal {
@@ -987,63 +989,82 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
 //                    }
 //                }
 //            }
-//            
-//            browser.customUserButtonHandler = { (object: NSObject?)->Void in
-//                NSLog("user button pressed")
-//                if let entry = object as? WRTimelineEntry {
-//                    if let animal = entry.animal {
-//                        self.dismissViewControllerAnimated(true, completion: {
-//                            self.openAnimalDetail(animal, push: true)
-//                        })
-//                    }
-//                }
-//            }
-//        }
-//        
-//        browser.customEntryLoadedHandler = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-//            if let entry = object as? WRTimelineEntry {
-//                entry.isLikedWithBlock({ (result, error) in
-//                    NSLog("entry is liked: \(result)")
-//                    if(result) {
+            
+            SKPhotoBrowserOptions.handleUserButtonPressed = { (object: NSObject?)->Void in
+                NSLog("user button pressed")
+                if let entry = object as? WRTimelineEntry {
+                    if let animal = entry.animal {
+                        self.dismiss(animated: true, completion: {
+                            self.openAnimalDetail(animalObject: animal, push: true)
+                        })
+                    }
+                }
+            }
+        }
+        
+        SKPhotoBrowserOptions.handleEntryLoaded = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
+            if let entry = object as? WRTimelineEntry {
+                entry.isLikedWithBlock({ (result, error) in
+                    NSLog("entry is liked: \(result)")
+                    if(result) {
 //                        browser.setLikeButtonImage(UIImage(named: "button_paw_filled")!)
 //                        self.setLikeHandlerOn(browser)
-//                    } else {
+                    } else {
 //                        browser.setLikeButtonImage(UIImage(named: "button_paw")!)
 //                        self.setLikeHandlerOff(browser)
-//                    }
-//                })
-//            }
-//        }
-//        
-//        browser.customCommentButtonImage = UIImage(named: "button_comments")
-//        browser.customCommentButtonHandler = { (object: NSObject?)->Void in
-//            NSLog("comment button pressed")
-//            if let entry = object as? WRTimelineEntry {
-//                self.dismissViewControllerAnimated(true, completion: {
-//                    self.openEntryComments(entry, push: false)
-//                })
-//            }
-//        }
-//        
-//        browser.customLikeButtonImage = UIImage(named: "button_paw")
-//        
-//        
-//        browser.customMoreButtonImage = UIImage(named: "button_more")
-//        browser.customMoreButtonHandler = { (object: NSObject?)->Void in
-//            NSLog("more button pressed")
-//            if let entry = object as? WRTimelineEntry {
-//                browser.showMoreActionSheet(entry)
-//            }
-//        }
-//        
-//        browser.customShareButtonImage = UIImage(named: "button_share")
-//        
+                    }
+                })
+            }
+        }
+
+        SKPhotoBrowserOptions.displayCommentButton = true
+        SKPhotoBrowserOptions.customCommentButtonImage = UIImage(named: "emoji_comment")
+        SKPhotoBrowserOptions.handleCommentButtonPressed = { (object: NSObject?)->Void in
+            NSLog("comment button pressed")
+            if let entry = object as? WRTimelineEntry {
+                self.dismiss(animated: true, completion: {
+                    self.openEntryComments(entryObject: entry, push: false)
+                })
+            }
+        }
+        
+        SKPhotoBrowserOptions.displayLikeButton = true
+        SKPhotoBrowserOptions.customLikeButtonImage = UIImage(named: "button_paw")
+        SKPhotoBrowserOptions.handleLikeButtonPressed = { (object: NSObject?)->Void in
+            NSLog("like button pressed")
+            if let entry = object as? WRTimelineEntry {
+                
+            }
+        }
+        
+        
+        SKPhotoBrowserOptions.displayShareButton = true
+        SKPhotoBrowserOptions.customShareButtonImage = UIImage(named: "button_share")
+        SKPhotoBrowserOptions.handleShareButtonPressed = { (object: NSObject?, image: UIImage)->Void in
+            NSLog("share button pressed")
+            browser.showShareActionSheet(image: image)
+        }
+
+        
+        if(self.isLoggedIn()) {
+            SKPhotoBrowserOptions.displayMoreButton = true
+            SKPhotoBrowserOptions.customMoreButtonImage = UIImage(named: "button_more")
+            SKPhotoBrowserOptions.handleMoreButtonPressed = { (object: NSObject?)->Void in
+                NSLog("more button pressed")
+                if let entry = object as? WRTimelineEntry {
+                    browser.showMoreActionSheet(entry: entry)
+                }
+            }
+        }
+        
+
 //        browser.bounceAnimation = true
 //        browser.enableSingleTapDismiss = false
 //        
 //        browser.displayCustomCloseButton = true
-//        browser.customCloseButtonImage = UIImage(named: "icon_close")
-//        
+        
+        SKPhotoBrowserOptions.customCloseButtonImage = UIImage(named: "icon_close")
+
         self.present(browser, animated: true, completion: nil)
     }
     

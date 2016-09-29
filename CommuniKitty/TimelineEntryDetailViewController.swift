@@ -42,7 +42,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
         self.commentField.delegate = self
 //        self.commentField.addTarget(self, action: #selector(textWasChanged), for: .editingChanged)
 
-        self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "button_share", action: #selector(TimelineEntryDetailViewController.showShareActionSheet), height: 45, width: 35)
+        self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "button_share", action: #selector(showShareSheet), height: 45, width: 35)
 
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -51,8 +51,10 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        self.setAnimalToComment(0)
-        
+        if self.isLoggedIn() {
+            self.setAnimalToComment(0)
+        }
+            
         //self.initActiveLabel(self.textLabel)
         
         self.updateView()
@@ -107,39 +109,28 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     func setAnimalToComment(_ index: Int) {
-
-        
+        //check if myAnimalsArray updated after login
+        if let myAnimalsArray = AppDelegate.getAppDelegate().myAnimalsArray {
+            if myAnimalsArray.count > 0{
+            let animalName = myAnimalsArray[index]
+            let animalToComment = AppDelegate.getAppDelegate().myAnimalByName![animalName]
             
-            if AppDelegate.getAppDelegate().myAnimalsArray == nil {
-                AppDelegate.getAppDelegate().postLogin()
+            if let profilePhotoFile = animalToComment!.profilePhoto {
+                profilePhotoFile.getDataInBackground(block: {
+                    (imageData: Data?, error: Error?) -> Void in
+                    if(error == nil) {
+                        let image = UIImage(data:imageData!)
+                        self.commentAnimalProfilePhoto.setImage(image?.circle, for: UIControlState())
+                    }
+                })
+            } else {
+                self.commentAnimalProfilePhoto.setImage(UIImage(named: "animal_profile_photo_empty"), for: UIControlState())
             }
-            //check if myAnimalsArray updated after login
-            if let myAnimalsArray = AppDelegate.getAppDelegate().myAnimalsArray {
-                if myAnimalsArray.count > 0{
-                let animalName = myAnimalsArray[index]
-                let animalToComment = AppDelegate.getAppDelegate().myAnimalByName![animalName]
-                
-                if let profilePhotoFile = animalToComment!.profilePhoto {
-                    profilePhotoFile.getDataInBackground(block: {
-                        (imageData: Data?, error: Error?) -> Void in
-                        if(error == nil) {
-                            let image = UIImage(data:imageData!)
-                            self.commentAnimalProfilePhoto.setImage(image?.circle, for: UIControlState())
-                        }
-                    })
-                } else {
-                    self.commentAnimalProfilePhoto.setImage(UIImage(named: "animal_profile_photo_empty"), for: UIControlState())
-                }
-                
-                self.commentAnimalProfilePhoto.tag = index
-                }
-            }
-           
             
-            
-        
-
+            self.commentAnimalProfilePhoto.tag = index
             }
+        }
+    }
     
     func showAnimalToCommentSheet() {
         let optionMenu = UIAlertController(title: nil, message: "Comment as:", preferredStyle: .actionSheet)
@@ -167,13 +158,14 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func commentAnimalProfilePhotoPressed(_ sender: AnyObject) {
-        self.showAnimalToCommentSheet()
+        self.checkForUser {
+            self.showAnimalToCommentSheet()
+        }
     }
     
-    func showShareActionSheet() {
+    func showShareSheet() {
         let image = self.shareImage
-        let activityVC = UIActivityViewController(activityItems: ["http://ftwtrbt.com", image], applicationActivities: nil)
-        self.present(activityVC, animated: true, completion: nil)
+        self.showShareActionSheet(image: image!)
     }
     
     func addComment(_ text: String) {
@@ -253,12 +245,14 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func sendWasPressed() {
-        if(self.commentField.text == "") {
-            self.commentField.resignFirstResponder()
-        } else {
-            self.addComment(self.commentField.text!)
-            self.commentField.resignFirstResponder()
-            self.commentField.text = ""
+        self.checkForUser {
+            if(self.commentField.text == "") {
+                self.commentField.resignFirstResponder()
+            } else {
+                self.addComment(self.commentField.text!)
+                self.commentField.resignFirstResponder()
+                self.commentField.text = ""
+            }
         }
     }
     

@@ -137,8 +137,7 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
     
     func showShareActionSheet(sender: AnyObject, indexPath: IndexPath?) {
         let image = self.imageAtCell(indexPath: indexPath)!
-        let activityVC = UIActivityViewController(activityItems: ["http://ftwtrbt.com", image], applicationActivities: nil)
-        self.present(activityVC, animated: true, completion: nil)
+        self.showShareActionSheet(image: image)
     }
 
     

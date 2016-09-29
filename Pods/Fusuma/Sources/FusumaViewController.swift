@@ -195,10 +195,6 @@ public final class FusumaViewController: UIViewController {
             cameraView.fullAspectRatioConstraint.isActive = true
             cameraView.croppedAspectRatioConstraint.isActive = false
         }
-
-        cameraView.frame = CGRect(origin: CGPoint.zero, size: cameraShotContainer.frame.size)
-        cameraView.layoutIfNeeded()
-        cameraView.initialize()
         
         albumView.frame  = CGRect(origin: CGPoint.zero, size: photoLibraryViewerContainer.frame.size)
         albumView.layoutIfNeeded()
@@ -220,6 +216,10 @@ public final class FusumaViewController: UIViewController {
     
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        cameraView.frame = CGRect(origin: CGPoint.zero, size: cameraShotContainer.frame.size)
+        cameraView.layoutIfNeeded()
+        cameraView.initialize()
     }
 
     override public func viewDidAppear(_ animated: Bool) {

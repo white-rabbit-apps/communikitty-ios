@@ -35,7 +35,7 @@ def shared_pods
     pod 'MMMarkdown'
     pod 'OAuthSwift', :git => 'https://github.com/skedgo/OAuthSwift/', :branch => 'swift3.0'
     pod 'PagingMenuController', :git => 'https://github.com/kitasuke/PagingMenuController.git', :branch => 'swift3.0'
-    pod 'SKPhotoBrowser', :git => 'https://github.com/suzuki-0000/SKPhotoBrowser.git', :branch => 'swift3'
+    pod 'SKPhotoBrowser', :git => 'https://github.com/white-rabbit-apps/SKPhotoBrowser.git', :branch => 'swift3'
     pod 'SlideMenuControllerSwift', :git => 'https://github.com/dekatotoro/SlideMenuControllerSwift.git', :tag => '3.0.0'
 end
 

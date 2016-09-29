@@ -9,6 +9,7 @@
 import UIKit
 
 @objc public protocol SKPhotoProtocol: NSObjectProtocol {
+    var underlyingObject: NSObject? { get set }
     var underlyingImage: UIImage! { get }
     var caption: String! { get }
     var index: Int { get set}
@@ -20,13 +21,16 @@ import UIKit
 // MARK: - SKPhoto
 open class SKPhoto: NSObject, SKPhotoProtocol {
     
+    open var underlyingObject: NSObject?
     open var underlyingImage: UIImage!
     open var photoURL: String!
     open var contentMode: UIViewContentMode = .scaleAspectFill
     open var shouldCachePhotoURLImage: Bool = false
     open var caption: String!
+    open var commentCount: Int!
+    open var likeCount: Int!
     open var index: Int = 0
-
+    
     override init() {
         super.init()
     }
@@ -34,6 +38,12 @@ open class SKPhoto: NSObject, SKPhotoProtocol {
     convenience init(image: UIImage) {
         self.init()
         underlyingImage = image
+    }
+    
+    convenience init(image: UIImage, object: NSObject) {
+        self.init()
+        underlyingImage = image
+        underlyingObject = object
     }
     
     convenience init(url: String) {
@@ -45,6 +55,12 @@ open class SKPhoto: NSObject, SKPhotoProtocol {
         self.init()
         photoURL = url
         underlyingImage = holder
+    }
+    
+    convenience init(url: String, object: NSObject?) {
+        self.init()
+        photoURL = url
+        underlyingObject = object
     }
     
     open func checkCache() {
@@ -103,12 +119,12 @@ open class SKPhoto: NSObject, SKPhotoProtocol {
                         }
                         session.finishTasksAndInvalidate()
                     }
-                })
+                    })
                 task.resume()
             }
         }
     }
-
+    
     open func loadUnderlyingImageComplete() {
         NotificationCenter.default.post(name: Notification.Name(rawValue: SKPHOTO_LOADING_DID_END_NOTIFICATION), object: self)
     }
@@ -122,11 +138,19 @@ extension SKPhoto {
         return SKPhoto(image: image)
     }
     
+    public class func photoWithImage(image: UIImage, object: NSObject) -> SKPhoto {
+        return SKPhoto(image: image, object: object)
+    }
+    
     public static func photoWithImageURL(_ url: String) -> SKPhoto {
         return SKPhoto(url: url)
     }
     
-    public static func photoWithImageURL(_ url: String, holder: UIImage?) -> SKPhoto {
-        return SKPhoto(url: url, holder: holder)
+    //    public static func photoWithImageURL(_ url: String, holder: UIImage?) -> SKPhoto {
+    //        return SKPhoto(url: url, holder: holder)
+    //    }
+    
+    public static func photoWithImageURL(url: String, object: NSObject?) -> SKPhoto {
+        return SKPhoto(url: url, object: object)
     }
 }
