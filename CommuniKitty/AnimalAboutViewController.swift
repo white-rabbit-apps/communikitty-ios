@@ -45,7 +45,7 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
     var animalFormViewController: AnimalFormViewController?
     var animalTimelineViewController: AnimalTimelineTableViewController?
     
-    @IBAction func breedButtonPressed(sender: AnyObject) {
+    @IBAction func breedButtonPressed(_ sender: AnyObject) {
         if animalObject?.breed != nil {
             self.performSegue(withIdentifier: "AboutToBreedDetail", sender: self)
         } else if currentUserIsOwner {
@@ -77,7 +77,7 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
         }
     }
     
-    @IBAction func coatButtonPressed(sender: AnyObject) {
+    @IBAction func coatButtonPressed(_ sender: AnyObject) {
         if let _ = animalObject!.coat {
         } else if currentUserIsOwner {
             let coatRow = RowOf<Coat>(tag: "Coat")
@@ -250,12 +250,12 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
     
     func pickTheImage(traitName:String)-> UIImage {
         switch traitName {
-//        case "independent":
-//            return UIImage(named: "independent")!
-//        case "calm":
-//            return UIImage(named: "lazy")!
-//        case "chill":
-//            return  UIImage(named: "sleepy")!
+        case "independent":
+            return UIImage(named: "independent")!
+        case "calm":
+            return UIImage(named: "lazy")!
+        case "chill":
+            return  UIImage(named: "sleepy")!
         default:
             return UIImage()
         }
