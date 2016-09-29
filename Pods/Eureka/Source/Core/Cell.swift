@@ -126,12 +126,14 @@ open class Cell<T: Equatable> : BaseCell, TypedCellType {
         if type(of: self) == Eureka.ButtonCell || type(of: self) == Eureka.TextAreaCell {
             textLabel?.text = row.title
         } else {
-            let numberOfSpace = row.title?.characters.count
-            if numberOfSpace! > 0{
-                var text = ""
-                for _ in 0...numberOfSpace!{
-                    text += "  "
-                    textLabel?.text = text
+            if let title = row.title {
+                let numberOfSpace = title.characters.count
+                if numberOfSpace > 0{
+                    var text = ""
+                    for _ in 0...numberOfSpace{
+                        text += "  "
+                        textLabel?.text = text
+                    }
                 }
             }
             

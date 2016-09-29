@@ -1403,13 +1403,13 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
     }
     
-//    func textWasChanged(textField: UITextField) {
-//        let val = textField.text
-//        let maxLength = 500
-//        if (val?.characters.count)! > maxLength {
-//            textField.text = val?[0...maxLength]
-//        }
-//    }
+    func textWasChanged(textField: UITextField) {
+        let val = textField.text
+        let maxLength = 500
+        if (val?.characters.count)! > maxLength {
+            textField.text = val?[0...maxLength]
+        }
+    }
 }
 
 extension SKPhotoBrowser {
