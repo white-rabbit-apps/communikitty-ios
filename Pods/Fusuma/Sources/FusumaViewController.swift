@@ -81,6 +81,9 @@ public final class FusumaViewController: UIViewController {
     @IBOutlet var libraryFirstConstraints: [NSLayoutConstraint]!
     @IBOutlet var cameraFirstConstraints: [NSLayoutConstraint]!
     
+    var cameraViewInitialized: Bool = false
+    var albumViewInitialized: Bool = false
+    
     lazy var albumView  = FSAlbumView.instance()
     lazy var cameraView = FSCameraView.instance()
     lazy var videoView = FSVideoCameraView.instance()
@@ -174,11 +177,6 @@ public final class FusumaViewController: UIViewController {
         cameraShotContainer.addSubview(cameraView)
         
 		titleLabel.textColor = fusumaBaseTintColor
-		
-//        if modeOrder != .libraryFirst {
-//            libraryFirstConstraints.forEach { $0.priority = 250 }
-//            cameraFirstConstraints.forEach { $0.priority = 1000 }
-//        }
         
         if !hasVideo {
             videoButton.removeFromSuperview()
@@ -196,13 +194,22 @@ public final class FusumaViewController: UIViewController {
             cameraView.croppedAspectRatioConstraint.isActive = false
         }
 
-//        cameraView.frame = CGRect(origin: CGPoint.zero, size: cameraShotContainer.frame.size)
-//        cameraView.layoutIfNeeded()
-//        cameraView.initialize()
-        
-        albumView.frame  = CGRect(origin: CGPoint.zero, size: photoLibraryViewerContainer.frame.size)
-        albumView.layoutIfNeeded()
-        albumView.initialize()
+        if modeOrder != .libraryFirst {
+            cameraView.frame = CGRect(origin: CGPoint.zero, size: cameraShotContainer.frame.size)
+            cameraView.layoutIfNeeded()
+            cameraView.initialize()
+            doneButton.isHidden = true
+            self.cameraViewInitialized = true
+
+//            libraryFirstConstraints.forEach { $0.priority = 250 }
+//            cameraFirstConstraints.forEach { $0.priority = 1000 }
+        } else {
+            albumView.frame  = CGRect(origin: CGPoint.zero, size: photoLibraryViewerContainer.frame.size)
+            albumView.layoutIfNeeded()
+            albumView.initialize()
+            doneButton.isHidden = false
+            self.albumViewInitialized = true
+        }
         
         if hasVideo {
             videoView.frame = CGRect(origin: CGPoint.zero, size: videoShotContainer.frame.size)
@@ -220,9 +227,6 @@ public final class FusumaViewController: UIViewController {
     
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cameraView.frame = CGRect(origin: CGPoint.zero, size: cameraShotContainer.frame.size)
-        cameraView.layoutIfNeeded()
-        cameraView.initialize()
     }
 
     override public func viewDidAppear(_ animated: Bool) {
@@ -245,11 +249,25 @@ public final class FusumaViewController: UIViewController {
     }
     
     @IBAction func libraryButtonPressed(_ sender: UIButton) {
+        if(!self.albumViewInitialized) {
+            albumView.frame  = CGRect(origin: CGPoint.zero, size: photoLibraryViewerContainer.frame.size)
+            albumView.layoutIfNeeded()
+            albumView.initialize()
+            self.albumViewInitialized = true
+        }
         changeMode(mode: Mode.library)
+        doneButton.isHidden = false
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
+        if(!self.cameraViewInitialized) {
+            cameraView.frame = CGRect(origin: CGPoint.zero, size: cameraShotContainer.frame.size)
+            cameraView.layoutIfNeeded()
+            cameraView.initialize()
+            self.cameraViewInitialized = true
+        }
         changeMode(mode: Mode.camera)
+        doneButton.isHidden = true
     }
     
     @IBAction func videoButtonPressed(_ sender: UIButton) {
@@ -384,7 +402,6 @@ extension FusumaViewController: FSAlbumViewDelegate, FSCameraViewDelegate, FSVid
             self.view.bringSubview(toFront: videoShotContainer)
             videoView.startCamera()
         }
-        doneButton.isHidden = !hasGalleryPermission
         self.view.bringSubview(toFront: menuView)
     }
     
