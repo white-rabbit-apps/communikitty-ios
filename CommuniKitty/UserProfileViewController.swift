@@ -95,13 +95,13 @@ class UserProfileViewController: UIViewController, CLImageEditorDelegate, Fusuma
             
             var widgets = [DashboardWidget]()
             
-            let photosWidget = UserPhotosDashboardWidget()
-            photosWidget.user = self.currentUser
-            widgets.append(photosWidget)
-
             let usersWidget = UserAnimalsDashboardWidget()
             usersWidget.user = self.currentUser
             widgets.append(usersWidget)
+
+//            let photosWidget = UserPhotosDashboardWidget()
+//            photosWidget.user = self.currentUser
+//            widgets.append(photosWidget)
             
             dashboard.widgets = widgets
             dashboard.parentView = self

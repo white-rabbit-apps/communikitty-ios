@@ -21,12 +21,12 @@ class UserAnimalsDashboardWidget : DashboardWidget {
         self.parentCell = cell
         
         if(self.deceased){
-            cell.titleLabel?.text = "Memorial"
+            cell.titleLabel?.text = "My Memorial"
             cell.titleLabel?.backgroundColor = UIColor.lightPinkColor()
         } else if(self.foster) {
-            cell.titleLabel?.text = "Foster Kitties"
+            cell.titleLabel?.text = "My Foster Kitties"
             cell.titleLabel?.backgroundColor = UIColor.lightBlueColor()
-        } else if(self.user != nil && self.user == WRUser.current()) {
+        } else if(self.user != nil && self.user != WRUser.current()) {
             cell.titleLabel?.text = "\(self.user!.firstName!)'s Kitties"
             cell.titleLabel?.backgroundColor = UIColor.lightOrangeColor()
         } else {
@@ -258,7 +258,7 @@ class FeaturedPhotosDashboardWidget : DashboardWidget {
     override func loadCellData(_ cell: DashboardWidget) {
         self.parentCell = cell
         
-        cell.titleLabel?.text = "Featured"
+        cell.titleLabel?.text = "Featured Meowments"
         cell.titleLabel?.backgroundColor = UIColor.lightRedColor()
         
         cell.collectionType = .Photos
@@ -292,7 +292,7 @@ class FollowingPhotosDashboardWidget : DashboardWidget {
     override func loadCellData(_ cell: DashboardWidget) {
         self.parentCell = cell
         
-        cell.titleLabel?.text = "Following"
+        cell.titleLabel?.text = "Followed Meowments"
         cell.titleLabel?.backgroundColor = UIColor(red:0.35, green:0.50, blue:0.57, alpha:1.00)
         
         cell.collectionType = .Photos

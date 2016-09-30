@@ -1253,7 +1253,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     }
     
     func showMoreActionSheet(entry: WRTimelineEntry) {
-        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        let optionMenu = UIAlertController(title: nil, message: "Meowment Action", preferredStyle: .actionSheet)
         
         if entry.isOwnedBy(WRUser.current()!) {
             let editAction = UIAlertAction(title: "Edit", style: .default, handler: {
@@ -1262,12 +1262,14 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
                 self.openEditEntryForm(entry: entry)
                 //            self.editEntry(indexPath)
             })
+            editAction.setValue(UIImage(named: "icon_edit_profile")!.withRenderingMode(.alwaysOriginal), forKey: "image")
             
             let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 print("Deleting timeline entry")
                 self.openDeleteEntryForm(entry: entry)
             })
+            deleteAction.setValue(UIImage(named: "button_delete")!.withRenderingMode(.alwaysOriginal), forKey: "image")
             
 //            let profilePhotoAction = UIAlertAction(title: "Set as Profile Photo", style: .Default, handler: {
 //                (alert: UIAlertAction!) -> Void in
@@ -1291,7 +1293,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
                 print("Flagging timeline entry")
                 //            self.editEntry(indexPath)
             })
-            
+            flagAction.setValue(UIImage(named: "button_flag")!.withRenderingMode(.alwaysOriginal), forKey: "image")
             
             optionMenu.addAction(flagAction)
         }
@@ -1305,46 +1307,46 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         self.present(optionMenu, animated: true, completion: nil)
     }
     
-    
-//    func showLikeActionSheet(entryCell: EntryCell, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
-//        self.showLikeActionSheet(entryCell: entryCell, userObject: nil, completionBlock: completionBlock)
-//    }
-
     func showLikeActionSheet(entry: WRTimelineEntry, completionBlock: @escaping (_ likeObject: WRLike?, _ error: Error?) -> Void) {
-        let optionMenu = UIAlertController(title: nil, message: "Choose Action", preferredStyle: .actionSheet)
+        let optionMenu = UIAlertController(title: nil, message: "Choose An Emeowji", preferredStyle: .actionSheet)
         
-        let meowAction = UIAlertAction(title: "😺 Meow", style: .default, handler: {
+        let meowAction = UIAlertAction(title: "Meow", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             entry.likeWithBlock(.Meow, completionBlock: completionBlock)
             self.playASound(soundName: "meow2")
         })
+        meowAction.setValue(UIImage(named: "emoji_meow")!.withRenderingMode(.alwaysOriginal), forKey: "image")
         
-        let purrAction = UIAlertAction(title: "😻 Purr", style: .default, handler: {
+        let purrAction = UIAlertAction(title: "Purr", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             entry.likeWithBlock(.Purr, completionBlock: completionBlock)
             self.playASound(soundName: "purr1")
         })
-        
-        let lickAction = UIAlertAction(title: "😽 Lick", style: .default, handler: {
+        purrAction.setValue(UIImage(named: "emoji_purr")!.withRenderingMode(.alwaysOriginal), forKey: "image")
+
+        let lickAction = UIAlertAction(title: "Lick", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             entry.likeWithBlock(.Lick, completionBlock: completionBlock)
             self.playASound(soundName: "lick1")
         })
+        lickAction.setValue(UIImage(named: "emoji_lick")!.withRenderingMode(.alwaysOriginal), forKey: "image")
         
-        let headBumpAction = UIAlertAction(title: "😸 Head Bump", style: .default, handler: {
+        let headBumpAction = UIAlertAction(title: "Head Bump", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             entry.likeWithBlock(.HeadBump, completionBlock: completionBlock)
             self.playASound(soundName: "chirp1")
         })
+        headBumpAction.setValue(UIImage(named: "emoji_headbump")!.withRenderingMode(.alwaysOriginal), forKey: "image")
         
-        let hissAction = UIAlertAction(title: "😼 Hiss", style: .default, handler: {
+        let hissAction = UIAlertAction(title: "Hiss", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             entry.likeWithBlock(.Hiss, completionBlock: completionBlock)
             self.playASound(soundName: "hiss1")
         })
+        hissAction.setValue(UIImage(named: "emoji_hiss")!.withRenderingMode(.alwaysOriginal), forKey: "image")
         
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+        let cancelAction = UIAlertAction(title: "Clawncel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
         })
         
@@ -1460,185 +1462,6 @@ extension UIImageView {
     }
 }
 
-
-//
-//extension UIImage {
-//    
-//    public class func gifWithData(data: NSData) -> UIImage? {
-//        // Create source from data
-//        guard let source = CGImageSourceCreateWithData(data, nil) else {
-//            print("SwiftGif: Source for the image does not exist")
-//            return nil
-//        }
-//        
-//        return UIImage.animatedImageWithSource(source: source)
-//    }
-//    
-//    public class func gifWithURL(gifUrl:String) -> UIImage? {
-//        // Validate URL
-//        guard let bundleURL:NSURL? = NSURL(string: gifUrl)
-//            else {
-//                print("SwiftGif: This image named \"\(gifUrl)\" does not exist")
-//                return nil
-//        }
-//        
-//        // Validate data
-//        guard let imageData = NSData(contentsOf: bundleURL! as URL) else {
-//            print("SwiftGif: Cannot turn image named \"\(gifUrl)\" into NSData")
-//            return nil
-//        }
-//        
-//        return gifWithData(data: imageData)
-//    }
-//    
-//    public class func gifWithName(name: String) -> UIImage? {
-//        // Check for existance of gif
-//        guard let bundleURL = Bundle.main
-//            .url(forResource: name, withExtension: "gif") else {
-//                print("SwiftGif: This image named \"\(name)\" does not exist")
-//                return nil
-//        }
-//        
-//        // Validate data
-//        guard let imageData = NSData(contentsOf: bundleURL) else {
-//            print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
-//            return nil
-//        }
-//        
-//        return gifWithData(data: imageData)
-//    }
-//    
-//    class func delayForImageAtIndex(index: Int, source: CGImageSource!) -> Double {
-//        var delay = 0.1
-//        
-//        // Get dictionaries
-//        let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
-//        let gifProperties: CFDictionary = unsafeBitCast(
-//            CFDictionaryGetValue(cfProperties,
-//                unsafeAddressOf(kCGImagePropertyGIFDictionary)),
-//            to: CFDictionary.self)
-//        
-//        // Get delay time
-//        var delayObject: AnyObject = unsafeBitCast(
-//            CFDictionaryGetValue(gifProperties,
-//                unsafeAddressOf(kCGImagePropertyGIFUnclampedDelayTime)),
-//            to: AnyObject.self)
-//        if delayObject.doubleValue == 0 {
-//            delayObject = unsafeBitCast(CFDictionaryGetValue(gifProperties,
-//                unsafeAddressOf(kCGImagePropertyGIFDelayTime)), to: AnyObject.self)
-//        }
-//        
-//        delay = delayObject as! Double
-//        
-//        if delay < 0.1 {
-//            delay = 0.1 // Make sure they're not too fast
-//        }
-//        
-//        return delay
-//    }
-//    
-//    class func gcdForPair(a: Int?, _ b: Int?) -> Int {
-//        var a = a
-//        var b = b
-//        // Check if one of them is nil
-//        if b == nil || a == nil {
-//            if b != nil {
-//                return b!
-//            } else if a != nil {
-//                return a!
-//            } else {
-//                return 0
-//            }
-//        }
-//        
-//        // Swap for modulo
-//        if a! < b! {
-//            let c = a
-//            a = b
-//            b = c
-//        }
-//        
-//        // Get greatest common divisor
-//        var rest: Int
-//        while true {
-//            rest = a! % b!
-//            
-//            if rest == 0 {
-//                return b! // Found it
-//            } else {
-//                a = b
-//                b = rest
-//            }
-//        }
-//    }
-//    
-//    class func gcdForArray(array: Array<Int>) -> Int {
-//        if array.isEmpty {
-//            return 1
-//        }
-//        
-//        var gcd = array[0]
-//        
-//        for val in array {
-//            gcd = UIImage.gcdForPair(gcd, val)
-//        }
-//        
-//        return gcd
-//    }
-//    
-//    class func animatedImageWithSource(source: CGImageSource) -> UIImage? {
-//        let count = CGImageSourceGetCount(source)
-//        var images = [CGImage]()
-//        var delays = [Int]()
-//        
-//        // Fill arrays
-//        for i in 0..<count {
-//            // Add image
-//            if let image = CGImageSourceCreateImageAtIndex(source, i, nil) {
-//                images.append(image)
-//            }
-//            
-//            // At it's delay in cs
-//            let delaySeconds = UIImage.delayForImageAtIndex(index: Int(i),
-//                                                            source: source)
-//            delays.append(Int(delaySeconds * 1000.0)) // Seconds to ms
-//        }
-//        
-//        // Calculate full duration
-//        let duration: Int = {
-//            var sum = 0
-//            
-//            for val: Int in delays {
-//                sum += val
-//            }
-//            
-//            return sum
-//        }()
-//        
-//        // Get frames
-//        let gcd = gcdForArray(array: delays)
-//        var frames = [UIImage]()
-//        
-//        var frame: UIImage
-//        var frameCount: Int
-//        for i in 0..<count {
-//            frame = UIImage(cgImage: images[Int(i)])
-//            frameCount = Int(delays[Int(i)] / gcd)
-//            
-//            for _ in 0..<frameCount {
-//                frames.append(frame)
-//            }
-//        }
-//        
-//        // Heyhey
-//        let animation = UIImage.animatedImage(with: frames, duration: Double(duration) / 1000.0)
-//        
-//        return animation
-//    }
-//    
-//}
-
-
 public extension UIApplicationDelegate {
     func initializeWhiteRabbitCommon() {
         self.initializeParse()
@@ -1705,15 +1528,6 @@ public extension UIColor {
     }
     
 }
-
-//public extension UITabBar {
-//    override public func sizeThatFits(_ size: CGSize) -> CGSize {
-//        super.sizeThatFits(size)
-//        var sizeThatFits = super.sizeThatFits(size)
-//        sizeThatFits.height = 50
-//        return sizeThatFits
-//    }
-//}
 
 public extension Int {
     public static func random(lower: Int , upper: Int) -> Int {
@@ -1892,16 +1706,6 @@ extension DateFormatter {
 
 }
 
-//public extension Float {
-//    // Format a price with currency based on the device locale.
-//    var asCurrency: String {
-//        let formatter = NumberFormatter()
-//        formatter.numberStyle = .currency
-//        formatter.locale = NSLocale.current
-//        return formatter.stringFromNumber(NSNumber(self))!
-//    }
-//}
-
 public extension UIView {
     // Draw a border at the top of a view.
     func drawTopBorderWithColor(color: UIColor, height: CGFloat) {
@@ -1952,43 +1756,6 @@ public extension String {
         return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex) ?? endIndex))
     }
 }
-
-//public extension String {
-//    func stringByRemovingOccurrencesOfCharacters(chars: String) -> String {
-//        let cs = characters.filter {
-//            chars.characters.index(of: $0) == nil
-//        }
-//        
-//        return String(cs)
-//    }
-//    
-//    func replace(target: String, withString: String) -> String {
-//        return self.stringByReplacingOccurrencesOfString(target, withString: withString, options: NSString.CompareOptions.LiteralSearch, range: nil)
-//    }
-//    
-
-//    subscript (i: Int) -> Character {
-//        return self[self.startIndex.advancedBy(i)]
-//    }
-//    
-//    subscript (i: Int) -> String {
-//        return String(self[i] as Character)
-//    }
-//    
-//    subscript (r: Range<Int>) -> String {
-//        let start = startIndex.advancedBy(r.lowerBound)
-//        let end = start.advancedBy(r.upperBound - r.lowerBound)
-//        return self[start..<end]
-//    }
-//    
-//    func removeCharsFromEnd(count_:Int) -> String {
-//        let stringLength = self.characters.count
-//        
-//        let substringIndex = (stringLength < count_) ? 0 : stringLength - count_
-//        
-//        return self.substringToIndex(self.startIndex.advancedBy(substringIndex))
-//    }
-//}
 
 public extension UILabel {
     func resizeHeightToFit(heightConstraint: NSLayoutConstraint) {

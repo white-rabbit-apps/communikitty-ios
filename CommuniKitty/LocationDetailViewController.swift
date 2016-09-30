@@ -186,7 +186,7 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate,PagingMenu
             }
         }
         
-        self.setupCustomTabbar()
+//        self.setupCustomTabbar()
     }
     
     func setupCustomTabbar() -> Void {
