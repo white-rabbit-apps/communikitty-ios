@@ -519,7 +519,6 @@
 				TargetAttributes = {
 					EDEC77A21D91A703007CF613 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = AZC38JWQNP;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -866,7 +865,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CommuniKitty/CommuniKitty.entitlements;
-				DEVELOPMENT_TEAM = AZC38JWQNP;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CommuniKitty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
@@ -883,7 +882,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CommuniKitty/CommuniKitty.entitlements;
-				DEVELOPMENT_TEAM = AZC38JWQNP;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CommuniKitty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
