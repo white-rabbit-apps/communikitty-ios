@@ -10,7 +10,7 @@ def shared_pods
     pod 'CLImageEditor/TextTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
     pod 'CLImageEditor/SplashTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
     pod 'Eureka', :git => 'https://github.com/white-rabbit-apps/Eureka.git', :branch => 'master'
-#    pod 'GooglePlacesRow', :git => 'https://github.com/white-rabbit-apps/GooglePlacesRow', :branch => 'master'
+    pod 'GooglePlacesRow', :git => 'https://github.com/white-rabbit-apps/GooglePlacesRow', :branch => 'master'
 
     pod 'Fusuma', :git => 'https://github.com/Ferrick90/Fusuma.git', :branch => 'swift3'
 #    pod 'Fusuma', :git => 'https://github.com/white-rabbit-apps/Fusuma', :branch => 'master'

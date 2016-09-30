@@ -455,12 +455,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDEC77CB1D91A704007CF613 /* Build configuration list for PBXNativeTarget "CommuniKitty" */;
 			buildPhases = (
+				4B7A0D680398D00E4880CD46 /* 📦 Check Pods Manifest.lock */,
 				26C8D9B29E0AD317EBBBDABC /* [CP] Check Pods Manifest.lock */,
 				EDEC779F1D91A703007CF613 /* Sources */,
 				EDEC77A01D91A703007CF613 /* Frameworks */,
 				EDEC77A11D91A703007CF613 /* Resources */,
 				AF77E57B5C82D716AA96C1BC /* [CP] Embed Pods Frameworks */,
 				1A1381808A4F06C245690969 /* [CP] Copy Pods Resources */,
+				F8834B75AC3560D268907833 /* 📦 Embed Pods Frameworks */,
+				ADEF2D87E238679C16CC9677 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -520,7 +523,7 @@
 					EDEC77A21D91A703007CF613 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = AZC38JWQNP;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -642,6 +645,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		4B7A0D680398D00E4880CD46 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ADEF2D87E238679C16CC9677 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		AF77E57B5C82D716AA96C1BC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -650,6 +683,21 @@
 			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8834B75AC3560D268907833 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -871,6 +919,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4ee6b642-b4a1-4437-b86d-d8df9a95dd64";
+				PROVISIONING_PROFILE_SPECIFIER = "Alina CommuniKitty";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -888,6 +938,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4ee6b642-b4a1-4437-b86d-d8df9a95dd64";
+				PROVISIONING_PROFILE_SPECIFIER = "Alina CommuniKitty";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

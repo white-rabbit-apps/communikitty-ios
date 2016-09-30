@@ -41,6 +41,8 @@ PODS:
   - FBSDKLoginKit (4.14.0):
     - FBSDKCoreKit
   - Fusuma (0.5.3)
+  - GooglePlacesRow (0.0.1):
+    - Eureka (~> 1.5)
   - Hoko (2.3.0)
   - Instabug (5.3.1)
   - Kingfisher (3.0.1)
@@ -80,6 +82,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - Fusuma (from `https://github.com/Ferrick90/Fusuma.git`, branch `swift3`)
+  - GooglePlacesRow (from `https://github.com/white-rabbit-apps/GooglePlacesRow`, branch `master`)
   - Hoko
   - Instabug
   - Kingfisher (from `https://github.com/onevcat/Kingfisher.git`, tag `3.0.1`)
@@ -109,6 +112,9 @@ EXTERNAL SOURCES:
   Fusuma:
     :branch: swift3
     :git: https://github.com/Ferrick90/Fusuma.git
+  GooglePlacesRow:
+    :branch: master
+    :git: https://github.com/white-rabbit-apps/GooglePlacesRow
   Kingfisher:
     :git: https://github.com/onevcat/Kingfisher.git
     :tag: 3.0.1
@@ -141,6 +147,9 @@ CHECKOUT OPTIONS:
   Fusuma:
     :commit: 503865a12b19b942e395845c91d4dbf1ebc7db54
     :git: https://github.com/Ferrick90/Fusuma.git
+  GooglePlacesRow:
+    :commit: 11291f7fc60197278773940d810f4f30af7d4814
+    :git: https://github.com/white-rabbit-apps/GooglePlacesRow
   Kingfisher:
     :git: https://github.com/onevcat/Kingfisher.git
     :tag: 3.0.1
@@ -171,6 +180,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
   Fusuma: 02ffb3a9943792519f2c0972263b750acb550a49
+  GooglePlacesRow: 4d3a145fe556f65b4e0bd835fb383f10ecfb25c8
   Hoko: b015751f406d455da0c8acb9404d7c617cb66877
   Instabug: b77626dcf1baf66534521a400d0680a2e914b241
   Kingfisher: d5a491b45ea453d90a31bd2c0831d5243e73a73f
@@ -184,6 +194,6 @@ SPEC CHECKSUMS:
   SKPhotoBrowser: 48717c1e2602e6e99a5b1df9d6b43889aaa70e9f
   SlideMenuControllerSwift: 9c0a84f9a3fba51681debd7be77617094562ebcc
 
-PODFILE CHECKSUM: 8690e6c0ad1f0a1de82d5d1eb76b26aee81a04e0
+PODFILE CHECKSUM: c01799af5561c6715d3ea4011562fd3da3bf132f
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.0.0

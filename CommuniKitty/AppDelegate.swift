@@ -15,6 +15,7 @@ import BWWalkthrough
 import Fusuma
 import Hoko
 import UserNotifications
+import GooglePlacesRow
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -149,7 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.initializeUI()
         
         DispatchQueue.main.async() { [unowned self] in
-//            GooglePlacesRow.provideApiKey("AIzaSyBSUv9V99TBfnXNtRW2FC3pyTgRpAwuKCc")
+            GooglePlacesRow.provideApiKey(Key: "AIzaSyBSUv9V99TBfnXNtRW2FC3pyTgRpAwuKCc")
             PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
             //        PFTwitterUtils.initializeWithConsumerKey("C16iyeaMoc91iPOQnBTnQkXgm", consumerSecret: "gvedI21p7UaJxEJKxyTttbkUydE37cnq3RBSUFB86erwjHAkt1")
 //            self.client = CDAClient(spaceKey:"8mu31kgi73w0", accessToken:"3bd31581398aa28d0b9c05aa86573763aa4dfd4119eb020625cd0989fee99836")
@@ -177,9 +178,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         TextAreaRow.defaultCellUpdate = { cell, row in
             cell.textView.font = font
         }
-//        GooglePlacesTableRow.defaultCellUpdate = { cell, row in
-//            cell.textField.font = font
-//        }
+        GooglePlacesTableRow.defaultCellUpdate = { cell, row in
+            cell.textField.font = font
+        }
         fusumaBackgroundColor = UIColor.mainColor()
         fusumaCheckImage = UIImage(named: "icon_next")
         fusumaCloseImage = UIImage(named: "icon_close")

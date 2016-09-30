@@ -7,7 +7,7 @@
 //
 
 import Eureka
-//import GooglePlacesRow
+import GooglePlacesRow
 import Fusuma
 import CLImageEditor
 
@@ -339,16 +339,16 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 cell.imageView?.image = UIImage(named: "form_birthdate")
                 row.maximumDate = Date()
         }
-        //            <<< GooglePlacesTableRow(HOMETOWN_TAG) {
-        //                $0.title = "Hometown"
-        //                if self.isEditMode() {
-        //                    if let hometownVal = self.animalObject?.objectForKey(self.HOMETOWN_TAG) as? String {
-        //                        $0.value = GooglePlace(string: hometownVal)
-        //                    }
-        //                }
-        //                }.cellSetup { cell, row in
-        //                    cell.imageView?.image = UIImage(named: "form_hometown")
-        //            }
+        <<< GooglePlacesTableRow(HOMETOWN_TAG) {
+            $0.title = "Hometown"
+            if self.isEditMode() {
+                if let hometownVal = self.animalObject?.object(forKey: self.HOMETOWN_TAG) as? String {
+                    $0.value = GooglePlace(string: hometownVal)
+                }
+            }
+            }.cellSetup { cell, row in
+                cell.imageView?.image = UIImage(named: "form_hometown")
+        }
         <<< TextAreaRow(INTRO_TAG) {
             $0.title = "Intro"
             $0.placeholder = "Enter an intro..."
