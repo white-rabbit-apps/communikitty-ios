@@ -43,6 +43,7 @@ public struct SKPhotoBrowserOptions {
     public static var customMoreButtonImage : UIImage? = nil
     public static var customShareButtonImage : UIImage? = nil
     public static var customDeleteButtonImage : UIImage? = nil
+    public static var customUserButtonDefaultImage : UIImage? = nil
     
     public static var bounceAnimation = false
     public static var enableZoomBlackArea = true

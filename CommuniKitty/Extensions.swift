@@ -1002,8 +1002,29 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
         
         SKPhotoBrowserOptions.handleEntryLoaded = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-            if self.isLoggedIn() {
-                if let entry = object as? WRTimelineEntry {
+            if let entry = object as? WRTimelineEntry {
+
+                if let animal = entry.animal {
+                    browser.updateUserName(animal.username!)
+
+                    animal.fetchProfilePhoto({ (error, image) in
+                        if image != nil {
+                            browser.updateUserButton(image!.circle)
+                        } else {
+                            browser.updateUserButton(UIImage(named: "animal_profile_photo_empty")!)
+                        }
+                    })
+                }
+                
+                if entry.commentCount != nil {
+                    browser.updateCommentCount(entry.commentCount!)
+                }
+                if entry.likeCount != nil {
+                    browser.updateLikeCount(entry.likeCount!)
+                }
+                
+                if self.isLoggedIn() {
+
                     entry.isLikedWithBlock({ (likeObject, error) in
                         NSLog("entry is liked: \(likeObject)")
                         if(likeObject != nil) {
@@ -1079,8 +1100,10 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
                     entry.unlikeWithBlock({ (result, error) in
                         if(result) {
                             browser.updateLikeButton(UIImage(named: "button_paw")!)
+
                             if let skPhoto = photo as? SKPhoto {
                                 skPhoto.likeCount = skPhoto.likeCount - 1
+                                browser.updateLikeCount(skPhoto.likeCount as NSNumber)
                             }
                             self.setLikeHandlerOff(browser: browser)
                             //                        browser.updateToolbar()
@@ -1116,6 +1139,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
                             }
                             if let skPhoto = photo as? SKPhoto {
                                 skPhoto.likeCount = skPhoto.likeCount + 1
+                                browser.updateLikeCount(skPhoto.likeCount as NSNumber)
                             }
                         }
                         self.setLikeHandlerOn(browser: browser)

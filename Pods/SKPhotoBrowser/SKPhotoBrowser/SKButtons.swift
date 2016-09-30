@@ -175,3 +175,24 @@ class SKShareButton: SKButton {
         hideFrame = CGRect(x: margin + (SKMesurement.screenWidth / 10), y: SKMesurement.screenHeight + size.height + 20, width: size.width, height: size.height)
     }
 }
+
+class SKUserButton: SKButton {
+    let imageName = "btn_common_close_wh"
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(frame: CGRect) {
+        let buttonWidth = CGFloat(80.0)
+        
+        super.init(frame: frame)
+        if let image = SKPhotoBrowserOptions.customUserButtonDefaultImage {
+            setupWithImage(image)
+            showFrame = CGRect(x: margin, y: buttonTopOffset + 60, width: buttonWidth, height: buttonWidth)
+        } else {
+            setup(imageName)
+            showFrame = CGRect(x: margin, y: buttonTopOffset + 60, width: buttonWidth, height: buttonWidth)
+        }
+        hideFrame = CGRect(x: margin, y: -20 + 60, width: buttonWidth, height: buttonWidth)
+    }
+}
