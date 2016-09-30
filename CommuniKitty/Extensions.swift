@@ -987,6 +987,8 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             if let entry = object as? WRTimelineEntry {
 
                 if let animal = entry.animal {
+                    try! animal.fetchIfNeeded()
+                    
                     browser.updateUserName(animal.username!)
 
                     animal.fetchProfilePhoto({ (error, image) in
