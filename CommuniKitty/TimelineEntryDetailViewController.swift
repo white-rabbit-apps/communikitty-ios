@@ -16,6 +16,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var commentToolbarBottomContraint: NSLayoutConstraint!
     
     @IBOutlet weak var commentBarItem: UIBarButtonItem!
+    @IBOutlet weak var commentSendButtonBarItem: UIBarButtonItem!
     @IBOutlet weak var translateButton: UIBarButtonItem!
     
     @IBOutlet weak var commentsContainerView: UIView!
@@ -41,6 +42,8 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
                 
         self.commentField.delegate = self
 //        self.commentField.addTarget(self, action: #selector(textWasChanged), for: .editingChanged)
+        self.commentSendButtonBarItem.image = UIImage(named: "button_chat_send")!.withRenderingMode(.alwaysOriginal)
+        
 
         self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "button_share", action: #selector(showShareSheet), height: 45, width: 35)
 
@@ -58,8 +61,6 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
         //self.initActiveLabel(self.textLabel)
         
         self.updateView()
-        
-        self.loadData()
     }
     
     func updateView() {
@@ -96,22 +97,10 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
         }
     }
         
-    func loadData() {
-        if let imageFile = entryObject?.image {
-            imageFile.getDataInBackground(block: {
-                (imageData: Data?, error: Error?) -> Void in
-                if(error == nil) {
-                    let image = UIImage(data:imageData!)
-                    self.shareImage = image
-                }
-            })
-        }
-    }
-    
     func setAnimalToComment(_ index: Int) {
         //check if myAnimalsArray updated after login
         if let myAnimalsArray = AppDelegate.getAppDelegate().myAnimalsArray {
-            if myAnimalsArray.count > 0{
+            if myAnimalsArray.count > 0 {
             let animalName = myAnimalsArray[index]
             let animalToComment = AppDelegate.getAppDelegate().myAnimalByName![animalName]
             
@@ -164,8 +153,9 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     func showShareSheet() {
-        let image = self.shareImage
-        self.showShareActionSheet(image: image!)
+        if let image = self.commentsView?.mainImage {
+            self.showShareActionSheet(image: image)
+        }
     }
     
     func addComment(_ text: String) {

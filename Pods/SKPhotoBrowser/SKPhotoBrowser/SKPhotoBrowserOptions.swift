@@ -31,7 +31,7 @@ public struct SKPhotoBrowserOptions {
     
     public static var handleUserButtonPressed : ((_ object: NSObject?)->Void)? = nil
     public static var handleCommentButtonPressed : ((_ object: NSObject?)->Void)? = nil
-    public static var handleLikeButtonPressed : ((_ object: NSObject?)->Void)? = nil
+    public static var handleLikeButtonPressed : ((_ object: NSObject?, _ photo: SKPhotoProtocol?)->Void)? = nil
     public static var handleMoreButtonPressed : ((_ object: NSObject?)->Void)? = nil
     public static var handleShareButtonPressed : ((_ object: NSObject?, _ image: UIImage)->Void)? = nil
     
@@ -47,4 +47,5 @@ public struct SKPhotoBrowserOptions {
     public static var bounceAnimation = false
     public static var enableZoomBlackArea = true
     public static var enableSingleTapDismiss = false
+    public static var autoHideControls = true
 }

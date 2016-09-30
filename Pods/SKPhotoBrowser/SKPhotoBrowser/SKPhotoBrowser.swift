@@ -149,7 +149,11 @@ open class SKPhotoBrowser: UIViewController {
         
         // where did start
         delegate?.didShowPhotoAtIndex?(currentPageIndex)
-        
+        if let entryLoadedAction = SKPhotoBrowserOptions.handleEntryLoaded {
+            let photo = self.photos[currentPageIndex]
+            entryLoadedAction(photo.underlyingObject, photo)
+        }
+
         isPerformingLayout = false
     }
     
@@ -201,6 +205,10 @@ open class SKPhotoBrowser: UIViewController {
         pagingScrollView.tilePages()
         
         delegate?.didShowPhotoAtIndex?(currentPageIndex)
+        if let entryLoadedAction = SKPhotoBrowserOptions.handleEntryLoaded {
+            let photo = self.photos[currentPageIndex]
+            entryLoadedAction(photo.underlyingObject, photo)
+        }
         
         isPerformingLayout = false
     }
@@ -357,7 +365,9 @@ public extension SKPhotoBrowser {
         // reset
         cancelControlHiding()
         // start
-        controlVisibilityTimer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(SKPhotoBrowser.hideControls(_:)), userInfo: nil, repeats: false)
+        if SKPhotoBrowserOptions.autoHideControls {
+            controlVisibilityTimer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(SKPhotoBrowser.hideControls(_:)), userInfo: nil, repeats: false)
+        }
     }
     
     func hideControls() {
@@ -563,7 +573,7 @@ internal extension SKPhotoBrowser {
     func likeButtonPressed(_ sender: UIButton) {
         if let likeButtonAction = SKPhotoBrowserOptions.handleLikeButtonPressed {
             let photo = self.photos[currentPageIndex]
-            likeButtonAction(photo.underlyingObject)
+            likeButtonAction(photo.underlyingObject, photo)
         }
     }
     
@@ -779,6 +789,10 @@ extension SKPhotoBrowser: UIScrollViewDelegate {
         
         if currentPageIndex != previousCurrentPage {
             delegate?.didShowPhotoAtIndex?(currentPageIndex)
+            if let entryLoadedAction = SKPhotoBrowserOptions.handleEntryLoaded {
+                let photo = self.photos[currentPageIndex]
+                entryLoadedAction(photo.underlyingObject, photo)
+            }
             toolbar.updateToolbar(currentPageIndex)
         }
     }

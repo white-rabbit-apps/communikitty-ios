@@ -974,7 +974,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         if(displayUser) {
             SKPhotoBrowserOptions.displayUserButton = true
 //            SKPhotoBrowserOptions.updateUserInfoHandler = { (object: NSObject?)->Void in
-//                NSLog("comment button pressed")
 //                if let entry = object as? WRTimelineEntry {
 //                    if let animal = entry.animal {
 //                        browser.updateUserName(animal.username!)
@@ -1003,19 +1002,37 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
         
         SKPhotoBrowserOptions.handleEntryLoaded = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-            if let entry = object as? WRTimelineEntry {
-                entry.isLikedWithBlock({ (result, error) in
-                    NSLog("entry is liked: \(result)")
-                    if(result) {
-//                        browser.setLikeButtonImage(UIImage(named: "button_paw_filled")!)
-//                        self.setLikeHandlerOn(browser)
-                    } else {
-//                        browser.setLikeButtonImage(UIImage(named: "button_paw")!)
-//                        self.setLikeHandlerOff(browser)
-                    }
-                })
+            if self.isLoggedIn() {
+                if let entry = object as? WRTimelineEntry {
+                    entry.isLikedWithBlock({ (likeObject, error) in
+                        NSLog("entry is liked: \(likeObject)")
+                        if(likeObject != nil) {
+                            
+                            switch(likeObject!.actionValue!) {
+                            case .Meow:
+                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+                            case .Hiss:
+                                browser.updateLikeButton(UIImage(named: "emoji_hiss")!)
+                            case .Purr:
+                                browser.updateLikeButton(UIImage(named: "emoji_purr")!)
+                            case .HeadBump:
+                                browser.updateLikeButton(UIImage(named: "emoji_headbump")!)
+                            case .Lick:
+                                browser.updateLikeButton(UIImage(named: "emoji_lick")!)
+                            default:
+                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+                            }
+                            self.setLikeHandlerOn(browser: browser)
+                        } else {
+                            browser.updateLikeButton(UIImage(named: "button_paw")!)
+                            self.setLikeHandlerOff(browser: browser)
+                        }
+                    })
+                }
             }
         }
+        
+        SKPhotoBrowserOptions.customCloseButtonImage = UIImage(named: "icon_close")
 
         SKPhotoBrowserOptions.displayCommentButton = true
         SKPhotoBrowserOptions.customCommentButtonImage = UIImage(named: "emoji_comment")
@@ -1030,13 +1047,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         
         SKPhotoBrowserOptions.displayLikeButton = true
         SKPhotoBrowserOptions.customLikeButtonImage = UIImage(named: "button_paw")
-        SKPhotoBrowserOptions.handleLikeButtonPressed = { (object: NSObject?)->Void in
-            NSLog("like button pressed")
-            if let entry = object as? WRTimelineEntry {
-                
-            }
-        }
-        
         
         SKPhotoBrowserOptions.displayShareButton = true
         SKPhotoBrowserOptions.customShareButtonImage = UIImage(named: "button_share")
@@ -1057,54 +1067,63 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             }
         }
         
-
-//        browser.bounceAnimation = true
-//        browser.enableSingleTapDismiss = false
-//        
-//        browser.displayCustomCloseButton = true
-        
-        SKPhotoBrowserOptions.customCloseButtonImage = UIImage(named: "icon_close")
-
+        SKPhotoBrowserOptions.autoHideControls = false
         self.present(browser, animated: true, completion: nil)
     }
     
-//    func setLikeHandlerOn(browser: SKPhotoBrowser) {
-//        browser.customLikeButtonHandler = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-//            NSLog("like filled button pressed")
-//            if let entry = object as? WRTimelineEntry {
-//                entry.unlikeWithBlock({ (result, error) in
-//                    if(result) {
-//                        browser.setLikeButtonImage(UIImage(named: "button_paw")!)
-//                        if let skPhoto = photo as? SKPhoto {
-//                            skPhoto.likeCount = skPhoto.likeCount - 1
-//                        }
-//                        self.setLikeHandlerOff(browser)
-//                        browser.updateToolbar()
-//                    }
-//                })
-//            }
-//        }
-//    }
-//    
-//    func setLikeHandlerOff(browser: SKPhotoBrowser) {
-//        browser.customLikeButtonHandler = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-//            NSLog("like button pressed")
-//            if let entry = object as? WRTimelineEntry {
-//                let entryCell = EntryCell()
-//                entryCell.entryObject = entry
-//                
-//                browser.showLikeActionSheet(entryCell, completionBlock: { (result, error) in
-//                    NSLog("like action completed")
-//                    browser.setLikeButtonImage(UIImage(named: "button_paw_filled")!)
-//                    if let skPhoto = photo as? SKPhoto {
-//                        skPhoto.likeCount = skPhoto.likeCount + 1
-//                    }
-//                    self.setLikeHandlerOn(browser)
-//                    browser.updateToolbar()
-//                })
-//            }
-//        }
-//    }
+    func setLikeHandlerOn(browser: SKPhotoBrowser) {
+        SKPhotoBrowserOptions.handleLikeButtonPressed = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
+            NSLog("like filled button pressed")
+            browser.checkForUser {
+                if let entry = object as? WRTimelineEntry {
+                    entry.unlikeWithBlock({ (result, error) in
+                        if(result) {
+                            browser.updateLikeButton(UIImage(named: "button_paw")!)
+                            if let skPhoto = photo as? SKPhoto {
+                                skPhoto.likeCount = skPhoto.likeCount - 1
+                            }
+                            self.setLikeHandlerOff(browser: browser)
+                            //                        browser.updateToolbar()
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    func setLikeHandlerOff(browser: SKPhotoBrowser) {
+        SKPhotoBrowserOptions.handleLikeButtonPressed = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
+            NSLog("like button pressed")
+            browser.checkForUser {
+                if let entry = object as? WRTimelineEntry {
+                    browser.showLikeActionSheet(entry: entry, completionBlock: { (likeObject, error) in
+                        NSLog("like action completed")
+
+                        if(likeObject != nil) {
+                            switch(likeObject!.actionValue!) {
+                            case .Meow:
+                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+                            case .Hiss:
+                                browser.updateLikeButton(UIImage(named: "emoji_hiss")!)
+                            case .Purr:
+                                browser.updateLikeButton(UIImage(named: "emoji_purr")!)
+                            case .HeadBump:
+                                browser.updateLikeButton(UIImage(named: "emoji_headbump")!)
+                            case .Lick:
+                                browser.updateLikeButton(UIImage(named: "emoji_lick")!)
+                            default:
+                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+                            }
+                            if let skPhoto = photo as? SKPhoto {
+                                skPhoto.likeCount = skPhoto.likeCount + 1
+                            }
+                        }
+                        self.setLikeHandlerOn(browser: browser)
+                    })
+                }
+            }
+        }
+    }
     
     
     /**
@@ -1131,16 +1150,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         if(startIndex != nil) {
             browser.initializePageIndex(startIndex!)
         }
-//        browser.displayBackAndForwardButton = false
-//        browser.displayCounterLabel = false
-//        browser.displayAction = false
-//        browser.displayToolbar = false
-//        
-//        browser.bounceAnimation = true
-//        browser.enableSingleTapDismiss = false
-//        
-//        browser.displayCustomCloseButton = true
-//        browser.customCloseButtonImage = UIImage(named: "icon_close")
         
         self.present(browser, animated: true, completion: nil)
     }
@@ -1169,17 +1178,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         if(startIndex != nil) {
             browser.initializePageIndex(startIndex!)
         }
-//        browser.displayBackAndForwardButton = false
-//        browser.displayCounterLabel = false
-//        browser.displayAction = false
-//        browser.displayToolbar = false
-//        
-//        browser.bounceAnimation = true
-//        browser.enableSingleTapDismiss = false
-//        
-//        browser.displayCustomCloseButton = true
-//        browser.customCloseButtonImage = UIImage(named: "icon_close")
-//        
+
         self.present(browser, animated: true, completion: nil)
     }
     
@@ -1208,50 +1207,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             openUrl(url: appLink)
         } else {
             openUrl(url: webUrl)
-        }
-    }
-    
-//    func likeEntryWithBlock(type: LikeAction, entryCell: EntryCell, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
-//        
-//        let like = WRLike()
-//        like.entry = entryCell.entryObject!
-//        like.actionValue = type
-//        like.actingUser = WRUser.current()!
-//        like.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-//            completionBlock(success, error)
-//            entryCell.likeObject = like
-//        }
-//    }
-//    
-//    func unlikeEntryWithBlock(entryCell: EntryCell, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
-//
-//        if let likeObject = entryCell.likeObject {
-//            likeObject.deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
-//                completionBlock(success, error)
-//            })
-//        }
-//    }
-//    
-//    func isEntryLikedWithBlock(entryCell: EntryCell, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
-//        let query = WRLike.query()!
-//        query.whereKey("actingUser", equalTo: WRUser.current()!)
-//        query.whereKey("entry", equalTo: entryCell.entryObject!)
-//        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: Error?) -> Void in
-//            completionBlock(result: objects!.count > 0, error: error)
-//            if(objects!.count > 0) {
-//                entryCell.likeObject = objects![0] as? WRLike
-//            }
-//        }
-//    }
-    
-    func pokeUserWithBlock(type: LikeAction, userObject: WRUser, completionBlock: @escaping (_ result: Bool, _ error: Error?) -> Void) {
-        let like = WRPoke()
-        like.userActedOn = userObject
-        like.actionValue = type
-        like.actingUser = WRUser.current()!
-        like.actingUserName = WRUser.current()!.username
-        like.saveInBackground { (success: Bool, error: Error?) -> Void in
-            completionBlock(success, error)
         }
     }
     
@@ -1344,74 +1299,54 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
 //    func showLikeActionSheet(entryCell: EntryCell, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
 //        self.showLikeActionSheet(entryCell: entryCell, userObject: nil, completionBlock: completionBlock)
 //    }
-//    
-//    func showLikeActionSheet(entryCell: EntryCell?, userObject: WRUser?, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
-//        let optionMenu = UIAlertController(title: nil, message: "Choose Action", preferredStyle: .actionSheet)
-//        
-//        let meowAction = UIAlertAction(title: "😺 Meow", style: .default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            if(entryCell != nil) {
-//                self.likeEntryWithBlock(type: LikeAction.Meow, entryCell: entryCell!, completionBlock: completionBlock)
-//            } else if(userObject != nil) {
-//                self.pokeUserWithBlock(type: LikeAction.Meow, userObject: userObject!, completionBlock: completionBlock)
-//            }
-//            self.playASound(soundName: "meow2")
-//        })
-//        
-//        let purrAction = UIAlertAction(title: "😻 Purr", style: .default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            if(entryCell != nil) {
-//                self.likeEntryWithBlock(type: LikeAction.Purr, entryCell: entryCell!, completionBlock: completionBlock)
-//            } else if(userObject != nil) {
-//                self.pokeUserWithBlock(type: LikeAction.Purr, userObject: userObject!, completionBlock: completionBlock)
-//            }
-//            self.playASound(soundName: "purr1")
-//        })
-//        
-//        let lickAction = UIAlertAction(title: "😽 Lick", style: .default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            if(entryCell != nil) {
-//                self.likeEntryWithBlock(type: LikeAction.Lick, entryCell: entryCell!, completionBlock: completionBlock)
-//            } else if(userObject != nil) {
-//                self.pokeUserWithBlock(type: LikeAction.Lick, userObject: userObject!, completionBlock: completionBlock)
-//            }
-//            self.playASound(soundName: "lick1")
-//        })
-//        
-//        let headBumpAction = UIAlertAction(title: "😸 Head Bump", style: .default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            if(entryCell != nil) {
-//                self.likeEntryWithBlock(type: LikeAction.HeadBump, entryCell: entryCell!, completionBlock: completionBlock)
-//            } else if(userObject != nil) {
-//                self.pokeUserWithBlock(type: LikeAction.HeadBump, userObject: userObject!, completionBlock: completionBlock)
-//            }
-//            self.playASound(soundName: "chirp1")
-//        })
-//        
-//        let hissAction = UIAlertAction(title: "😼 Hiss", style: .default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            if(entryCell != nil) {
-//                self.likeEntryWithBlock(type: LikeAction.Hiss, entryCell: entryCell!, completionBlock: completionBlock)
-//            } else if(userObject != nil) {
-//                self.pokeUserWithBlock(type: LikeAction.Hiss, userObject: userObject!, completionBlock: completionBlock)
-//            }
-//            self.playASound(soundName: "hiss1")
-//        })
-//        
-//        
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//        })
-//        
-//        optionMenu.addAction(meowAction)
-//        optionMenu.addAction(purrAction)
-//        optionMenu.addAction(lickAction)
-//        optionMenu.addAction(headBumpAction)
-//        optionMenu.addAction(hissAction)
-//        optionMenu.addAction(cancelAction)
-//        
-//        self.present(optionMenu, animated: true, completion: nil)
-//    }
+
+    func showLikeActionSheet(entry: WRTimelineEntry, completionBlock: @escaping (_ likeObject: WRLike?, _ error: Error?) -> Void) {
+        let optionMenu = UIAlertController(title: nil, message: "Choose Action", preferredStyle: .actionSheet)
+        
+        let meowAction = UIAlertAction(title: "😺 Meow", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            entry.likeWithBlock(.Meow, completionBlock: completionBlock)
+            self.playASound(soundName: "meow2")
+        })
+        
+        let purrAction = UIAlertAction(title: "😻 Purr", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            entry.likeWithBlock(.Purr, completionBlock: completionBlock)
+            self.playASound(soundName: "purr1")
+        })
+        
+        let lickAction = UIAlertAction(title: "😽 Lick", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            entry.likeWithBlock(.Lick, completionBlock: completionBlock)
+            self.playASound(soundName: "lick1")
+        })
+        
+        let headBumpAction = UIAlertAction(title: "😸 Head Bump", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            entry.likeWithBlock(.HeadBump, completionBlock: completionBlock)
+            self.playASound(soundName: "chirp1")
+        })
+        
+        let hissAction = UIAlertAction(title: "😼 Hiss", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            entry.likeWithBlock(.Hiss, completionBlock: completionBlock)
+            self.playASound(soundName: "hiss1")
+        })
+        
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        optionMenu.addAction(meowAction)
+        optionMenu.addAction(purrAction)
+        optionMenu.addAction(lickAction)
+        optionMenu.addAction(headBumpAction)
+        optionMenu.addAction(hissAction)
+        optionMenu.addAction(cancelAction)
+        
+        self.present(optionMenu, animated: true, completion: nil)
+    }
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
@@ -1432,16 +1367,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
     }
 }
-
-extension SKPhotoBrowser {
-    
-    /**
-     Override this function in SKPhotoBrowser to avoid hiding controls while dragging
-     */
-    public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-    }
-}
-
 
 extension PFQueryTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     public func initEmptyState() {
@@ -1924,6 +1849,37 @@ extension DateFormatter {
         
         return result
     }
+    
+    func timeSinceShortened(from: Date) -> String {
+        let calendar = Calendar.current
+        let now = NSDate()
+        let earliest = now.earlierDate(from as Date)
+        let latest = earliest == now as Date ? from : now as Date
+        let components = calendar.dateComponents([.year, .weekOfYear, .month, .day, .hour, .minute, .second], from: earliest, to: latest as Date)
+        
+        var result = ""
+        
+        if components.year! >= 1 {
+            result = "\(components.year!)y"
+        } else if components.month! >= 1 {
+            result = "\(components.month!)mo"
+        } else if components.weekOfYear! >= 1 {
+            result = "\(components.weekOfYear!)w"
+        } else if components.day! >= 1 {
+            result = "\(components.day!)d"
+        } else if components.hour! >= 1 {
+            result = "\(components.hour!)h"
+        } else if components.minute! >= 1 {
+            result = "\(components.minute!)min"
+        } else if components.second! >= 3 {
+            result = "\(components.second!)sec"
+        } else {
+            result = "Just now"
+        }
+        
+        return result
+    }
+
 }
 
 //public extension Float {

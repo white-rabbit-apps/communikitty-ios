@@ -34,6 +34,9 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
     
     var entryObject : WRTimelineEntry?
     var isLoadFirstTime = false
+    
+    var mainImage : UIImage?
+    
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var commentLabel: ActiveLabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -69,14 +72,21 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
 //        self.headerImageView.kf_showIndicatorWhenLoading = true
         if let imageFile = entryObject?.image {
             self.headerImageView.kf_setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                if image != nil {
+                    self.mainImage = image
+                }
+
             })
         } else if let imageUrl = entryObject?.imageUrl {
             self.headerImageView.kf_setImage(with: URL(string: imageUrl)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                if image != nil {
+                    self.mainImage = image
+                }
             })
         }
         
         if let date = entryObject?.createdAt {
-            let formatted = DateFormatter().timeSince(from: date, numericDates: true)
+            let formatted = DateFormatter().timeSinceShortened(from: date)
             self.timeLabel.text = formatted
         }
         
@@ -217,7 +227,7 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
 //            cell!.gifImageView.image = UIImage.gifWithName(name: "gif/\(gifName)")
             
             if let date = comment?.createdAt {
-                let formatted = DateFormatter().timeSince(from: date, numericDates: true)
+                let formatted = DateFormatter().timeSinceShortened(from: date)
                 cell!.timeLabel.text = formatted
             }
             
@@ -248,7 +258,7 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
             self.initActiveLabel(label: cell!.commentLabel)
             
             if let date = comment?.createdAt {
-                let formatted = DateFormatter().timeSince(from: date, numericDates: true)
+                let formatted = DateFormatter().timeSinceShortened(from: date)
                 cell!.timeLabel.text = formatted
             }
             
@@ -325,7 +335,6 @@ extension String {
      
      - returns: CGFloat
      */
-    
     func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
         
