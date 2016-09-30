@@ -25,4 +25,21 @@ class WRUser: PFUser {
     override static func current() -> WRUser? {
         return PFUser.current() as? WRUser
     }
+    
+    /**
+     Have the current user meow at this this entry
+     
+     - Parameters:
+     - type: LikeAction enum value of which type of action
+     - completionBlock: Block of code to run after like is saved
+     */
+    func pokeWithBlock(_ type: LikeAction, completionBlock: @escaping (_ result: Bool, _ error: Error?) -> Void) {
+        let like = WRLike()
+        like.userActedOn = self
+        like.actionValue = type
+        like.actingUser = WRUser.current()!
+        like.saveInBackground { (success: Bool, error: Error?) -> Void in
+            completionBlock(success, error)
+        }
+    }
 }

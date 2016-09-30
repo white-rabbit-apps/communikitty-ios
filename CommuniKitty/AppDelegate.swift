@@ -89,9 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    
-    
-    
     func initializeUI() {
         UILabel.appearance().substituteFontName = "Nunito-Regular"
         UITabBar.appearance().barTintColor = UIColor.mainColor()
@@ -132,7 +129,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.loadBreeds()
             self.loadCoats()
             self.loadShelters()
-//            self.loadVets()
             self.loadTraits()
             self.loadLoves()
             self.loadHates()
@@ -206,20 +202,84 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fusumaTintIcons = false
     }
     
+    /**
+     Ask the user to authorize the ability to receive push notifications
+     */
     func registerForPushNotifications() {
-        let application = UIApplication.shared
-        
         if Device.type() == .Simulator {
-            //            NSLog("registering for local push notifications")
-            //            application.listenForRemoteNotifications()
         } else {
             print("registering for push notifications")
-//            let settings = UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (result: Bool, error: Error?) in
-//            })
-//            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
+            DispatchQueue.main.async {
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+                    // Enable or disable features based on authorization
+                }
+                UIApplication.shared.registerForRemoteNotifications()
+            }
         }
     }
+    
+    /**
+     Called when the user accepts the ability to receive push notifications
+     */
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+        let currentInstallation = PFInstallation.current()
+        
+        currentInstallation.setDeviceTokenFrom(deviceToken)
+        currentInstallation.setValue(WRUser.current(), forKey: "user")
+        currentInstallation.saveInBackground { (succeeded, e) -> Void in
+            NSLog("Successfully registered for push notifications")
+        }
+    }
+    
+    /**
+     Called when the user rejects the ability to receive push notifications or there is a failure
+     */
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("failed to register for notifications: \(error)")
+    }
+    
+    /**
+     Called when the user receives a push notification while the app is open
+     */
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("didReceiveRemoteNotification")
+        
+        let state = application.applicationState
+        
+        if (state == .inactive || state == .background) {
+            // App was inactive or in the background when the notification was received
+            
+            if let uri = userInfo["uri"] as? String {
+                print("has uri: " + uri)
+                Hoko.deeplinking().handleOpen(URL(string: uri))
+            }
+        } else {
+            // App was already running
+            // Show a notification
+            
+            if let aps = userInfo["aps"] as? NSDictionary {
+                if let alert = aps["alert"] as? NSDictionary {
+                    if let message = alert["message"] as? String {
+                        self.showNotification(message: message)
+                    }
+                } else if let alert = aps["alert"] as? String {
+                    let sound = aps["sound"] as? String
+                    if sound != nil {
+                        let soundName = sound!.replacingOccurrences(of: ".caf", with: "")
+                        self.showNotification(message: alert, sound: soundName)
+                    } else {
+                        self.showNotification(message: alert)
+                    }
+                }
+            }
+        }
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        return Hoko.deeplinking().continue(userActivity, restorationHandler:restorationHandler)
+    }
+    
     
     /**
      Register uris for deeplink handling

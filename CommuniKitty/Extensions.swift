@@ -358,57 +358,51 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
     }
     
-    func getToastOptions(message: String, type: String, timeToShow: Double) -> [NSObject : AnyObject] {
+    func getToastOptions(message: String, type: String, timeToShow: Double) -> [AnyHashable : Any] {
         var fontSize = 14.0
         if(message.characters.count > 60) {
             fontSize = 12.0
         }
         
-        let options: [NSObject : AnyObject] = [
-            kCRToastSubtitleTextKey as NSObject: message as AnyObject,
-            kCRToastUnderStatusBarKey as NSObject: false as AnyObject,
-            kCRToastTimeIntervalKey as NSObject: timeToShow as AnyObject,
-            kCRToastNotificationPreferredPaddingKey as NSObject: 15.0 as AnyObject,
-            //            kCRToastNotificationPreferredHeightKey: 150.0,
-            kCRToastFontKey as NSObject: UIFont.italicSystemFont(ofSize: 16),
-            kCRToastSubtitleFontKey as NSObject: UIFont(name: "Nunito-Regular", size: CGFloat(fontSize))!,
-//            kCRToastNotificationTypeKey : CRToastType.NavigationBar.rawValue,
-//            kCRToastSubtitleTextAlignmentKey: NSTextAlignment.Left.rawValue,
-//            kCRToastTextAlignmentKey: NSTextAlignment.Left.rawValue,
-//            kCRToastAnimationInTypeKey: CRToastAnimationType.Spring.rawValue,
-//            kCRToastAnimationOutTypeKey: CRToastAnimationType.Spring.rawValue,
-//            kCRToastAnimationInDirectionKey: CRToastAnimationDirection.Top.rawValue,
-//            kCRToastAnimationOutDirectionKey: CRToastAnimationDirection.Top.rawValue
-        ]
+        var options = [
+            kCRToastSubtitleTextKey : message,
+            kCRToastUnderStatusBarKey : NSNumber(value: false),
+            kCRToastTimeIntervalKey : NSNumber(value:timeToShow),
+            kCRToastNotificationPreferredPaddingKey: 15 as NSNumber,
+            kCRToastNotificationPreferredHeightKey : 150 as NSNumber,
+            kCRToastFontKey: UIFont.italicSystemFont(ofSize: 16),
+            kCRToastSubtitleFontKey : UIFont(name: "Nunito-Regular", size: CGFloat(fontSize))!,
+            kCRToastNotificationTypeKey  : NSNumber(value:CRToastType.navigationBar.rawValue),
+            kCRToastSubtitleTextAlignmentKey : NSNumber(value:NSTextAlignment.left.rawValue),
+            kCRToastTextAlignmentKey : NSNumber(value:NSTextAlignment.left.rawValue),
+            kCRToastAnimationInTypeKey : NSNumber(value:CRToastAnimationType.spring.rawValue),
+            kCRToastAnimationOutTypeKey : NSNumber(value:CRToastAnimationType.spring.rawValue),
+            kCRToastAnimationInDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue),
+            kCRToastAnimationOutDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue)
+        ] as [AnyHashable : Any]
         
-//        let interactionResponder = CRToastInteractionResponder(interactionType: CRToastInteractionType.tap, automaticallyDismiss: false) { (type: CRToastInteractionType) -> Void in
-//            CRToastManager.dismissNotification(true)
-//        }
-//        options[kCRToastInteractionRespondersKey] = Array([interactionResponder])
-//        
-//        if(type == "error") {
-//            options[kCRToastBackgroundColorKey] = UIColor(red: 0.80, green:0.25, blue:0.15, alpha:1.0)
-//            
-//            options[kCRToastTextKey] = ["Taht dint werk.", "Ruh roh.", "Ar yoo kitten me?"].randomItem()
-//            
-//            let filename = Int.random(lower: 1, upper: 8)
-//            options[kCRToastImageKey] = UIImage(named: "error" + String(filename))
-//        } else if(type == "success") {
-//            options[kCRToastBackgroundColorKey] = UIColor(red: 0.58, green: 0.77, blue: 0.49, alpha: 1.0)
-//            
-//            options[kCRToastTextKey] = ["Errrmahgerd!", "Pawesum.", "It werkd.", "Clawesome!"].randomItem()
-//            
-//            let filename = Int.random(lower: 1, upper: 5)
-//            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
-//        } else if(type == "info") {
-//            options[kCRToastBackgroundColorKey] = UIColor(red: 98/255, green: 81/255, blue: 255/255, alpha: 1.0)
-//            
-//            options[kCRToastTextKey] = ["Oh hai."].randomItem()
-//            
-//            let filename = Int.random(lower: 1, upper: 5)
-//            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
-//        }
-//        
+        if(type == "error") {
+            options[kCRToastBackgroundColorKey] = UIColor.lightRedColor()
+            
+            options[kCRToastTextKey] = ["Taht dint werk.", "Ruh roh.", "Ar yoo kitten me?"].randomItem()
+            
+            let filename = Int.random(lower: 1, upper: 8)
+            options[kCRToastImageKey] = UIImage(named: "error" + String(filename))
+        } else if(type == "success") {
+            options[kCRToastBackgroundColorKey] = UIColor.lightGreenColor()
+            
+            options[kCRToastTextKey] = ["Errrmahgerd!", "Pawesum.", "It werkd.", "Clawesome!"].randomItem()
+            
+            let filename = Int.random(lower: 1, upper: 5)
+            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
+        } else if(type == "info") {
+            options[kCRToastBackgroundColorKey] = UIColor.lightBlueColor()
+            
+            options[kCRToastTextKey] = ["Oh hai."].randomItem()
+            
+            let filename = Int.random(lower: 1, upper: 5)
+            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
+        }
         
         return options
     }
@@ -455,6 +449,11 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         
         let options = getToastOptions(message: successMessage, type: "success", timeToShow: timeToShow)
         CRToastManager.showNotification(options: options, completionBlock: nil)
+    }
+    
+    func showShareActionSheet(image: UIImage) {
+        let activityVC = UIActivityViewController(activityItems: ["http://www.communikitty.com", image], applicationActivities: nil)
+        self.present(activityVC, animated: true, completion: nil)
     }
     
 //    func showFlagActionSheet(entryCell: EntryCell?, flaggedObject: PFObject?) {
@@ -677,32 +676,12 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     
     func openUserSettings() {
         self.checkForUser {
+            
             let userSettingsVC = UserFormViewController()
             
             userSettingsVC.userObject = WRUser.current()
             
             self.present(UINavigationController(rootViewController: userSettingsVC), animated: true, completion: nil)
-        }
-    }
-    
-    func checkCameraAuth() {
-        let cameraMediaType = AVMediaTypeVideo
-        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: cameraMediaType)
-        
-        switch cameraAuthorizationStatus {
-        case .denied: break
-        case .authorized: break
-        case .restricted: break
-            
-        case .notDetermined:
-            // Prompting user for the permission to use the camera.
-            AVCaptureDevice.requestAccess(forMediaType: cameraMediaType) { granted in
-                if granted {
-                    print("Granted access to \(cameraMediaType)")
-                } else {
-                    print("Denied access to \(cameraMediaType)")
-                }
-            }
         }
     }
     
@@ -793,29 +772,27 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
      - forceCrop: Boolean value to force CropView opening
      */
     func showEditor(image : UIImage, delegate: CLImageEditorDelegate, ratios: [Int]?, fromController: UIViewController, forceCrop: Bool = false) {
-        let editor = CLImageEditor(image: image, delegate: delegate)!
-//        let editor = CLImageEditor(image: image, delegate: delegate, forceToCrop: forceCrop)
+        let editor = CLImageEditor(image: image, delegate: delegate, forceToCrop: forceCrop)
         
-        let stickerTool = editor.toolInfo.subToolInfo(withToolName: "CLStickerTool", recursive: false)
-        stickerTool?.optionalInfo["flipHorizontalIconAssetsName"] = "button_stickers"
+        let stickerTool = editor?.toolInfo.subToolInfo(withToolName: "CLStickerTool", recursive: false)
         stickerTool?.available = true
-//        stickerTool.customIcon = "icon_stickers"
-        //        stickerTool.optionalInfo["stickerPath"] = "stickers/"
+        stickerTool?.customIcon = "icon_stickers"
+//        stickerTool?.optionalInfo["stickerPath"] = "stickers/"
         stickerTool?.optionalInfo["deleteIconAssetsName"] = "button_delete"
         stickerTool?.optionalInfo["resizeIconAssetsName"] = "icon_resize"
         
-        let splashTool = editor.toolInfo.subToolInfo(withToolName: "CLSplashTool", recursive: false)
+        let splashTool = editor?.toolInfo.subToolInfo(withToolName: "CLSplashTool", recursive: false)
         splashTool?.available = false
-        let curveTool = editor.toolInfo.subToolInfo(withToolName: "CLToneCurveTool", recursive: false)
+        let curveTool = editor?.toolInfo.subToolInfo(withToolName: "CLToneCurveTool", recursive: false)
         curveTool?.available = false
-        let blurTool = editor.toolInfo.subToolInfo(withToolName: "CLBlurTool", recursive: false)
+        let blurTool = editor?.toolInfo.subToolInfo(withToolName: "CLBlurTool", recursive: false)
         blurTool?.available = false
-        let drawTool = editor.toolInfo.subToolInfo(withToolName: "CLDrawTool", recursive: false)
+        let drawTool = editor?.toolInfo.subToolInfo(withToolName: "CLDrawTool", recursive: false)
         drawTool?.available = false
-        let adjustmentTool = editor.toolInfo.subToolInfo(withToolName: "CLAdjustmentTool", recursive: false)
+        let adjustmentTool = editor?.toolInfo.subToolInfo(withToolName: "CLAdjustmentTool", recursive: false)
         adjustmentTool?.available = false
         
-        let effectTool = editor.toolInfo.subToolInfo(withToolName: "CLEffectTool", recursive: false)
+        let effectTool = editor?.toolInfo.subToolInfo(withToolName: "CLEffectTool", recursive: false)
         effectTool?.available = false
         let pixelateFilter = effectTool?.subToolInfo(withToolName: "CLPixellateEffect", recursive: false)
         pixelateFilter?.available = false
@@ -823,24 +800,24 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         posterizeFilter?.available = false
         
         
-        let filterTool = editor.toolInfo.subToolInfo(withToolName: "CLFilterTool", recursive: false)
+        let filterTool = editor?.toolInfo.subToolInfo(withToolName: "CLFilterTool", recursive: false)
         //        filterTool.optionalInfo["flipHorizontalIconAssetsName"] = "button_filter"
         filterTool?.available = true
-//        filterTool.customIcon = "icon_filters"
+        filterTool?.customIcon = "icon_filters"
         let invertFilter = filterTool?.subToolInfo(withToolName: "CLDefaultInvertFilter", recursive: false)
         invertFilter?.available = false
         
-        let rotateTool = editor.toolInfo.subToolInfo(withToolName: "CLRotateTool", recursive: false)
+        let rotateTool = editor?.toolInfo.subToolInfo(withToolName: "CLRotateTool", recursive: false)
         rotateTool?.available = true
         rotateTool?.dockedNumber = -1
-//        rotateTool.customIcon = "icon_rotate"
+        rotateTool?.customIcon = "icon_rotate"
         
         rotateTool?.optionalInfo["rotateIconAssetsName"] = "icon_rotate"
         rotateTool?.optionalInfo["flipHorizontalIconAssetsName"] = "icon_flip_horizontal"
         rotateTool?.optionalInfo["flipVerticalIconAssetsName"] = "icon_flip_vertical"
         
-        let textTool = editor.toolInfo.subToolInfo(withToolName: "CLTextTool", recursive: false)
-//        textTool.customIcon = "icon_text"
+        let textTool = editor?.toolInfo.subToolInfo(withToolName: "CLTextTool", recursive: false)
+        textTool?.customIcon = "icon_text"
         textTool?.optionalInfo["newTextIconAssetsName"] = "button_add_small"
         textTool?.optionalInfo["editTextIconAssetsName"] = "icon_text_edit"
         textTool?.optionalInfo["deleteIconAssetsName"] = "button_delete"
@@ -849,25 +826,31 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         textTool?.optionalInfo["alignCenterIconAssetsName"] = "icon_align_center"
         textTool?.optionalInfo["alignRightIconAssetsName"] = "icon_align_right"
         
-        let cropTool = editor.toolInfo.subToolInfo(withToolName: "CLClippingTool", recursive: false)
+        let cropTool = editor?.toolInfo.subToolInfo(withToolName: "CLClippingTool", recursive: false)
         cropTool?.optionalInfo["flipHorizontalIconAssetsName"] = "button_crop"
         cropTool?.available = true
-//        cropTool.customIcon = "icon_crop"
+        cropTool?.customIcon = "icon_crop"
         cropTool?.dockedNumber = -2
         cropTool?.optionalInfo["swapButtonHidden"] = true
         
-        cropTool?.optionalInfo["ratios"] = ratios != nil ? ratios : [["value1": 1, "value2": 1]]
+        var ratiosValue = [["value1": 1, "value2": 1]]
+        
+        if (ratios != nil) {
+            ratiosValue = [["value1": ratios![0], "value2": ratios![1]]]
+        }
+        
+        cropTool?.optionalInfo["ratios"] = ratiosValue
         
         // set the custom style for the toolbar
-        editor.theme!.toolbarColor = UIColor.mainColor()
-        editor.theme!.backgroundColor = UIColor.black
-        editor.theme!.toolbarTextColor = UIColor.white
-        editor.theme!.toolIconColor = "white"
-        editor.theme!.toolbarTextFont = UIFont(name:"Nunito-Regular", size: 16)!
+        editor?.theme!.toolbarColor = UIColor.mainColor()
+        editor?.theme!.backgroundColor = UIColor.black
+        editor?.theme!.toolbarTextColor = UIColor.white
+        editor?.theme!.toolIconColor = "white"
+        editor?.theme!.toolbarTextFont = UIFont(name:"Nunito-Regular", size: 16)!
         
         // find the navigation bar in the editor's subviews and set custom style
         var nav = UINavigationBar()
-        for subview in editor.view.subviews {
+        for subview in (editor?.view.subviews)! {
             if subview is UINavigationBar {
                 nav = subview as! UINavigationBar
                 nav.barStyle = UIBarStyle.default
@@ -883,11 +866,11 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             }
         }
         
-        editor.modalTransitionStyle = .coverVertical
+        editor?.modalTransitionStyle = .coverVertical
         
         currentEditor = editor
         
-        self.present(editor, animated: false) { () -> Void in
+        self.present(editor!, animated: false) { () -> Void in
             self.hideLoader()
             UIView.animate(withDuration: 0.2, animations: {
                 nav.frame = CGRect(x: 0, y: nav.frame.origin.y, width: nav.frame.size.width, height: nav.frame.size.height)
@@ -962,11 +945,11 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     func showImagesBrowser(entries: [WRTimelineEntry], startIndex: Int?, animatedFromView: UIView?, displayUser: Bool = false) {
         var idmImages = Array<SKPhoto>()
         entries.forEach { (entry) -> Void in
-            let idmPhoto : SKPhoto = SKPhoto.photoWithImageURL(entry.getImageUrl()!) //, holder: entry)
+            let idmPhoto : SKPhoto = SKPhoto.photoWithImageURL(url: entry.getImageUrl()!, object: entry)
             idmPhoto.shouldCachePhotoURLImage = true
             idmPhoto.caption = entry.text
-//            idmPhoto.commentCount = entry.getCommentCount()
-//            idmPhoto.likeCount = entry.getLikeCount()
+            idmPhoto.commentCount = entry.getCommentCount()
+            idmPhoto.likeCount = entry.getLikeCount()
             idmImages.append(idmPhoto)
         }
         
@@ -980,132 +963,175 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         if(startIndex != nil) {
             browser.initializePageIndex(startIndex!)
         }
-//        browser.displayBackAndForwardButton = false
-//        browser.displayCounterLabel = false
-//        browser.displayAction = true
-//        browser.displayToolbar = true
-//        
-//        browser.displayCommentButton = true
-//        browser.displayLikeButton = true
-//        browser.displayMoreButton = true
-//        
-//        browser.callingViewController = self
-//        
-//        if(displayUser) {
-//            browser.displayUserButton = true
-//            browser.updateUserInfoHandler = { (object: NSObject?)->Void in
-//                NSLog("comment button pressed")
-//                if let entry = object as? WRTimelineEntry {
-//                    if let animal = entry.animal {
-//                        browser.updateUserName(animal.username!)
-//                        
-//                        animal.fetchProfilePhoto({ (error, image) in
-//                            if image != nil {
-//                                browser.updateUserPhoto(image!)
-//                            } else {
-//                                browser.updateUserPhoto(UIImage(named: "animal_profile_photo_empty")!)
-//                            }
-//                        })
-//                    }
-//                }
-//            }
-//            
-//            browser.customUserButtonHandler = { (object: NSObject?)->Void in
-//                NSLog("user button pressed")
-//                if let entry = object as? WRTimelineEntry {
-//                    if let animal = entry.animal {
-//                        self.dismissViewControllerAnimated(true, completion: {
-//                            self.openAnimalDetail(animal, push: true)
-//                        })
-//                    }
-//                }
-//            }
-//        }
-//        
-//        browser.customEntryLoadedHandler = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-//            if let entry = object as? WRTimelineEntry {
-//                entry.isLikedWithBlock({ (result, error) in
-//                    NSLog("entry is liked: \(result)")
-//                    if(result) {
-//                        browser.setLikeButtonImage(UIImage(named: "button_paw_filled")!)
-//                        self.setLikeHandlerOn(browser)
-//                    } else {
-//                        browser.setLikeButtonImage(UIImage(named: "button_paw")!)
-//                        self.setLikeHandlerOff(browser)
-//                    }
-//                })
-//            }
-//        }
-//        
-//        browser.customCommentButtonImage = UIImage(named: "button_comments")
-//        browser.customCommentButtonHandler = { (object: NSObject?)->Void in
-//            NSLog("comment button pressed")
-//            if let entry = object as? WRTimelineEntry {
-//                self.dismissViewControllerAnimated(true, completion: {
-//                    self.openEntryComments(entry, push: false)
-//                })
-//            }
-//        }
-//        
-//        browser.customLikeButtonImage = UIImage(named: "button_paw")
-//        
-//        
-//        browser.customMoreButtonImage = UIImage(named: "button_more")
-//        browser.customMoreButtonHandler = { (object: NSObject?)->Void in
-//            NSLog("more button pressed")
-//            if let entry = object as? WRTimelineEntry {
-//                browser.showMoreActionSheet(entry)
-//            }
-//        }
-//        
-//        browser.customShareButtonImage = UIImage(named: "button_share")
-//        
-//        browser.bounceAnimation = true
-//        browser.enableSingleTapDismiss = false
-//        
-//        browser.displayCustomCloseButton = true
-//        browser.customCloseButtonImage = UIImage(named: "icon_close")
-//        
+        
+        SKPhotoBrowserOptions.displayToolbar = false
+        SKPhotoBrowserOptions.displayAction = true
+        SKPhotoBrowserOptions.displayDeleteButton = false
+        
+        if(displayUser) {
+            SKPhotoBrowserOptions.displayUserButton = true
+            
+            SKPhotoBrowserOptions.handleUserButtonPressed = { (object: NSObject?)->Void in
+                NSLog("user button pressed")
+                if let entry = object as? WRTimelineEntry {
+                    if let animal = entry.animal {
+                        self.dismiss(animated: true, completion: {
+                            self.openAnimalDetail(animalObject: animal, push: true)
+                        })
+                    }
+                }
+            }
+        }
+        
+        SKPhotoBrowserOptions.handleEntryLoaded = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
+            if let entry = object as? WRTimelineEntry {
+
+                if let animal = entry.animal {
+                    browser.updateUserName(animal.username!)
+
+                    animal.fetchProfilePhoto({ (error, image) in
+                        if image != nil {
+                            browser.updateUserButton(image!.circle)
+                        } else {
+                            browser.updateUserButton(UIImage(named: "animal_profile_photo_empty")!)
+                        }
+                    })
+                }
+                
+                if entry.commentCount != nil {
+                    browser.updateCommentCount(entry.commentCount!)
+                }
+                if entry.likeCount != nil {
+                    browser.updateLikeCount(entry.likeCount!)
+                }
+                
+                if self.isLoggedIn() {
+
+                    entry.isLikedWithBlock({ (likeObject, error) in
+                        NSLog("entry is liked: \(likeObject)")
+                        if(likeObject != nil) {
+                            
+                            switch(likeObject!.actionValue!) {
+                            case .Meow:
+                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+                            case .Hiss:
+                                browser.updateLikeButton(UIImage(named: "emoji_hiss")!)
+                            case .Purr:
+                                browser.updateLikeButton(UIImage(named: "emoji_purr")!)
+                            case .HeadBump:
+                                browser.updateLikeButton(UIImage(named: "emoji_headbump")!)
+                            case .Lick:
+                                browser.updateLikeButton(UIImage(named: "emoji_lick")!)
+                            default:
+                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+                            }
+                            self.setLikeHandlerOn(browser: browser)
+                        } else {
+                            browser.updateLikeButton(UIImage(named: "button_paw")!)
+                            self.setLikeHandlerOff(browser: browser)
+                        }
+                    })
+                }
+            }
+        }
+        
+        SKPhotoBrowserOptions.customCloseButtonImage = UIImage(named: "icon_close")
+
+        SKPhotoBrowserOptions.displayCommentButton = true
+        SKPhotoBrowserOptions.customCommentButtonImage = UIImage(named: "emoji_comment")
+        SKPhotoBrowserOptions.handleCommentButtonPressed = { (object: NSObject?)->Void in
+            NSLog("comment button pressed")
+            if let entry = object as? WRTimelineEntry {
+                self.dismiss(animated: true, completion: {
+                    self.openEntryComments(entryObject: entry, push: false)
+                })
+            }
+        }
+        
+        SKPhotoBrowserOptions.displayLikeButton = true
+        SKPhotoBrowserOptions.customLikeButtonImage = UIImage(named: "button_paw")
+        
+        SKPhotoBrowserOptions.customUserButtonDefaultImage = UIImage(named: "animal_profile_photo_empty")
+        
+        SKPhotoBrowserOptions.displayShareButton = true
+        SKPhotoBrowserOptions.customShareButtonImage = UIImage(named: "button_share")
+        SKPhotoBrowserOptions.handleShareButtonPressed = { (object: NSObject?, image: UIImage)->Void in
+            NSLog("share button pressed")
+            browser.showShareActionSheet(image: image)
+        }
+
+        
+        if(self.isLoggedIn()) {
+            SKPhotoBrowserOptions.displayMoreButton = true
+            SKPhotoBrowserOptions.customMoreButtonImage = UIImage(named: "button_more")
+            SKPhotoBrowserOptions.handleMoreButtonPressed = { (object: NSObject?)->Void in
+                NSLog("more button pressed")
+                if let entry = object as? WRTimelineEntry {
+                    browser.showMoreActionSheet(entry: entry)
+                }
+            }
+        }
+        
+        SKPhotoBrowserOptions.autoHideControls = false
         self.present(browser, animated: true, completion: nil)
     }
     
-//    func setLikeHandlerOn(browser: SKPhotoBrowser) {
-//        browser.customLikeButtonHandler = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-//            NSLog("like filled button pressed")
-//            if let entry = object as? WRTimelineEntry {
-//                entry.unlikeWithBlock({ (result, error) in
-//                    if(result) {
-//                        browser.setLikeButtonImage(UIImage(named: "button_paw")!)
-//                        if let skPhoto = photo as? SKPhoto {
-//                            skPhoto.likeCount = skPhoto.likeCount - 1
-//                        }
-//                        self.setLikeHandlerOff(browser)
-//                        browser.updateToolbar()
-//                    }
-//                })
-//            }
-//        }
-//    }
-//    
-//    func setLikeHandlerOff(browser: SKPhotoBrowser) {
-//        browser.customLikeButtonHandler = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-//            NSLog("like button pressed")
-//            if let entry = object as? WRTimelineEntry {
-//                let entryCell = EntryCell()
-//                entryCell.entryObject = entry
-//                
-//                browser.showLikeActionSheet(entryCell, completionBlock: { (result, error) in
-//                    NSLog("like action completed")
-//                    browser.setLikeButtonImage(UIImage(named: "button_paw_filled")!)
-//                    if let skPhoto = photo as? SKPhoto {
-//                        skPhoto.likeCount = skPhoto.likeCount + 1
-//                    }
-//                    self.setLikeHandlerOn(browser)
-//                    browser.updateToolbar()
-//                })
-//            }
-//        }
-//    }
+    func setLikeHandlerOn(browser: SKPhotoBrowser) {
+        SKPhotoBrowserOptions.handleLikeButtonPressed = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
+            NSLog("like filled button pressed")
+            browser.checkForUser {
+                if let entry = object as? WRTimelineEntry {
+                    entry.unlikeWithBlock({ (result, error) in
+                        if(result) {
+                            browser.updateLikeButton(UIImage(named: "button_paw")!)
+
+                            if let skPhoto = photo as? SKPhoto {
+                                skPhoto.likeCount = skPhoto.likeCount - 1
+                                browser.updateLikeCount(skPhoto.likeCount as NSNumber)
+                            }
+                            self.setLikeHandlerOff(browser: browser)
+                            //                        browser.updateToolbar()
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    func setLikeHandlerOff(browser: SKPhotoBrowser) {
+        SKPhotoBrowserOptions.handleLikeButtonPressed = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
+            NSLog("like button pressed")
+            browser.checkForUser {
+                if let entry = object as? WRTimelineEntry {
+                    browser.showLikeActionSheet(entry: entry, completionBlock: { (likeObject, error) in
+                        NSLog("like action completed")
+
+                        if(likeObject != nil) {
+                            switch(likeObject!.actionValue!) {
+                            case .Meow:
+                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+                            case .Hiss:
+                                browser.updateLikeButton(UIImage(named: "emoji_hiss")!)
+                            case .Purr:
+                                browser.updateLikeButton(UIImage(named: "emoji_purr")!)
+                            case .HeadBump:
+                                browser.updateLikeButton(UIImage(named: "emoji_headbump")!)
+                            case .Lick:
+                                browser.updateLikeButton(UIImage(named: "emoji_lick")!)
+                            default:
+                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+                            }
+                            if let skPhoto = photo as? SKPhoto {
+                                skPhoto.likeCount = skPhoto.likeCount + 1
+                                browser.updateLikeCount(skPhoto.likeCount as NSNumber)
+                            }
+                        }
+                        self.setLikeHandlerOn(browser: browser)
+                    })
+                }
+            }
+        }
+    }
     
     
     /**
@@ -1132,16 +1158,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         if(startIndex != nil) {
             browser.initializePageIndex(startIndex!)
         }
-//        browser.displayBackAndForwardButton = false
-//        browser.displayCounterLabel = false
-//        browser.displayAction = false
-//        browser.displayToolbar = false
-//        
-//        browser.bounceAnimation = true
-//        browser.enableSingleTapDismiss = false
-//        
-//        browser.displayCustomCloseButton = true
-//        browser.customCloseButtonImage = UIImage(named: "icon_close")
         
         self.present(browser, animated: true, completion: nil)
     }
@@ -1170,17 +1186,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         if(startIndex != nil) {
             browser.initializePageIndex(startIndex!)
         }
-//        browser.displayBackAndForwardButton = false
-//        browser.displayCounterLabel = false
-//        browser.displayAction = false
-//        browser.displayToolbar = false
-//        
-//        browser.bounceAnimation = true
-//        browser.enableSingleTapDismiss = false
-//        
-//        browser.displayCustomCloseButton = true
-//        browser.customCloseButtonImage = UIImage(named: "icon_close")
-//        
+
         self.present(browser, animated: true, completion: nil)
     }
     
@@ -1209,50 +1215,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             openUrl(url: appLink)
         } else {
             openUrl(url: webUrl)
-        }
-    }
-    
-//    func likeEntryWithBlock(type: LikeAction, entryCell: EntryCell, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
-//        
-//        let like = WRLike()
-//        like.entry = entryCell.entryObject!
-//        like.actionValue = type
-//        like.actingUser = WRUser.current()!
-//        like.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-//            completionBlock(success, error)
-//            entryCell.likeObject = like
-//        }
-//    }
-//    
-//    func unlikeEntryWithBlock(entryCell: EntryCell, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
-//
-//        if let likeObject = entryCell.likeObject {
-//            likeObject.deleteInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
-//                completionBlock(success, error)
-//            })
-//        }
-//    }
-//    
-//    func isEntryLikedWithBlock(entryCell: EntryCell, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
-//        let query = WRLike.query()!
-//        query.whereKey("actingUser", equalTo: WRUser.current()!)
-//        query.whereKey("entry", equalTo: entryCell.entryObject!)
-//        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: Error?) -> Void in
-//            completionBlock(result: objects!.count > 0, error: error)
-//            if(objects!.count > 0) {
-//                entryCell.likeObject = objects![0] as? WRLike
-//            }
-//        }
-//    }
-    
-    func pokeUserWithBlock(type: LikeAction, userObject: WRUser, completionBlock: @escaping (_ result: Bool, _ error: Error?) -> Void) {
-        let like = WRPoke()
-        like.userActedOn = userObject
-        like.actionValue = type
-        like.actingUser = WRUser.current()!
-        like.actingUserName = WRUser.current()!.username
-        like.saveInBackground { (success: Bool, error: Error?) -> Void in
-            completionBlock(success, error)
         }
     }
     
@@ -1345,74 +1307,54 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
 //    func showLikeActionSheet(entryCell: EntryCell, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
 //        self.showLikeActionSheet(entryCell: entryCell, userObject: nil, completionBlock: completionBlock)
 //    }
-//    
-//    func showLikeActionSheet(entryCell: EntryCell?, userObject: WRUser?, completionBlock: @escaping (_ result: Bool, _ error: NSError?) -> Void) {
-//        let optionMenu = UIAlertController(title: nil, message: "Choose Action", preferredStyle: .actionSheet)
-//        
-//        let meowAction = UIAlertAction(title: "😺 Meow", style: .default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            if(entryCell != nil) {
-//                self.likeEntryWithBlock(type: LikeAction.Meow, entryCell: entryCell!, completionBlock: completionBlock)
-//            } else if(userObject != nil) {
-//                self.pokeUserWithBlock(type: LikeAction.Meow, userObject: userObject!, completionBlock: completionBlock)
-//            }
-//            self.playASound(soundName: "meow2")
-//        })
-//        
-//        let purrAction = UIAlertAction(title: "😻 Purr", style: .default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            if(entryCell != nil) {
-//                self.likeEntryWithBlock(type: LikeAction.Purr, entryCell: entryCell!, completionBlock: completionBlock)
-//            } else if(userObject != nil) {
-//                self.pokeUserWithBlock(type: LikeAction.Purr, userObject: userObject!, completionBlock: completionBlock)
-//            }
-//            self.playASound(soundName: "purr1")
-//        })
-//        
-//        let lickAction = UIAlertAction(title: "😽 Lick", style: .default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            if(entryCell != nil) {
-//                self.likeEntryWithBlock(type: LikeAction.Lick, entryCell: entryCell!, completionBlock: completionBlock)
-//            } else if(userObject != nil) {
-//                self.pokeUserWithBlock(type: LikeAction.Lick, userObject: userObject!, completionBlock: completionBlock)
-//            }
-//            self.playASound(soundName: "lick1")
-//        })
-//        
-//        let headBumpAction = UIAlertAction(title: "😸 Head Bump", style: .default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            if(entryCell != nil) {
-//                self.likeEntryWithBlock(type: LikeAction.HeadBump, entryCell: entryCell!, completionBlock: completionBlock)
-//            } else if(userObject != nil) {
-//                self.pokeUserWithBlock(type: LikeAction.HeadBump, userObject: userObject!, completionBlock: completionBlock)
-//            }
-//            self.playASound(soundName: "chirp1")
-//        })
-//        
-//        let hissAction = UIAlertAction(title: "😼 Hiss", style: .default, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//            if(entryCell != nil) {
-//                self.likeEntryWithBlock(type: LikeAction.Hiss, entryCell: entryCell!, completionBlock: completionBlock)
-//            } else if(userObject != nil) {
-//                self.pokeUserWithBlock(type: LikeAction.Hiss, userObject: userObject!, completionBlock: completionBlock)
-//            }
-//            self.playASound(soundName: "hiss1")
-//        })
-//        
-//        
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-//            (alert: UIAlertAction!) -> Void in
-//        })
-//        
-//        optionMenu.addAction(meowAction)
-//        optionMenu.addAction(purrAction)
-//        optionMenu.addAction(lickAction)
-//        optionMenu.addAction(headBumpAction)
-//        optionMenu.addAction(hissAction)
-//        optionMenu.addAction(cancelAction)
-//        
-//        self.present(optionMenu, animated: true, completion: nil)
-//    }
+
+    func showLikeActionSheet(entry: WRTimelineEntry, completionBlock: @escaping (_ likeObject: WRLike?, _ error: Error?) -> Void) {
+        let optionMenu = UIAlertController(title: nil, message: "Choose Action", preferredStyle: .actionSheet)
+        
+        let meowAction = UIAlertAction(title: "😺 Meow", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            entry.likeWithBlock(.Meow, completionBlock: completionBlock)
+            self.playASound(soundName: "meow2")
+        })
+        
+        let purrAction = UIAlertAction(title: "😻 Purr", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            entry.likeWithBlock(.Purr, completionBlock: completionBlock)
+            self.playASound(soundName: "purr1")
+        })
+        
+        let lickAction = UIAlertAction(title: "😽 Lick", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            entry.likeWithBlock(.Lick, completionBlock: completionBlock)
+            self.playASound(soundName: "lick1")
+        })
+        
+        let headBumpAction = UIAlertAction(title: "😸 Head Bump", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            entry.likeWithBlock(.HeadBump, completionBlock: completionBlock)
+            self.playASound(soundName: "chirp1")
+        })
+        
+        let hissAction = UIAlertAction(title: "😼 Hiss", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            entry.likeWithBlock(.Hiss, completionBlock: completionBlock)
+            self.playASound(soundName: "hiss1")
+        })
+        
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        optionMenu.addAction(meowAction)
+        optionMenu.addAction(purrAction)
+        optionMenu.addAction(lickAction)
+        optionMenu.addAction(headBumpAction)
+        optionMenu.addAction(hissAction)
+        optionMenu.addAction(cancelAction)
+        
+        self.present(optionMenu, animated: true, completion: nil)
+    }
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
@@ -1425,24 +1367,14 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
     }
     
-//    func textWasChanged(textField: UITextField) {
-//        let val = textField.text
-//        let maxLength = 500
-//        if (val?.characters.count)! > maxLength {
-//            textField.text = val?[0...maxLength]
-//        }
-//    }
-}
-
-extension SKPhotoBrowser {
-    
-    /**
-     Override this function in SKPhotoBrowser to avoid hiding controls while dragging
-     */
-    public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func textWasChanged(textField: UITextField) {
+        let val = textField.text
+        let maxLength = 500
+        if (val?.characters.count)! > maxLength {
+            textField.text = val?[0...maxLength]
+        }
     }
 }
-
 
 extension PFQueryTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     public func initEmptyState() {
@@ -1925,6 +1857,37 @@ extension DateFormatter {
         
         return result
     }
+    
+    func timeSinceShortened(from: Date) -> String {
+        let calendar = Calendar.current
+        let now = NSDate()
+        let earliest = now.earlierDate(from as Date)
+        let latest = earliest == now as Date ? from : now as Date
+        let components = calendar.dateComponents([.year, .weekOfYear, .month, .day, .hour, .minute, .second], from: earliest, to: latest as Date)
+        
+        var result = ""
+        
+        if components.year! >= 1 {
+            result = "\(components.year!)y"
+        } else if components.month! >= 1 {
+            result = "\(components.month!)mo"
+        } else if components.weekOfYear! >= 1 {
+            result = "\(components.weekOfYear!)w"
+        } else if components.day! >= 1 {
+            result = "\(components.day!)d"
+        } else if components.hour! >= 1 {
+            result = "\(components.hour!)h"
+        } else if components.minute! >= 1 {
+            result = "\(components.minute!)min"
+        } else if components.second! >= 3 {
+            result = "\(components.second!)sec"
+        } else {
+            result = "Just now"
+        }
+        
+        return result
+    }
+
 }
 
 //public extension Float {
@@ -2250,7 +2213,7 @@ public struct MenuItemCustom: MenuItemViewCustomizable {
             title.textColor = .gray
             title.backgroundColor = .clear
           
-            let width = (UIApplication.shared.keyWindow?.bounds.width)!/CGFloat(numberOfPages)+2 
+            let width = UIScreen.main.bounds.width/CGFloat(numberOfPages)+2
             
             let bottomImageView = UIImageView(frame: CGRect(x: 0, y: 49, width: width, height: 1))
             bottomImageView.backgroundColor = UIColor.lightGray

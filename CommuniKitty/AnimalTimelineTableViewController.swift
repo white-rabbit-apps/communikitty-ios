@@ -40,162 +40,18 @@ class AnimalTimelineTableViewCell: EntryCell {
     @IBOutlet weak var instagramButton: UIButton!
     @IBOutlet weak var locationButton: UIButton!
     
-    @IBOutlet weak var heartButton: UIButton!
-    @IBOutlet weak var heartFilledButton: UIButton!
-    @IBOutlet weak var commentButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
-    @IBOutlet weak var moreButton: UIButton!
-    @IBOutlet weak var flagButton: UIButton!
-
-    @IBOutlet weak var commentCountButton: UIButton!
-    @IBOutlet weak var likeCountButton: UIButton!
-    
-    @IBOutlet weak var shareToCommentConstraint: NSLayoutConstraint!
-    @IBOutlet weak var commentToLikeConstraint: NSLayoutConstraint!
-    
     var indexPath: IndexPath?
     var parentTable: AnimalTimelineTableViewController?
     var type: String?
     
-    var likeCount:Int = 0 {
-        didSet {
-            self.likeCountButton.setTitle("\(likeCount)", for: .normal)
-        }
-    }
-    var commentCount:Int = 0 {
-        didSet {
-            self.commentCountButton.setTitle("\(commentCount)", for: .normal)
-        }
-    }
-    
     init(style: UITableViewCellStyle, reuseIdentifier: String?, type: String) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        self.hideAllButtons()
-
-        self.type = type
-        if self.type == "image" {
-            self.showAllButtons()
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    func setSpacing() {
-        switch Device.size() {
-            case .Screen3_5Inch:
-                self.shareToCommentConstraint.constant = 24
-                self.commentToLikeConstraint.constant = 24
-            case .Screen4Inch:
-                self.shareToCommentConstraint.constant = 44
-                self.commentToLikeConstraint.constant = 44
-            case .Screen4_7Inch:
-                self.shareToCommentConstraint.constant = 64
-                self.commentToLikeConstraint.constant = 64
-            case .Screen5_5Inch:
-                self.shareToCommentConstraint.constant = 74
-                self.commentToLikeConstraint.constant = 74
-            default:
-                self.shareToCommentConstraint.constant = 44
-                self.commentToLikeConstraint.constant = 44
-        }
-    }
 
-    func showAllButtons() {
-        self.heartButton.isHidden = false
-        self.commentButton.isHidden = false
-        self.shareButton.isHidden = false
-        self.flagButton.isHidden = false
-        self.moreButton.isHidden = false
-        self.likeCountButton.isHidden = false
-        self.commentCountButton.isHidden = false
-    }
-    
-    func hideAllButtons() {
-        self.heartButton.isHidden = true
-        self.heartFilledButton.isHidden = true
-        self.commentButton.isHidden = true
-        self.shareButton.isHidden = true
-        self.flagButton.isHidden = true
-        self.moreButton.isHidden = true
-        self.likeCountButton.isHidden = true
-        self.commentCountButton.isHidden = true
-    }
-    
-    func incrementLikeCount() {
-        self.isLiked = true
-        self.likeCount = self.likeCount + 1
-    }
-
-    func decrementLikeCount() {
-        if self.likeCount > 0 {
-            self.isLiked = false
-            self.likeCount = self.likeCount - 1
-        }
-    }
-    
-    func setHeartsDisabled() {
-        self.heartButton.isEnabled = false
-        self.heartFilledButton.isEnabled = false
-    }
-
-    func setHeartsEnabled() {
-        self.heartButton.isEnabled = true
-        self.heartFilledButton.isEnabled = true
-    }
-    
-    func setEntryLiked() {
-        self.isLiked = true
-        self.heartButton.isHidden = true
-        self.heartFilledButton.isHidden = false
-    }
-
-    func setEntryUnliked() {
-        self.isLiked = false
-        self.heartButton.isHidden = false
-        self.heartFilledButton.isHidden = true
-    }
-        
-//    @IBAction func heartButtonPressed(sender: AnyObject) {
-//        self.setHeartsDisabled()
-//        parentTable?.showLikeActionSheet(entryCell: self, completionBlock: { (result, error) -> Void in
-//            self.setEntryLiked()
-//            self.incrementLikeCount()
-//            self.setHeartsEnabled()
-//        })
-//    }
-//    
-//    @IBAction func heartFilledButtonPressed(sender: AnyObject) {
-//        self.setHeartsDisabled()
-//        parentTable?.unlikeEntryWithBlock(entryCell: self, completionBlock: { (result, error) -> Void in
-//            self.setEntryUnliked()
-//            self.decrementLikeCount()
-//            self.setHeartsEnabled()
-//        })
-//    }
-//    
-//    @IBAction func commentButtonPressed(sender: AnyObject) {
-//        parentTable!.selectedIndexPath = self.indexPath!
-//        parentTable!.performSegue(withIdentifier: "TimelineToEntryDetail", sender: self)
-//    }
-//    
-//    @IBAction func shareButtonPressed(sender: AnyObject) {
-//        parentTable!.showShareActionSheet(sender: sender, indexPath: self.indexPath!)
-//    }
-//    
-//    @IBAction func flagButtonPressed(sender: AnyObject) {
-//        if self.flagButton.isEnabled {
-//            parentTable!.showFlagActionSheet(entryCell: self, flaggedObject: nil)
-//        }
-//    }
-//    
-//    @IBAction func moreButtonPressed(sender: AnyObject) {
-//        if self.moreButton.isEnabled {
-//            parentTable!.showMoreActionSheet(sender: sender, indexPath: self.indexPath!)
-//        }
-//    }
 }
 
 class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEditorDelegate, FusumaDelegate, ImagesLoadedHandler {
@@ -679,38 +535,6 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         let entry = object as! WRTimelineEntry
         cell!.entryObject = entry
         
-        cell!.setSpacing()
-        
-        
-        if(entry.isImage()) {
-            cell!.showAllButtons()
-
-            if(currentUserIsOwner) {
-                cell!.moreButton.isHidden = false
-                cell!.moreButton.isEnabled = true
-                cell!.flagButton.isHidden = true
-                cell!.flagButton.isEnabled = false
-            } else {
-                cell!.moreButton.isHidden = true
-                cell!.moreButton.isEnabled = false
-                cell!.flagButton.isHidden = false
-                cell!.flagButton.isEnabled = true
-            }
-            
-//            self.isEntryLikedWithBlock(cell!, completionBlock: { (result, error) -> Void in
-//                if(result) {
-//                    cell!.setEntryLiked()
-//                } else {
-//                    cell!.setEntryUnliked()
-//                }
-//            })
-            
-            cell!.commentCount = entry.getCommentCount()
-            cell!.likeCount = entry.getLikeCount()
-        } else {
-            cell!.hideAllButtons()
-        }
-        
         cell!.timelineImageView.isHidden = true
         if let imageFile = entry.image {
             cell!.timelineImageView.kf_setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
@@ -845,7 +669,6 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "TimelineToEntryDetail") {
             let detailScene =  segue.destination as! TimelineEntryDetailViewController
-
             detailScene.entryObject = self.object(at: self.selectedIndexPath) as? WRTimelineEntry
         }
     }

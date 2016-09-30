@@ -31,12 +31,7 @@ private struct MenuOptions: MenuViewCustomizable {
 }
 
 class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, PagingMenuControllerDelegate, FusumaDelegate ,UIScrollViewDelegate{
-    
-    public func fusumaImageSelected(_ image: UIImage) {
 
-    }
-
-    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var coverPhoto: UIImageView!
@@ -584,8 +579,9 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Pagin
             }
             
             if let profilePhotoFile = animal.profilePhoto {
-                self.profileThumb.imageView?.makeCircular()
                 self.profileThumb.kf_setImage(with: URL(string: profilePhotoFile.url!)!, for: UIControlState())
+                self.profileThumb.frame = CGRect(x: 0, y: 0, width: 76, height: 76)
+                self.profileThumb.imageView?.makeCircular()
             } else {
                 self.profileThumb.imageView?.image = UIImage(named: "animal_profile_photo_empty")!
             }

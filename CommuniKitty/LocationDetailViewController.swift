@@ -344,7 +344,7 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate,PagingMenu
         
         let menuOptions = MenuOptions(itemsOptions: optionItems, displayMode: .segmentedControl)
         
-        let options = PagingMenuOptions(pagingControllers: viewControllers as! [UIViewController], menuOptions: menuOptions)
+        let options = PagingMenuOptions(pagingControllers: viewControllers, menuOptions: menuOptions)
 
         self.aboutAndPhotosTabs!.setup(options)
     }

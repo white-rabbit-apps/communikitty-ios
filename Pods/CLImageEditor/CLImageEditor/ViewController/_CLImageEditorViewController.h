@@ -18,12 +18,13 @@
 @property (nonatomic, strong) UIImageView  *imageView;
 @property (nonatomic, weak) IBOutlet UIScrollView *menuView;
 @property (nonatomic, readonly) UIScrollView *scrollView;
+@property  BOOL forceToCrop;
 
 - (IBAction)pushedCloseBtn:(id)sender;
 - (IBAction)pushedFinishBtn:(id)sender;
 
 
-- (id)initWithImage:(UIImage*)image;
+- (id)initWithImage:(UIImage*)image forceToCrop:(BOOL)forceToCrop;
 
 - (void)setCurrentTool:(CLImageToolBase *)currentTool;
 - (void)fixZoomScaleWithAnimated:(BOOL)animated;

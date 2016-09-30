@@ -120,12 +120,12 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string></string>
 	<key>NSCameraUsageDescription</key>
-	<string>Take photos of your kitty!</string>
+	<string>Take photos of your kitty</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Kitty photos!</string>
+	<string>Kitty photos from your catmera roll</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Find your friends kitties</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Nunito-Regular.ttf</string>

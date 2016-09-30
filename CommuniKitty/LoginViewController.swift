@@ -141,17 +141,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 let username: String = (object["username"] as! String)
                 
                 WRUser.logInWithUsername(inBackground: username, password: self.passwordField.text!) { (user: PFUser?, error: Error?) -> Void in
+                    self.hideLoader()
                     if error != nil {
                         self.showError(message: error!.localizedDescription)
-                    }
-                    if user != nil {
+                    } else if user != nil {
                         self.view.endEditing(true)
                         self.goToHome()
+                        self.closeAndRun(completion: {
+                            self.completionBlock()
+                            AppDelegate.getAppDelegate().postLogin()
+                        })
                     }
-                    self.hideLoader()
-                    self.closeAndRun(completion: {
-                        self.completionBlock()
-                    })
                 }
                 
             } else {
@@ -160,10 +160,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.hideLoader()
                     if error != nil {
                         self.showError(message: error!.localizedDescription)
-                    }
-                    if user != nil {
+                    } else if user != nil {
                         self.view.endEditing(true)
-//                        self.goToHome()
+                        self.goToHome()
                         self.closeAndRun(completion: {
                             self.completionBlock()
                             AppDelegate.getAppDelegate().postLogin()

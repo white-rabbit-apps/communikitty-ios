@@ -11,6 +11,7 @@ import Parse
 class WRLike: PFObject, PFSubclassing {
 
     @NSManaged var actingUser: WRUser?
+    @NSManaged var userActedOn: WRUser?
     @NSManaged var entry: WRTimelineEntry?
     
     @NSManaged fileprivate var action: String?

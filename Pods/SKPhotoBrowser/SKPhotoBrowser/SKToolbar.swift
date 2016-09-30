@@ -134,7 +134,17 @@ class SKToolbarButton: UIButton {
         contentMode = .center
         
         let image = UIImage(named: "SKPhotoBrowser.bundle/images/\(imageName)",
-                            in: bundle, compatibleWith: nil) ?? UIImage()
+            in: bundle, compatibleWith: nil) ?? UIImage()
+        setImage(image, for: UIControlState())
+    }
+    
+    func setupWithImage(_ image: UIImage) {
+        backgroundColor = UIColor.clear
+        imageEdgeInsets = insets
+        translatesAutoresizingMaskIntoConstraints = true
+        autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin]
+        contentMode = .center
+        
         setImage(image, for: UIControlState())
     }
 }

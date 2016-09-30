@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		56EF53AAFC1EB62A008239D4 /* Pods_CommuniKitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */; };
+		B810F8EE1D9D136B005DEAE7 /* QuirksSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8ED1D9D136B005DEAE7 /* QuirksSelectorViewController.swift */; };
+		B810F8F01D9D191F005DEAE7 /* QuirksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8EF1D9D191F005DEAE7 /* QuirksTableViewController.swift */; };
+		B810F8F21D9D1C5B005DEAE7 /* QuirksContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8F11D9D1C5B005DEAE7 /* QuirksContainerViewController.swift */; };
 		ED15C1411D94AA7200B1B895 /* hiss1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C1391D94AA7200B1B895 /* hiss1.caf */; };
 		ED15C1421D94AA7200B1B895 /* lick1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13A1D94AA7200B1B895 /* lick1.caf */; };
 		ED15C1431D94AA7200B1B895 /* lick2.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13B1D94AA7200B1B895 /* lick2.caf */; };
@@ -16,6 +19,7 @@
 		ED15C1461D94AA7200B1B895 /* meow3.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13E1D94AA7200B1B895 /* meow3.caf */; };
 		ED15C1471D94AA7200B1B895 /* purr1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13F1D94AA7200B1B895 /* purr1.caf */; };
 		ED15C1481D94AA7200B1B895 /* chirp1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C1401D94AA7200B1B895 /* chirp1.caf */; };
+		ED29CBB11D9A3E7D00E02EBF /* CLImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED29CBB01D9A3E7D00E02EBF /* CLImageEditor.bundle */; };
 		ED3483721D93A1CD00632D90 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3483701D93A1CD00632D90 /* LoginViewController.swift */; };
 		ED3483731D93A1CD00632D90 /* ForgotPasswordFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3483711D93A1CD00632D90 /* ForgotPasswordFormViewController.swift */; };
 		ED36AF0F1D9279D2007CC1F9 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36AF0E1D9279D2007CC1F9 /* UserTableViewController.swift */; };
@@ -57,7 +61,6 @@
 		ED4F8EBC1D9353EF00BEB208 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB71D9353EF00BEB208 /* Nunito-Light.ttf */; };
 		ED4F8EBD1D9353EF00BEB208 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */; };
 		ED51266C1D9883AA00EB9027 /* gif in Resources */ = {isa = PBXBuildFile; fileRef = ED51266B1D9883AA00EB9027 /* gif */; };
-		ED51266E1D9890EA00EB9027 /* CLImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED51266D1D9890EA00EB9027 /* CLImageEditor.bundle */; };
 		EDEC77A71D91A703007CF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77A61D91A703007CF613 /* AppDelegate.swift */; };
 		EDEC77AE1D91A703007CF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AD1D91A703007CF613 /* Assets.xcassets */; };
 		EDEC77B11D91A703007CF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AF1D91A703007CF613 /* LaunchScreen.storyboard */; };
@@ -108,6 +111,9 @@
 /* Begin PBXFileReference section */
 		1F0F692362EFD302D34EFB88 /* Pods-CommuniKitty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommuniKitty.release.xcconfig"; path = "Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty.release.xcconfig"; sourceTree = "<group>"; };
 		929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CommuniKitty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B810F8ED1D9D136B005DEAE7 /* QuirksSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuirksSelectorViewController.swift; sourceTree = "<group>"; };
+		B810F8EF1D9D191F005DEAE7 /* QuirksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuirksTableViewController.swift; sourceTree = "<group>"; };
+		B810F8F11D9D1C5B005DEAE7 /* QuirksContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuirksContainerViewController.swift; sourceTree = "<group>"; };
 		ED15C1391D94AA7200B1B895 /* hiss1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hiss1.caf; sourceTree = "<group>"; };
 		ED15C13A1D94AA7200B1B895 /* lick1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lick1.caf; sourceTree = "<group>"; };
 		ED15C13B1D94AA7200B1B895 /* lick2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lick2.caf; sourceTree = "<group>"; };
@@ -116,6 +122,7 @@
 		ED15C13E1D94AA7200B1B895 /* meow3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = meow3.caf; sourceTree = "<group>"; };
 		ED15C13F1D94AA7200B1B895 /* purr1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = purr1.caf; sourceTree = "<group>"; };
 		ED15C1401D94AA7200B1B895 /* chirp1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chirp1.caf; sourceTree = "<group>"; };
+		ED29CBB01D9A3E7D00E02EBF /* CLImageEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLImageEditor.bundle; sourceTree = "<group>"; };
 		ED3483701D93A1CD00632D90 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ED3483711D93A1CD00632D90 /* ForgotPasswordFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordFormViewController.swift; sourceTree = "<group>"; };
 		ED36AF0E1D9279D2007CC1F9 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
@@ -158,7 +165,6 @@
 		ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Regular.ttf"; path = "CommuniKitty/Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommuniKitty.entitlements; sourceTree = "<group>"; };
 		ED51266B1D9883AA00EB9027 /* gif */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gif; sourceTree = "<group>"; };
-		ED51266D1D9890EA00EB9027 /* CLImageEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLImageEditor.bundle; sourceTree = "<group>"; };
 		EDEC77A31D91A703007CF613 /* CommuniKitty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommuniKitty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEC77A61D91A703007CF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEC77AD1D91A703007CF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -271,7 +277,7 @@
 		ED3A84601D97843200EDED2A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				ED51266D1D9890EA00EB9027 /* CLImageEditor.bundle */,
+				ED29CBB01D9A3E7D00E02EBF /* CLImageEditor.bundle */,
 				ED51266B1D9883AA00EB9027 /* gif */,
 				ED15C1491D94AA7900B1B895 /* Sounds */,
 				ED4F8EBE1D9353F700BEB208 /* Fonts */,
@@ -435,6 +441,9 @@
 				ED4512271D925CF100B95BB5 /* PhotosCollectionViewController.swift */,
 				ED4512291D925D2500B95BB5 /* PhotosCollectionViewLayout.swift */,
 				ED45122B1D925F1000B95BB5 /* PostsTableViewController.swift */,
+				B810F8ED1D9D136B005DEAE7 /* QuirksSelectorViewController.swift */,
+				B810F8EF1D9D191F005DEAE7 /* QuirksTableViewController.swift */,
+				B810F8F11D9D1C5B005DEAE7 /* QuirksContainerViewController.swift */,
 			);
 			name = "Social Network";
 			sourceTree = "<group>";
@@ -568,10 +577,10 @@
 				ED4F8EBB1D9353EF00BEB208 /* Nunito-ExtraLight.ttf in Resources */,
 				ED4F8EBD1D9353EF00BEB208 /* Nunito-Regular.ttf in Resources */,
 				ED15C1431D94AA7200B1B895 /* lick2.caf in Resources */,
-				ED51266E1D9890EA00EB9027 /* CLImageEditor.bundle in Resources */,
 				ED4F8EAF1D9351BB00BEB208 /* Locations.storyboard in Resources */,
 				ED4F8EB31D9351BB00BEB208 /* Walkthrough.storyboard in Resources */,
 				ED15C1451D94AA7200B1B895 /* meow2.caf in Resources */,
+				ED29CBB11D9A3E7D00E02EBF /* CLImageEditor.bundle in Resources */,
 				ED4F8EB01D9351BB00BEB208 /* About.storyboard in Resources */,
 				ED4F8EBA1D9353EF00BEB208 /* Nunito-Bold.ttf in Resources */,
 				ED15C1481D94AA7200B1B895 /* chirp1.caf in Resources */,
@@ -660,6 +669,7 @@
 				ED4512441D926EA800B95BB5 /* AboutViewController.swift in Sources */,
 				EDEC78031D9224BB007CF613 /* WRHate.swift in Sources */,
 				ED45122E1D92612600B95BB5 /* UserProfileViewController.swift in Sources */,
+				B810F8F01D9D191F005DEAE7 /* QuirksTableViewController.swift in Sources */,
 				EDEC78021D9224BB007CF613 /* WRLove.swift in Sources */,
 				ED45123A1D926A7400B95BB5 /* DashboardViewController.swift in Sources */,
 				ED4512221D9255CF00B95BB5 /* AnimalTimelineTableViewController.swift in Sources */,
@@ -668,6 +678,7 @@
 				EDEC77F41D9224BB007CF613 /* WRAnimal.swift in Sources */,
 				EDEC77FB1D9224BB007CF613 /* WRLike.swift in Sources */,
 				EDEC77F81D9224BB007CF613 /* WRComment.swift in Sources */,
+				B810F8F21D9D1C5B005DEAE7 /* QuirksContainerViewController.swift in Sources */,
 				ED4512301D92631A00B95BB5 /* TimelineEntryDetailViewController.swift in Sources */,
 				ED4512361D9267B000B95BB5 /* ExploreViewController.swift in Sources */,
 				EDEC77DF1D922246007CF613 /* GiFHUD.swift in Sources */,
@@ -686,6 +697,7 @@
 				EDEC77A71D91A703007CF613 /* AppDelegate.swift in Sources */,
 				ED4512481D926FBE00B95BB5 /* LocationPhotosViewController.swift in Sources */,
 				ED4512471D926FBE00B95BB5 /* LocationAboutViewController.swift in Sources */,
+				B810F8EE1D9D136B005DEAE7 /* QuirksSelectorViewController.swift in Sources */,
 				EDEC77F51D9224BB007CF613 /* WRAnimalTransfer.swift in Sources */,
 				EDEC77FE1D9224BB007CF613 /* WRProduct.swift in Sources */,
 				ED4512241D92561200B95BB5 /* AnimalAboutViewController.swift in Sources */,

@@ -32,7 +32,7 @@ class WRTimelineEntry: PFObject, PFSubclassing {
 
     @NSManaged var location: WRLocation?
     
-    fileprivate var currentUserLikeEntry: WRLike?
+    open var currentUserLikeEntry: WRLike?
     
 //    @NSManaged var shareToFacebook: Bool?
 //    @NSManaged var shareToTwitter: Bool?
@@ -52,14 +52,14 @@ class WRTimelineEntry: PFObject, PFSubclassing {
      - type: LikeAction enum value of which type of action
      - completionBlock: Block of code to run after like is saved
      */
-    func likeWithBlock(_ type: LikeAction, completionBlock: @escaping (_ result: Bool, _ error: Error?) -> Void) {
+    func likeWithBlock(_ type: LikeAction, completionBlock: @escaping (_ likeObject: WRLike?, _ error: Error?) -> Void) {
         let like = WRLike()
         like.entry = self
         like.actionValue = type
         like.actingUser = WRUser.current()!
         like.saveInBackground { (success: Bool, error: Error?) -> Void in
             self.currentUserLikeEntry = like
-            completionBlock(success, error)
+            completionBlock(like, error)
         }
     }
     
@@ -88,7 +88,7 @@ class WRTimelineEntry: PFObject, PFSubclassing {
      - Parameters:
      - completionBlock: Block of code to run after like is found
      */
-    func isLikedWithBlock(_ completionBlock: @escaping (_ result: Bool, _ error: Error?) -> Void) {
+    func isLikedWithBlock(_ completionBlock: @escaping (_ likeObject: WRLike?, _ error: Error?) -> Void) {
         let query = WRLike.query()!
         query.whereKey("actingUser", equalTo: WRUser.current()!)
         query.whereKey("entry", equalTo: self)
@@ -97,7 +97,7 @@ class WRTimelineEntry: PFObject, PFSubclassing {
                 if(objects!.count > 0) {
                     self.currentUserLikeEntry = objects![0] as? WRLike
                 }
-                completionBlock(objects!.count > 0, error)
+                completionBlock(self.currentUserLikeEntry, error)
             }
         }
     }

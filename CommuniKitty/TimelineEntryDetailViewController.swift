@@ -16,6 +16,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var commentToolbarBottomContraint: NSLayoutConstraint!
     
     @IBOutlet weak var commentBarItem: UIBarButtonItem!
+    @IBOutlet weak var commentSendButtonBarItem: UIBarButtonItem!
     @IBOutlet weak var translateButton: UIBarButtonItem!
     
     @IBOutlet weak var commentsContainerView: UIView!
@@ -41,8 +42,10 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
                 
         self.commentField.delegate = self
 //        self.commentField.addTarget(self, action: #selector(textWasChanged), for: .editingChanged)
+        self.commentSendButtonBarItem.image = UIImage(named: "button_chat_send")!.withRenderingMode(.alwaysOriginal)
+        
 
-        self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "button_share", action: #selector(TimelineEntryDetailViewController.showShareActionSheet), height: 45, width: 35)
+        self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "button_share", action: #selector(showShareSheet), height: 45, width: 35)
 
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -51,13 +54,13 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        self.setAnimalToComment(0)
-        
+        if self.isLoggedIn() {
+            self.setAnimalToComment(0)
+        }
+            
         //self.initActiveLabel(self.textLabel)
         
         self.updateView()
-        
-        self.loadData()
     }
     
     func updateView() {
@@ -94,23 +97,12 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
         }
     }
         
-    func loadData() {
-        if let imageFile = entryObject?.image {
-            imageFile.getDataInBackground(block: {
-                (imageData: Data?, error: Error?) -> Void in
-                if(error == nil) {
-                    let image = UIImage(data:imageData!)
-                    self.shareImage = image
-                }
-            })
-        }
-    }
-    
     func setAnimalToComment(_ index: Int) {
-        let appDelegate = AppDelegate.getAppDelegate()
-        if(appDelegate.myAnimalsArray!.count > 0) {
-            let animalName = appDelegate.myAnimalsArray![index]
-            let animalToComment = appDelegate.myAnimalByName![animalName]
+        //check if myAnimalsArray updated after login
+        if let myAnimalsArray = AppDelegate.getAppDelegate().myAnimalsArray {
+            if myAnimalsArray.count > 0 {
+            let animalName = myAnimalsArray[index]
+            let animalToComment = AppDelegate.getAppDelegate().myAnimalByName![animalName]
             
             if let profilePhotoFile = animalToComment!.profilePhoto {
                 profilePhotoFile.getDataInBackground(block: {
@@ -125,6 +117,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
             }
             
             self.commentAnimalProfilePhoto.tag = index
+            }
         }
     }
     
@@ -154,13 +147,15 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func commentAnimalProfilePhotoPressed(_ sender: AnyObject) {
-        self.showAnimalToCommentSheet()
+        self.checkForUser {
+            self.showAnimalToCommentSheet()
+        }
     }
     
-    func showShareActionSheet() {
-        let image = self.shareImage
-        let activityVC = UIActivityViewController(activityItems: ["http://ftwtrbt.com", image], applicationActivities: nil)
-        self.present(activityVC, animated: true, completion: nil)
+    func showShareSheet() {
+        if let image = self.commentsView?.mainImage {
+            self.showShareActionSheet(image: image)
+        }
     }
     
     func addComment(_ text: String) {
@@ -202,7 +197,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
         UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(rawValue: curve), animations: {
-            self.commentToolbarBottomContraint.constant = keyboardFrame.size.height - 50
+            self.commentToolbarBottomContraint.constant = keyboardFrame.size.height
             self.view.layoutIfNeeded()
         }, completion: { (value: Bool) in
         })
@@ -240,12 +235,14 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func sendWasPressed() {
-        if(self.commentField.text == "") {
-            self.commentField.resignFirstResponder()
-        } else {
-            self.addComment(self.commentField.text!)
-            self.commentField.resignFirstResponder()
-            self.commentField.text = ""
+        self.checkForUser {
+            if(self.commentField.text == "") {
+                self.commentField.resignFirstResponder()
+            } else {
+                self.addComment(self.commentField.text!)
+                self.commentField.resignFirstResponder()
+                self.commentField.text = ""
+            }
         }
     }
     

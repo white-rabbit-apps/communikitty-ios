@@ -12,7 +12,7 @@
 
 @implementation CLToolbarMenuItem
 {
-    
+
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -20,13 +20,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         CGFloat W = frame.size.width;
-        
-        _iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, W-20, W-20)];
+
+        _iconView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 14, W-38, W-38)];
         _iconView.clipsToBounds = YES;
-        _iconView.layer.cornerRadius = 5;
+        _iconView.layer.cornerRadius = 0;
         _iconView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:_iconView];
-        
+
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _iconView.bottom + 5, W, 15)];
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.textColor = [CLImageEditorTheme toolbarTextColor];
@@ -43,7 +43,7 @@
     if(self){
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
         [self addGestureRecognizer:gesture];
-        
+
         self.toolInfo = toolInfo;
     }
     return self;
@@ -83,7 +83,7 @@
 - (void)setToolInfo:(CLImageToolInfo *)toolInfo
 {
     [super setToolInfo:toolInfo];
-    
+
     self.title = self.toolInfo.title;
     if(self.toolInfo.iconImagePath){
         self.iconImage = self.toolInfo.iconImage;
@@ -107,4 +107,3 @@
 }
 
 @end
-

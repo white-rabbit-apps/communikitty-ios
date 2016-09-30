@@ -28,18 +28,19 @@
     for(CLImageToolInfo *sub in self.sortedSubtools){
         [array addObject:sub.descriptionDictionary];
     }
-    
+
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [self setObject:self.toolName forKey:@"toolName"  inDictionary:dict];
     [self setObject:self.title forKey:@"title" inDictionary:dict];
     [self setObject:((self.available)?@"YES":@"NO") forKey:@"available" inDictionary:dict];
     [self setObject:@(self.dockedNumber) forKey:@"dockedNumber" inDictionary:dict];
     [self setObject:self.iconImagePath forKey:@"iconImagePath" inDictionary:dict];
+    [self setObject:self.customIcon forKey:@"customIcon" inDictionary:dict];
     [self setObject:array forKey:@"subtools" inDictionary:dict];
     if(self.optionalInfo){
         [self setObject:self.optionalInfo forKey:@"optionalInfo" inDictionary:dict];
     }
-    
+
     return dict;
 }
 
@@ -51,7 +52,7 @@
 - (NSString*)toolTreeDescriptionWithSpace:(NSString*)space
 {
     NSString *str = [NSString stringWithFormat:@"%@%@\n", space, self.toolName];
-    
+
     space = [NSString stringWithFormat:@"    %@", space];
     for(CLImageToolInfo *sub in self.sortedSubtools){
         str = [str stringByAppendingFormat:@"%@", [sub toolTreeDescriptionWithSpace:space]];
@@ -66,7 +67,11 @@
 
 - (UIImage*)iconImage
 {
-    return [UIImage fastImageWithContentsOfFile:self.iconImagePath];
+    if(self.customIcon) {
+        return [UIImage imageNamed:self.customIcon];
+    } else {
+        return [UIImage fastImageWithContentsOfFile:self.iconImagePath];
+    }
 }
 
 - (NSString*)toolName
@@ -82,7 +87,7 @@
     self.subtools = [self.subtools sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         CGFloat dockedNum1 = [obj1 dockedNumber];
         CGFloat dockedNum2 = [obj2 dockedNumber];
-        
+
         if(dockedNum1 < dockedNum2){ return NSOrderedAscending; }
         else if(dockedNum1 > dockedNum2){ return NSOrderedDescending; }
         return NSOrderedSame;
@@ -93,7 +98,7 @@
 - (CLImageToolInfo*)subToolInfoWithToolName:(NSString*)toolName recursive:(BOOL)recursive
 {
     CLImageToolInfo *result = nil;
-    
+
     for(CLImageToolInfo *sub in self.subtools){
         if([sub.toolName isEqualToString:toolName]){
             result = sub;
@@ -106,7 +111,7 @@
             }
         }
     }
-    
+
     return result;
 }
 

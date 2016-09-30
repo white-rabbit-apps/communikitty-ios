@@ -227,6 +227,10 @@ public final class FusumaViewController: UIViewController {
     
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        cameraView.frame = CGRect(origin: CGPoint.zero, size: cameraShotContainer.frame.size)
+        cameraView.layoutIfNeeded()
+        cameraView.initialize()
     }
 
     override public func viewDidAppear(_ animated: Bool) {

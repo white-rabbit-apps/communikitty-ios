@@ -23,12 +23,12 @@
 
 - (id)initWithImage:(UIImage*)image
 {
-    return [self initWithImage:image delegate:nil];
+    return [self initWithImage:image delegate:nil forceToCrop:NO];
 }
 
-- (id)initWithImage:(UIImage*)image delegate:(id<CLImageEditorDelegate>)delegate
+- (id)initWithImage:(UIImage*)image delegate:(id<CLImageEditorDelegate>)delegate forceToCrop:(BOOL)forceToCrop
 {
-    return [[_CLImageEditorViewController alloc] initWithImage:image delegate:delegate];
+    return [[_CLImageEditorViewController alloc] initWithImage:image delegate:delegate forceToCrop:forceToCrop];
 }
 
 - (id)initWithDelegate:(id<CLImageEditorDelegate>)delegate
@@ -38,12 +38,12 @@
 
 - (void)showInViewController:(UIViewController*)controller withImageView:(UIImageView*)imageView;
 {
-    
+
 }
 
 - (void)setCurrentTool:(CLImageToolBase *)currentTool
 {
-    
+
 }
 
 
@@ -53,4 +53,3 @@
 }
 
 @end
-
