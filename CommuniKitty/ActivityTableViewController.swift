@@ -27,6 +27,7 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 58
+        self.tableView.separatorStyle = .singleLine
         self.replacePFLoadingView()
 
         self.initEmptyState()
