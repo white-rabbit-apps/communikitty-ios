@@ -968,26 +968,8 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         SKPhotoBrowserOptions.displayAction = true
         SKPhotoBrowserOptions.displayDeleteButton = false
         
-//        browser.callingViewController = self
-
-        
         if(displayUser) {
             SKPhotoBrowserOptions.displayUserButton = true
-//            SKPhotoBrowserOptions.updateUserInfoHandler = { (object: NSObject?)->Void in
-//                if let entry = object as? WRTimelineEntry {
-//                    if let animal = entry.animal {
-//                        browser.updateUserName(animal.username!)
-//                        
-//                        animal.fetchProfilePhoto({ (error, image) in
-//                            if image != nil {
-//                                browser.updateUserPhoto(image!)
-//                            } else {
-//                                browser.updateUserPhoto(UIImage(named: "animal_profile_photo_empty")!)
-//                            }
-//                        })
-//                    }
-//                }
-//            }
             
             SKPhotoBrowserOptions.handleUserButtonPressed = { (object: NSObject?)->Void in
                 NSLog("user button pressed")
@@ -1068,6 +1050,8 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         
         SKPhotoBrowserOptions.displayLikeButton = true
         SKPhotoBrowserOptions.customLikeButtonImage = UIImage(named: "button_paw")
+        
+        SKPhotoBrowserOptions.customUserButtonDefaultImage = UIImage(named: "animal_profile_photo_empty")
         
         SKPhotoBrowserOptions.displayShareButton = true
         SKPhotoBrowserOptions.customShareButtonImage = UIImage(named: "button_share")
