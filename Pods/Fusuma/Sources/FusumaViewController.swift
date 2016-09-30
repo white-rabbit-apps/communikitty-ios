@@ -196,9 +196,9 @@ public final class FusumaViewController: UIViewController {
             cameraView.croppedAspectRatioConstraint.isActive = false
         }
         
-        albumView.frame  = CGRect(origin: CGPoint.zero, size: photoLibraryViewerContainer.frame.size)
-        albumView.layoutIfNeeded()
-        albumView.initialize()
+//        albumView.frame  = CGRect(origin: CGPoint.zero, size: photoLibraryViewerContainer.frame.size)
+//        albumView.layoutIfNeeded()
+//        albumView.initialize()
         
         if hasVideo {
             videoView.frame = CGRect(origin: CGPoint.zero, size: videoShotContainer.frame.size)
@@ -242,7 +242,11 @@ public final class FusumaViewController: UIViewController {
     }
     
     @IBAction func libraryButtonPressed(_ sender: UIButton) {
+        albumView.frame  = CGRect(origin: CGPoint.zero, size: photoLibraryViewerContainer.frame.size)
+        albumView.layoutIfNeeded()
+        albumView.initialize()
         changeMode(mode: Mode.library)
+        
     }
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
@@ -308,8 +312,15 @@ extension FusumaViewController: FSAlbumViewDelegate, FSCameraViewDelegate, FSVid
     
     // MARK: FSCameraViewDelegate
     func cameraShotFinished(_ image: UIImage) {
+      
+        var date = albumView.selectedImageCreationDate
         
-        let date = albumView.selectedImageCreationDate
+        if date == nil {
+            albumView.frame  = CGRect(origin: CGPoint.zero, size: photoLibraryViewerContainer.frame.size)
+            albumView.layoutIfNeeded()
+            albumView.initialize()
+            date = albumView.selectedImageCreationDate
+        }
         
         delegate?.fusumaImageSelected(image, creationDate: date)
         self.dismiss(animated: true, completion: {

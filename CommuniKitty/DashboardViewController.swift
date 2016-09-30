@@ -102,7 +102,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
      */
     @IBAction func takeFusumaPhoto() {
         self.checkForUser {
-            self.showLoader()
+//            self.showLoader()
             let fusuma = FusumaViewController()
             fusuma.delegate = self
             
@@ -112,7 +112,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
             fusuma.modalPresentationStyle = .custom
             
             self.present(fusuma, animated: true, completion: {
-                self.hideLoader()
+//                self.hideLoader()
             })
         }
     }
