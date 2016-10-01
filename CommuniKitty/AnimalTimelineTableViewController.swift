@@ -119,7 +119,6 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
      - imageIndexById: [String : Int]? - adds the dictionary after images loading
      - imageEntries:[WRTimelineEntry]? - adds the entries after image loading
      */
-    
     func imagesLoaded(_ objects: [PFObject]?, imageIndexById: [String : Int]? , imageEntries:[WRTimelineEntry]?){
         self.imageIndexById = imageIndexById ?? [String : Int]()
         self.imageEntries = imageEntries ?? [WRTimelineEntry]()
@@ -178,22 +177,22 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
 //        }
 //    }
 //    
-//    func handlePress(gestureRecognizer : UILongPressGestureRecognizer) {
-//        let p = gestureRecognizer.locationInView(self.tableView)
-//        let indexPath = self.tableView.indexPathForRowAtPoint(p)
-//        let cell = tableView.cellForRowAtIndexPath(indexPath!) as? AnimalTimelineTableViewCell
-//        
-//        if (indexPath == nil) {
-//            NSLog("tap on table view but not on a row");
-//        } else {
-//            let object = self.objectAtCell(indexPath)!
-//            
-//            let index = self.imageIndexById![object.objectId!]
-//            
-//            self.showImagesBrowser(imageEntries!, startIndex: index, animatedFromView: cell!.timelineImageView, displayUser: false)
-//        }
-//    }
-//    
+    func handlePress(gestureRecognizer : UILongPressGestureRecognizer) {
+        let p = gestureRecognizer.location(in: self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: p)
+        let cell = tableView.cellForRow(at: indexPath!) as? AnimalTimelineTableViewCell
+        
+        if (indexPath == nil) {
+            NSLog("tap on table view but not on a row");
+        } else {
+            let object = self.objectAtCell(indexPath: indexPath)!
+            
+            let index = self.imageIndexById![object.objectId!]
+            
+            self.showImagesBrowser(entries: imageEntries!, startIndex: index, animatedFromView: cell!.timelineImageView, displayUser: false)
+        }
+    }
+//
 //    func handleLongPress(gestureRecognizer : UILongPressGestureRecognizer) {
 //        let p = gestureRecognizer.locationInView(self.tableView)
 //        let indexPath = self.tableView.indexPathForRowAtPoint(p)
@@ -215,55 +214,6 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         } else {
             self.tableView.isScrollEnabled = true;
         }
-    }
-    
-    
-    func showMoreActionSheet(sender: AnyObject, indexPath: IndexPath?) {
-        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
-
-        let editAction = UIAlertAction(title: "Edit", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            print("Editing timeline entry")
-            self.editEntry(indexPath: indexPath)
-        })
-        
-        let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            print("Deleting timeline entry")
-            self.deleteEntry(indexPath: indexPath)
-        })
-        
-        let profilePhotoAction = UIAlertAction(title: "Set as Profile Photo", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            print("Setting profile photo")
-            self.setProfilePhoto(image: self.imageAtCell(indexPath: indexPath)!)
-        })
-
-        let coverPhotoAction = UIAlertAction(title: "Set as Cover Photo", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            print("Setting cover photo")
-            self.setCoverPhoto(image: self.imageAtCell(indexPath: indexPath)!)
-        })
-
-        
-         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-            print("Cancelled")
-        })
-        
-        optionMenu.addAction(editAction)
-        optionMenu.addAction(deleteAction)
-        optionMenu.addAction(profilePhotoAction)
-        optionMenu.addAction(coverPhotoAction)
-        optionMenu.addAction(cancelAction)
-        
-        self.present(optionMenu, animated: true, completion: nil)
-    }
-    
-    func showShareActionSheet(sender: AnyObject, indexPath: IndexPath?) {
-        let image = self.imageAtCell(indexPath: indexPath)!
-        let activityVC = UIActivityViewController(activityItems: ["http://ftwtrbt.com", image], applicationActivities: nil)
-        self.present(activityVC, animated: true, completion: nil)
     }
     
     func imageAtCell(indexPath: IndexPath?) -> UIImage? {
@@ -288,27 +238,6 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         self.tableView.scrollToRow(at: indexPath!, at: .bottom, animated: true)
     }
 
-    func editEntry(indexPath: IndexPath?) {
-        let object = self.object(at: indexPath)
-        let entry = object as! WRTimelineEntry
-
-        let entryFormView = TimelineEntryFormViewController()
-        entryFormView.image = self.imageAtCell(indexPath: indexPath)
-        entryFormView.animalObject = self.animalObject
-        entryFormView.entryObject = entry
-        entryFormView.animalDetailController = self.animalDetailController
-        
-        self.present(UINavigationController(rootViewController: entryFormView), animated: true, completion: nil)
-    }
-    
-    func deleteEntry(indexPath: IndexPath?) {
-        let object = self.object(at: indexPath)
-        self.showLoader()
-        self.animalImagesRepository?.deleteImage(object, complHandler: {
-            self.hideLoader()
-            self.loadObjects()
-        })
-    }
     
     func imageEditor(_ editor: CLImageEditor!, didFinishEdittingWith image: UIImage!) {
         NSLog("got new image")
@@ -640,21 +569,21 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
             cell!.yearLabel.text = dateFormatter.string(from: date)
         }
         
-//        if entry.isImage() {
+        if entry.isImage() {
 //            if currentUserIsOwner {
 //                let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
 //                gestureRecognizer.minimumPressDuration = 1.0
 //                cell!.addGestureRecognizer(gestureRecognizer)
 //            }
-//            
-//            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handlePress))
-//            cell!.addGestureRecognizer(tapRecognizer)
-//            
+            
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handlePress))
+            cell!.addGestureRecognizer(tapRecognizer)
+            
 //            let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
 //            doubleTapRecognizer.numberOfTapsRequired = 2
 //            tapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
 //            cell!.addGestureRecognizer(doubleTapRecognizer)
-//        }
+        }
         
         return cell
     }
@@ -665,6 +594,13 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
 //            TipInCellAnimator.animate(cell)
         }
     }
+    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let object = self.objectAtCell(indexPath: indexPath)!
+//        let index = self.imageIndexById![object.objectId!]
+//        
+//        self.showImagesBrowser(entries: imageEntries!, startIndex: index, animatedFromView: nil, displayUser: false)
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "TimelineToEntryDetail") {

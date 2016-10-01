@@ -1008,7 +1008,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
                 }
                 
                 if self.isLoggedIn() {
-
                     entry.isLikedWithBlock({ (likeObject, error) in
                         NSLog("entry is liked: \(likeObject)")
                         if(likeObject != nil) {
@@ -1033,6 +1032,8 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
                             self.setLikeHandlerOff(browser: browser)
                         }
                     })
+                } else {
+                    self.setLikeHandlerOff(browser: browser)
                 }
             }
         }
