@@ -85,9 +85,9 @@ class UserTableViewController: PFQueryTableViewController {
     
     func getFacebookFriends() {
         let fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters: nil)
-//        fbRequest?.start(completionHandler: { (connection: FBSDKGraphRequestConnection?, result: Any?, error: Error?) in
-//            if error == nil {
-//                var resultIds = [String]()
+        _ = fbRequest?.start(completionHandler: { (connection: FBSDKGraphRequestConnection?, result: Any?, error: Error?) in
+            if error == nil {
+                let resultIds = [String]()
 //                let resultVals = result.object(forKey: "data") as! NSArray
 //                
 //                for result in resultVals {
@@ -95,15 +95,15 @@ class UserTableViewController: PFQueryTableViewController {
 //                }
 //                
 //                self.facebookFriendIds = resultIds
-//                
-//                self.loadObjects()
-//                self.hideLoader()
-//                
-//                print("Friends are : \(resultIds)")
-//            } else {
-//                print("Error Getting Friends \(error)");
-//            }
-//        })
+                
+                self.loadObjects()
+                self.hideLoader()
+                
+                print("Friends are : \(resultIds)")
+            } else {
+                print("Error Getting Friends \(error)");
+            }
+        })
     }
     
     

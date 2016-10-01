@@ -70,8 +70,7 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
                     }
                 })
                 
-                vc.navigationController?.popViewController(animated: true)
-                
+                _ = vc.navigationController?.popViewController(animated: true)
             }
             self.show(bvc, sender: self)
         }
@@ -98,7 +97,7 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
                     }
                 })
                 
-                vc.navigationController?.popViewController(animated: true)
+                _ = vc.navigationController?.popViewController(animated: true)
             }
             self.show(cvc, sender: self)
         }
@@ -250,12 +249,12 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
     
     func pickTheImage(traitName:String)-> UIImage {
         switch traitName {
-        case "independent":
-            return UIImage(named: "independent")!
-        case "calm":
-            return UIImage(named: "lazy")!
-        case "chill":
-            return  UIImage(named: "sleepy")!
+//        case "independent":
+//            return UIImage(named: "independent")!
+//        case "calm":
+//            return UIImage(named: "lazy")!
+//        case "chill":
+//            return  UIImage(named: "sleepy")!
         default:
             return UIImage()
         }
@@ -364,7 +363,7 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
                     view.subviews.last?.removeFromSuperview()
                 }
             default:
-                ""
+                break
             }
             
             var separatorInset: CGFloat
@@ -396,7 +395,7 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
             case self.hatesView:
                 self.hatesSeparator = true
             default:
-                ""
+                break
             }
         }
     }

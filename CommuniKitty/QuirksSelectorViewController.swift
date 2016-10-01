@@ -107,7 +107,7 @@ class QuirksSelectorViewController: UIViewController, UITextFieldDelegate, Typed
                 //save the WRAnimal
                 self.animalObject?.saveInBackground{(success: Bool, error: Error?) -> Void in
                     if (error == nil) {
-                        self.quirksTableView?.navigationController?.popToRootViewController(animated: true)
+                        _ = self.quirksTableView?.navigationController?.popToRootViewController(animated: true)
                         self.animalFormView?.selectedStringsReload(selectedStringsArray: self.addedStrings, nav: self.navTitle)
                     }
                 }
@@ -123,7 +123,7 @@ class QuirksSelectorViewController: UIViewController, UITextFieldDelegate, Typed
                 default:
                     print("Animal object doesn't have an array to update")
                 }
-                self.quirksTableView?.navigationController?.popToRootViewController(animated: true)
+                _ = self.quirksTableView?.navigationController?.popToRootViewController(animated: true)
                 self.animalFormView?.selectedStringsReload(selectedStringsArray: self.addedStrings, nav: self.navTitle)
             }
         }

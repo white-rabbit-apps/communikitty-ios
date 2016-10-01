@@ -748,7 +748,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gel-Jh-gKG" id="3jx-sf-Xmv">
-                                    <frame key="frameInset" width="375" height="74.5"/>
+                                    <frame key="frameInset" width="375" height="74"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3SN-Fx-ojJ">
@@ -919,7 +919,7 @@
                                 <items>
                                     <barButtonItem width="320" style="plain" id="9T0-1m-xYY">
                                         <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="AjG-HA-0hV">
-                                            <rect key="frame" x="16" y="485" width="320" height="30"/>
+                                            <rect key="frame" x="16" y="20" width="320" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -1050,7 +1050,7 @@
                                 <rect key="frame" x="0.0" y="28" width="383" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eFn-KC-OLf" id="aT6-hN-5eC">
-                                    <frame key="frameInset" width="383" height="43.5"/>
+                                    <frame key="frameInset" width="383" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="km8-3A-PfR" userLabel="textLabel">
@@ -1747,7 +1747,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jtu-nP-UoT" id="jIF-Op-8fX">
-                                    <frame key="frameInset" width="375" height="57.5"/>
+                                    <frame key="frameInset" width="375" height="57"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ova-wQ-DaR" customClass="PFImageView">
@@ -6959,7 +6959,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RlW-pc-oHP" userLabel="Animals Navigation" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Me" image="form_cat_name" id="NfE-rO-bgB"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tif-17-PQS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tif-17-PQS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -6977,7 +6977,7 @@
             <objects>
                 <navigationController storyboardIdentifier="BreedsTable" automaticallyAdjustsScrollViewInsets="NO" id="3JW-hH-bBl" userLabel="Breeds Navigation" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Woq-84-9HD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Woq-84-9HD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -6995,7 +6995,7 @@
             <objects>
                 <navigationController storyboardIdentifier="UserNavigation" automaticallyAdjustsScrollViewInsets="NO" id="Myd-0m-M1h" userLabel="User Settings Navigation" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kpS-1L-uVR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kpS-1L-uVR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7081,7 +7081,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QlJ-2d-xa7" id="FLH-xk-NuJ">
-                                    <frame key="frameInset" width="375" height="70.5"/>
+                                    <frame key="frameInset" width="375" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pr6-Wh-fiI" userLabel="Profile Photo Button">
@@ -7179,7 +7179,7 @@
                                 <rect key="frame" x="0.0" y="163" width="375" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UEI-cR-bHw" id="Q9f-k2-ynW">
-                                    <frame key="frameInset" width="375" height="70.5"/>
+                                    <frame key="frameInset" width="375" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8T-Ik-Jyv" userLabel="Profile Photo Button">
@@ -7436,7 +7436,7 @@
             <objects>
                 <navigationController storyboardIdentifier="UsersNav" automaticallyAdjustsScrollViewInsets="NO" id="0IJ-5N-bUW" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aXV-32-dYg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aXV-32-dYg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7805,7 +7805,7 @@
             <objects>
                 <navigationController storyboardIdentifier="DashboardNav" automaticallyAdjustsScrollViewInsets="NO" id="VDF-2e-27L" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ohG-W0-UDa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ohG-W0-UDa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -7914,7 +7914,7 @@
         <image name="button_chat_send" width="54" height="39"/>
         <image name="button_comments" width="29" height="27"/>
         <image name="button_delete" width="28" height="28"/>
-        <image name="button_flag" width="24" height="27"/>
+        <image name="button_flag" width="24" height="26"/>
         <image name="button_follow" width="90" height="31"/>
         <image name="button_paw" width="31" height="27"/>
         <image name="button_paw_filled" width="30" height="27"/>

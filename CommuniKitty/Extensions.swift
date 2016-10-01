@@ -72,7 +72,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
      Pop back to the previous view controller in the current UINavigationController
      */
     func goBack() {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
     /**
@@ -143,7 +143,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         var email: String = "mailto:\(emailAddress)?subject=\(subject)&body=\(body)"
         email = email.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed)!
         
-        UIApplication.shared.openURL(NSURL(string: email)! as URL)
+        UIApplication.shared.open(URL(string: email)!, options: [:], completionHandler: nil)
     }
     
     /**
@@ -1201,8 +1201,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     func openUrl(url:String!) {
         NSLog("opening url: \(url)")
         
-        let url = NSURL(string: url)!
-        UIApplication.shared.openURL(url as URL)
+        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
     }
     
     /**
@@ -1240,13 +1239,13 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             if(success) {
                 self.hideLoader()
                 self.dismiss(animated: true, completion: {
-                    if self is SKPhotoBrowser {
-                        let browser = self as! SKPhotoBrowser
-                        if browser.splitViewController is AnimalTimelineTableViewController {
-                            let animalTimeline = browser.splitViewController as! AnimalTimelineTableViewController
-                            animalTimeline.loadObjects()
-                        }
-                    }
+//                    if self is SKPhotoBrowser {
+//                        let browser = self as! SKPhotoBrowser
+//                        if browser.splitViewController is AnimalTimelineTableViewController {
+//                            let animalTimeline = browser.splitViewController as! AnimalTimelineTableViewController
+//                            animalTimeline.loadObjects()
+//                        }
+//                    }
                 })
             }
         })

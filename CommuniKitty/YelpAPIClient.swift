@@ -53,7 +53,7 @@ class YelpAPIClient: NSObject {
     
     func searchPlacesWithParameters(_ searchParameters: Dictionary<String, String>, successSearch: @escaping (_ data: Data, _ response: HTTPURLResponse) -> Void, failureSearch: @escaping (_ error: NSError) -> Void) {
         let searchUrl = APIBaseUrl + "search/"
-        clientOAuth!.get(searchUrl, parameters: searchParameters, success: successSearch, failure: failureSearch)
+        _ = clientOAuth!.get(searchUrl, parameters: searchParameters, success: successSearch, failure: failureSearch)
     }
     
     /*
@@ -83,7 +83,7 @@ class YelpAPIClient: NSObject {
         if parameters == nil {
             parameters = Dictionary<String, String>()
         }
-        clientOAuth!.get(businessInformationUrl, parameters: parameters!, success: successSearch, failure: failureSearch)
+        _ = clientOAuth!.get(businessInformationUrl, parameters: parameters!, success: successSearch, failure: failureSearch)
     }
     
     /*
@@ -116,6 +116,6 @@ class YelpAPIClient: NSObject {
         
         parameters!["phone"] = phoneNumber
         
-        clientOAuth!.get(phoneSearchUrl, parameters: parameters!, success: successSearch, failure: failureSearch)
+        _ = clientOAuth!.get(phoneSearchUrl, parameters: parameters!, success: successSearch, failure: failureSearch)
     }
 }

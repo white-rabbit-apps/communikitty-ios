@@ -191,7 +191,8 @@ class UserProfileViewController: UIViewController, CLImageEditorDelegate, Fusuma
         
         alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { (action) -> Void in
             if let url = URL(string:UIApplicationOpenSettingsURLString) {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
             }
         }))
         

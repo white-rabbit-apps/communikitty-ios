@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CommuniKitty Dev.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>CommuniKitty.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>EDBB49041D9F923C00BF68CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>EDEC77A21D91A703007CF613</key>
 		<dict>
 			<key>primary</key>

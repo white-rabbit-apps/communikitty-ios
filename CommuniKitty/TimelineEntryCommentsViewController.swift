@@ -216,7 +216,7 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
         
         let comment = object as? WRComment
         
-        if let gifName = comment?.gifName {
+        if let _ = comment?.gifName {
             var cell: TimelineEntryCommentGifViewCell? = tableView.dequeueReusableCell(withIdentifier: "CommentGifCell", for: indexPath as IndexPath) as? TimelineEntryCommentGifViewCell
             if cell == nil  {
                 cell = TimelineEntryCommentGifViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "CommentGifCell")

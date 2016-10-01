@@ -94,7 +94,7 @@ public class QuirksTableViewController: PFQueryTableViewController{
                     self.tableView.backgroundView?.sizeToFit()
                 }
             default:
-                ""
+                break
             }
             
         }

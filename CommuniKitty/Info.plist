@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -38,6 +36,8 @@
 	<string>597512767097778</string>
 	<key>FacebookDisplayName</key>
 	<string>CommuniKitty</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -120,12 +120,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Kitty videos from your camera roll</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Take photos of your kitty</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Kitty photos from your catmera roll</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Find your friends kitties</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>White Rabbit Apps</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Kitty photos from your catmera roll</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Nunito-Regular.ttf</string>

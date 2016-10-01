@@ -148,14 +148,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.registerUris()
         self.initializeUI()
         
-        DispatchQueue.main.async() { [unowned self] in
-//            GooglePlacesRow.provideApiKey("AIzaSyBSUv9V99TBfnXNtRW2FC3pyTgRpAwuKCc")
+        DispatchQueue.main.async {
+            //            GooglePlacesRow.provideApiKey("AIzaSyBSUv9V99TBfnXNtRW2FC3pyTgRpAwuKCc")
             PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
             //        PFTwitterUtils.initializeWithConsumerKey("C16iyeaMoc91iPOQnBTnQkXgm", consumerSecret: "gvedI21p7UaJxEJKxyTttbkUydE37cnq3RBSUFB86erwjHAkt1")
-//            self.client = CDAClient(spaceKey:"8mu31kgi73w0", accessToken:"3bd31581398aa28d0b9c05aa86573763aa4dfd4119eb020625cd0989fee99836")
+            //            self.client = CDAClient(spaceKey:"8mu31kgi73w0", accessToken:"3bd31581398aa28d0b9c05aa86573763aa4dfd4119eb020625cd0989fee99836")
             if Device.type() != .Simulator {
                 Instabug.start(withToken: "b97c87481a11e4f5469722434cef6a24", invocationEvent: IBGInvocationEvent.screenshot)
-//                Fabric.with([Crashlytics.self, Answers.self])
+                //                Fabric.with([Crashlytics.self, Answers.self])
             }
         }
     }

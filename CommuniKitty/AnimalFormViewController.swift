@@ -35,11 +35,11 @@ public final class CoatsPushRow : SelectorRow<PushSelectorCell<Coat>, CoatsTable
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cvc = storyboard.instantiateViewController(withIdentifier: "CoatsTableView") as! CoatsTableViewController
             cvc.completionCallback = { vc in
-                vc.navigationController?.popViewController(animated: true)
+                _ = vc.navigationController?.popViewController(animated: true)
             }
             return cvc
             }, onDismiss: { vc in
-                vc.navigationController?.popViewController(animated: true)
+                _ = vc.navigationController?.popViewController(animated: true)
         })
         
         displayValueFor = {
@@ -75,11 +75,11 @@ public final class BreedsPushRow : SelectorRow<PushSelectorCell<Breed>, BreedsTa
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let bvc = storyboard.instantiateViewController(withIdentifier: "BreedsTableView") as! BreedsTableViewController
             bvc.completionCallback = { vc in
-                vc.navigationController?.popViewController(animated: true)
+                _ = vc.navigationController?.popViewController(animated: true)
             }
             return bvc
             }, onDismiss: { vc in
-                vc.navigationController?.popViewController(animated: true)
+                _ = vc.navigationController?.popViewController(animated: true)
         })
         
         displayValueFor = {
@@ -114,7 +114,7 @@ final class  QuirksSelectorRow<T: Hashable>: GenericMultipleSelectorRow<String, 
             cvc.navTitle = self.navTitle
             return cvc
             }, onDismiss: { vc in
-                vc.navigationController?.popViewController(animated: true)
+                _ = vc.navigationController?.popViewController(animated: true)
         })
         
     }

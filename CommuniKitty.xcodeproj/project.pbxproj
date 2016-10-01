@@ -61,6 +61,92 @@
 		ED4F8EBC1D9353EF00BEB208 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB71D9353EF00BEB208 /* Nunito-Light.ttf */; };
 		ED4F8EBD1D9353EF00BEB208 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */; };
 		ED51266C1D9883AA00EB9027 /* gif in Resources */ = {isa = PBXBuildFile; fileRef = ED51266B1D9883AA00EB9027 /* gif */; };
+		EDBB49031D9F917600BF68CB /* Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49021D9F917500BF68CB /* Info-dev.plist */; };
+		EDBB49071D9F923C00BF68CB /* AnimalFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC78071D923AE7007CF613 /* AnimalFormViewController.swift */; };
+		EDBB49081D9F923C00BF68CB /* PFQueryTableAutoLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77D81D922246007CF613 /* PFQueryTableAutoLoadingViewController.swift */; };
+		EDBB49091D9F923C00BF68CB /* WRActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77E21D9224BA007CF613 /* WRActivity.swift */; };
+		EDBB490A1D9F923C00BF68CB /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512431D926EA800B95BB5 /* AboutViewController.swift */; };
+		EDBB490B1D9F923C00BF68CB /* WRHate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77F21D9224BB007CF613 /* WRHate.swift */; };
+		EDBB490C1D9F923C00BF68CB /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45122D1D92612600B95BB5 /* UserProfileViewController.swift */; };
+		EDBB490D1D9F923C00BF68CB /* QuirksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8EF1D9D191F005DEAE7 /* QuirksTableViewController.swift */; };
+		EDBB490E1D9F923C00BF68CB /* WRLove.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77F11D9224BB007CF613 /* WRLove.swift */; };
+		EDBB490F1D9F923C00BF68CB /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512371D926A7400B95BB5 /* DashboardViewController.swift */; };
+		EDBB49101D9F923C00BF68CB /* AnimalTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512211D9255CF00B95BB5 /* AnimalTimelineTableViewController.swift */; };
+		EDBB49111D9F923C00BF68CB /* WRPoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77EC1D9224BA007CF613 /* WRPoke.swift */; };
+		EDBB49121D9F923C00BF68CB /* WRCoat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77E61D9224BA007CF613 /* WRCoat.swift */; };
+		EDBB49131D9F923C00BF68CB /* WRAnimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77E31D9224BA007CF613 /* WRAnimal.swift */; };
+		EDBB49141D9F923C00BF68CB /* WRLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77EA1D9224BA007CF613 /* WRLike.swift */; };
+		EDBB49151D9F923C00BF68CB /* WRComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77E71D9224BA007CF613 /* WRComment.swift */; };
+		EDBB49161D9F923C00BF68CB /* QuirksContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8F11D9D1C5B005DEAE7 /* QuirksContainerViewController.swift */; };
+		EDBB49171D9F923C00BF68CB /* TimelineEntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45122F1D92631A00B95BB5 /* TimelineEntryDetailViewController.swift */; };
+		EDBB49181D9F923C00BF68CB /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512351D9267B000B95BB5 /* ExploreViewController.swift */; };
+		EDBB49191D9F923C00BF68CB /* GiFHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77DA1D922246007CF613 /* GiFHUD.swift */; };
+		EDBB491A1D9F923C00BF68CB /* CoatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36AF161D92DA8E007CC1F9 /* CoatsTableViewController.swift */; };
+		EDBB491B1D9F923C00BF68CB /* WRUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77F01D9224BB007CF613 /* WRUser.swift */; };
+		EDBB491C1D9F923C00BF68CB /* BreedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36AF141D928219007CC1F9 /* BreedDetailViewController.swift */; };
+		EDBB491D1D9F923C00BF68CB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A845D1D9750BE00EDED2A /* HomeViewController.swift */; };
+		EDBB491E1D9F923C00BF68CB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77D71D922246007CF613 /* Extensions.swift */; };
+		EDBB491F1D9F923C00BF68CB /* UserFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512311D92661700B95BB5 /* UserFormViewController.swift */; };
+		EDBB49201D9F923C00BF68CB /* DashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512381D926A7400B95BB5 /* DashboardTableViewController.swift */; };
+		EDBB49211D9F923C00BF68CB /* YelpAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77DB1D922246007CF613 /* YelpAPIClient.swift */; };
+		EDBB49221D9F923C00BF68CB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3483701D93A1CD00632D90 /* LoginViewController.swift */; };
+		EDBB49231D9F923C00BF68CB /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77D91D922246007CF613 /* CustomActivityIndicator.swift */; };
+		EDBB49241D9F923C00BF68CB /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512271D925CF100B95BB5 /* PhotosCollectionViewController.swift */; };
+		EDBB49251D9F923C00BF68CB /* TimelineEntryCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36AF101D927B28007CC1F9 /* TimelineEntryCommentsViewController.swift */; };
+		EDBB49261D9F923C00BF68CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77A61D91A703007CF613 /* AppDelegate.swift */; };
+		EDBB49271D9F923C00BF68CB /* LocationPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512461D926FBE00B95BB5 /* LocationPhotosViewController.swift */; };
+		EDBB49281D9F923C00BF68CB /* LocationAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512451D926FBE00B95BB5 /* LocationAboutViewController.swift */; };
+		EDBB49291D9F923C00BF68CB /* QuirksSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8ED1D9D136B005DEAE7 /* QuirksSelectorViewController.swift */; };
+		EDBB492A1D9F923C00BF68CB /* WRAnimalTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77E41D9224BA007CF613 /* WRAnimalTransfer.swift */; };
+		EDBB492B1D9F923C00BF68CB /* WRProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77ED1D9224BB007CF613 /* WRProduct.swift */; };
+		EDBB492C1D9F923C00BF68CB /* AnimalAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512231D92561200B95BB5 /* AnimalAboutViewController.swift */; };
+		EDBB492D1D9F923C00BF68CB /* BreedsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36AF121D928042007CC1F9 /* BreedsTableViewController.swift */; };
+		EDBB492E1D9F923C00BF68CB /* WRTrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77EF1D9224BB007CF613 /* WRTrait.swift */; };
+		EDBB492F1D9F923C00BF68CB /* PasswordFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45124A1D92751D00B95BB5 /* PasswordFormViewController.swift */; };
+		EDBB49301D9F923C00BF68CB /* AnimalTransferFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45123D1D926B5C00B95BB5 /* AnimalTransferFormViewController.swift */; };
+		EDBB49311D9F923C00BF68CB /* WRFollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77E91D9224BA007CF613 /* WRFollow.swift */; };
+		EDBB49321D9F923C00BF68CB /* TimelineEntryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512251D925BC500B95BB5 /* TimelineEntryFormViewController.swift */; };
+		EDBB49331D9F923C00BF68CB /* ForgotPasswordFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3483711D93A1CD00632D90 /* ForgotPasswordFormViewController.swift */; };
+		EDBB49341D9F923C00BF68CB /* PhotosCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512291D925D2500B95BB5 /* PhotosCollectionViewLayout.swift */; };
+		EDBB49351D9F923C00BF68CB /* WRFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77E81D9224BA007CF613 /* WRFlag.swift */; };
+		EDBB49361D9F923C00BF68CB /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45123F1D926D4600B95BB5 /* LocationDetailViewController.swift */; };
+		EDBB49371D9F923C00BF68CB /* DashboardWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512391D926A7400B95BB5 /* DashboardWidgets.swift */; };
+		EDBB49381D9F923C00BF68CB /* WRBreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77E51D9224BA007CF613 /* WRBreed.swift */; };
+		EDBB49391D9F923C00BF68CB /* WRTimelineEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77EE1D9224BB007CF613 /* WRTimelineEntry.swift */; };
+		EDBB493A1D9F923C00BF68CB /* WRLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77EB1D9224BA007CF613 /* WRLocation.swift */; };
+		EDBB493B1D9F923C00BF68CB /* PostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45122B1D925F1000B95BB5 /* PostsTableViewController.swift */; };
+		EDBB493C1D9F923C00BF68CB /* AnimalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45121F1D92530500B95BB5 /* AnimalDetailViewController.swift */; };
+		EDBB493D1D9F923C00BF68CB /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36AF0E1D9279D2007CC1F9 /* UserTableViewController.swift */; };
+		EDBB493E1D9F923C00BF68CB /* ActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512331D92661E00B95BB5 /* ActivityTableViewController.swift */; };
+		EDBB49401D9F923C00BF68CB /* Pods_CommuniKitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */; };
+		EDBB49431D9F923C00BF68CB /* meow3.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13E1D94AA7200B1B895 /* meow3.caf */; };
+		EDBB49441D9F923C00BF68CB /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB41D9353EF00BEB208 /* Nunito-Black.ttf */; };
+		EDBB49451D9F923C00BF68CB /* purr1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13F1D94AA7200B1B895 /* purr1.caf */; };
+		EDBB49461D9F923C00BF68CB /* lick1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13A1D94AA7200B1B895 /* lick1.caf */; };
+		EDBB49471D9F923C00BF68CB /* Learn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EAD1D9351BB00BEB208 /* Learn.storyboard */; };
+		EDBB49481D9F923C00BF68CB /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB61D9353EF00BEB208 /* Nunito-ExtraLight.ttf */; };
+		EDBB49491D9F923C00BF68CB /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */; };
+		EDBB494A1D9F923C00BF68CB /* lick2.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13B1D94AA7200B1B895 /* lick2.caf */; };
+		EDBB494B1D9F923C00BF68CB /* Locations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EAA1D9351BB00BEB208 /* Locations.storyboard */; };
+		EDBB494C1D9F923C00BF68CB /* Walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EAE1D9351BB00BEB208 /* Walkthrough.storyboard */; };
+		EDBB494D1D9F923C00BF68CB /* meow2.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13D1D94AA7200B1B895 /* meow2.caf */; };
+		EDBB494E1D9F923C00BF68CB /* CLImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED29CBB01D9A3E7D00E02EBF /* CLImageEditor.bundle */; };
+		EDBB494F1D9F923C00BF68CB /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EAB1D9351BB00BEB208 /* About.storyboard */; };
+		EDBB49501D9F923C00BF68CB /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB51D9353EF00BEB208 /* Nunito-Bold.ttf */; };
+		EDBB49511D9F923C00BF68CB /* chirp1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C1401D94AA7200B1B895 /* chirp1.caf */; };
+		EDBB49521D9F923C00BF68CB /* Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49021D9F917500BF68CB /* Info-dev.plist */; };
+		EDBB49531D9F923C00BF68CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AD1D91A703007CF613 /* Assets.xcassets */; };
+		EDBB49541D9F923C00BF68CB /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB71D9353EF00BEB208 /* Nunito-Light.ttf */; };
+		EDBB49551D9F923C00BF68CB /* gif in Resources */ = {isa = PBXBuildFile; fileRef = ED51266B1D9883AA00EB9027 /* gif */; };
+		EDBB49561D9F923C00BF68CB /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EAC1D9351BB00BEB208 /* Store.storyboard */; };
+		EDBB49571D9F923C00BF68CB /* meow1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13C1D94AA7200B1B895 /* meow1.caf */; };
+		EDBB49581D9F923C00BF68CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EA81D93503000BEB208 /* Main.storyboard */; };
+		EDBB49591D9F923C00BF68CB /* hiss1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C1391D94AA7200B1B895 /* hiss1.caf */; };
+		EDBB49611D9F945900BF68CB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77B21D91A703007CF613 /* Info.plist */; };
+		EDBB49621D9F945A00BF68CB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77B21D91A703007CF613 /* Info.plist */; };
+		EDBB49671D9FA18F00BF68CB /* LaunchScreenDev.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49631D9F95B200BF68CB /* LaunchScreenDev.storyboard */; };
+		EDBB49681D9FA65D00BF68CB /* LaunchScreenDev.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49631D9F95B200BF68CB /* LaunchScreenDev.storyboard */; };
+		EDBB49691D9FA67000BF68CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AF1D91A703007CF613 /* LaunchScreen.storyboard */; };
 		EDEC77A71D91A703007CF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77A61D91A703007CF613 /* AppDelegate.swift */; };
 		EDEC77AE1D91A703007CF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AD1D91A703007CF613 /* Assets.xcassets */; };
 		EDEC77B11D91A703007CF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AF1D91A703007CF613 /* LaunchScreen.storyboard */; };
@@ -165,6 +251,9 @@
 		ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Regular.ttf"; path = "CommuniKitty/Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommuniKitty.entitlements; sourceTree = "<group>"; };
 		ED51266B1D9883AA00EB9027 /* gif */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gif; sourceTree = "<group>"; };
+		EDBB49021D9F917500BF68CB /* Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-dev.plist"; sourceTree = "<group>"; };
+		EDBB495F1D9F923C00BF68CB /* CommuniKitty Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CommuniKitty Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDBB49641D9F95B200BF68CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenDev.storyboard; sourceTree = "<group>"; };
 		EDEC77A31D91A703007CF613 /* CommuniKitty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommuniKitty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEC77A61D91A703007CF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEC77AD1D91A703007CF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -204,6 +293,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EDBB493F1D9F923C00BF68CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDBB49401D9F923C00BF68CB /* Pods_CommuniKitty.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDEC77A01D91A703007CF613 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -265,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				EDEC77AF1D91A703007CF613 /* LaunchScreen.storyboard */,
+				EDBB49631D9F95B200BF68CB /* LaunchScreenDev.storyboard */,
 				ED4F8EAA1D9351BB00BEB208 /* Locations.storyboard */,
 				ED4F8EAB1D9351BB00BEB208 /* About.storyboard */,
 				ED4F8EAC1D9351BB00BEB208 /* Store.storyboard */,
@@ -338,6 +436,7 @@
 				EDEC77A31D91A703007CF613 /* CommuniKitty.app */,
 				EDEC77B71D91A704007CF613 /* CommuniKittyTests.xctest */,
 				EDEC77C21D91A704007CF613 /* CommuniKittyUITests.xctest */,
+				EDBB495F1D9F923C00BF68CB /* CommuniKitty Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -349,6 +448,7 @@
 				ED4F8EA81D93503000BEB208 /* Main.storyboard */,
 				EDEC77AD1D91A703007CF613 /* Assets.xcassets */,
 				EDEC77B21D91A703007CF613 /* Info.plist */,
+				EDBB49021D9F917500BF68CB /* Info-dev.plist */,
 				EDEC77D41D9221C7007CF613 /* CommuniKitty-Bridging-Header.h */,
 				ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */,
 				ED45124C1D92752C00B95BB5 /* Account */,
@@ -451,6 +551,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EDBB49041D9F923C00BF68CB /* CommuniKitty Dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDBB495C1D9F923C00BF68CB /* Build configuration list for PBXNativeTarget "CommuniKitty Dev" */;
+			buildPhases = (
+				EDBB49051D9F923C00BF68CB /* [CP] Check Pods Manifest.lock */,
+				EDBB49061D9F923C00BF68CB /* Sources */,
+				EDBB493F1D9F923C00BF68CB /* Frameworks */,
+				EDBB49411D9F923C00BF68CB /* Resources */,
+				EDBB495A1D9F923C00BF68CB /* [CP] Embed Pods Frameworks */,
+				EDBB495B1D9F923C00BF68CB /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CommuniKitty Dev";
+			productName = CommuniKitty;
+			productReference = EDBB495F1D9F923C00BF68CB /* CommuniKitty Dev.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EDEC77A21D91A703007CF613 /* CommuniKitty */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDEC77CB1D91A704007CF613 /* Build configuration list for PBXNativeTarget "CommuniKitty" */;
@@ -517,12 +637,16 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "White Rabbit Apps";
 				TargetAttributes = {
+					EDBB49041D9F923C00BF68CB = {
+						DevelopmentTeam = AZC38JWQNP;
+					};
 					EDEC77A21D91A703007CF613 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = AZC38JWQNP;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -557,6 +681,7 @@
 			projectRoot = "";
 			targets = (
 				EDEC77A21D91A703007CF613 /* CommuniKitty */,
+				EDBB49041D9F923C00BF68CB /* CommuniKitty Dev */,
 				EDEC77B61D91A704007CF613 /* CommuniKittyTests */,
 				EDEC77C11D91A704007CF613 /* CommuniKittyUITests */,
 			);
@@ -564,6 +689,39 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EDBB49411D9F923C00BF68CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDBB49431D9F923C00BF68CB /* meow3.caf in Resources */,
+				EDBB49441D9F923C00BF68CB /* Nunito-Black.ttf in Resources */,
+				EDBB49451D9F923C00BF68CB /* purr1.caf in Resources */,
+				EDBB49461D9F923C00BF68CB /* lick1.caf in Resources */,
+				EDBB49471D9F923C00BF68CB /* Learn.storyboard in Resources */,
+				EDBB49481D9F923C00BF68CB /* Nunito-ExtraLight.ttf in Resources */,
+				EDBB49491D9F923C00BF68CB /* Nunito-Regular.ttf in Resources */,
+				EDBB49691D9FA67000BF68CB /* LaunchScreen.storyboard in Resources */,
+				EDBB494A1D9F923C00BF68CB /* lick2.caf in Resources */,
+				EDBB494B1D9F923C00BF68CB /* Locations.storyboard in Resources */,
+				EDBB494C1D9F923C00BF68CB /* Walkthrough.storyboard in Resources */,
+				EDBB494D1D9F923C00BF68CB /* meow2.caf in Resources */,
+				EDBB494E1D9F923C00BF68CB /* CLImageEditor.bundle in Resources */,
+				EDBB494F1D9F923C00BF68CB /* About.storyboard in Resources */,
+				EDBB49501D9F923C00BF68CB /* Nunito-Bold.ttf in Resources */,
+				EDBB49511D9F923C00BF68CB /* chirp1.caf in Resources */,
+				EDBB49521D9F923C00BF68CB /* Info-dev.plist in Resources */,
+				EDBB49531D9F923C00BF68CB /* Assets.xcassets in Resources */,
+				EDBB49541D9F923C00BF68CB /* Nunito-Light.ttf in Resources */,
+				EDBB49551D9F923C00BF68CB /* gif in Resources */,
+				EDBB49561D9F923C00BF68CB /* Store.storyboard in Resources */,
+				EDBB49671D9FA18F00BF68CB /* LaunchScreenDev.storyboard in Resources */,
+				EDBB49571D9F923C00BF68CB /* meow1.caf in Resources */,
+				EDBB49581D9F923C00BF68CB /* Main.storyboard in Resources */,
+				EDBB49621D9F945A00BF68CB /* Info.plist in Resources */,
+				EDBB49591D9F923C00BF68CB /* hiss1.caf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDEC77A11D91A703007CF613 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -584,12 +742,15 @@
 				ED4F8EB01D9351BB00BEB208 /* About.storyboard in Resources */,
 				ED4F8EBA1D9353EF00BEB208 /* Nunito-Bold.ttf in Resources */,
 				ED15C1481D94AA7200B1B895 /* chirp1.caf in Resources */,
+				EDBB49031D9F917600BF68CB /* Info-dev.plist in Resources */,
 				EDEC77AE1D91A703007CF613 /* Assets.xcassets in Resources */,
 				ED4F8EBC1D9353EF00BEB208 /* Nunito-Light.ttf in Resources */,
 				ED51266C1D9883AA00EB9027 /* gif in Resources */,
 				ED4F8EB11D9351BB00BEB208 /* Store.storyboard in Resources */,
+				EDBB49681D9FA65D00BF68CB /* LaunchScreenDev.storyboard in Resources */,
 				ED15C1441D94AA7200B1B895 /* meow1.caf in Resources */,
 				ED4F8EA91D93503000BEB208 /* Main.storyboard in Resources */,
+				EDBB49611D9F945900BF68CB /* Info.plist in Resources */,
 				ED15C1411D94AA7200B1B895 /* hiss1.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -656,9 +817,117 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EDBB49051D9F923C00BF68CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EDBB495A1D9F923C00BF68CB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDBB495B1D9F923C00BF68CB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EDBB49061D9F923C00BF68CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDBB49071D9F923C00BF68CB /* AnimalFormViewController.swift in Sources */,
+				EDBB49081D9F923C00BF68CB /* PFQueryTableAutoLoadingViewController.swift in Sources */,
+				EDBB49091D9F923C00BF68CB /* WRActivity.swift in Sources */,
+				EDBB490A1D9F923C00BF68CB /* AboutViewController.swift in Sources */,
+				EDBB490B1D9F923C00BF68CB /* WRHate.swift in Sources */,
+				EDBB490C1D9F923C00BF68CB /* UserProfileViewController.swift in Sources */,
+				EDBB490D1D9F923C00BF68CB /* QuirksTableViewController.swift in Sources */,
+				EDBB490E1D9F923C00BF68CB /* WRLove.swift in Sources */,
+				EDBB490F1D9F923C00BF68CB /* DashboardViewController.swift in Sources */,
+				EDBB49101D9F923C00BF68CB /* AnimalTimelineTableViewController.swift in Sources */,
+				EDBB49111D9F923C00BF68CB /* WRPoke.swift in Sources */,
+				EDBB49121D9F923C00BF68CB /* WRCoat.swift in Sources */,
+				EDBB49131D9F923C00BF68CB /* WRAnimal.swift in Sources */,
+				EDBB49141D9F923C00BF68CB /* WRLike.swift in Sources */,
+				EDBB49151D9F923C00BF68CB /* WRComment.swift in Sources */,
+				EDBB49161D9F923C00BF68CB /* QuirksContainerViewController.swift in Sources */,
+				EDBB49171D9F923C00BF68CB /* TimelineEntryDetailViewController.swift in Sources */,
+				EDBB49181D9F923C00BF68CB /* ExploreViewController.swift in Sources */,
+				EDBB49191D9F923C00BF68CB /* GiFHUD.swift in Sources */,
+				EDBB491A1D9F923C00BF68CB /* CoatsTableViewController.swift in Sources */,
+				EDBB491B1D9F923C00BF68CB /* WRUser.swift in Sources */,
+				EDBB491C1D9F923C00BF68CB /* BreedDetailViewController.swift in Sources */,
+				EDBB491D1D9F923C00BF68CB /* HomeViewController.swift in Sources */,
+				EDBB491E1D9F923C00BF68CB /* Extensions.swift in Sources */,
+				EDBB491F1D9F923C00BF68CB /* UserFormViewController.swift in Sources */,
+				EDBB49201D9F923C00BF68CB /* DashboardTableViewController.swift in Sources */,
+				EDBB49211D9F923C00BF68CB /* YelpAPIClient.swift in Sources */,
+				EDBB49221D9F923C00BF68CB /* LoginViewController.swift in Sources */,
+				EDBB49231D9F923C00BF68CB /* CustomActivityIndicator.swift in Sources */,
+				EDBB49241D9F923C00BF68CB /* PhotosCollectionViewController.swift in Sources */,
+				EDBB49251D9F923C00BF68CB /* TimelineEntryCommentsViewController.swift in Sources */,
+				EDBB49261D9F923C00BF68CB /* AppDelegate.swift in Sources */,
+				EDBB49271D9F923C00BF68CB /* LocationPhotosViewController.swift in Sources */,
+				EDBB49281D9F923C00BF68CB /* LocationAboutViewController.swift in Sources */,
+				EDBB49291D9F923C00BF68CB /* QuirksSelectorViewController.swift in Sources */,
+				EDBB492A1D9F923C00BF68CB /* WRAnimalTransfer.swift in Sources */,
+				EDBB492B1D9F923C00BF68CB /* WRProduct.swift in Sources */,
+				EDBB492C1D9F923C00BF68CB /* AnimalAboutViewController.swift in Sources */,
+				EDBB492D1D9F923C00BF68CB /* BreedsTableViewController.swift in Sources */,
+				EDBB492E1D9F923C00BF68CB /* WRTrait.swift in Sources */,
+				EDBB492F1D9F923C00BF68CB /* PasswordFormViewController.swift in Sources */,
+				EDBB49301D9F923C00BF68CB /* AnimalTransferFormViewController.swift in Sources */,
+				EDBB49311D9F923C00BF68CB /* WRFollow.swift in Sources */,
+				EDBB49321D9F923C00BF68CB /* TimelineEntryFormViewController.swift in Sources */,
+				EDBB49331D9F923C00BF68CB /* ForgotPasswordFormViewController.swift in Sources */,
+				EDBB49341D9F923C00BF68CB /* PhotosCollectionViewLayout.swift in Sources */,
+				EDBB49351D9F923C00BF68CB /* WRFlag.swift in Sources */,
+				EDBB49361D9F923C00BF68CB /* LocationDetailViewController.swift in Sources */,
+				EDBB49371D9F923C00BF68CB /* DashboardWidgets.swift in Sources */,
+				EDBB49381D9F923C00BF68CB /* WRBreed.swift in Sources */,
+				EDBB49391D9F923C00BF68CB /* WRTimelineEntry.swift in Sources */,
+				EDBB493A1D9F923C00BF68CB /* WRLocation.swift in Sources */,
+				EDBB493B1D9F923C00BF68CB /* PostsTableViewController.swift in Sources */,
+				EDBB493C1D9F923C00BF68CB /* AnimalDetailViewController.swift in Sources */,
+				EDBB493D1D9F923C00BF68CB /* UserTableViewController.swift in Sources */,
+				EDBB493E1D9F923C00BF68CB /* ActivityTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDEC779F1D91A703007CF613 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -754,6 +1023,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		EDBB49631D9F95B200BF68CB /* LaunchScreenDev.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDBB49641D9F95B200BF68CB /* Base */,
+			);
+			name = LaunchScreenDev.storyboard;
+			sourceTree = "<group>";
+		};
 		EDEC77AF1D91A703007CF613 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -765,6 +1042,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EDBB495D1D9F923C00BF68CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA56A0CBAAEAB30F17C645E4 /* Pods-CommuniKitty.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
+				CODE_SIGN_ENTITLEMENTS = CommuniKitty/CommuniKitty.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT = YES;
+				DEVELOPMENT_TEAM = AZC38JWQNP;
+				INFOPLIST_FILE = "CommuniKitty/Info-dev.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-D\" \"DEVELOPMENT\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.whiterabbitapps.communikitty-dev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		EDBB495E1D9F923C00BF68CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F0F692362EFD302D34EFB88 /* Pods-CommuniKitty.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
+				CODE_SIGN_ENTITLEMENTS = CommuniKitty/CommuniKitty.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT = YES;
+				DEVELOPMENT_TEAM = AZC38JWQNP;
+				INFOPLIST_FILE = "CommuniKitty/Info-dev.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-D\" \"DEVELOPMENT\"";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.whiterabbitapps.communikitty-dev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		EDEC77C91D91A704007CF613 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -865,11 +1188,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CommuniKitty/CommuniKitty.entitlements;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = AZC38JWQNP;
 				INFOPLIST_FILE = CommuniKitty/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -882,11 +1209,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CommuniKitty/CommuniKitty.entitlements;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = AZC38JWQNP;
 				INFOPLIST_FILE = CommuniKitty/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -953,6 +1284,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EDBB495C1D9F923C00BF68CB /* Build configuration list for PBXNativeTarget "CommuniKitty Dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDBB495D1D9F923C00BF68CB /* Debug */,
+				EDBB495E1D9F923C00BF68CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EDEC779E1D91A703007CF613 /* Build configuration list for PBXProject "CommuniKitty" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -204,7 +204,7 @@ class UserFormViewController : FormViewController {
     
     func saveUserDataFromFacebook() {
         let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email,name,first_name,last_name,gender"])
-        fbRequest?.start(completionHandler: { (FBSDKGraphRequestConnection, result, error) -> Void in
+        _ = fbRequest?.start(completionHandler: { (FBSDKGraphRequestConnection, result, error) -> Void in
             
             if (error == nil && result != nil) {
                 let facebookData = result as! NSDictionary //FACEBOOK DATA IN DICTIONARY
