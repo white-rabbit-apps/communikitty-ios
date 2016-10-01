@@ -579,9 +579,12 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Pagin
             }
             
             if let profilePhotoFile = animal.profilePhoto {
-                self.profileThumb.kf_setImage(with: URL(string: profilePhotoFile.url!)!, for: UIControlState())
-                self.profileThumb.frame = CGRect(x: 0, y: 0, width: 76, height: 76)
-                self.profileThumb.imageView?.makeCircular()
+                
+                self.profileThumb.kf_setImage(with: URL(string: profilePhotoFile.url!)!, for: UIControlState(), placeholder: UIImage(named: "animal_profile_photo_empty"), options: nil, progressBlock: nil, completionHandler: { (image: Image?, error: NSError?, cache: CacheType, url: URL?) in
+                    let frame = self.profileThumb.frame
+                    self.profileThumb.frame = CGRect(x: frame.minX, y: frame.minY, width: 76, height: 76)
+                    self.profileThumb.imageView?.makeCircular()
+                })
             } else {
                 self.profileThumb.imageView?.image = UIImage(named: "animal_profile_photo_empty")!
             }

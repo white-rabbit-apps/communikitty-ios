@@ -351,7 +351,8 @@ class AnimalThumbnailCell: UICollectionViewCell, DashboardCollectionViewCell {
             if let profilePhoto = animal.profilePhoto {
 //                self.thumbnailImage!.kf_showIndicatorWhenLoading = true
                 self.thumbnailImage!.kf_setImage(with: URL(string: profilePhoto.url!), placeholder: placeholderImage, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
-                    self.thumbnailImage!.frame = CGRect(x: 0, y: 0, width: 90, height: 90)
+                    let frame = self.thumbnailImage!.frame
+                    self.thumbnailImage!.frame = CGRect(x: frame.minX, y: frame.minY, width: 90, height: 90)
                     self.thumbnailImage!.makeCircular()
                     self.thumbnailImage!.isHidden = false
                 })
