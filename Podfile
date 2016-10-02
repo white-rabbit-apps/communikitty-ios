@@ -30,7 +30,7 @@ def shared_pods
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'Hoko'
-    pod 'Instabug'
+    pod 'Instabug', :git => 'https://github.com/Instabug/Instabug-iOS.git', :tag => '5.3.2'
     pod 'Kingfisher', :git => 'https://github.com/onevcat/Kingfisher.git', :tag => '3.0.1'
     pod 'MMMarkdown'
     pod 'OAuthSwift', :git => 'https://github.com/skedgo/OAuthSwift/', :branch => 'swift3.0'
@@ -40,6 +40,10 @@ def shared_pods
 end
 
 target 'CommuniKitty' do
+    shared_pods
+end
+
+target 'CommuniKitty Dev' do
     shared_pods
 end
 

@@ -722,7 +722,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Pagin
             
             self.timelineTableController?.photosCollectionViewController = self.photosCollectionViewController
             
-            let viewControllers = [self.aboutViewController!, self.timelineTableController!, self.photosCollectionViewController!] as [Any]
+            let viewControllers = [self.timelineTableController!, self.aboutViewController!, self.photosCollectionViewController!] as [Any]
             
             //            if(currentUserIsOwner || currentUserIsShelterCaregiver) {
             //                let medicalViewController = self.storyboard?.instantiateViewControllerWithIdentifier("Medical") as! MedicalViewController
@@ -747,7 +747,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Pagin
             photosTab.imageFrame = CGRect(x: 20, y: 12, width: 25, height: 25)
             photosTab.labelFrame = CGRect(x: 55, y: 0, width: 100, height: 50)
             
-            let menuOptions = MenuOptions(itemsOptions: [pageAbout, pageTimeline, photosTab], displayMode: .segmentedControl)
+            let menuOptions = MenuOptions(itemsOptions: [pageTimeline, pageAbout, photosTab], displayMode: .segmentedControl)
             
             let options = PagingMenuOptions(pagingControllers: viewControllers as! [UIViewController], menuOptions: menuOptions)
             let profileTabs = segue.destination as! PagingMenuController

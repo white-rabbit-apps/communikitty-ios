@@ -188,7 +188,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
     }
     
     func loadDashboard() {
-        var widgets: [DashboardWidget] = [FeaturedPhotosDashboardWidget(), FollowingPhotosDashboardWidget(), MyAnimalsDashboardWidget()]
+        var widgets: [DashboardWidget] = [FeaturedPhotosDashboardWidget(), FollowingPhotosDashboardWidget(), HashtagPhotosDashboardWidget(hashtag: "naptime"), MyAnimalsDashboardWidget()]
         
         if AppDelegate.getAppDelegate().hasFosters {
             let fostersWidget = UserAnimalsDashboardWidget()

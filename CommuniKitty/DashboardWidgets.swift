@@ -198,6 +198,46 @@ class FeaturedAnimalsDashboardWidget : DashboardWidget {
     }
 }
 
+class HashtagPhotosDashboardWidget : DashboardWidget {
+    var hashtag: String?
+    
+    init(hashtag: String) {
+        super.init(style: .default, reuseIdentifier: "hashtag")
+        self.hashtag = hashtag
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func loadCellData(_ cell: DashboardWidget) {
+        self.parentCell = cell
+        
+        if let hashtag = self.hashtag {
+            cell.titleLabel?.text = "#\(hashtag)"
+        }
+        cell.titleLabel?.backgroundColor = UIColor.lightGreenColor()
+        
+        cell.collectionType = .Photos
+        cell.rowContent = .Hashtag
+        
+        cell.titleButton?.isHidden = true
+        
+        cell.sourceArray = self.sourceArray
+    }
+    
+    override func getQuery() -> PFQuery<PFObject> {
+        let query = WRTimelineEntry.query()!
+        query.order(byDescending: "createdAt")
+        query.whereKey("type", equalTo: "image")
+        query.whereKey("text", contains: "#\(self.hashtag!)")
+        
+        query.includeKey("animal")
+        
+        return query
+    }
+}
+
 class PopularPhotosDashboardWidget : DashboardWidget {
     
     override func loadCellData(_ cell: DashboardWidget) {

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		56EF53AAFC1EB62A008239D4 /* Pods_CommuniKitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */; };
+		88780B01B47EE7554A1E63D3 /* Pods_CommuniKitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */; };
+		9F53780F40047EE7C355EA91 /* Pods_CommuniKitty_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E810CF4F8607A3558ABC3BE /* Pods_CommuniKitty_Dev.framework */; };
 		B810F8EE1D9D136B005DEAE7 /* QuirksSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8ED1D9D136B005DEAE7 /* QuirksSelectorViewController.swift */; };
 		B810F8F01D9D191F005DEAE7 /* QuirksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8EF1D9D191F005DEAE7 /* QuirksTableViewController.swift */; };
 		B810F8F21D9D1C5B005DEAE7 /* QuirksContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8F11D9D1C5B005DEAE7 /* QuirksContainerViewController.swift */; };
@@ -118,7 +120,6 @@
 		EDBB493C1D9F923C00BF68CB /* AnimalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45121F1D92530500B95BB5 /* AnimalDetailViewController.swift */; };
 		EDBB493D1D9F923C00BF68CB /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36AF0E1D9279D2007CC1F9 /* UserTableViewController.swift */; };
 		EDBB493E1D9F923C00BF68CB /* ActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4512331D92661E00B95BB5 /* ActivityTableViewController.swift */; };
-		EDBB49401D9F923C00BF68CB /* Pods_CommuniKitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */; };
 		EDBB49431D9F923C00BF68CB /* meow3.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13E1D94AA7200B1B895 /* meow3.caf */; };
 		EDBB49441D9F923C00BF68CB /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB41D9353EF00BEB208 /* Nunito-Black.ttf */; };
 		EDBB49451D9F923C00BF68CB /* purr1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13F1D94AA7200B1B895 /* purr1.caf */; };
@@ -134,7 +135,6 @@
 		EDBB494F1D9F923C00BF68CB /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EAB1D9351BB00BEB208 /* About.storyboard */; };
 		EDBB49501D9F923C00BF68CB /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB51D9353EF00BEB208 /* Nunito-Bold.ttf */; };
 		EDBB49511D9F923C00BF68CB /* chirp1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C1401D94AA7200B1B895 /* chirp1.caf */; };
-		EDBB49521D9F923C00BF68CB /* Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49021D9F917500BF68CB /* Info-dev.plist */; };
 		EDBB49531D9F923C00BF68CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AD1D91A703007CF613 /* Assets.xcassets */; };
 		EDBB49541D9F923C00BF68CB /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB71D9353EF00BEB208 /* Nunito-Light.ttf */; };
 		EDBB49551D9F923C00BF68CB /* gif in Resources */ = {isa = PBXBuildFile; fileRef = ED51266B1D9883AA00EB9027 /* gif */; };
@@ -143,7 +143,6 @@
 		EDBB49581D9F923C00BF68CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EA81D93503000BEB208 /* Main.storyboard */; };
 		EDBB49591D9F923C00BF68CB /* hiss1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C1391D94AA7200B1B895 /* hiss1.caf */; };
 		EDBB49611D9F945900BF68CB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77B21D91A703007CF613 /* Info.plist */; };
-		EDBB49621D9F945A00BF68CB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77B21D91A703007CF613 /* Info.plist */; };
 		EDBB49671D9FA18F00BF68CB /* LaunchScreenDev.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49631D9F95B200BF68CB /* LaunchScreenDev.storyboard */; };
 		EDBB49681D9FA65D00BF68CB /* LaunchScreenDev.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49631D9F95B200BF68CB /* LaunchScreenDev.storyboard */; };
 		EDBB49691D9FA67000BF68CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AF1D91A703007CF613 /* LaunchScreen.storyboard */; };
@@ -195,11 +194,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F0F692362EFD302D34EFB88 /* Pods-CommuniKitty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommuniKitty.release.xcconfig"; path = "Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty.release.xcconfig"; sourceTree = "<group>"; };
+		2E810CF4F8607A3558ABC3BE /* Pods_CommuniKitty_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CommuniKitty_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		310024AB01E230C7918E3E38 /* Pods-CommuniKitty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommuniKitty.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty.debug.xcconfig"; sourceTree = "<group>"; };
+		3474979882F65A0B4B21C302 /* Pods-CommuniKitty Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommuniKitty Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev.release.xcconfig"; sourceTree = "<group>"; };
+		47EF696EF1977CCE9802F269 /* Pods-CommuniKitty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommuniKitty.release.xcconfig"; path = "Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty.release.xcconfig"; sourceTree = "<group>"; };
 		929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CommuniKitty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B810F8ED1D9D136B005DEAE7 /* QuirksSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuirksSelectorViewController.swift; sourceTree = "<group>"; };
 		B810F8EF1D9D191F005DEAE7 /* QuirksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuirksTableViewController.swift; sourceTree = "<group>"; };
 		B810F8F11D9D1C5B005DEAE7 /* QuirksContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuirksContainerViewController.swift; sourceTree = "<group>"; };
+		D97F534D6C8BC7F1606DCF39 /* Pods-CommuniKitty Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommuniKitty Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		ED15C1391D94AA7200B1B895 /* hiss1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hiss1.caf; sourceTree = "<group>"; };
 		ED15C13A1D94AA7200B1B895 /* lick1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lick1.caf; sourceTree = "<group>"; };
 		ED15C13B1D94AA7200B1B895 /* lick2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lick2.caf; sourceTree = "<group>"; };
@@ -289,7 +292,6 @@
 		EDEC77F11D9224BB007CF613 /* WRLove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRLove.swift; sourceTree = "<group>"; };
 		EDEC77F21D9224BB007CF613 /* WRHate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRHate.swift; sourceTree = "<group>"; };
 		EDEC78071D923AE7007CF613 /* AnimalFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalFormViewController.swift; sourceTree = "<group>"; };
-		FA56A0CBAAEAB30F17C645E4 /* Pods-CommuniKitty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommuniKitty.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,7 +299,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDBB49401D9F923C00BF68CB /* Pods_CommuniKitty.framework in Frameworks */,
+				9F53780F40047EE7C355EA91 /* Pods_CommuniKitty_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56EF53AAFC1EB62A008239D4 /* Pods_CommuniKitty.framework in Frameworks */,
+				88780B01B47EE7554A1E63D3 /* Pods_CommuniKitty.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,8 +332,10 @@
 		54DDE3583CBEEAFF80F1A876 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FA56A0CBAAEAB30F17C645E4 /* Pods-CommuniKitty.debug.xcconfig */,
-				1F0F692362EFD302D34EFB88 /* Pods-CommuniKitty.release.xcconfig */,
+				310024AB01E230C7918E3E38 /* Pods-CommuniKitty.debug.xcconfig */,
+				47EF696EF1977CCE9802F269 /* Pods-CommuniKitty.release.xcconfig */,
+				D97F534D6C8BC7F1606DCF39 /* Pods-CommuniKitty Dev.debug.xcconfig */,
+				3474979882F65A0B4B21C302 /* Pods-CommuniKitty Dev.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -339,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */,
+				2E810CF4F8607A3558ABC3BE /* Pods_CommuniKitty_Dev.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -709,7 +715,6 @@
 				EDBB494F1D9F923C00BF68CB /* About.storyboard in Resources */,
 				EDBB49501D9F923C00BF68CB /* Nunito-Bold.ttf in Resources */,
 				EDBB49511D9F923C00BF68CB /* chirp1.caf in Resources */,
-				EDBB49521D9F923C00BF68CB /* Info-dev.plist in Resources */,
 				EDBB49531D9F923C00BF68CB /* Assets.xcassets in Resources */,
 				EDBB49541D9F923C00BF68CB /* Nunito-Light.ttf in Resources */,
 				EDBB49551D9F923C00BF68CB /* gif in Resources */,
@@ -717,7 +722,6 @@
 				EDBB49671D9FA18F00BF68CB /* LaunchScreenDev.storyboard in Resources */,
 				EDBB49571D9F923C00BF68CB /* meow1.caf in Resources */,
 				EDBB49581D9F923C00BF68CB /* Main.storyboard in Resources */,
-				EDBB49621D9F945A00BF68CB /* Info.plist in Resources */,
 				EDBB49591D9F923C00BF68CB /* hiss1.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -844,7 +848,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EDBB495B1D9F923C00BF68CB /* [CP] Copy Pods Resources */ = {
@@ -859,7 +863,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1044,7 +1048,7 @@
 /* Begin XCBuildConfiguration section */
 		EDBB495D1D9F923C00BF68CB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA56A0CBAAEAB30F17C645E4 /* Pods-CommuniKitty.debug.xcconfig */;
+			baseConfigurationReference = D97F534D6C8BC7F1606DCF39 /* Pods-CommuniKitty Dev.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
@@ -1067,7 +1071,7 @@
 		};
 		EDBB495E1D9F923C00BF68CB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F0F692362EFD302D34EFB88 /* Pods-CommuniKitty.release.xcconfig */;
+			baseConfigurationReference = 3474979882F65A0B4B21C302 /* Pods-CommuniKitty Dev.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
@@ -1183,7 +1187,7 @@
 		};
 		EDEC77CC1D91A704007CF613 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA56A0CBAAEAB30F17C645E4 /* Pods-CommuniKitty.debug.xcconfig */;
+			baseConfigurationReference = 310024AB01E230C7918E3E38 /* Pods-CommuniKitty.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1204,7 +1208,7 @@
 		};
 		EDEC77CD1D91A704007CF613 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F0F692362EFD302D34EFB88 /* Pods-CommuniKitty.release.xcconfig */;
+			baseConfigurationReference = 47EF696EF1977CCE9802F269 /* Pods-CommuniKitty.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

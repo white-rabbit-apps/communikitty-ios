@@ -42,7 +42,7 @@ PODS:
     - FBSDKCoreKit
   - Fusuma (0.5.3)
   - Hoko (2.3.0)
-  - Instabug (5.3.1)
+  - Instabug (5.3.2)
   - Kingfisher (3.0.1)
   - MMMarkdown (0.5.5)
   - OAuthSwift (0.5.2)
@@ -81,7 +81,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - Fusuma (from `https://github.com/Ferrick90/Fusuma.git`, branch `swift3`)
   - Hoko
-  - Instabug
+  - Instabug (from `https://github.com/Instabug/Instabug-iOS.git`, tag `5.3.2`)
   - Kingfisher (from `https://github.com/onevcat/Kingfisher.git`, tag `3.0.1`)
   - MMMarkdown
   - OAuthSwift (from `https://github.com/skedgo/OAuthSwift/`, branch `swift3.0`)
@@ -109,6 +109,9 @@ EXTERNAL SOURCES:
   Fusuma:
     :branch: swift3
     :git: https://github.com/Ferrick90/Fusuma.git
+  Instabug:
+    :git: https://github.com/Instabug/Instabug-iOS.git
+    :tag: 5.3.2
   Kingfisher:
     :git: https://github.com/onevcat/Kingfisher.git
     :tag: 3.0.1
@@ -141,6 +144,9 @@ CHECKOUT OPTIONS:
   Fusuma:
     :commit: 503865a12b19b942e395845c91d4dbf1ebc7db54
     :git: https://github.com/Ferrick90/Fusuma.git
+  Instabug:
+    :git: https://github.com/Instabug/Instabug-iOS.git
+    :tag: 5.3.2
   Kingfisher:
     :git: https://github.com/onevcat/Kingfisher.git
     :tag: 3.0.1
@@ -172,7 +178,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
   Fusuma: 02ffb3a9943792519f2c0972263b750acb550a49
   Hoko: b015751f406d455da0c8acb9404d7c617cb66877
-  Instabug: b77626dcf1baf66534521a400d0680a2e914b241
+  Instabug: 035bf24475ffac1bcb81f8c542774487bc72f528
   Kingfisher: d5a491b45ea453d90a31bd2c0831d5243e73a73f
   MMMarkdown: 1af97166ce0f6d6e0cb05695665492195d27c3f1
   OAuthSwift: 1ef042d4362e755e24a78f158d817245641a5d24
@@ -184,6 +190,6 @@ SPEC CHECKSUMS:
   SKPhotoBrowser: 48717c1e2602e6e99a5b1df9d6b43889aaa70e9f
   SlideMenuControllerSwift: 9c0a84f9a3fba51681debd7be77617094562ebcc
 
-PODFILE CHECKSUM: 8690e6c0ad1f0a1de82d5d1eb76b26aee81a04e0
+PODFILE CHECKSUM: ffe1397dfb59f08ccb6be689b46fa23c2469fb18
 
 COCOAPODS: 1.0.1
