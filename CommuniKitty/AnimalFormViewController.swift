@@ -597,9 +597,9 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 section.color   = UIColor.facebookThemeColor()
             }
                 
-            <<< ButtonRow("transfer") { $0.title = "Transfer Profile" }.onCellSelection { cell, row in
-                self.showTransferAnimalForm()
-            }
+//            <<< ButtonRow("transfer") { $0.title = "Transfer Profile" }.onCellSelection { cell, row in
+//                self.showTransferAnimalForm()
+//            }
                 
             <<< ButtonRow("remove") { $0.title = "Remove Profile" }.onCellSelection { cell, row in
                 self.removeAnimal()

@@ -313,6 +313,7 @@ class PhotoThumbnailCell: UICollectionViewCell, DashboardCollectionViewCell {
     func loadData(_ object: PFObject) {
         if let entry = object as? WRTimelineEntry {
             
+            self.thumbnailImage!.kf_indicatorType = .activity
             if let imageFile = entry.image {
                 self.thumbnailImage!.kf_setImage(with: URL(string: imageFile.url!))
             } else if let imageUrl = entry.imageUrl {
@@ -349,7 +350,7 @@ class AnimalThumbnailCell: UICollectionViewCell, DashboardCollectionViewCell {
             
             self.thumbnailImage?.image = nil
             if let profilePhoto = animal.profilePhoto {
-//                self.thumbnailImage!.kf_showIndicatorWhenLoading = true
+                self.thumbnailImage!.kf_indicatorType = .activity
                 self.thumbnailImage!.kf_setImage(with: URL(string: profilePhoto.url!), placeholder: placeholderImage, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
                     let frame = self.thumbnailImage!.frame
                     self.thumbnailImage!.frame = CGRect(x: frame.minX, y: frame.minY, width: 90, height: 90)

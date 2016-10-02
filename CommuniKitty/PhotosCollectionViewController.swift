@@ -184,14 +184,13 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
         }
 
     }
+    
     func tapOnCameraButton(){
          self.animalTimelineController?.takeFusumaPhoto()
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize{
-        return CGSize(width: 50,height: 50)
+        return CGSize(width: 100,height: 100)
     }
     
     /**
@@ -214,6 +213,8 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
     
         // Configure the cell
         let entry = self.imageEntries[(indexPath as IndexPath).row]
+        
+        cell.imageViewContent.kf_indicatorType = .activity
         if let imageFile = entry.image {
             cell.imageViewContent.kf_setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             })
