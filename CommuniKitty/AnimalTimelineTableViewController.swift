@@ -178,7 +178,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
             
             let index = self.imageIndexById![object.objectId!]
             
-            self.showImagesBrowser(entries: imageEntries!, startIndex: index, animatedFromView: cell!.timelineImageView, displayUser: false)
+            self.showImagesBrowser(entries: imageEntries!, startIndex: index, animatedFromView: cell!.timelineImageView, displayUser: false, vc: self)
         }
     }
 //
@@ -365,79 +365,10 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
                 subview.removeFromSuperview()
                 }
             }
-        let customView = UIView(frame:CGRect(x:0, y:0, width:  self.view.frame.size.width, height:   self.view.frame.size.height))
-
-        let backImage = UIImageView()
-        if currentUserIsOwner {
-            let image = UIImage(named: "kitteh_selfie")!
-            backImage.image = image
-            backImage.sizeToFit()
-            let imageWidth = backImage.frame.width
-            let imageHeight = backImage.frame.height
-            backImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4-imageHeight/2, width: imageWidth, height: imageHeight)
-        } else {
-            let image = UIImage(named: "kitteh_hit")!
-            backImage.image = image
-            backImage.sizeToFit()
-            let imageWidth = backImage.frame.width
-            let imageHeight = backImage.frame.height
-            backImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4-imageHeight/2, width: imageWidth, height: imageHeight)
-        }
-        customView.addSubview(backImage)
-        
-        let attr: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0), NSForegroundColorAttributeName: UIColor.darkGray]
-        let label = UILabel(frame:CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-30, width: screenBounds.width-30, height: 20))
-        label.textAlignment = .center
-        
-        if currentUserIsOwner {
-            label.attributedText = NSAttributedString(string: "No meowments yet", attributes: attr)
-        } else {
-            label.frame = CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-60, width: screenBounds.width-30, height: 20)
-            label.attributedText = NSAttributedString(string: "No meowments yet", attributes: attr)
-        }
-        
-        customView.addSubview(label)
-        
-        let par: NSMutableParagraphStyle = NSMutableParagraphStyle()
-        par.lineBreakMode = .byWordWrapping
-        par.alignment = .center
-        let parAttributes: [String : AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: par]
-        
-        let secondLabel = UILabel(frame:CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-30+label.frame.height, width: screenBounds.width-30, height: 40))
-        
-        if currentUserIsOwner {
-            secondLabel.attributedText =  NSAttributedString(string: "Start capturing some of your kitteh’s best meowments.", attributes: parAttributes)
-        } else {
-            secondLabel.frame = CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-60+label.frame.height, width: screenBounds.width-30, height: 40)
-            secondLabel.attributedText = NSAttributedString(string: "This kitteh hasn’t added any meowments yet", attributes: parAttributes)
-        }
-        secondLabel.numberOfLines = 0
-        
-        customView.addSubview(secondLabel)
-        
-        let cameraImage = UIButton()
-
-        if currentUserIsOwner {
-            cameraImage.setImage(UIImage(named: "arrow_to_button_camera"), for: UIControlState())
-            cameraImage.sizeToFit()
-            
-            
-            let imageWidth = cameraImage.frame.width
-            let imageHeight = cameraImage.frame.height
-            cameraImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4+imageHeight+label.frame.height+secondLabel.frame.height - 90, width: imageWidth, height: imageHeight)
-            
-            cameraImage.addTarget(self, action: #selector(self.tapOnEmptyDataSetButton), for: .touchUpInside)
-            
-        } else {
-            cameraImage.setImage(UIImage(named: "button_nudge"), for: UIControlState())
-            cameraImage.sizeToFit()
-            let imageWidth = cameraImage.frame.width
-            let imageHeight = cameraImage.frame.height
-            cameraImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4+imageHeight+label.frame.height+secondLabel.frame.height + 30, width: imageWidth, height: imageHeight)
-        }
-        
-        customView.addSubview(cameraImage)
-        self.view.addSubview(customView)
+            let customView = UIView(frame:CGRect(x:0, y:0, width:  self.view.frame.size.width, height:   self.view.frame.size.height))
+            self.showEmptyCustomView(view: customView, currentUserIsOwner: currentUserIsOwner, vc: self)
+            self.view.addSubview(customView)
+            self.tableView.reloadData()
         } else if self.imagesLoaded && self.imageIndexById?.count != 0 {
             if self.isFistImageAdded {
                 for subview in self.view.subviews{
@@ -447,6 +378,8 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
                 }
                 self.tableView.reloadData()
                 self.isFistImageAdded = false
+            } else {
+                self.tableView.reloadData()
             }
         }
 
