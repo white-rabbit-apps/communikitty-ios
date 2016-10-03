@@ -53,6 +53,87 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     /**
      Show the GifHUD loader window
      */
+    
+    func showEmptyCustomView(view:Any, currentUserIsOwner:Bool, vc: UIViewController)  {
+
+        let backImage = UIImageView()
+        if currentUserIsOwner {
+            let image = UIImage(named: "kitteh_selfie")!
+            backImage.image = image
+            backImage.sizeToFit()
+            let imageWidth = backImage.frame.width
+            let imageHeight = backImage.frame.height
+            backImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4-imageHeight/2, width: imageWidth, height: imageHeight)
+        } else {
+            let image = UIImage(named: "kitteh_hit")!
+            backImage.image = image
+            backImage.sizeToFit()
+            let imageWidth = backImage.frame.width
+            let imageHeight = backImage.frame.height
+            backImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4-imageHeight/2, width: imageWidth, height: imageHeight)
+        }
+        (view as AnyObject).addSubview(backImage)
+        
+        let attr: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0), NSForegroundColorAttributeName: UIColor.darkGray]
+        let label = UILabel(frame:CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-30, width: screenBounds.width-30, height: 20))
+        label.textAlignment = .center
+        
+        if currentUserIsOwner {
+            label.attributedText = NSAttributedString(string: "No meowments yet", attributes: attr)
+        } else {
+            label.frame = CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-60, width: screenBounds.width-30, height: 20)
+            label.attributedText = NSAttributedString(string: "No meowments yet", attributes: attr)
+        }
+        
+        (view as AnyObject).addSubview(label)
+        
+        let par: NSMutableParagraphStyle = NSMutableParagraphStyle()
+        par.lineBreakMode = .byWordWrapping
+        par.alignment = .center
+        let parAttributes: [String : AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: par]
+        
+        let secondLabel = UILabel(frame:CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-30+label.frame.height, width: screenBounds.width-30, height: 40))
+        
+        if currentUserIsOwner {
+            secondLabel.attributedText =  NSAttributedString(string: "Start capturing some of your kitteh’s best meowments.", attributes: parAttributes)
+        } else {
+            secondLabel.frame = CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-60+label.frame.height, width: screenBounds.width-30, height: 40)
+            secondLabel.attributedText = NSAttributedString(string: "This kitteh hasn’t added any meowments yet", attributes: parAttributes)
+        }
+        secondLabel.numberOfLines = 0
+        
+        (view as AnyObject).addSubview(secondLabel)
+        
+        let cameraImage = UIButton()
+        
+        if currentUserIsOwner {
+            cameraImage.setImage(UIImage(named: "arrow_to_button_camera"), for: UIControlState())
+            cameraImage.sizeToFit()
+            
+            
+            let imageWidth = cameraImage.frame.width
+            let imageHeight = cameraImage.frame.height
+            cameraImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4+imageHeight+label.frame.height+secondLabel.frame.height - 90, width: imageWidth, height: imageHeight)
+            
+            if type(of: view) == UIView.self {
+            let viewContr = vc as! AnimalTimelineTableViewController
+                cameraImage.addTarget(self, action: #selector(viewContr.tapOnEmptyDataSetButton) , for: .touchUpInside)
+            } else if type(of: view) == UICollectionView.self {
+                let viewContr = vc as! PhotosCollectionViewController
+                cameraImage.addTarget(self, action: #selector(viewContr.tapOnCameraButton) , for: .touchUpInside)
+            }
+            
+        } else {
+            cameraImage.setImage(UIImage(named: "button_nudge"), for: UIControlState())
+            cameraImage.sizeToFit()
+            let imageWidth = cameraImage.frame.width
+            let imageHeight = cameraImage.frame.height
+            cameraImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4+imageHeight+label.frame.height+secondLabel.frame.height + 30, width: imageWidth, height: imageHeight)
+        }
+        
+        (view as AnyObject).addSubview(cameraImage)
+    }
+    
     func showLoader() {
 //        self.hideLoader()
         
@@ -942,7 +1023,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
      - startIndex: the index of the photo to start the slideshow at
      - animatedFromView: the UIView or subclass object from which to animate to the gallery
      */
-    func showImagesBrowser(entries: [WRTimelineEntry], startIndex: Int?, animatedFromView: UIView?, displayUser: Bool = false) {
+    func showImagesBrowser(entries: [WRTimelineEntry], startIndex: Int?, animatedFromView: UIView?, displayUser: Bool = false, vc:UIViewController = UIViewController()) {
         var idmImages = Array<SKPhoto>()
         entries.forEach { (entry) -> Void in
             let idmPhoto : SKPhoto = SKPhoto.photoWithImageURL(url: entry.getImageUrl()!, object: entry)
@@ -1070,7 +1151,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             SKPhotoBrowserOptions.handleMoreButtonPressed = { (object: NSObject?)->Void in
                 NSLog("more button pressed")
                 if let entry = object as? WRTimelineEntry {
-                    browser.showMoreActionSheet(entry: entry)
+                    browser.showMoreActionSheet(entry: entry, vc:vc)
                 }
             }
         }
@@ -1234,25 +1315,30 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         })
     }
     
-    func openDeleteEntryForm(entry: WRTimelineEntry) {
+    func openDeleteEntryForm(entry: WRTimelineEntry, vc: UIViewController) {
         self.showLoader()
         entry.deleteInBackground(block: { (success : Bool, error : Error?) -> Void in
             if(success) {
                 self.hideLoader()
                 self.dismiss(animated: true, completion: {
-//                    if self is SKPhotoBrowser {
-//                        let browser = self as! SKPhotoBrowser
-//                        if browser.splitViewController is AnimalTimelineTableViewController {
-//                            let animalTimeline = browser.splitViewController as! AnimalTimelineTableViewController
-//                            animalTimeline.loadObjects()
-//                        }
-//                    }
+                  if self is SKPhotoBrowser {
+                    if type(of: vc) == AnimalTimelineTableViewController.self {
+                        let animalTimeline = vc as! AnimalTimelineTableViewController
+                        animalTimeline.animalImagesRepository?.loadAllImages()
+                        animalTimeline.loadObjects()
+                    } else if type(of: vc) == PhotosCollectionViewController.self {
+                        let photoCollection = vc as! PhotosCollectionViewController
+                        photoCollection.animalImagesRepository?.loadAllImages()
+                        photoCollection.collectionView?.reloadData()
+                        photoCollection.animalTimelineController?.loadObjects()
+                    }
+                    }
                 })
             }
         })
     }
     
-    func showMoreActionSheet(entry: WRTimelineEntry) {
+    func showMoreActionSheet(entry: WRTimelineEntry, vc: UIViewController) {
         let optionMenu = UIAlertController(title: nil, message: "Meowment Action", preferredStyle: .actionSheet)
         
         if entry.isOwnedBy(WRUser.current()!) {
@@ -1260,14 +1346,14 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
                 (alert: UIAlertAction!) -> Void in
                 print("Editing timeline entry")
                 self.openEditEntryForm(entry: entry)
-                //            self.editEntry(indexPath)
+//                            self.editEntry(indexPath)
             })
             editAction.setValue(UIImage(named: "icon_edit_profile")!.withRenderingMode(.alwaysOriginal), forKey: "image")
             
             let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 print("Deleting timeline entry")
-                self.openDeleteEntryForm(entry: entry)
+                self.openDeleteEntryForm(entry: entry, vc: vc)
             })
             deleteAction.setValue(UIImage(named: "button_delete")!.withRenderingMode(.alwaysOriginal), forKey: "image")
             
@@ -1385,14 +1471,6 @@ extension PFQueryTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDele
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
         self.tableView.tableFooterView = UIView()
-    }
-    
-    public func emptyDataSetShouldDisplay(scrollView: UIScrollView) -> Bool {
-        if(self.isLoading) {
-            return false
-        } else {
-            return true
-        }
     }
     
     func replacePFLoadingView(verticalOffset:CGFloat=0) {
