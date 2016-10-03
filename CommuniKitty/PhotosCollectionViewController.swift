@@ -8,6 +8,8 @@
 
 import UIKit
 import Device
+import Fusuma
+import CLImageEditor
 
 class PhotoViewCell :UICollectionViewCell{
     var imageViewContent : UIImageView = UIImageView()
@@ -44,7 +46,8 @@ public var controllerHeight: CGFloat {
     }
 }
 
-class PhotosCollectionViewController: UICollectionViewController, PhotoCollectionViewDelegateLayout, ImagesLoadedHandler{
+class PhotosCollectionViewController: UICollectionViewController, PhotoCollectionViewDelegateLayout, ImagesLoadedHandler, FusumaDelegate, CLImageEditorDelegate {
+
     
     var imageEntries: [WRTimelineEntry] = []
     var imageIndexById : [String : Int] = [:]
@@ -186,7 +189,16 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
     }
     
     func tapOnCameraButton(){
-         self.animalTimelineController?.takeFusumaPhoto()
+        let fusuma = FusumaViewController()
+        
+        fusuma.delegate = self
+        
+        fusuma.modeOrder = .cameraFirst
+        
+        fusuma.transitioningDelegate = transitioningDelegate
+        fusuma.modalPresentationStyle = .custom
+        
+        present(fusuma, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize{
@@ -244,5 +256,92 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
         KingfisherManager.shared.cache.clearMemoryCache()
     }
 
+    var pickedImageDate: Date?
+    var isAddingFirstImage: Bool = false
+    func fusumaImageSelected(_ image: UIImage, creationDate: Date?) {
+        self.pickedImageDate = creationDate
+        
+        self.modalTransitionStyle = .coverVertical
+        self.dismiss(animated: false, completion: { () -> Void in
+            self.isAddingFirstImage = true
+            self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
+        })
+    }
     
+    public func fusumaImageSelected(_ image: UIImage) {
+        self.modalTransitionStyle = .coverVertical
+        self.dismiss(animated: false, completion: { () -> Void in
+            self.isAddingFirstImage = true
+            self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
+        })
+    }
+    
+    /**
+     Handle the video that is returned from the camera
+     - implements FusumaDelegate
+     */
+    func fusumaVideoCompleted(withFileURL fileURL: URL) {
+        
+    }
+    
+    /**
+     Handle the user not authorizing access to the camera roll
+     - implements FusumaDelegate
+     */
+    func fusumaCameraRollUnauthorized() {
+        print("Camera roll unauthorized")
+    }
+    
+    func imageEditorDidCancel(_ editor: CLImageEditor!) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    func imageEditor(_ editor: CLImageEditor!, didFinishEdittingWith image: UIImage!) {
+        NSLog("got new image")
+//        let imageFile = PFFile(data: UIImageJPEGRepresentation(image, 0.5)!)
+        if let object = self.animalTimelineController?.animalObject {
+            if self.isAddingFirstImage {
+                if image != nil {
+                    let detailScene =  TimelineEntryFormViewController()
+                    detailScene.type = "image"
+                    detailScene.image = image
+                    detailScene.pickedImageDate = self.pickedImageDate as Date?
+                    detailScene.animalObject = self.animalTimelineController?.animalObject
+                    detailScene.isFromTimelineController = true
+                    detailScene.animalDetailController = self.animalTimelineController?.animalDetailController
+                    detailScene.animalTimelineTableVC = self.animalTimelineController!
+                    
+                    let nav = UINavigationController(rootViewController: detailScene)
+                    nav.modalTransitionStyle = .coverVertical
+                    
+                    self.dismiss(animated: false) { () -> Void in
+                        self.present(nav, animated: false, completion: { () -> Void in
+                            self.hideLoader()
+                        })
+                    }
+                } else {
+                    self.dismiss(animated: false, completion: { () -> Void in
+                        self.hideLoader()
+                    })
+                }
+                
+                
+            }
+            self.showLoader()
+//            object.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
+//                NSLog("finished saving first image")
+//                if success {
+//                    self.dismiss(animated: false, completion: nil)
+//                    self.animalTimelineController?.animalDetailController?.loadAnimal()
+//                    self.animalImagesRepository?.loadAllImages()
+//                } else {
+//                    self.showError(message: error!.localizedDescription)
+//                }
+//                self.hideLoader()
+//            })
+        }
+        self.isAddingFirstImage = false
+    }
+
+ 
 }

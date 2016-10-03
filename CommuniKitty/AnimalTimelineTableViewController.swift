@@ -69,6 +69,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     var isEditingProfile : Bool = false
     var isEditingCover : Bool = false
     var isAddingFirstImage: Bool = false
+    var isFistImageAdded: Bool = false
     
     var currentUserIsOwner : Bool = false
     
@@ -90,27 +91,14 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         self.animalImagesRepository?.loadAllImages()
         let screenSize: CGRect = UIScreen.main.bounds
         self.tableView.rowHeight = screenSize.width + 15
-        
-        self.initEmptyState()
+//        setEmptyDataSetCustomView()
+//        self.initEmptyState()
         
         self.initGestureRecognizers()
     }
     
-    override func viewDidLayoutSubviews() {
-        
-        if self.imagesLoaded && self.imageIndexById?.count == 0{
-            switch Device.size() {
-            case .Screen4_7Inch:
-                self.view.frame.size.height = 430
-            case .Screen5_5Inch:
-                self.view.frame.size.height = 500
-            default:
-                self.view.frame.size.height = 430
-            }
-        }
-        
-    }
     
+   
     /**
      Loads imageEntries and imageIndexById. Conforms ImagesLoadedHandler protocol
      
@@ -124,8 +112,9 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         self.imageEntries = imageEntries ?? [WRTimelineEntry]()
         self.perform(#selector(scrollToIndexPathForEntity), with: objects, afterDelay: 0.5)
         self.imagesLoaded = true
-        self.viewDidLayoutSubviews()
+        setEmptyDataSetCustomView()
     }
+    
     
     var imagesLoaded:Bool = false
     
@@ -256,6 +245,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
                     detailScene.pickedImageDate = self.pickedImageDate as Date?
                     detailScene.animalObject = self.animalObject
                     detailScene.isFromTimelineController = true
+                    detailScene.animalTimelineTableVC = self
                     detailScene.animalDetailController = self.animalDetailController
                     
                     let nav = UINavigationController(rootViewController: detailScene)
@@ -278,9 +268,9 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
             object.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
                 NSLog("finished saving profile photo")
                 if success {
+//                    self.animalDetailController?.loadAnimal()
+//                    self.animalImagesRepository?.loadAllImages()
                     self.dismiss(animated: false, completion: nil)
-                    self.animalDetailController?.loadAnimal()
-                    self.animalImagesRepository?.loadAllImages()
                 } else {
                     self.showError(message: error!.localizedDescription)
                 }
@@ -312,52 +302,157 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         return nextIndexPath
     }
     
-    func imageForEmptyDataSet(scrollView: UIScrollView) -> UIImage {
-        if currentUserIsOwner {
-            return UIImage(named: "kitteh_selfie")!
-        } else {
-            return UIImage(named: "kitteh_hit")!
-        }
-    }
-    
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0), NSForegroundColorAttributeName: UIColor.darkGray]
-        
-        if currentUserIsOwner {
-            return NSAttributedString(string: "No meowments yet", attributes: attributes)
-        } else {
-            return NSAttributedString(string: "No meowments yet", attributes: attributes)
-        }
-    }
-    
-    func descriptionForEmptyDataSet(scrollView: UIScrollView) -> NSAttributedString {
-        let paragraph: NSMutableParagraphStyle = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .byWordWrapping
-        paragraph.alignment = .center
-        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: paragraph]
-        
-        if currentUserIsOwner {
-            return NSAttributedString(string: "Start capturing some of your kitteh’s best meowments.", attributes: attributes)
-        } else {
-            return NSAttributedString(string: "This kitteh hasn’t added any meowments yet", attributes: attributes)
-        }
-    }
-    
-    func buttonImageForEmptyDataSet(scrollView: UIScrollView, forState state: UIControlState) -> UIImage? {
-        if currentUserIsOwner {
-            return UIImage(named: "arrow_to_button_camera")
-        } else {
-            return UIImage(named: "button_nudge")
-        }
-    }
-    
-    func emptyDataSetDidTapButton(scrollView: UIScrollView) {
+//    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage!
+// {
+//        if currentUserIsOwner {
+//            return UIImage(named: "kitteh_selfie")!
+//        } else {
+//            return UIImage(named: "kitteh_hit")!
+//        }
+//    }
+//    
+//    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+//        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0), NSForegroundColorAttributeName: UIColor.darkGray]
+//        
+//        if currentUserIsOwner {
+//            return NSAttributedString(string: "No meowments yet", attributes: attributes)
+//        } else {
+//            return NSAttributedString(string: "No meowments yet", attributes: attributes)
+//        }
+//    }
+//    
+//    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString!
+//        
+// {
+//        let paragraph: NSMutableParagraphStyle = NSMutableParagraphStyle()
+//        paragraph.lineBreakMode = .byWordWrapping
+//        paragraph.alignment = .center
+//        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: paragraph]
+//        
+//        if currentUserIsOwner {
+//            return NSAttributedString(string: "Start capturing some of your kitteh’s best meowments.", attributes: attributes)
+//        } else {
+//            return NSAttributedString(string: "This kitteh hasn’t added any meowments yet", attributes: attributes)
+//        }
+//    }
+//    
+//    func buttonImage(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> UIImage! {
+//        if currentUserIsOwner {
+//            return UIImage(named: "arrow_to_button_camera")
+//        } else {
+//            return UIImage(named: "button_nudge")
+//        }
+//    }
+//    
+//    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+//        if currentUserIsOwner {
+//            self.takeFusumaPhoto()
+//        } else {
+//        }
+//    }
+//    
+    func tapOnEmptyDataSetButton(){
         if currentUserIsOwner {
             self.takeFusumaPhoto()
         } else {
         }
     }
     
+    func setEmptyDataSetCustomView(){
+        if self.imagesLoaded && self.imageIndexById?.count == 0 {
+            for subview in self.view.subviews {
+                if type(of: subview) == UIView.self {
+                subview.removeFromSuperview()
+                }
+            }
+        let customView = UIView(frame:CGRect(x:0, y:0, width:  self.view.frame.size.width, height:   self.view.frame.size.height))
+
+        let backImage = UIImageView()
+        if currentUserIsOwner {
+            let image = UIImage(named: "kitteh_selfie")!
+            backImage.image = image
+            backImage.sizeToFit()
+            let imageWidth = backImage.frame.width
+            let imageHeight = backImage.frame.height
+            backImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4-imageHeight/2, width: imageWidth, height: imageHeight)
+        } else {
+            let image = UIImage(named: "kitteh_hit")!
+            backImage.image = image
+            backImage.sizeToFit()
+            let imageWidth = backImage.frame.width
+            let imageHeight = backImage.frame.height
+            backImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4-imageHeight/2, width: imageWidth, height: imageHeight)
+        }
+        customView.addSubview(backImage)
+        
+        let attr: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0), NSForegroundColorAttributeName: UIColor.darkGray]
+        let label = UILabel(frame:CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-30, width: screenBounds.width-30, height: 20))
+        label.textAlignment = .center
+        
+        if currentUserIsOwner {
+            label.attributedText = NSAttributedString(string: "No meowments yet", attributes: attr)
+        } else {
+            label.frame = CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-60, width: screenBounds.width-30, height: 20)
+            label.attributedText = NSAttributedString(string: "No meowments yet", attributes: attr)
+        }
+        
+        customView.addSubview(label)
+        
+        let par: NSMutableParagraphStyle = NSMutableParagraphStyle()
+        par.lineBreakMode = .byWordWrapping
+        par.alignment = .center
+        let parAttributes: [String : AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: par]
+        
+        let secondLabel = UILabel(frame:CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-30+label.frame.height, width: screenBounds.width-30, height: 40))
+        
+        if currentUserIsOwner {
+            secondLabel.attributedText =  NSAttributedString(string: "Start capturing some of your kitteh’s best meowments.", attributes: parAttributes)
+        } else {
+            secondLabel.frame = CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-60+label.frame.height, width: screenBounds.width-30, height: 40)
+            secondLabel.attributedText = NSAttributedString(string: "This kitteh hasn’t added any meowments yet", attributes: parAttributes)
+        }
+        secondLabel.numberOfLines = 0
+        
+        customView.addSubview(secondLabel)
+        
+        let cameraImage = UIButton()
+
+        if currentUserIsOwner {
+            cameraImage.setImage(UIImage(named: "arrow_to_button_camera"), for: UIControlState())
+            cameraImage.sizeToFit()
+            
+            
+            let imageWidth = cameraImage.frame.width
+            let imageHeight = cameraImage.frame.height
+            cameraImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4+imageHeight+label.frame.height+secondLabel.frame.height - 90, width: imageWidth, height: imageHeight)
+            
+            cameraImage.addTarget(self, action: #selector(self.tapOnEmptyDataSetButton), for: .touchUpInside)
+            
+        } else {
+            cameraImage.setImage(UIImage(named: "button_nudge"), for: UIControlState())
+            cameraImage.sizeToFit()
+            let imageWidth = cameraImage.frame.width
+            let imageHeight = cameraImage.frame.height
+            cameraImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4+imageHeight+label.frame.height+secondLabel.frame.height + 30, width: imageWidth, height: imageHeight)
+        }
+        
+        customView.addSubview(cameraImage)
+        self.view.addSubview(customView)
+        } else if self.imagesLoaded && self.imageIndexById?.count != 0 {
+            if self.isFistImageAdded {
+                for subview in self.view.subviews{
+                    if type(of: subview) == UIView.self {
+                        subview.removeFromSuperview()
+                    }
+                }
+                self.tableView.reloadData()
+                self.isFistImageAdded = false
+            }
+        }
+
+    }
+
+
     func takeFusumaPhoto() {
         let fusuma = FusumaViewController()
         

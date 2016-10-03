@@ -1387,13 +1387,13 @@ extension PFQueryTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDele
         self.tableView.tableFooterView = UIView()
     }
     
-    public func emptyDataSetShouldDisplay(scrollView: UIScrollView) -> Bool {
-        if(self.isLoading) {
-            return false
-        } else {
-            return true
-        }
-    }
+//    public func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+//        if(self.isLoading) {
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
     
     func replacePFLoadingView(verticalOffset:CGFloat=0) {
         
