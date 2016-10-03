@@ -1332,11 +1332,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
                         photoCollection.collectionView?.reloadData()
                         photoCollection.animalTimelineController?.loadObjects()
                     }
-//                      let browser = self as! SKPhotoBrowser
-//                        if browser.splitViewController is AnimalTimelineTableViewController {
-//                            let animalTimeline = browser.splitViewController as! AnimalTimelineTableViewController
-//                            animalTimeline.loadObjects()
-//                        }
                     }
                 })
             }
@@ -1477,14 +1472,6 @@ extension PFQueryTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDele
         self.tableView.emptyDataSetDelegate = self
         self.tableView.tableFooterView = UIView()
     }
-    
-//    public func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
-//        if(self.isLoading) {
-//            return false
-//        } else {
-//            return true
-//        }
-//    }
     
     func replacePFLoadingView(verticalOffset:CGFloat=0) {
         

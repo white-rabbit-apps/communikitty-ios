@@ -91,9 +91,6 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         self.animalImagesRepository?.loadAllImages()
         let screenSize: CGRect = UIScreen.main.bounds
         self.tableView.rowHeight = screenSize.width + 15
-//        setEmptyDataSetCustomView()
-//        self.initEmptyState()
-        
         self.initGestureRecognizers()
     }
     
@@ -268,8 +265,6 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
             object.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
                 NSLog("finished saving profile photo")
                 if success {
-//                    self.animalDetailController?.loadAnimal()
-//                    self.animalImagesRepository?.loadAllImages()
                     self.dismiss(animated: false, completion: nil)
                 } else {
                     self.showError(message: error!.localizedDescription)
@@ -302,55 +297,6 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         return nextIndexPath
     }
     
-//    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage!
-// {
-//        if currentUserIsOwner {
-//            return UIImage(named: "kitteh_selfie")!
-//        } else {
-//            return UIImage(named: "kitteh_hit")!
-//        }
-//    }
-//    
-//    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-//        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0), NSForegroundColorAttributeName: UIColor.darkGray]
-//        
-//        if currentUserIsOwner {
-//            return NSAttributedString(string: "No meowments yet", attributes: attributes)
-//        } else {
-//            return NSAttributedString(string: "No meowments yet", attributes: attributes)
-//        }
-//    }
-//    
-//    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString!
-//        
-// {
-//        let paragraph: NSMutableParagraphStyle = NSMutableParagraphStyle()
-//        paragraph.lineBreakMode = .byWordWrapping
-//        paragraph.alignment = .center
-//        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: paragraph]
-//        
-//        if currentUserIsOwner {
-//            return NSAttributedString(string: "Start capturing some of your kitteh’s best meowments.", attributes: attributes)
-//        } else {
-//            return NSAttributedString(string: "This kitteh hasn’t added any meowments yet", attributes: attributes)
-//        }
-//    }
-//    
-//    func buttonImage(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> UIImage! {
-//        if currentUserIsOwner {
-//            return UIImage(named: "arrow_to_button_camera")
-//        } else {
-//            return UIImage(named: "button_nudge")
-//        }
-//    }
-//    
-//    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-//        if currentUserIsOwner {
-//            self.takeFusumaPhoto()
-//        } else {
-//        }
-//    }
-//    
     func tapOnEmptyDataSetButton(){
         if currentUserIsOwner {
             self.takeFusumaPhoto()
