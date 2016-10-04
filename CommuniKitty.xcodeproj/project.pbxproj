@@ -379,6 +379,8 @@
 		A3E53B142558A0798B14AE5A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED8374431DA3A1860026C023 /* Instabug.framework */,
+				ED8374441DA3A1860026C023 /* Instabug.bundle */,
 				ED783AA01DA3775E00973C1E /* UIKit.framework */,
 				ED783A9E1DA3775800973C1E /* SystemConfiguration.framework */,
 				ED783A9C1DA3775000973C1E /* CoreTelephony.framework */,
@@ -497,8 +499,6 @@
 				EDEC77AD1D91A703007CF613 /* Assets.xcassets */,
 				EDEC77B21D91A703007CF613 /* Info.plist */,
 				EDBB49021D9F917500BF68CB /* Info-dev.plist */,
-				ED8374431DA3A1860026C023 /* Instabug.framework */,
-				ED8374441DA3A1860026C023 /* Instabug.bundle */,
 				EDEC77D41D9221C7007CF613 /* CommuniKitty-Bridging-Header.h */,
 				ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */,
 				ED45124C1D92752C00B95BB5 /* Account */,
@@ -693,7 +693,7 @@
 					EDEC77A21D91A703007CF613 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = AZC38JWQNP;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
