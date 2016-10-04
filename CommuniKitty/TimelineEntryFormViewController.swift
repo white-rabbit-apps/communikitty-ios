@@ -6,27 +6,9 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
+import ImageRow
 import Eureka
 import ParseFacebookUtilsV4
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
 
 
 class TimelineEntryFormViewController: FormViewController {
@@ -49,7 +31,7 @@ class TimelineEntryFormViewController: FormViewController {
         let appDelegate = AppDelegate.getAppDelegate()
         
         if self.animalObject == nil {
-            if appDelegate.myAnimalsArray?.count > 0 {
+            if (appDelegate.myAnimalsArray?.count)! > 0 {
                 self.animalObject = appDelegate.myAnimalByName![appDelegate.myAnimalsArray![0]]
             }
         }
@@ -80,7 +62,7 @@ class TimelineEntryFormViewController: FormViewController {
             section.color   = UIColor.lightOrangeColor()
         }
             <<< ActionSheetRow<String>("animal") {
-                $0.title = "Cat"
+                $0.title = "Kitty"
                 $0.options = appDelegate.myAnimalsWithDeceasedArray!
                 if let animalObject = self.animalObject {
                     $0.value = animalObject.name
@@ -99,21 +81,21 @@ class TimelineEntryFormViewController: FormViewController {
                     cell.imageView?.image = UIImage(named: "form_date")
                     row.maximumDate = Date()
             }
-//            <<< PhotoRow("photo") {
-//                $0.title = "Photo"
-//                $0.disabled = true
-//                $0.value = self.image
-//            }.cellSetup { cell, row in
-//                cell.imageView?.image = UIImage(named: "form_photo")
-//                cell.height = { 50 }
-//            }
+            <<< ImageRow("photo") {
+                $0.title = "Photo"
+                $0.disabled = true
+                $0.value = self.image
+            }.cellSetup { cell, row in
+                cell.imageView?.image = UIImage(named: "form_photo")
+                cell.height = { 100 }
+            }
             <<< TextAreaRow("text") {
-                $0.title = "Caption"
-                $0.placeholder = "Enter caption here..."
+                $0.title = "Kapshun"
+                $0.placeholder = "Enter kapshun here..."
                 $0.onChange({ (row: TextAreaRow) -> () in
                     let val = row.baseValue as? String
                     let maxLength = 500
-                    if val?.characters.count > maxLength {
+                    if (val?.characters.count)! > maxLength {
                         row.cell!.textView.text = val?[0...maxLength]
                     }
                 })

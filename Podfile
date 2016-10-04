@@ -12,6 +12,7 @@ def shared_pods
     pod 'Eureka', :git => 'https://github.com/white-rabbit-apps/Eureka.git', :branch => 'master'
 #    pod 'GooglePlacesRow', :git => 'https://github.com/white-rabbit-apps/GooglePlacesRow', :branch => 'master'
     pod 'GooglePlacesRow', :git => 'https://github.com/EurekaCommunity/GooglePlacesRow.git', :commit => 'b56ff3c'
+    pod 'ImageRow', :git => 'https://github.com/EurekaCommunity/ImageRow.git', :branch => 'master'
 
     pod 'Fusuma', :git => 'https://github.com/Ferrick90/Fusuma.git', :branch => 'swift3'
 #    pod 'Fusuma', :git => 'https://github.com/white-rabbit-apps/Fusuma', :branch => 'master'

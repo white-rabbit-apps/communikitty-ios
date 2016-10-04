@@ -84,6 +84,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ImageRow.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -172,12 +177,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1C3436CEA5C3D39764C5F54374794ECB</key>
+		<key>19131986256BC669D9741F457D747F73</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>26084E66441AAAA6828484000C418F7B</key>
+		<key>1C3436CEA5C3D39764C5F54374794ECB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -192,7 +197,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>5521527DCEE01591F4138947A6CD4B9C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>55ABC5300F5EF855C57F9B23657FB8F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>602089C45BFF3D9D0844DD5A3512C631</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -242,7 +257,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9FB717E1086A12FA6691E092198DD069</key>
+		<key>A33C4F1ACDA7753400E9B73BF30A5647</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -272,17 +287,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DE6315D3CACEF0589CEC71641D5603EF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F59A084FF2671AD334CD7996D3C75E75</key>
+		<key>F5FF8D082DF247BBB4C3C8E6BBA33AA1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
