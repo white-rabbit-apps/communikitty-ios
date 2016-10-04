@@ -31,6 +31,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class TimelineEntryFormViewController: FormViewController {
     var animalDetailController : AnimalDetailViewController?
+    var animalTimelineTableVC: AnimalTimelineTableViewController?
     
     var image : UIImage?
     var animalObject : WRAnimal?
@@ -250,8 +251,9 @@ class TimelineEntryFormViewController: FormViewController {
                     
                     if self.isFromTimelineController{
                         if(self.animalDetailController != nil) {
-                            self.animalDetailController!.loadAnimal()
                             self.isFromTimelineController = false
+                            self.animalTimelineTableVC?.isFistImageAdded = true
+                            self.animalDetailController!.loadAnimal()
                         }
                         
                     } else{

@@ -693,7 +693,7 @@
 					EDEC77A21D91A703007CF613 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = AZC38JWQNP;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -1260,8 +1260,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "4ee6b642-b4a1-4437-b86d-d8df9a95dd64";
+				PROVISIONING_PROFILE_SPECIFIER = "Alina CommuniKitty";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1286,8 +1286,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "4ee6b642-b4a1-4437-b86d-d8df9a95dd64";
+				PROVISIONING_PROFILE_SPECIFIER = "Alina CommuniKitty";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

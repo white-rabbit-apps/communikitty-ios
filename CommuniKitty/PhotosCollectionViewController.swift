@@ -8,6 +8,8 @@
 
 import UIKit
 import Device
+import Fusuma
+import CLImageEditor
 
 class PhotoViewCell :UICollectionViewCell{
     var imageViewContent : UIImageView = UIImageView()
@@ -44,7 +46,8 @@ public var controllerHeight: CGFloat {
     }
 }
 
-class PhotosCollectionViewController: UICollectionViewController, PhotoCollectionViewDelegateLayout, ImagesLoadedHandler{
+class PhotosCollectionViewController: UICollectionViewController, PhotoCollectionViewDelegateLayout, ImagesLoadedHandler, FusumaDelegate, CLImageEditorDelegate {
+
     
     var imageEntries: [WRTimelineEntry] = []
     var imageIndexById : [String : Int] = [:]
@@ -111,82 +114,22 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
                 subview.removeFromSuperview()
             }
             self.collectionView!.backgroundColor = UIColor.white
-            let backImage = UIImageView()
-            if currentUserIsOwner {
-                let image = UIImage(named: "kitteh_selfie")!
-                backImage.image = image
-                backImage.sizeToFit()
-                let imageWidth = backImage.frame.width
-                let imageHeight = backImage.frame.height
-                backImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4-imageHeight/2, width: imageWidth, height: imageHeight)
-            } else {
-                let image = UIImage(named: "kitteh_hit")!
-                backImage.image = image
-                backImage.sizeToFit()
-                let imageWidth = backImage.frame.width
-                let imageHeight = backImage.frame.height
-                backImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4-imageHeight/2, width: imageWidth, height: imageHeight)
-            }
-            self.collectionView!.addSubview(backImage)
-            
-            let attr: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0), NSForegroundColorAttributeName: UIColor.darkGray]
-            let label = UILabel(frame:CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-30, width: screenBounds.width-30, height: 20))
-            label.textAlignment = .center
-            
-            if currentUserIsOwner {
-                label.attributedText = NSAttributedString(string: "No meowments yet", attributes: attr)
-            } else {
-                label.frame = CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-60, width: screenBounds.width-30, height: 20)
-                label.attributedText = NSAttributedString(string: "No meowments yet", attributes: attr)
-            }
-            
-            self.collectionView!.addSubview(label)
-            
-            let par: NSMutableParagraphStyle = NSMutableParagraphStyle()
-            par.lineBreakMode = .byWordWrapping
-            par.alignment = .center
-            let parAttributes: [String : AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: par]
-            
-            let secondLabel = UILabel(frame:CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-30+label.frame.height, width: screenBounds.width-30, height: 40))
-            
-            if currentUserIsOwner {
-                secondLabel.attributedText =  NSAttributedString(string: "Start capturing some of your kitteh’s best meowments.", attributes: parAttributes)
-            } else {
-                secondLabel.frame = CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-60+label.frame.height, width: screenBounds.width-30, height: 40)
-                secondLabel.attributedText = NSAttributedString(string: "This kitteh hasn’t added any meowments yet", attributes: parAttributes)
-            }
-            secondLabel.numberOfLines = 0
-            
-            self.collectionView!.addSubview(secondLabel)
-            
-            let cameraImage = UIButton()
-            
-            if currentUserIsOwner {
-                cameraImage.setImage(UIImage(named: "arrow_to_button_camera"), for: UIControlState())
-                cameraImage.sizeToFit()
-                
-                
-                let imageWidth = cameraImage.frame.width
-                let imageHeight = cameraImage.frame.height
-                cameraImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4+imageHeight+label.frame.height+secondLabel.frame.height - 90, width: imageWidth, height: imageHeight)
-                
-                cameraImage.addTarget(self, action: #selector(self.tapOnCameraButton), for: .touchUpInside)
-                
-            } else {
-                cameraImage.setImage(UIImage(named: "button_nudge"), for: UIControlState())
-                cameraImage.sizeToFit()
-                let imageWidth = cameraImage.frame.width
-                let imageHeight = cameraImage.frame.height
-                cameraImage.frame = CGRect(x: screenBounds.width/2-imageWidth/2, y: controllerHeight/4+imageHeight+label.frame.height+secondLabel.frame.height + 30, width: imageWidth, height: imageHeight)
-            }
-            
-            self.collectionView!.addSubview(cameraImage)
+            self.showEmptyCustomView(view: self.collectionView!, currentUserIsOwner: currentUserIsOwner, vc: self)
         }
 
     }
     
     func tapOnCameraButton(){
-         self.animalTimelineController?.takeFusumaPhoto()
+        let fusuma = FusumaViewController()
+        
+        fusuma.delegate = self
+        
+        fusuma.modeOrder = .cameraFirst
+        
+        fusuma.transitioningDelegate = transitioningDelegate
+        fusuma.modalPresentationStyle = .custom
+        
+        present(fusuma, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize{
@@ -235,7 +178,7 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
         
         let index = self.imageIndexById[object.objectId!]
         
-        self.showImagesBrowser(entries: imageEntries, startIndex: index, animatedFromView: cell.imageViewContent, displayUser: false)
+        self.showImagesBrowser(entries: imageEntries, startIndex: index, animatedFromView: cell.imageViewContent, displayUser: false, vc: self)
      }
     
     override func didReceiveMemoryWarning() {
@@ -244,5 +187,79 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
         KingfisherManager.shared.cache.clearMemoryCache()
     }
 
+    var pickedImageDate: Date?
+    var isAddingFirstImage: Bool = false
+    func fusumaImageSelected(_ image: UIImage, creationDate: Date?) {
+        self.pickedImageDate = creationDate
+        
+        self.modalTransitionStyle = .coverVertical
+        self.dismiss(animated: false, completion: { () -> Void in
+            self.isAddingFirstImage = true
+            self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
+        })
+    }
     
+    public func fusumaImageSelected(_ image: UIImage) {
+        self.modalTransitionStyle = .coverVertical
+        self.dismiss(animated: false, completion: { () -> Void in
+            self.isAddingFirstImage = true
+            self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
+        })
+    }
+    
+    /**
+     Handle the video that is returned from the camera
+     - implements FusumaDelegate
+     */
+    func fusumaVideoCompleted(withFileURL fileURL: URL) {
+        
+    }
+    
+    /**
+     Handle the user not authorizing access to the camera roll
+     - implements FusumaDelegate
+     */
+    func fusumaCameraRollUnauthorized() {
+        print("Camera roll unauthorized")
+    }
+    
+    func imageEditorDidCancel(_ editor: CLImageEditor!) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    func imageEditor(_ editor: CLImageEditor!, didFinishEdittingWith image: UIImage!) {
+        NSLog("got new image")
+
+            if self.isAddingFirstImage {
+                if image != nil {
+                    let detailScene =  TimelineEntryFormViewController()
+                    detailScene.type = "image"
+                    detailScene.image = image
+                    detailScene.pickedImageDate = self.pickedImageDate as Date?
+                    detailScene.animalObject = self.animalTimelineController?.animalObject
+                    detailScene.isFromTimelineController = true
+                    detailScene.animalDetailController = self.animalTimelineController?.animalDetailController
+                    detailScene.animalTimelineTableVC = self.animalTimelineController!
+                    
+                    let nav = UINavigationController(rootViewController: detailScene)
+                    nav.modalTransitionStyle = .coverVertical
+                    
+                    self.dismiss(animated: false) { () -> Void in
+                        self.present(nav, animated: false, completion: { () -> Void in
+                            self.hideLoader()
+                        })
+                    }
+                } else {
+                    self.dismiss(animated: false, completion: { () -> Void in
+                        self.hideLoader()
+                    })
+                }
+                
+                
+            }
+        self.showLoader()
+        self.isAddingFirstImage = false
+    }
+
+ 
 }

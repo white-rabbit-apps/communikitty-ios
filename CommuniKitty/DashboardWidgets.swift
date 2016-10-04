@@ -223,7 +223,7 @@ class HashtagPhotosDashboardWidget : DashboardWidget {
         cell.titleLabel?.backgroundColor = UIColor.lightGreenColor()
         
         cell.collectionType = .Photos
-        cell.rowContent = .Hashtag
+        cell.rowContent = .Popular
         
         cell.titleButton?.isHidden = true
         
