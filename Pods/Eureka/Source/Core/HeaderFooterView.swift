@@ -112,7 +112,6 @@ public struct HeaderFooterView<ViewType: UIView> : ExpressibleByStringLiteral, H
                 label.textColor = UIColor.white
                 label.textAlignment = .center
                 label.text = self.title
-//                label.font = UIFont(name: "Nunito-Bold", size: 18)
                 label.font = UIFont.boldSystemFont(ofSize: 18)
                 view.addSubview(label)
                 

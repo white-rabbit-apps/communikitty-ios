@@ -29,7 +29,7 @@ class DashboardTableViewController: UITableViewController {
         if (self.showRefreshControl) {
             // Add a pull to refresh control for the table view
             refreshControl = UIRefreshControl()
-            refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
+            refreshControl!.attributedTitle = NSAttributedString(string: "Paw to refresh")
             refreshControl!.addTarget(self, action: #selector(DashboardTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
             tableView.addSubview(refreshControl!) // not required when using UITableViewController
         }

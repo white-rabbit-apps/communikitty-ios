@@ -66,7 +66,7 @@ public class QuirksTableViewController: PFQueryTableViewController{
                 //checking if the array exists
                 if let array = animal.loves{
                     if array.count == 0 {
-                        self.tableView.backgroundView = UIImageView(image: UIImage(named: "love_back"))
+                        self.tableView.backgroundView = UIImageView(image: UIImage(named: "empty_screen_loves"))
                         self.tableView.backgroundView?.sizeToFit()
                     } else {
                         self.arrayOfStrings = array
@@ -76,13 +76,13 @@ public class QuirksTableViewController: PFQueryTableViewController{
                     //creates the array if it doesn't exist and set the backgroundView
                 } else {
                     animal.loves = [String]()
-                    self.tableView.backgroundView = UIImageView(image: UIImage(named: "love_back"))
+                    self.tableView.backgroundView = UIImageView(image: UIImage(named: "empty_screen_loves"))
                     self.tableView.backgroundView?.sizeToFit()
                 }
             case "Hates":
                 if let array = animal.hates{
                     if array.count == 0 {
-                        self.tableView.backgroundView = UIImageView(image: UIImage(named: "love_back"))
+                        self.tableView.backgroundView = UIImageView(image: UIImage(named: "empty_screen_hates"))
                         self.tableView.backgroundView?.sizeToFit()
                     } else {
                         self.arrayOfStrings = array
@@ -90,7 +90,7 @@ public class QuirksTableViewController: PFQueryTableViewController{
                     }
                 } else {
                     animal.hates = [String]()
-                    self.tableView.backgroundView = UIImageView(image: UIImage(named: "love_back"))
+                    self.tableView.backgroundView = UIImageView(image: UIImage(named: "empty_screen_hates"))
                     self.tableView.backgroundView?.sizeToFit()
                 }
             default:

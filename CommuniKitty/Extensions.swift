@@ -601,7 +601,13 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     func openExplore() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let exploreView = storyboard.instantiateViewController(withIdentifier: "Explore") as! ExploreViewController
-        self.present(UINavigationController(rootViewController: exploreView), animated: true, completion: nil)
+//        exploreView.showAsNav = true
+//        
+//        if let nav = self.navigationController {
+//            nav.pushViewController(UINavigationController(rootViewController: exploreView), animated: true)
+//        } else {
+            self.present(UINavigationController(rootViewController: exploreView), animated: true, completion: nil)
+//        }
     }
     
     /**

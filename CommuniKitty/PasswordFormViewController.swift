@@ -17,14 +17,21 @@ class PasswordFormViewController : FormViewController {
     var settingsForm : UserFormViewController?
     
     func generateForm() {
-        form +++ Section("Password")
+        form +++ Section("Password") { section  in
+            section.color   = UIColor.lightOrangeColor()
+        }
         <<< PasswordRow(PASSWORD_TAG) {
-            $0.title = "Password"
+            $0.title = "Current Password"
+            }.cellSetup { cell, row in
+                cell.imageView?.image = UIImage(named: "form_password")
+        }
+        <<< PasswordRow(PASSWORD_TAG) {
+            $0.title = "New Password"
         }.cellSetup { cell, row in
             cell.imageView?.image = UIImage(named: "form_password")
         }
         <<< PasswordRow(PASSWORD_CONFIRM_TAG) {
-            $0.title = "Confirm Password"
+            $0.title = "Confirm New Password"
         }.cellSetup { cell, row in
             cell.imageView?.image = UIImage(named: "form_password")
         }

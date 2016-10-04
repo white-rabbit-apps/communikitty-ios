@@ -56,6 +56,7 @@ class UserTableViewController: PFQueryTableViewController {
     var myContacts : [CNContact]?
     var facebookFriendIds : [String]?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,6 +69,11 @@ class UserTableViewController: PFQueryTableViewController {
         
 //        self.tableView.rowHeight = UITableViewAutomaticDimension
 //        self.tableView.estimatedRowHeight = 160.0
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setUpModalBar(title: "Contacts")
     }
     
     func getContactsEmailsArray() -> [String] {
@@ -115,10 +121,6 @@ class UserTableViewController: PFQueryTableViewController {
         self.myContacts?.sort(by: { $0.givenName.localizedCaseInsensitiveCompare($1.givenName) == ComparisonResult.orderedAscending })
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setUpModalBar(title: "Contacts")
-    }
     
     override func objectsWillLoad() {
         super.objectsWillLoad()

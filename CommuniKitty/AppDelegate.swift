@@ -15,6 +15,8 @@ import BWWalkthrough
 import Fusuma
 import Hoko
 import UserNotifications
+import Instabug
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -149,12 +151,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.initializeUI()
         
         DispatchQueue.main.async {
+            GMSPlacesClient.provideAPIKey("AIzaSyB02jXQAR8Zw1ZMA62Jgr8BUQysN10nE74")
             //            GooglePlacesRow.provideApiKey("AIzaSyBSUv9V99TBfnXNtRW2FC3pyTgRpAwuKCc")
             PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
             //        PFTwitterUtils.initializeWithConsumerKey("C16iyeaMoc91iPOQnBTnQkXgm", consumerSecret: "gvedI21p7UaJxEJKxyTttbkUydE37cnq3RBSUFB86erwjHAkt1")
             //            self.client = CDAClient(spaceKey:"8mu31kgi73w0", accessToken:"3bd31581398aa28d0b9c05aa86573763aa4dfd4119eb020625cd0989fee99836")
             if Device.type() != .Simulator {
                 Instabug.start(withToken: "b97c87481a11e4f5469722434cef6a24", invocationEvent: IBGInvocationEvent.screenshot)
+                Instabug.setColorTheme(.light)
+                Instabug.setCrashReportingEnabled(true)
                 //                Fabric.with([Crashlytics.self, Answers.self])
             }
         }
@@ -365,8 +370,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.registerForPushNotifications()
             self.hasRegisteredForPush = true
         }
+        
+        Instabug.setUserEmail(WRUser.current()?.email)
+//        self.refreshDashboard()
     }
     
+    func postLogout() {
+        self.myAnimalsArray = nil
+        self.myAnimalByName = nil
+        self.myAnimalsWithDeceasedArray = nil
+        self.myAnimalWithDeceasedByName = nil
+        
+        self.refreshDashboard()
+    }
+    
+    func refreshDashboard() {
+        if let dashboardVC = dashboardViewController {
+            dashboardVC.refreshOnNextLoad = true
+            if let dashboard = dashboardVC.dashboard {
+                dashboard.refresh(dashboardVC)
+            }
+        }
+    }
     
     func loadMainController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

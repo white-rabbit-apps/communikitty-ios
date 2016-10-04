@@ -17,8 +17,8 @@
 #import <ParseTwitterUtils/ParseTwitterUtils.h>
 #import <MMMarkdown/MMMarkdown.h>
 #import <CLImageEditor/CLImageEditor.h>
-#import <BGTableViewRowActionWithImage/BGTableViewRowActionWithImage.h>
+//#import <BGTableViewRowActionWithImage/BGTableViewRowActionWithImage.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <CRToast/CRToast.h>
 #import <Kingfisher/Kingfisher.h>
-#import <Instabug/Instabug.h>
+//#import <Instabug/Instabug.h>

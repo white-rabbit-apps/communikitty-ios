@@ -11,6 +11,7 @@ def shared_pods
     pod 'CLImageEditor/SplashTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
     pod 'Eureka', :git => 'https://github.com/white-rabbit-apps/Eureka.git', :branch => 'master'
 #    pod 'GooglePlacesRow', :git => 'https://github.com/white-rabbit-apps/GooglePlacesRow', :branch => 'master'
+    pod 'GooglePlacesRow', :git => 'https://github.com/EurekaCommunity/GooglePlacesRow.git', :commit => 'b56ff3c'
 
     pod 'Fusuma', :git => 'https://github.com/Ferrick90/Fusuma.git', :branch => 'swift3'
 #    pod 'Fusuma', :git => 'https://github.com/white-rabbit-apps/Fusuma', :branch => 'master'
@@ -30,7 +31,7 @@ def shared_pods
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'Hoko'
-    pod 'Instabug', :git => 'https://github.com/Instabug/Instabug-iOS.git', :tag => '5.3.2'
+#    pod 'Instabug', :git => 'https://github.com/Instabug/Instabug-iOS.git', :tag => '5.3.2'
     pod 'Kingfisher', :git => 'https://github.com/onevcat/Kingfisher.git', :tag => '3.0.1'
     pod 'MMMarkdown'
     pod 'OAuthSwift', :git => 'https://github.com/skedgo/OAuthSwift/', :branch => 'swift3.0'

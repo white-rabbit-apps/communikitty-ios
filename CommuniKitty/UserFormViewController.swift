@@ -168,9 +168,12 @@ class UserFormViewController : FormViewController {
     }
 
     func logout() {
+        AppDelegate.getAppDelegate().postLogout()
         self.logout(completionBlock: { (result, error) in
             if(error == nil) {
-                self.cancel()
+                self.dismiss(animated: true, completion: {
+//                    AppDelegate.getAppDelegate().postLogout()
+                })
             } else {
                 self.showError(message: error!.localizedDescription)
             }

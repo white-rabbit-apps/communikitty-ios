@@ -98,14 +98,14 @@ class TimelineEntryFormViewController: FormViewController {
                     cell.imageView?.image = UIImage(named: "form_date")
                     row.maximumDate = Date()
             }
-            <<< ImageRow("photo") {
-                $0.title = "Photo"
-                $0.disabled = true
-                $0.value = self.image
-            }.cellSetup { cell, row in
-                cell.imageView?.image = UIImage(named: "form_photo")
-                cell.height = { 50 }
-            }
+//            <<< PhotoRow("photo") {
+//                $0.title = "Photo"
+//                $0.disabled = true
+//                $0.value = self.image
+//            }.cellSetup { cell, row in
+//                cell.imageView?.image = UIImage(named: "form_photo")
+//                cell.height = { 50 }
+//            }
             <<< TextAreaRow("text") {
                 $0.title = "Caption"
                 $0.placeholder = "Enter caption here..."

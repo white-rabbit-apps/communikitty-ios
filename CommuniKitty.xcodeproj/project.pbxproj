@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		56EF53AAFC1EB62A008239D4 /* Pods_CommuniKitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */; };
-		88780B01B47EE7554A1E63D3 /* Pods_CommuniKitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */; };
 		9F53780F40047EE7C355EA91 /* Pods_CommuniKitty_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E810CF4F8607A3558ABC3BE /* Pods_CommuniKitty_Dev.framework */; };
 		B810F8EE1D9D136B005DEAE7 /* QuirksSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8ED1D9D136B005DEAE7 /* QuirksSelectorViewController.swift */; };
 		B810F8F01D9D191F005DEAE7 /* QuirksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8EF1D9D191F005DEAE7 /* QuirksTableViewController.swift */; };
@@ -63,7 +62,24 @@
 		ED4F8EBC1D9353EF00BEB208 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB71D9353EF00BEB208 /* Nunito-Light.ttf */; };
 		ED4F8EBD1D9353EF00BEB208 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */; };
 		ED51266C1D9883AA00EB9027 /* gif in Resources */ = {isa = PBXBuildFile; fileRef = ED51266B1D9883AA00EB9027 /* gif */; };
-		EDBB49031D9F917600BF68CB /* Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49021D9F917500BF68CB /* Info-dev.plist */; };
+		ED8374371DA39BE00026C023 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783AA01DA3775E00973C1E /* UIKit.framework */; };
+		ED8374381DA39BE90026C023 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783A9E1DA3775800973C1E /* SystemConfiguration.framework */; };
+		ED8374391DA39BF00026C023 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783A9C1DA3775000973C1E /* CoreTelephony.framework */; };
+		ED83743A1DA39BF80026C023 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783A9A1DA3774800973C1E /* CoreMotion.framework */; };
+		ED83743B1DA39BFF0026C023 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783A981DA3774000973C1E /* CoreGraphics.framework */; };
+		ED83743C1DA39C050026C023 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783A961DA3773800973C1E /* AVFoundation.framework */; };
+		ED83743D1DA3A0210026C023 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783AA01DA3775E00973C1E /* UIKit.framework */; };
+		ED83743E1DA3A0290026C023 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783A9E1DA3775800973C1E /* SystemConfiguration.framework */; };
+		ED83743F1DA3A0320026C023 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783A9C1DA3775000973C1E /* CoreTelephony.framework */; };
+		ED8374401DA3A03B0026C023 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783A9A1DA3774800973C1E /* CoreMotion.framework */; };
+		ED8374411DA3A0430026C023 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783A981DA3774000973C1E /* CoreGraphics.framework */; };
+		ED8374421DA3A04B0026C023 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED783A961DA3773800973C1E /* AVFoundation.framework */; };
+		ED8374451DA3A1860026C023 /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8374431DA3A1860026C023 /* Instabug.framework */; };
+		ED8374461DA3A1860026C023 /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8374431DA3A1860026C023 /* Instabug.framework */; };
+		ED8374471DA3A1860026C023 /* Instabug.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED8374441DA3A1860026C023 /* Instabug.bundle */; };
+		ED8374481DA3A1860026C023 /* Instabug.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED8374441DA3A1860026C023 /* Instabug.bundle */; };
+		ED83744C1DA3B24D0026C023 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77B21D91A703007CF613 /* Info.plist */; };
+		ED83744D1DA3B2560026C023 /* Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49021D9F917500BF68CB /* Info-dev.plist */; };
 		EDBB49071D9F923C00BF68CB /* AnimalFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC78071D923AE7007CF613 /* AnimalFormViewController.swift */; };
 		EDBB49081D9F923C00BF68CB /* PFQueryTableAutoLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77D81D922246007CF613 /* PFQueryTableAutoLoadingViewController.swift */; };
 		EDBB49091D9F923C00BF68CB /* WRActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC77E21D9224BA007CF613 /* WRActivity.swift */; };
@@ -142,7 +158,6 @@
 		EDBB49571D9F923C00BF68CB /* meow1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C13C1D94AA7200B1B895 /* meow1.caf */; };
 		EDBB49581D9F923C00BF68CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4F8EA81D93503000BEB208 /* Main.storyboard */; };
 		EDBB49591D9F923C00BF68CB /* hiss1.caf in Resources */ = {isa = PBXBuildFile; fileRef = ED15C1391D94AA7200B1B895 /* hiss1.caf */; };
-		EDBB49611D9F945900BF68CB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77B21D91A703007CF613 /* Info.plist */; };
 		EDBB49671D9FA18F00BF68CB /* LaunchScreenDev.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49631D9F95B200BF68CB /* LaunchScreenDev.storyboard */; };
 		EDBB49681D9FA65D00BF68CB /* LaunchScreenDev.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBB49631D9F95B200BF68CB /* LaunchScreenDev.storyboard */; };
 		EDBB49691D9FA67000BF68CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEC77AF1D91A703007CF613 /* LaunchScreen.storyboard */; };
@@ -254,6 +269,14 @@
 		ED4F8EB81D9353EF00BEB208 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Regular.ttf"; path = "CommuniKitty/Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommuniKitty.entitlements; sourceTree = "<group>"; };
 		ED51266B1D9883AA00EB9027 /* gif */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gif; sourceTree = "<group>"; };
+		ED783A961DA3773800973C1E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		ED783A981DA3774000973C1E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		ED783A9A1DA3774800973C1E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		ED783A9C1DA3775000973C1E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		ED783A9E1DA3775800973C1E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		ED783AA01DA3775E00973C1E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		ED8374431DA3A1860026C023 /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
+		ED8374441DA3A1860026C023 /* Instabug.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Instabug.bundle; sourceTree = "<group>"; };
 		EDBB49021D9F917500BF68CB /* Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-dev.plist"; sourceTree = "<group>"; };
 		EDBB495F1D9F923C00BF68CB /* CommuniKitty Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CommuniKitty Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBB49641D9F95B200BF68CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenDev.storyboard; sourceTree = "<group>"; };
@@ -299,6 +322,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED83743C1DA39C050026C023 /* AVFoundation.framework in Frameworks */,
+				ED83743B1DA39BFF0026C023 /* CoreGraphics.framework in Frameworks */,
+				ED83743A1DA39BF80026C023 /* CoreMotion.framework in Frameworks */,
+				ED8374391DA39BF00026C023 /* CoreTelephony.framework in Frameworks */,
+				ED8374381DA39BE90026C023 /* SystemConfiguration.framework in Frameworks */,
+				ED8374371DA39BE00026C023 /* UIKit.framework in Frameworks */,
+				ED8374461DA3A1860026C023 /* Instabug.framework in Frameworks */,
 				9F53780F40047EE7C355EA91 /* Pods_CommuniKitty_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,8 +337,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED8374421DA3A04B0026C023 /* AVFoundation.framework in Frameworks */,
+				ED8374411DA3A0430026C023 /* CoreGraphics.framework in Frameworks */,
+				ED8374401DA3A03B0026C023 /* CoreMotion.framework in Frameworks */,
+				ED83743F1DA3A0320026C023 /* CoreTelephony.framework in Frameworks */,
+				ED83743E1DA3A0290026C023 /* SystemConfiguration.framework in Frameworks */,
+				ED83743D1DA3A0210026C023 /* UIKit.framework in Frameworks */,
+				ED8374451DA3A1860026C023 /* Instabug.framework in Frameworks */,
 				56EF53AAFC1EB62A008239D4 /* Pods_CommuniKitty.framework in Frameworks */,
-				88780B01B47EE7554A1E63D3 /* Pods_CommuniKitty.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +379,12 @@
 		A3E53B142558A0798B14AE5A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED783AA01DA3775E00973C1E /* UIKit.framework */,
+				ED783A9E1DA3775800973C1E /* SystemConfiguration.framework */,
+				ED783A9C1DA3775000973C1E /* CoreTelephony.framework */,
+				ED783A9A1DA3774800973C1E /* CoreMotion.framework */,
+				ED783A981DA3774000973C1E /* CoreGraphics.framework */,
+				ED783A961DA3773800973C1E /* AVFoundation.framework */,
 				929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */,
 				2E810CF4F8607A3558ABC3BE /* Pods_CommuniKitty_Dev.framework */,
 			);
@@ -455,6 +497,8 @@
 				EDEC77AD1D91A703007CF613 /* Assets.xcassets */,
 				EDEC77B21D91A703007CF613 /* Info.plist */,
 				EDBB49021D9F917500BF68CB /* Info-dev.plist */,
+				ED8374431DA3A1860026C023 /* Instabug.framework */,
+				ED8374441DA3A1860026C023 /* Instabug.bundle */,
 				EDEC77D41D9221C7007CF613 /* CommuniKitty-Bridging-Header.h */,
 				ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */,
 				ED45124C1D92752C00B95BB5 /* Account */,
@@ -707,6 +751,7 @@
 				EDBB49481D9F923C00BF68CB /* Nunito-ExtraLight.ttf in Resources */,
 				EDBB49491D9F923C00BF68CB /* Nunito-Regular.ttf in Resources */,
 				EDBB49691D9FA67000BF68CB /* LaunchScreen.storyboard in Resources */,
+				ED8374481DA3A1860026C023 /* Instabug.bundle in Resources */,
 				EDBB494A1D9F923C00BF68CB /* lick2.caf in Resources */,
 				EDBB494B1D9F923C00BF68CB /* Locations.storyboard in Resources */,
 				EDBB494C1D9F923C00BF68CB /* Walkthrough.storyboard in Resources */,
@@ -723,6 +768,7 @@
 				EDBB49571D9F923C00BF68CB /* meow1.caf in Resources */,
 				EDBB49581D9F923C00BF68CB /* Main.storyboard in Resources */,
 				EDBB49591D9F923C00BF68CB /* hiss1.caf in Resources */,
+				ED83744D1DA3B2560026C023 /* Info-dev.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +784,7 @@
 				ED4F8EB21D9351BB00BEB208 /* Learn.storyboard in Resources */,
 				ED4F8EBB1D9353EF00BEB208 /* Nunito-ExtraLight.ttf in Resources */,
 				ED4F8EBD1D9353EF00BEB208 /* Nunito-Regular.ttf in Resources */,
+				ED8374471DA3A1860026C023 /* Instabug.bundle in Resources */,
 				ED15C1431D94AA7200B1B895 /* lick2.caf in Resources */,
 				ED4F8EAF1D9351BB00BEB208 /* Locations.storyboard in Resources */,
 				ED4F8EB31D9351BB00BEB208 /* Walkthrough.storyboard in Resources */,
@@ -746,7 +793,6 @@
 				ED4F8EB01D9351BB00BEB208 /* About.storyboard in Resources */,
 				ED4F8EBA1D9353EF00BEB208 /* Nunito-Bold.ttf in Resources */,
 				ED15C1481D94AA7200B1B895 /* chirp1.caf in Resources */,
-				EDBB49031D9F917600BF68CB /* Info-dev.plist in Resources */,
 				EDEC77AE1D91A703007CF613 /* Assets.xcassets in Resources */,
 				ED4F8EBC1D9353EF00BEB208 /* Nunito-Light.ttf in Resources */,
 				ED51266C1D9883AA00EB9027 /* gif in Resources */,
@@ -754,8 +800,8 @@
 				EDBB49681D9FA65D00BF68CB /* LaunchScreenDev.storyboard in Resources */,
 				ED15C1441D94AA7200B1B895 /* meow1.caf in Resources */,
 				ED4F8EA91D93503000BEB208 /* Main.storyboard in Resources */,
-				EDBB49611D9F945900BF68CB /* Info.plist in Resources */,
 				ED15C1411D94AA7200B1B895 /* hiss1.caf in Resources */,
+				ED83744C1DA3B24D0026C023 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1056,6 +1102,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT = YES;
 				DEVELOPMENT_TEAM = AZC38JWQNP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CommuniKitty",
+					"$(PROJECT_DIR)/Pods/GooglePlacesRow/Frameworks",
+				);
 				INFOPLIST_FILE = "CommuniKitty/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1079,6 +1130,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT = YES;
 				DEVELOPMENT_TEAM = AZC38JWQNP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CommuniKitty",
+					"$(PROJECT_DIR)/Pods/GooglePlacesRow/Frameworks",
+				);
 				INFOPLIST_FILE = "CommuniKitty/Info-dev.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1194,6 +1250,11 @@
 				CODE_SIGN_ENTITLEMENTS = CommuniKitty/CommuniKitty.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = AZC38JWQNP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CommuniKitty",
+					"$(PROJECT_DIR)/Pods/GooglePlacesRow/Frameworks",
+				);
 				INFOPLIST_FILE = CommuniKitty/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1215,6 +1276,11 @@
 				CODE_SIGN_ENTITLEMENTS = CommuniKitty/CommuniKitty.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = AZC38JWQNP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CommuniKitty",
+					"$(PROJECT_DIR)/Pods/GooglePlacesRow/Frameworks",
+				);
 				INFOPLIST_FILE = CommuniKitty/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

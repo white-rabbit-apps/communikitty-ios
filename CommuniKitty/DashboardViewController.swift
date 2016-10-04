@@ -21,6 +21,7 @@ enum RowContent {
     case User
     case Fosters
     case Shelter
+    case Hashtag
 }
 
 // The types of content that can be displayed in a dashboard widget collectionView cell
@@ -37,10 +38,12 @@ enum CollectionType {
 class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDelegate {
     
     var pickedImageDate: Date?
+    var refreshOnNextLoad: Bool = false
+    
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     
-    private var dashboard: DashboardTableViewController!
+    open var dashboard: DashboardTableViewController!
     
     override func viewDidLoad() {
         // Listen for when MyAnimals is finished loading to update the UI
@@ -83,7 +86,13 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
         } else {
             self.navigationItem.leftBarButtonItem = nil
         }
-        self.dashboard.refresh(self)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if(self.refreshOnNextLoad) {
+            self.dashboard.refresh(self)
+            self.refreshOnNextLoad = false
+        }
     }
     
     /**

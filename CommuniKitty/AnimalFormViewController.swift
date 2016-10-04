@@ -7,7 +7,8 @@
 //
 
 import Eureka
-//import GooglePlacesRow
+import GooglePlacesRow
+import GooglePlaces
 import Fusuma
 import CLImageEditor
 
@@ -339,16 +340,20 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 cell.imageView?.image = UIImage(named: "form_birthdate")
                 row.maximumDate = Date()
         }
-        //            <<< GooglePlacesTableRow(HOMETOWN_TAG) {
-        //                $0.title = "Hometown"
-        //                if self.isEditMode() {
-        //                    if let hometownVal = self.animalObject?.objectForKey(self.HOMETOWN_TAG) as? String {
-        //                        $0.value = GooglePlace(string: hometownVal)
-        //                    }
-        //                }
-        //                }.cellSetup { cell, row in
-        //                    cell.imageView?.image = UIImage(named: "form_hometown")
-        //            }
+        <<< GooglePlacesTableRow(HOMETOWN_TAG) {
+            $0.title = "Hometown"
+            $0.placeFilter?.type = .city
+            if self.isEditMode() {
+                if let hometownVal = self.animalObject?.object(forKey: self.HOMETOWN_TAG) as? String {
+                    $0.value = GooglePlace(string: hometownVal)
+                }
+            }
+            $0.onNetworkingError = { error in
+                print(error)
+            }
+            }.cellSetup { cell, row in
+                cell.imageView?.image = UIImage(named: "form_hometown")
+        }
         <<< TextAreaRow(INTRO_TAG) {
             $0.title = "Intro"
             $0.placeholder = "Enter an intro..."
@@ -757,16 +762,16 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             animal.name = nameValue.trim()
         }
         
-//        if let hometown = self.form.rowBy(tag: self.HOMETOWN_TAG)!.baseValue as? GooglePlace {
-//            var hometownVal = ""
-//            switch hometown {
-//            case let GooglePlace.UserInput(val):
-//                hometownVal = val
-//            case let GooglePlace.Prediction(pred):
-//                hometownVal = pred.desc
-//            }
-//            animal.setObject(hometownVal, forKey: HOMETOWN_TAG)
-//        }
+        if let hometown = self.form.rowBy(tag: self.HOMETOWN_TAG)!.baseValue as? GooglePlace {
+            var hometownVal = ""
+            switch hometown {
+            case let GooglePlace.userInput(val):
+                hometownVal = val
+            case let GooglePlace.prediction(pred):
+                hometownVal = pred.attributedFullText.string
+            }
+            animal.setObject(hometownVal, forKey: HOMETOWN_TAG)
+        }
         
         if let breedValue = self.form.rowBy(tag: self.BREED_TAG)?.baseValue as? Breed {
             animal.breed = breedValue.object!

@@ -11,6 +11,8 @@ import Contacts
 
 class ExploreViewController: UIViewController {
     
+    var showAsNav : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -22,8 +24,12 @@ class ExploreViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setUpModalBar(title: "Prowl")
-        
+        if(self.showAsNav) {
+            self.setUpNavigationBar(title: "Prowl")
+        } else {
+            self.setUpModalBar(title: "Prowl")
+        }
+            
         self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "button_contacts", action: #selector(ExploreViewController.getContacts), height: 25, width: 25)
 
         self.view.setNeedsUpdateConstraints()

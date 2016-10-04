@@ -465,6 +465,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         cell!.entryObject = entry
         
         cell!.timelineImageView.isHidden = true
+        cell!.timelineImageView.kf_indicatorType = .activity
         if let imageFile = entry.image {
             cell!.timelineImageView.kf_setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             })

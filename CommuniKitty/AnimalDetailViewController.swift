@@ -163,8 +163,6 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Pagin
     var negativeValue = false
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        
         var offset = scrollView.contentOffset.y
         
         if offset == 0 {

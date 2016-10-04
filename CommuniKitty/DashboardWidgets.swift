@@ -88,6 +88,8 @@ class ShelterAnimalsDashboardWidget : DashboardWidget {
             cell.titleLabel?.backgroundColor = UIColor.lightGreenColor()
         }
         
+        cell.titleButton?.isHidden = true
+        
         cell.collectionType = .Animals
         cell.rowContent = .Shelter
         
@@ -114,6 +116,8 @@ class UserPhotosDashboardWidget : DashboardWidget {
         if(self.user != nil) {
             cell.titleLabel?.text = "\(self.user!.firstName!)'s Photos"
             cell.titleLabel?.backgroundColor = UIColor.lightBlueColor()
+
+            cell.titleButton?.isHidden = true
         } else {
             cell.titleLabel?.text = "My Photos"
             cell.titleLabel?.backgroundColor = UIColor.lightBlueColor()
