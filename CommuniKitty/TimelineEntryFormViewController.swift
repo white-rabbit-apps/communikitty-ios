@@ -239,7 +239,13 @@ class TimelineEntryFormViewController: FormViewController {
                         }
                         
                     } else{
-                    AppDelegate.getAppDelegate().dashboardViewController?.openAnimalDetail(animalObject: newAnimal!, push: true, timelineObjectId: timelineEntry.objectId!)
+                        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                            while let presentedViewController = topController.presentedViewController {
+                                topController = presentedViewController
+                            }
+                            let child = topController.childViewControllers[0]
+                            child.openAnimalDetail(animalObject: newAnimal!, push: true, timelineObjectId: timelineEntry.objectId!)
+                        }
                     }
                     
                     if shareToInstagram {
