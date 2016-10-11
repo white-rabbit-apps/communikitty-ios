@@ -7,20 +7,19 @@
 //
 
 
-private let reuseIdentifier = "Cell"
 class LocationPhotoCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var thumbnailImage: UIImageView!
 }
 
 
 class LocationPhotosViewController: UICollectionViewController {
-
-    var googlePlacePhotos: [String?]?
+    
+    var googlePlacePhotos: [String?]? = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView?.backgroundColor = UIColor.clear
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -44,69 +43,74 @@ class LocationPhotosViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDataSource
     
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
+        
         return (self.googlePlacePhotos?.count)!
     }
     
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view!.frame.size.width/4, height: self.view!.frame.size.width/4)
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        return CGSize(width:90, height:90)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as? LocationPhotoCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as? LocationPhotoCollectionViewCell
         
         let photoUrl = googlePlacePhotos![indexPath.row]
-//        cell!.thumbnailImage.kf_showIndicatorWhenLoading = true
-        cell!.thumbnailImage.kf_setImage(with: URL(string: photoUrl!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+        let thumbnailImage = UIImageView(frame: CGRect(x:0, y:0, width:90, height: 90))
+        thumbnailImage.kf_setImage(with: URL(string: photoUrl!)!, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+            
         })
-        // Configure the cell
+        thumbnailImage.contentMode = .scaleAspectFill
+        cell?.addSubview(thumbnailImage)
+        
         return cell!
     }
-    
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.cellForItem(at: indexPath as IndexPath) as? LocationPhotoCollectionViewCell
-        self.showImagesBrowser(imageUrls: googlePlacePhotos!, startIndex: indexPath.row, animatedFromView: cell!.thumbnailImage)
+        self.showImagesBrowser(imageUrls: googlePlacePhotos!, startIndex: indexPath.row, animatedFromView: cell!.subviews.last)
+        collectionView.scrollToItem(at: indexPath as IndexPath, at: .centeredHorizontally, animated: false)
     }
-
-    
-    // MARK: UICollectionViewDelegate
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: IndexPath, withSender sender: AnyObject?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: IndexPath, withSender sender: AnyObject?) {
-     
-     }
-     */
     
 }
+
+
+// MARK: UICollectionViewDelegate
+
+/*
+ // Uncomment this method to specify if the specified item should be highlighted during tracking
+ override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+ return true
+ }
+ */
+
+/*
+ // Uncomment this method to specify if the specified item should be selected
+ override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+ return true
+ }
+ */
+
+/*
+ // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+ override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+ return false
+ }
+ 
+ override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+ return false
+ }
+ 
+ override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+ 
+ }
+ */
+    
