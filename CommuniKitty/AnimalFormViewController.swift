@@ -92,10 +92,6 @@ public final class BreedsPushRow : SelectorRow<PushSelectorCell<Breed>, BreedsTa
 
 // custom SelectorRow class to open Loves/Hates form sections
 final class  QuirksSelectorRow<T: Hashable>: GenericMultipleSelectorRow<String, PushSelectorCell<Set<String>>, QuirksSelectorViewController>, RowType {
-    /// The cell associated to this row.
-//     var baseCell: BaseCell!
-
-//     var tag: String?
 
     //pass the values of AnimalFormViewController
     var animalObject: WRAnimal?
@@ -416,6 +412,8 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             <<< MultipleSelectorRow<String>(TRAITS_TAG) {
                 $0.title = "Traits"
                 $0.options = appDelegate.traitsArray!
+                $0.selectorTitle = "Traits"
+                $0.isTitleForFormSet = false
                 if self.isEditMode() {
                     $0.value = self.selectedTraitStrings
                 }

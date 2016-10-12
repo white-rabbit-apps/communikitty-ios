@@ -40,6 +40,7 @@ open class GenericMultipleSelectorRow<T: Hashable, Cell: CellType, VCType: Typed
     
     open var noValueDisplayText: String?
     
+    open var isTitleForFormSet: Bool = true
     /// Options from which the user will choose
     open var options: [T] {
         get { return self.dataProvider?.arrayData?.map({ $0.first! }) ?? [] }
