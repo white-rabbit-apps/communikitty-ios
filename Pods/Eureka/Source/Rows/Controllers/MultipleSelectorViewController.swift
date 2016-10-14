@@ -51,6 +51,13 @@ open class _MultipleSelectorViewController<T:Hashable, Row: SelectableRowType> :
     }
     
     open override func viewDidLoad() {
+        
+        let setTitle = row as? Eureka._MultipleSelectorRow<T, Eureka.PushSelectorCell<Set<T>>>
+        //setting the title on the form to nil
+        self.isTitleSet = (setTitle?.isTitleForFormSet)!
+        if !self.isTitleSet{
+           self.tableViewStyle = .plain
+        }
         super.viewDidLoad()
         guard let options = row.dataProvider?.arrayData else { return }
         let _ =  form +++ SelectableSection<Row>(row.title ?? "", selectionType: .multipleSelection) { [weak self] section in
@@ -79,6 +86,7 @@ open class _MultipleSelectorViewController<T:Hashable, Row: SelectableRowType> :
                 }
         
         }
+        
         form.first?.header = HeaderFooterView<UITableViewHeaderFooterView>(title: row.title)
     }
     

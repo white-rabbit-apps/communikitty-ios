@@ -183,6 +183,9 @@ public enum PresentationMode<VCType: UIViewController> {
     public func present(_ viewController: VCType!, row: BaseRow, presentingController: FormViewController){
         switch self {
             case .show(_, _):
+                let backItem = UIBarButtonItem()
+                backItem.title = ""
+                presentingController.navigationItem.backBarButtonItem = backItem
                 presentingController.show(viewController, sender: row)
             case .presentModally(_, _):
                 presentingController.present(viewController, animated: true)
@@ -429,13 +432,14 @@ open class FormViewController : UIViewController, FormViewControllerProtocol {
             }
         }
     }
+    public var isTitleSet:Bool = true
     
     /// Accessory view that is responsible for the navigation between rows
     open var navigationAccessoryView : NavigationAccessoryView!
     
     /// Defines the behaviour of the navigation between rows
     public var navigationOptions : RowNavigationOptions?
-    private var tableViewStyle: UITableViewStyle = .grouped
+    public var tableViewStyle: UITableViewStyle = .grouped
     
     public init(style: UITableViewStyle) {
         super.init(nibName: nil, bundle: nil)
@@ -469,10 +473,12 @@ open class FormViewController : UIViewController, FormViewControllerProtocol {
             tableView?.dataSource = self
         }
         tableView?.estimatedRowHeight = BaseRow.estimatedRowHeight
+
     }
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationAccessoryView = NavigationAccessoryView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44.0))
         navigationAccessoryView.tintColor = view.tintColor
 
@@ -700,7 +706,11 @@ extension FormViewController : UITableViewDelegate {
     }
     
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return form[section].header?.viewForSection(form[section], type: .header)
+        if !isTitleSet{
+            return UIView()
+        } else{
+            return form[section].header?.viewForSection(form[section], type: .header)
+        }
     }
     
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -708,11 +718,15 @@ extension FormViewController : UITableViewDelegate {
     }
     
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if !isTitleSet{
+            return 0
+        }
         if let height = form[section].header?.height {
             return height()
         }
         guard let view = form[section].header?.viewForSection(form[section], type: .header) else{
             return UITableViewAutomaticDimension
+
         }
         guard view.bounds.height != 0 else {
             return UITableViewAutomaticDimension
@@ -752,7 +766,11 @@ extension FormViewController : UITableViewDataSource {
     }
     
     open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return form[section].header?.title
+        if !isTitleSet{
+            return nil
+        } else {
+            return form[section].header?.title
+        }
     }
     
     open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
