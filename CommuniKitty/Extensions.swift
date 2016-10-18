@@ -282,11 +282,10 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     func setUpNavigationBar(title: String, showButton: Bool = true) {
         let nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.default
-        nav?.backgroundColor = UIColor.mainColor()
-        nav?.barTintColor = UIColor.mainColor()
-        nav?.tintColor = UIColor.white
-        
-        nav?.setBackgroundImage(nil, for: .default)
+        nav?.isTranslucent = true
+        nav?.setBackgroundImage(UIImage(named:"nav_color"), for: .default)
+        nav?.shadowImage = UIImage()
+
         if var frame = nav?.frame {
             frame.size.height = 45
             nav?.frame = frame
@@ -306,19 +305,22 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     }
     
     func setUpTransparentNavigationBar(title: String) {
-        self.setUpNavigationBar(title: title)
-        
         let nav = self.navigationController?.navigationBar
-        nav?.barStyle = UIBarStyle.blackTranslucent
+        nav?.barStyle = UIBarStyle.default
         nav?.isTranslucent = true
-        nav?.backgroundColor = UIColor.clear
-        nav?.setBackgroundImage(UIImage(), for: .default)
+        nav?.setBackgroundImage(UIImage(named:"nav_transparent"), for: .default)
         nav?.shadowImage = UIImage()
-        
+
         if var frame = nav?.frame {
             frame.size.height = 45
             nav?.frame = frame
         }
+        
+        nav?.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Nunito-Black", size: 20)!,  NSForegroundColorAttributeName: UIColor.white]
+        
+        self.navigationItem.title = title
+        self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "icon_back", action: #selector(UIViewController.goBack), height: 30, width: 25)
+
     }
     
     func setUpNavigationBarImage(image: UIImage, height: CGFloat) {
