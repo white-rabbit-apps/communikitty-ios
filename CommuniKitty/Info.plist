@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.4</string>
+	<string>0.4.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -128,6 +128,8 @@
 	<string>Find your friends kitties</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>White Rabbit Apps</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Record your kitties</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Kitty photos from your catmera roll</string>
 	<key>UIAppFonts</key>
@@ -151,7 +153,5 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Record your kitties</string>
 </dict>
 </plist>

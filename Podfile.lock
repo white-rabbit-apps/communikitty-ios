@@ -46,6 +46,7 @@ PODS:
   - Hoko (2.3.0)
   - ImageRow (1.0.0):
     - Eureka (~> 2.0.0-beta.1)
+  - Instabug (6.0.3)
   - Kingfisher (3.0.1)
   - MMMarkdown (0.5.5)
   - OAuthSwift (0.5.2)
@@ -86,6 +87,7 @@ DEPENDENCIES:
   - GooglePlacesRow (from `https://github.com/EurekaCommunity/GooglePlacesRow.git`, commit `b56ff3c`)
   - Hoko
   - ImageRow (from `https://github.com/EurekaCommunity/ImageRow.git`, branch `master`)
+  - Instabug (from `https://github.com/Instabug/Instabug-iOS.git`, tag `6.0.3`)
   - Kingfisher (from `https://github.com/onevcat/Kingfisher.git`, tag `3.0.1`)
   - MMMarkdown
   - OAuthSwift (from `https://github.com/skedgo/OAuthSwift/`, branch `swift3.0`)
@@ -119,6 +121,9 @@ EXTERNAL SOURCES:
   ImageRow:
     :branch: master
     :git: https://github.com/EurekaCommunity/ImageRow.git
+  Instabug:
+    :git: https://github.com/Instabug/Instabug-iOS.git
+    :tag: 6.0.3
   Kingfisher:
     :git: https://github.com/onevcat/Kingfisher.git
     :tag: 3.0.1
@@ -157,6 +162,9 @@ CHECKOUT OPTIONS:
   ImageRow:
     :commit: 80df823a1f419c9a4804f85962fcd6483e6ab455
     :git: https://github.com/EurekaCommunity/ImageRow.git
+  Instabug:
+    :git: https://github.com/Instabug/Instabug-iOS.git
+    :tag: 6.0.3
   Kingfisher:
     :git: https://github.com/onevcat/Kingfisher.git
     :tag: 3.0.1
@@ -190,6 +198,7 @@ SPEC CHECKSUMS:
   GooglePlacesRow: 79ac09e492fea7e5414b9b93bb9598aa7be5749a
   Hoko: b015751f406d455da0c8acb9404d7c617cb66877
   ImageRow: 1e37db26f61a0c4ad3bc9a3a803c32d968782857
+  Instabug: 4daae5fd154e8a83654f8d974ba008ce87b9a104
   Kingfisher: d5a491b45ea453d90a31bd2c0831d5243e73a73f
   MMMarkdown: 1af97166ce0f6d6e0cb05695665492195d27c3f1
   OAuthSwift: 1ef042d4362e755e24a78f158d817245641a5d24
@@ -201,6 +210,6 @@ SPEC CHECKSUMS:
   SKPhotoBrowser: 48717c1e2602e6e99a5b1df9d6b43889aaa70e9f
   SlideMenuControllerSwift: 9c0a84f9a3fba51681debd7be77617094562ebcc
 
-PODFILE CHECKSUM: 7d72ddc0eec94c48988f3332f5b8a93ebdd526a0
+PODFILE CHECKSUM: 69dc41fbed449c69e2023913739744f43f0714f9
 
 COCOAPODS: 1.0.1

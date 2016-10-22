@@ -371,7 +371,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.hasRegisteredForPush = true
         }
         
-        Instabug.setUserEmail(WRUser.current()?.email)
+        Instabug.setUserEmail((WRUser.current()?.email)!)
 //        self.refreshDashboard()
     }
     

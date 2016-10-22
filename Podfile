@@ -32,7 +32,7 @@ def shared_pods
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'Hoko'
-#    pod 'Instabug', :git => 'https://github.com/Instabug/Instabug-iOS.git', :tag => '5.3.2'
+    pod 'Instabug' , :git => 'https://github.com/Instabug/Instabug-iOS.git', :tag => '6.0.3'
     pod 'Kingfisher', :git => 'https://github.com/onevcat/Kingfisher.git', :tag => '3.0.1'
     pod 'MMMarkdown'
     pod 'OAuthSwift', :git => 'https://github.com/skedgo/OAuthSwift/', :branch => 'swift3.0'
