@@ -37,7 +37,7 @@
 	<key>FacebookDisplayName</key>
 	<string>CommuniKitty</string>
 	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string>public.app-category.lifestyle</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

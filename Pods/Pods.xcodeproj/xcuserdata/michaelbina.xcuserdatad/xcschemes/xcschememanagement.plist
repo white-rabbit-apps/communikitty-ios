@@ -119,11 +119,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ParseTwitterUtils.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>ParseUI.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -157,27 +152,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0EB19C1377A747F81110D44E2D5FCF78</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>124BA04F2E4A4F5C8CDAA39DB6C7F903</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>16FB872D0D2D4BA0F378AB34D47CF95F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>17664F8F0232329D875EC690EB653867</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>19131986256BC669D9741F457D747F73</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -192,17 +172,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2E303C3CE7513908EE880D9CA833AFAE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3EBB97988EA73CAED65A10806B0BB121</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5521527DCEE01591F4138947A6CD4B9C</key>
+		<key>418474F667AED96D3148F10F31DD1E05</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>55ABC5300F5EF855C57F9B23657FB8F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5D53EEF0A501665DB7EBF8C6F3742CDB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -252,12 +242,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D0F2E5EA1B46A5D72FFD42B0B39DBBC</key>
+		<key>9B2B7B4C494A6F5E4293E47F921E6A1A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A33C4F1ACDA7753400E9B73BF30A5647</key>
+		<key>9D0F2E5EA1B46A5D72FFD42B0B39DBBC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -277,6 +267,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B6AB5EDFB1F50271B39622D49BF510F5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BDAF27BE15DBEE3F66D84079233BDDFA</key>
 		<dict>
 			<key>primary</key>
@@ -288,11 +283,6 @@
 			<true/>
 		</dict>
 		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F5FF8D082DF247BBB4C3C8E6BBA33AA1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

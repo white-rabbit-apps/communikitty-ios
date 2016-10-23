@@ -7,7 +7,7 @@
 //
 
 import ParseFacebookUtilsV4
-import ParseTwitterUtils
+//import ParseTwitterUtils
 
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
@@ -202,25 +202,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    @IBAction func loginWithTwitter(_ sender: UIButton) {
-        PFTwitterUtils.logIn { (user: PFUser?, error: Error?) -> Void in
-            if(error != nil) {
-                self.showError(message: error!.localizedDescription)
-            }
-            
-            if let user = user {
-                if user.isNew {
-                    NSLog("User signed up and logged in with Twitter.")
-                    self.goToHome()
-                } else {
-                    NSLog("Existing user logged in with Twitter.")
-                    self.goToHome()
-                }
-            } else {
-                NSLog("Uh oh. The user cancelled the Twitter login.")
-            }
-        }
-    }
+//    @IBAction func loginWithTwitter(_ sender: UIButton) {
+//        PFTwitterUtils.logIn { (user: PFUser?, error: Error?) -> Void in
+//            if(error != nil) {
+//                self.showError(message: error!.localizedDescription)
+//            }
+//            
+//            if let user = user {
+//                if user.isNew {
+//                    NSLog("User signed up and logged in with Twitter.")
+//                    self.goToHome()
+//                } else {
+//                    NSLog("Existing user logged in with Twitter.")
+//                    self.goToHome()
+//                }
+//            } else {
+//                NSLog("Uh oh. The user cancelled the Twitter login.")
+//            }
+//        }
+//    }
 //    
 //    func saveUserDataFromTwitter(user: PFUser) {
 //        let currentUser = user //PFUser.currentUser()!
