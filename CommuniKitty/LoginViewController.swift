@@ -114,8 +114,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        if (textField === usernameField)
-        {
+        if (textField === usernameField) {
             textField.resignFirstResponder()
             passwordField.becomeFirstResponder()
         } else if(textField == passwordField) {
@@ -188,18 +187,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.showError(message: error!.localizedDescription)
             } else if user!.isNew {
                 NSLog("User signed up and logged in through Facebook! \(user!.username)")
-                self.saveUserDataFromFacebook()
+                self.closeAndRun(completion: {
+                    self.saveUserDataFromFacebook {
+                        self.completionBlock()
+                        AppDelegate.getAppDelegate().postLogin()
+                    }
+                })
             } else {
                 NSLog("User logged in through Facebook! \(user!.username)")
                 self.closeAndRun(completion: {
                     self.completionBlock()
                     AppDelegate.getAppDelegate().postLogin()
                 })
-//                self.goToHome()
-                //                self.saveUserDataFromFacebook()
             }
         }
-        
     }
     
 //    @IBAction func loginWithTwitter(_ sender: UIButton) {
@@ -274,7 +275,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //        }
 //    }
     
-    func saveUserDataFromFacebook() {
+    func saveUserDataFromFacebook(completionBlock: @escaping () -> Void) {
         
         let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email,name,first_name,last_name,gender"])
         _ = fbRequest?.start(completionHandler: { (FBSDKGraphRequestConnection, result, error) -> Void in
@@ -331,7 +332,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             (success: Bool, error: Error?) -> Void in
                             if(success) {
                                 NSLog("success saving user info from facebook")
-                                self.goToHome()
+                                completionBlock()
                             } else {
                                 self.showError(message: error!.localizedDescription)
                             }
