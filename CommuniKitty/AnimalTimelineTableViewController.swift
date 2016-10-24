@@ -107,7 +107,10 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     func imagesLoaded(_ objects: [PFObject]?, imageIndexById: [String : Int]? , imageEntries:[WRTimelineEntry]?){
         self.imageIndexById = imageIndexById ?? [String : Int]()
         self.imageEntries = imageEntries ?? [WRTimelineEntry]()
-        self.perform(#selector(scrollToIndexPathForEntity), with: objects, afterDelay: 0.5)
+        if self.timelineObjectId != nil {
+            self.perform(#selector(scrollToEntry), with: self.timelineObjectId, afterDelay: 0.5)
+            self.timelineObjectId = nil
+        }
         self.imagesLoaded = true
         setEmptyDataSetCustomView()
     }
@@ -121,24 +124,26 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
      - Parameters:
      - objects: An array of the objects to scroll to
      */
-    func scrollToIndexPathForEntity(objects: [PFObject]?) {
-        if (self.timelineObjectId != nil) {
-            for (index, object) in objects!.enumerated(){
-                if object.objectId == self.timelineObjectId {
-                    var scrollIndex = index
-                    if self.animalDeceased() {
-                         scrollIndex += 1
-                    }
-                    if scrollIndex < tableView.numberOfRows(inSection: 0) {
-                        let indexPath = IndexPath(row: scrollIndex, section: 0)
-                        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                    }
-                    self.timelineObjectId = nil
-                    break
-                }
-            }
-        }
-    }
+//    func scrollToIndexPathForEntity(objects: [PFObject]?) {
+//            if (self.timelineObjectId != nil) {
+//                for (index, object) in objects!.enumerated(){
+//                    if object.objectId == self.timelineObjectId {
+//                        var scrollIndex = index
+//                        if self.animalDeceased() {
+//                             scrollIndex += 1
+//                        }
+//                        if scrollIndex < tableView.numberOfRows(inSection: 0) {
+//                            let indexPath = IndexPath(row: scrollIndex, section: 0)
+//                            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+//                        }
+//                        self.timelineObjectId = nil
+//                        break
+//                    }
+//                }
+//            }
+//        }
+//    
+
     
     func initGestureRecognizers() {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
@@ -221,7 +226,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     }
     
     func scrollToIndexPath(indexPath: IndexPath?) {
-        self.tableView.scrollToRow(at: indexPath!, at: .bottom, animated: true)
+        self.tableView.scrollToRow(at: indexPath!, at: .top, animated: true)
     }
 
     
@@ -482,6 +487,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
                 case "birth":
                     cell!.largeIcon.image = UIImage(named: "timeline_born")
                     cell!.largeIcon.isHidden = false
+                    
                     break
                 case "birthday":
                     cell!.largeIcon.image = UIImage(named: "timeline_birthday")

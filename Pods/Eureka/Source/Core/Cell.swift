@@ -127,7 +127,7 @@ open class Cell<T: Equatable> : BaseCell, TypedCellType {
             textLabel?.text = row.title
         } else {
             let numberOfSpace = row.title?.characters.count
-            if numberOfSpace! > 0{
+            if let number = numberOfSpace {
                 var text = ""
                 for _ in 0...numberOfSpace!{
                     text += "  "
