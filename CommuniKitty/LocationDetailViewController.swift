@@ -44,23 +44,17 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate,PagingMenu
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setUpNavigationBar()
-        self.setUpTransparentNavigationBar()
-        self.tabBarController?.tabBar.isHidden = true
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.setUpTransparentNavigationBar()
         super.viewWillDisappear(animated)
-        
-        self.tabBarController?.tabBar.isHidden = false
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        setUpTransparentNavigationBar()
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(UIViewController.goBack))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(swipeRight)
@@ -68,7 +62,6 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate,PagingMenu
         if let location = currentLocationObject {
             print("Location Object==",location)
             nameLabel.text = location.name
-            self.setUpNavigationBar(title: location.name!)
             
             // make api call to get details of place using google place api
             if let googlePlaceId = location.googlePlaceId {

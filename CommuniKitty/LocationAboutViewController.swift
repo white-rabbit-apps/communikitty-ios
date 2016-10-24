@@ -270,10 +270,8 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
     @IBAction func phoneButtonTap(_ sender: AnyObject) {
         if let location = currentLocationObject {
             if let number = location.phone {
-                let strippedNumber = number.replacingCharacters(in: number.startIndex..<number.endIndex, with: "")
-
-//                let strippedNumber = number.stringByReplacingOccurrencesOfString("\\D", withString: "", options: .RegularExpressionSearch, range: number.startIndex..<number.endIndex)
-                openUrl(url: "tel://" + strippedNumber)
+                let strippedNumber = number.components(separatedBy: NSCharacterSet.decimalDigits.inverted).joined(separator: "")
+                openUrl(url: "telprompt://" + strippedNumber)
             }
         }
     }
