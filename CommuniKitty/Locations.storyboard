@@ -1902,7 +1902,8 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s39-Ib-Sfz">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank_cover" translatesAutoresizingMaskIntoConstraints="NO" id="9ff-0G-7QV">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9ff-0G-7QV">
+                                        <color key="backgroundColor" red="0.12941176470588234" green="0.17254901960784313" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="251" id="3Bp-oj-xlx">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="195"/>
@@ -1920,6 +1921,7 @@
                                         </variation>
                                     </imageView>
                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V9S-cI-tku">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="76" id="Zb0-yL-VJX"/>
                                             <constraint firstAttribute="height" constant="76" id="x05-wO-nyt"/>
@@ -3200,7 +3202,6 @@
     </scenes>
     <resources>
         <image name="animal_profile_photo_empty" width="103" height="103"/>
-        <image name="blank_cover" width="750" height="358"/>
         <image name="icon_call" width="29" height="29"/>
         <image name="icon_current_location" width="33" height="33"/>
         <image name="icon_expand" width="17" height="11"/>
