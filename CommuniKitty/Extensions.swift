@@ -285,6 +285,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         nav?.isTranslucent = true
         nav?.setBackgroundImage(UIImage(named:"nav_color"), for: .default)
         nav?.shadowImage = UIImage()
+        nav?.tintColor = UIColor.white
 
         if var frame = nav?.frame {
             frame.size.height = 45

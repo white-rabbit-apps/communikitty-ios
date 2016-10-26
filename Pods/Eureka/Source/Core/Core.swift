@@ -412,7 +412,11 @@ public struct InlineRowHideOptions : OptionSet {
 /// View controller that shows a form.
 open class FormViewController : UIViewController, FormViewControllerProtocol {
     
-    @IBOutlet public var tableView: UITableView?
+    @IBOutlet public var tableView: UITableView? {
+        didSet{
+            tableView?.backgroundColor = UIColor.white
+        }
+    }
     
     private lazy var _form : Form = { [weak self] in
         let form = Form()
@@ -440,6 +444,7 @@ open class FormViewController : UIViewController, FormViewControllerProtocol {
     /// Defines the behaviour of the navigation between rows
     public var navigationOptions : RowNavigationOptions?
     public var tableViewStyle: UITableViewStyle = .grouped
+    public var separatorStyle: UITableViewCellSeparatorStyle = .none
     
     public init(style: UITableViewStyle) {
         super.init(nibName: nil, bundle: nil)
@@ -473,6 +478,7 @@ open class FormViewController : UIViewController, FormViewControllerProtocol {
             tableView?.dataSource = self
         }
         tableView?.estimatedRowHeight = BaseRow.estimatedRowHeight
+        tableView?.separatorStyle = separatorStyle
 
     }
     
