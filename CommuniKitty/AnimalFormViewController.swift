@@ -11,6 +11,7 @@ import GooglePlacesRow
 import GooglePlaces
 import Fusuma
 import CLImageEditor
+import ImageRow
 
 public final class Coat : NSObject {
     var name: String?
@@ -162,6 +163,29 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
     func isEditMode() -> Bool {
         return (self.animalObject != nil)
     }
+    func addSeparator(cell:BaseCell, separatorStart: CGFloat = 0.0, separatorEnd: CGFloat = 0.0, bottom: CGFloat = 0.0, updateDefaults:Bool = false){
+        
+        let width = UIScreen.main.bounds.width
+        let separatorView = UIView()
+        if updateDefaults {
+            if width > 400 {
+                separatorView.frame = CGRect(x:separatorStart, y: bottom, width: separatorEnd - 30, height: 1)
+            } else {
+                separatorView.frame = CGRect(x:separatorStart-2, y: bottom , width: separatorEnd - 25, height: 1)
+            }
+            separatorView.backgroundColor = UIColor.gray
+            cell.addSubview(separatorView)
+        } else {
+            if width > 400 {
+                separatorView.frame = CGRect(x:13, y:cell.frame.height-2, width: self.view.frame.width - 30, height: 1)
+            } else {
+                separatorView.frame = CGRect(x:11, y:cell.frame.height-2, width: self.view.frame.width - 25, height: 1)
+            }
+            separatorView.backgroundColor = UIColor.gray
+            cell.addSubview(separatorView)
+        }
+       
+    }
     
     func loadTraits() {
         if let animal = self.animalObject {
@@ -265,33 +289,30 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
     func generateForm() {
         let appDelegate = AppDelegate.getAppDelegate()
         
-        //        form +++ ImageRow(PROFILE_PHOTO_TAG) {imageRow_ in
-        //            }.cellSetup { cell, row in
-        //                if self.isEditMode() {
-        //                    if let profilePhotoFile = self.animalObject!.profilePhoto {
-        //                        profilePhotoFile.getDataInBackgroundWithBlock({
-        //                            (imageData: NSData?, error: Error?) -> Void in
-        //                            if(error == nil) {
-        //                                let image = UIImage(data:imageData!)
-        //                                row.profileImage = (image?.circle)!
-        //                                row.customUpdateCell()
-        //                            }
-        //                        })
-        //                    } else {
-        //                    }
-        //                } else {
-        //                    row.profileImage = UIImage(named: "animal_profile_photo_empty_add.png")!
-        //                }
-        //                row.shouldShowProfileImage  = true
-        //            }.onCellSelection {cell,row in
-        //                self.takeFusumaPhoto()
-        //                row.shouldShowProfileImage  = false
-        //            }.cellUpdate { cell, row in
-        //                if(self.profileImage != nil) {
-        //                    row.profileImage = self.profileImage!
-        //                    row.customUpdateCell()
-        //                }
-        //        }
+                form +++ ImageRow(PROFILE_PHOTO_TAG) {imageRow_ in
+                    }.cellSetup { cell, row in
+                        row.emptyProfileImage = UIImage(named: "animal_profile_photo_empty_add.png")!
+                        row.emptyProfileCircleBounds = false
+                        if self.isEditMode() {
+                            if let profilePhotoFile = self.animalObject!.profilePhoto {
+                                profilePhotoFile.getDataInBackground(block: {
+                                     (imageData: Data?, error: Error?) -> Void in
+                                    if(error == nil) {
+                                        let image = UIImage(data:imageData!)
+                                        row.profileImage = (image?.circle)!
+                                        row.customUpdateCell()
+                                    }
+                                })
+                            } else {
+                            }
+                        }
+                    }.onCellSelection {cell,row in
+                        self.takeFusumaPhoto()
+                    }.cellUpdate { cell, row in
+                        if row.profileImage != nil {
+                            self.profileImage = row.profileImage
+                        }
+                    }
         
         form +++ Section("Info") { section  in
             section.color   = UIColor.lightOrangeColor()
@@ -304,7 +325,9 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             }
         }.cellSetup { cell, row in
             cell.imageView?.image = UIImage(named: "form_cat_name")
-        }
+            self.addSeparator(cell: cell)
+            }
+            
         <<< TwitterRow(USERNAME_TAG) {
             $0.title = "Username"
             if self.isEditMode() {
@@ -313,6 +336,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         }.cellSetup { cell, row in
             cell.textField.placeholder = "@username"
             cell.imageView?.image = UIImage(named: "form_username")
+            self.addSeparator(cell: cell)
         }
         <<< SegmentedRow<String>(GENDER_TAG) {
             
@@ -324,6 +348,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             }
         }.cellSetup { cell, row in
             cell.imageView?.image = UIImage(named: "form_gender")
+            self.addSeparator(cell: cell)
         }
         
         <<< DateInlineRow(BIRTHDATE_TAG) {
@@ -335,6 +360,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             }.cellSetup { cell, row in
                 cell.imageView?.image = UIImage(named: "form_birthdate")
                 row.maximumDate = Date()
+                self.addSeparator(cell: cell)
         }
         <<< GooglePlacesTableRow(HOMETOWN_TAG) {
             $0.title = "Hometown"
@@ -349,6 +375,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             }
             }.cellSetup { cell, row in
                 cell.imageView?.image = UIImage(named: "form_hometown")
+                self.addSeparator(cell: cell)
         }
         <<< TextAreaRow(INTRO_TAG) {
             $0.title = "Intro"
@@ -365,6 +392,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             }
         }.cellSetup { cell, row in
             cell.imageView?.image = UIImage(named: "form_intro")
+            self.addSeparator(cell: cell, separatorStart:13, separatorEnd: self.view.frame.width, bottom: cell.bounds.height*2.5, updateDefaults : true)
         }
         
         form +++ Section("Details"){ section  in
@@ -386,6 +414,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 
                 }.cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "form_breed")
+                    self.addSeparator(cell: cell)
             }
             
             <<< CoatsPushRow(COAT_TAG) {
@@ -402,6 +431,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 }
                 }.cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "form_coat")
+                    self.addSeparator(cell: cell)
         }
         
         
@@ -419,6 +449,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 }
                 }.cellSetup { cell, row in
                     cell.imageView?.image = UIImage(named: "form_traits")
+                    self.addSeparator(cell: cell)
             }
             
             <<< QuirksSelectorRow<String>(LOVES_TAG) {
@@ -440,6 +471,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 }
             }.cellSetup { cell, row in
                 cell.imageView?.image = UIImage(named: "form_loves")
+                self.addSeparator(cell: cell)
             }
         
             <<< QuirksSelectorRow<String>(HATES_TAG){
@@ -460,6 +492,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 
             }.cellSetup { cell, row in
                 cell.imageView?.image = UIImage(named: "form_hates")
+                self.addSeparator(cell: cell)
             }
         
         form +++ Section("Soshul Meowdia") { section  in
@@ -474,6 +507,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 }.cellSetup { cell, row in
                     cell.textField.placeholder = "@username"
                     cell.imageView?.image = UIImage(named: "form_social_twitter")
+                    self.addSeparator(cell: cell)
             }
             <<< TwitterRow(YOUTUBE_TAG) {
                 $0.title = "Youtube"
@@ -483,6 +517,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 }.cellSetup { cell, row in
                     cell.textField.placeholder = "@username"
                     cell.imageView?.image = UIImage(named: "form_social_youtube")
+                    self.addSeparator(cell: cell)
             }
             <<< TwitterRow(FACEBOOK_TAG) {
                 $0.title = "Facebook"
@@ -492,6 +527,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 }.cellSetup { cell, row in
                     cell.textField.placeholder = "page_id"
                     cell.imageView?.image = UIImage(named: "form_social_facebook")
+                    self.addSeparator(cell: cell)
             }
             <<< TwitterRow(INSTAGRAM_TAG) {
                 $0.title = "Instagram"
@@ -501,6 +537,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 }.cellSetup { cell, row in
                     cell.textField.placeholder = "@username"
                     cell.imageView?.image = UIImage(named: "form_social_instagram")
+                    self.addSeparator(cell: cell)
             }
 //            <<< ButtonRow("instagramImport") {
 //                $0.title = "Import Photos from Instagram"

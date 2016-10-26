@@ -71,6 +71,9 @@ open class _ImageRow<Cell: CellType>: SelectorRow<Cell, ImagePickerController> w
     open var sourceTypes: ImageRowSourceTypes
     open internal(set) var imageURL: URL?
     open var clearAction = ImageClearAction.yes(style: .destructive)
+    public var profileImage : UIImage?
+    public var emptyProfileImage : UIImage?
+    public var emptyProfileCircleBounds: Bool = true
     
     private var _sourceType: UIImagePickerControllerSourceType = .camera
     
@@ -138,6 +141,7 @@ open class _ImageRow<Cell: CellType>: SelectorRow<Cell, ImagePickerController> w
             let clearPhotoOption = UIAlertAction(title: NSLocalizedString("Clear Photo", comment: ""), style: style, handler: { [weak self] _ in
                 self?.value = nil
                 self?.imageURL = nil
+                self?.profileImage = nil
                 self?.updateCell()
                 })
             sourceActionSheet.addAction(clearPhotoOption)
@@ -169,18 +173,14 @@ open class _ImageRow<Cell: CellType>: SelectorRow<Cell, ImagePickerController> w
         super.customUpdateCell()
         cell.accessoryType = .none
         if let image = self.value {
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 88, height: 88))
-            imageView.contentMode = .scaleAspectFill
-            imageView.image = image
-            imageView.clipsToBounds = true
-            cell.accessoryView = imageView
+            self.profileImage = image
+            self.addImageView()
         }
-        else{
-            cell.accessoryView = nil
+        else {
+            self.addImageView()
         }
-    }
     
-
+    }
 }
 
 extension _ImageRow {
@@ -200,7 +200,29 @@ extension _ImageRow {
         createOptionForAlertController(alertController, sourceType: .PhotoLibrary)
         createOptionForAlertController(alertController, sourceType: .SavedPhotosAlbum)
     }
+    
+    public func  addImageView() {
+        
+        for view in self.cell.subviews {
+            if let imageSubView = view as? UIImageView {
+                imageSubView.removeFromSuperview()
+            }
+        }
+        cell.height           = { 120 }
+        cell.backgroundColor  = UIColor.white
+        let x = UIScreen.main.bounds.width/2
+        let imgView : UIImageView = UIImageView(frame: CGRect(x:x-60, y:0.0, width: 120,height:120))
+        imgView.contentMode = .scaleAspectFill
+        imgView.image = self.profileImage ?? self.emptyProfileImage ?? UIImage()
+        if self.profileImage != nil || (self.emptyProfileImage != nil && self.emptyProfileCircleBounds) {
+            imgView.clipsToBounds = true
+            imgView.layer.masksToBounds = true
+            imgView.layer.cornerRadius = imgView.frame.width / 2
+        }
+        cell.addSubview(imgView)
+    }
 }
+
 
 /// A selector row where the user can pick an image
 public final class ImageRow : _ImageRow<PushSelectorCell<UIImage>>, RowType {

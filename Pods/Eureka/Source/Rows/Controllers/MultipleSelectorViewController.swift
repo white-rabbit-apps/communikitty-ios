@@ -57,6 +57,8 @@ open class _MultipleSelectorViewController<T:Hashable, Row: SelectableRowType> :
         self.isTitleSet = (setTitle?.isTitleForFormSet)!
         if !self.isTitleSet{
            self.tableViewStyle = .plain
+            //add separator to the table
+            self.separatorStyle = .singleLine
         }
         super.viewDidLoad()
         guard let options = row.dataProvider?.arrayData else { return }
