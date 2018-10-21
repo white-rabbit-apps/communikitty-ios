@@ -337,7 +337,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         
         fusuma.delegate = self
         
-        fusuma.modeOrder = .cameraFirst
+//        fusuma.modeOrder = .cameraFirst
         
         fusuma.transitioningDelegate = transitioningDelegate
         fusuma.modalPresentationStyle = .custom
@@ -361,12 +361,15 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         })
     }
     
-    public func fusumaImageSelected(_ image: UIImage) {
+    public func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         self.modalTransitionStyle = .coverVertical
         self.dismiss(animated: false, completion: { () -> Void in
             self.isAddingFirstImage = true
             self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
         })
+    }
+    
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
     }
     
     /**
@@ -439,13 +442,13 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         cell!.entryObject = entry
         
         cell!.timelineImageView.isHidden = true
-        cell!.timelineImageView.kf_indicatorType = .activity
+        cell!.timelineImageView.kf.indicatorType = .activity
         if let imageFile = entry.image {
-            cell!.timelineImageView.kf_setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+            cell!.timelineImageView.kf.setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             })
             cell!.timelineImageView.isHidden = false
         } else if let imageUrl = entry.imageUrl {
-            cell!.timelineImageView.kf_setImage(with: URL(string: imageUrl)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+            cell!.timelineImageView.kf.setImage(with: URL(string: imageUrl)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             })
             cell!.timelineImageView.isHidden = false
         } else {

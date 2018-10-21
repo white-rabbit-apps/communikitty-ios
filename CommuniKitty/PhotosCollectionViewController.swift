@@ -36,9 +36,9 @@ public let screenBounds = UIScreen.main.bounds
 public var controllerHeight: CGFloat {
     get {
         switch Device.size() {
-        case .Screen4_7Inch:
+        case .screen4_7Inch:
             return CGFloat(430)
-        case .Screen5_5Inch:
+        case .screen5_5Inch:
             return CGFloat(500)
         default:
             return CGFloat(430)
@@ -47,7 +47,6 @@ public var controllerHeight: CGFloat {
 }
 
 class PhotosCollectionViewController: UICollectionViewController, PhotoCollectionViewDelegateLayout, ImagesLoadedHandler, FusumaDelegate, CLImageEditorDelegate {
-
     
     var imageEntries: [WRTimelineEntry] = []
     var imageIndexById : [String : Int] = [:]
@@ -124,7 +123,7 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
         
         fusuma.delegate = self
         
-        fusuma.modeOrder = .cameraFirst
+//        fusuma.modeOrder = .cameraFirst
         
         fusuma.transitioningDelegate = transitioningDelegate
         fusuma.modalPresentationStyle = .custom
@@ -157,12 +156,12 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
         // Configure the cell
         let entry = self.imageEntries[(indexPath as IndexPath).row]
         
-        cell.imageViewContent.kf_indicatorType = .activity
+        cell.imageViewContent.kf.indicatorType = .activity
         if let imageFile = entry.image {
-            cell.imageViewContent.kf_setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+            cell.imageViewContent.kf.setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             })
         } else  if let imageUrl = entry.imageUrl {
-            cell.imageViewContent.kf_setImage(with: URL(string: imageUrl)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+            cell.imageViewContent.kf.setImage(with: URL(string: imageUrl)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             })
         }
         cell.setNeedsLayout()
@@ -199,12 +198,15 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
         })
     }
     
-    public func fusumaImageSelected(_ image: UIImage) {
+    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         self.modalTransitionStyle = .coverVertical
         self.dismiss(animated: false, completion: { () -> Void in
             self.isAddingFirstImage = true
             self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
         })
+    }
+    
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
     }
     
     /**

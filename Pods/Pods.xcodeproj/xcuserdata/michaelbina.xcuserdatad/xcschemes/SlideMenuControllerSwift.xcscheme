@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B6AB5EDFB1F50271B39622D49BF510F5'
-               BlueprintName = 'SlideMenuControllerSwift'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SlideMenuControllerSwift.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "94282CA47AB96C112FA35B30ECE78B68"
+               BlueprintName = "SlideMenuControllerSwift"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "SlideMenuControllerSwift.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

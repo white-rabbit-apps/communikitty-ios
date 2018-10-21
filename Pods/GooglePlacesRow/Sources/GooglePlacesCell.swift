@@ -28,12 +28,12 @@ open class GooglePlacesCell: _FieldCell<GooglePlace>, CellType {
     fileprivate var autocompleteTimer: Timer?
     
     //MARK: Methods
-    required public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    required public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     override open func setup() {
@@ -82,7 +82,7 @@ open class GooglePlacesCell: _FieldCell<GooglePlace>, CellType {
     /**
      Function called when the Google Places autocomplete timer is fired
      */
-    func timerFired(_ timer: Timer?) {
+    @objc func timerFired(_ timer: Timer?) {
         autocompleteTimer?.invalidate()
         autocompleteTimer = nil
         autocomplete()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '8978C7FB7007A28B676AB1EA004C3923'
-               BlueprintName = 'ParseFacebookUtilsV4'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'ParseFacebookUtilsV4.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "407FD199E2EE0EF871ADE78D007371E1"
+               BlueprintName = "ParseFacebookUtilsV4"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "ParseFacebookUtilsV4.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

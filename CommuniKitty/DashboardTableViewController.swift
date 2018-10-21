@@ -131,7 +131,7 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
     // Each collectionType expects a different kind of object:
     //    - .Animals: Array<WRAnimal>
     //    - .Photos: Array<WRTimelineEntry>
-    var sourceArray: [AnyObject]! = [AnyObject!]()
+    var sourceArray: [AnyObject]! = [AnyObject]()
     
     // The type of cells that should be displayed in this widget [.Animals, .Photos]
     var collectionType : CollectionType = .Animals
@@ -234,7 +234,7 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
     }
     
     func reloadData() {
-        self.sourceArray = [AnyObject!]()
+        self.sourceArray = [AnyObject]()
         self.nextPage = 1
         self.currentlyLoading = false
         self.loadData(self.nextPage)
@@ -313,11 +313,11 @@ class PhotoThumbnailCell: UICollectionViewCell, DashboardCollectionViewCell {
     func loadData(_ object: PFObject) {
         if let entry = object as? WRTimelineEntry {
             
-            self.thumbnailImage!.kf_indicatorType = .activity
+            self.thumbnailImage!.kf.indicatorType = .activity
             if let imageFile = entry.image {
-                self.thumbnailImage!.kf_setImage(with: URL(string: imageFile.url!))
+                self.thumbnailImage!.kf.setImage(with: URL(string: imageFile.url!))
             } else if let imageUrl = entry.imageUrl {
-                self.thumbnailImage!.kf_setImage(with: URL(string: imageUrl))
+                self.thumbnailImage!.kf.setImage(with: URL(string: imageUrl))
             }
         }
     }
@@ -350,8 +350,8 @@ class AnimalThumbnailCell: UICollectionViewCell, DashboardCollectionViewCell {
             
             self.thumbnailImage?.image = nil
             if let profilePhoto = animal.profilePhoto {
-                self.thumbnailImage!.kf_indicatorType = .activity
-                self.thumbnailImage!.kf_setImage(with: URL(string: profilePhoto.url!), placeholder: placeholderImage, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+                self.thumbnailImage!.kf.indicatorType = .activity
+                self.thumbnailImage!.kf.setImage(with: URL(string: profilePhoto.url!), placeholder: placeholderImage, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
                     let frame = self.thumbnailImage!.frame
                     self.thumbnailImage!.frame = CGRect(x: frame.minX, y: frame.minY, width: 90, height: 90)
                     self.thumbnailImage!.makeCircular()

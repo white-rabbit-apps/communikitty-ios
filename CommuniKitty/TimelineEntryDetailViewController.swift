@@ -65,18 +65,18 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     
     func updateView() {
         switch Device.size() {
-        case .Screen3_5Inch:
+        case .screen3_5Inch:
             print("It's a 3.5 inch screen")
             break
-        case .Screen4Inch:
+        case .screen4Inch:
             print("It's a 4 inch screen")
             self.commentBarItem.width = 180.0
             self.translateButton.width = 20.0
             break
-        case .Screen4_7Inch:
+        case .screen4_7Inch:
             print("It's a 4.7 inch screen")
             break
-        case .Screen5_5Inch:
+        case .screen5_5Inch:
             let frame = CGRect(x: commentField.frame.minX, y: commentField.frame.minY, width: 340.0, height: commentField.frame.height)
             self.commentField.frame(forAlignmentRect: frame)
             self.translateButton.width = 30.0

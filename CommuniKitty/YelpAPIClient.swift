@@ -24,7 +24,8 @@ class YelpAPIClient: NSObject {
 
     override init() {
         apiConsoleInfo = YelpAPIConsole()
-        self.clientOAuth = OAuthSwiftClient(consumerKey: apiConsoleInfo.consumerKey, consumerSecret: apiConsoleInfo.consumerSecret, accessToken: apiConsoleInfo.accessToken, accessTokenSecret: apiConsoleInfo.accessTokenSecret)
+        self.clientOAuth = OAuthSwiftClient(consumerKey: apiConsoleInfo.consumerKey, consumerSecret: apiConsoleInfo.consumerSecret, oauthToken: apiConsoleInfo.accessToken, oauthTokenSecret: apiConsoleInfo.accessTokenSecret, version: OAuthSwiftCredential.Version.oauth2)
+        
         super.init()
     }
     
@@ -51,9 +52,14 @@ class YelpAPIClient: NSObject {
     
     */
     
-    func searchPlacesWithParameters(_ searchParameters: Dictionary<String, String>, successSearch: @escaping (_ data: Data, _ response: HTTPURLResponse) -> Void, failureSearch: @escaping (_ error: NSError) -> Void) {
+    func searchPlacesWithParameters(_ searchParameters: Dictionary<String, String>, successSearch: @escaping (_ data: Data, _ response: HTTPURLResponse) -> Void, failureSearch: @escaping (_ error: Error) -> Void) {
         let searchUrl = APIBaseUrl + "search/"
-        _ = clientOAuth!.get(searchUrl, parameters: searchParameters, success: successSearch, failure: failureSearch)
+        
+        _ = clientOAuth!.get(searchUrl, parameters: searchParameters, headers: nil, success: { (response: OAuthSwiftResponse) in
+            successSearch(response.data, response.response)
+        }, failure: { (error: OAuthSwiftError) in
+            failureSearch(error.underlyingError!)
+        })        
     }
     
     /*
@@ -77,13 +83,18 @@ class YelpAPIClient: NSObject {
     
     */
     
-    func getBusinessInformationOf(_ businessId: String, localeParameters: Dictionary<String, String>? = nil, successSearch: @escaping (_ data: Data, _ response: HTTPURLResponse) -> Void, failureSearch: @escaping (_ error: NSError) -> Void) {
+    func getBusinessInformationOf(_ businessId: String, localeParameters: Dictionary<String, String>? = nil, successSearch: @escaping (_ data: Data, _ response: HTTPURLResponse) -> Void, failureSearch: @escaping (_ error: Error) -> Void) {
         let businessInformationUrl = APIBaseUrl + "business/" + businessId
         var parameters = localeParameters
         if parameters == nil {
             parameters = Dictionary<String, String>()
         }
-        _ = clientOAuth!.get(businessInformationUrl, parameters: parameters!, success: successSearch, failure: failureSearch)
+        
+        _ = clientOAuth!.get(businessInformationUrl, parameters: parameters!, headers: nil, success: { (response: OAuthSwiftResponse) in
+            successSearch(response.data, response.response)
+        }, failure: { (error: OAuthSwiftError) in
+            failureSearch(error.underlyingError!)
+        })
     }
     
     /*
@@ -107,7 +118,7 @@ class YelpAPIClient: NSObject {
     
     */
     
-    func searchBusinessWithPhone(_ phoneNumber: String, searchParameters: Dictionary<String, String>? = nil, successSearch: @escaping (_ data: Data, _ response: HTTPURLResponse) -> Void, failureSearch: @escaping (_ error: NSError) -> Void) {
+    func searchBusinessWithPhone(_ phoneNumber: String, searchParameters: Dictionary<String, String>? = nil, successSearch: @escaping (_ data: Data, _ response: HTTPURLResponse) -> Void, failureSearch: @escaping (_ error: Error) -> Void) {
         let phoneSearchUrl = APIBaseUrl + "phone_search/"
         var parameters = searchParameters
         if parameters == nil {
@@ -116,6 +127,10 @@ class YelpAPIClient: NSObject {
         
         parameters!["phone"] = phoneNumber
         
-        _ = clientOAuth!.get(phoneSearchUrl, parameters: parameters!, success: successSearch, failure: failureSearch)
+        _ = clientOAuth!.get(phoneSearchUrl, parameters: parameters!, headers: nil, success: { (response: OAuthSwiftResponse) in
+            successSearch(response.data, response.response)
+        }, failure: { (error: OAuthSwiftError) in
+            failureSearch(error.underlyingError!)
+        })
     }
 }

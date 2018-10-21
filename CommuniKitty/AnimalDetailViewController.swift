@@ -30,7 +30,7 @@ private struct MenuOptions: MenuViewCustomizable {
     }
 }
 
-class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, PagingMenuControllerDelegate, FusumaDelegate ,UIScrollViewDelegate{
+class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, FusumaDelegate ,UIScrollViewDelegate{
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
@@ -397,9 +397,8 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Pagin
     
     
     // Return the image which is selected from camera roll or is taken via the camera.
-    func fusumaImageSelected(_ image: UIImage, creationDate: Date?) {
-        self.pickedImageDate = creationDate
-        
+//    func fusumaImageSelected(_ image: UIImage, creationDate: Date?) {
+    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         self.modalTransitionStyle = .coverVertical
         
         let cropRatioHeight = self.isSettingProfilePhoto ? 1 : 2
@@ -407,6 +406,9 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Pagin
         self.dismiss(animated: false, completion: { () -> Void in
             self.showEditor(image: image, delegate: self, ratios: [cropRatioHeight, 1], fromController: self)
         })
+    }
+    
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
     }
     
     func fusumaVideoCompleted(withFileURL fileURL: URL) {
@@ -569,7 +571,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Pagin
             }
             
             if let coverPhotoFile = animal.coverPhoto {
-                self.coverPhoto.kf_setImage(with: URL(string: coverPhotoFile.url!)!)
+                self.coverPhoto.kf.setImage(with: URL(string: coverPhotoFile.url!)!)
                 self.coverOverlay.isHidden = false
             } else {
                 self.coverPhoto.image = nil
@@ -578,7 +580,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Pagin
             
             if let profilePhotoFile = animal.profilePhoto {
                 
-                self.profileThumb.kf_setImage(with: URL(string: profilePhotoFile.url!)!, for: UIControlState(), placeholder: UIImage(named: "animal_profile_photo_empty"), options: nil, progressBlock: nil, completionHandler: { (image: Image?, error: NSError?, cache: CacheType, url: URL?) in
+                self.profileThumb.kf.setImage(with: URL(string: profilePhotoFile.url!)!, for: UIControlState(), placeholder: UIImage(named: "animal_profile_photo_empty"), options: nil, progressBlock: nil, completionHandler: { (image: Image?, error: NSError?, cache: CacheType, url: URL?) in
                     let frame = self.profileThumb.frame
                     self.profileThumb.frame = CGRect(x: frame.minX, y: frame.minY, width: 76, height: 76)
                     self.profileThumb.imageView?.makeCircular()

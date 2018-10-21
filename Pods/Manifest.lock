@@ -1,27 +1,27 @@
 PODS:
-  - ActiveLabel (0.6.2)
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
+  - ActiveLabel (1.0.1)
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - BGTableViewRowActionWithImage (0.3.5)
-  - Bolts (1.8.4):
-    - Bolts/AppLinks (= 1.8.4)
-    - Bolts/Tasks (= 1.8.4)
-  - Bolts/AppLinks (1.8.4):
+  - BGTableViewRowActionWithImage (0.4.5)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.8.4)
+  - Bolts/Tasks (1.9.0)
   - BWWalkthrough (1.1.0)
   - CLImageEditor (0.1.6):
     - CLImageEditor/Core (= 0.1.6)
@@ -33,26 +33,28 @@ PODS:
   - CLImageEditor/TextTool (0.1.6):
     - CLImageEditor/Core
   - CRToast (0.0.9)
-  - Device (1.0.1)
+  - Device (3.1.2)
   - DZNEmptyDataSet (1.8.1)
-  - Eureka (2.0.0-beta.1)
+  - Eureka (4.3.0)
   - FBSDKCoreKit (4.16.1):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.16.1):
     - FBSDKCoreKit
-  - Fusuma (0.5.3)
-  - GooglePlacesRow (1.0.1):
-    - Eureka (~> 2.0.0-beta.1)
-  - Hoko (2.3.0)
-  - ImageRow (1.0.0):
-    - Eureka (~> 2.0.0-beta.1)
+  - Fusuma (1.2.4)
+  - GooglePlacesRow (3.1.0):
+    - Eureka (~> 4.0)
+  - Hoko (2.5.0)
+  - ImageRow (3.1.0):
+    - Eureka (~> 4.0)
   - Instabug (6.0.3)
-  - Kingfisher (3.0.1)
+  - Kingfisher (4.10.0)
   - MMMarkdown (0.5.5)
-  - OAuthSwift (0.5.2)
-  - PagingMenuController (1.2.0)
-  - Parse (1.13.0):
-    - Bolts/Tasks (~> 1.6)
+  - OAuthSwift (1.2.2)
+  - PagingMenuController (2.2.0)
+  - Parse (1.17.1):
+    - Parse/Core (= 1.17.1)
+  - Parse/Core (1.17.1):
+    - Bolts/Tasks (~> 1.9)
   - ParseFacebookUtilsV4 (1.11.2):
     - Bolts/Tasks (>= 1.6)
     - FBSDKCoreKit (~> 4.16.1)
@@ -63,10 +65,10 @@ PODS:
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
   - SKPhotoBrowser (3.1.0)
-  - SlideMenuControllerSwift (3.0.0)
+  - SlideMenuControllerSwift (4.0.0)
 
 DEPENDENCIES:
-  - ActiveLabel (from `https://github.com/optonaut/ActiveLabel.swift.git`, branch `swift-3`)
+  - ActiveLabel
   - AFNetworking (~> 3.0)
   - BGTableViewRowActionWithImage
   - BWWalkthrough (from `https://github.com/willeeklund/BWWalkthrough.git`, branch `master`)
@@ -80,25 +82,42 @@ DEPENDENCIES:
   - Eureka (from `https://github.com/white-rabbit-apps/Eureka.git`, branch `master`)
   - FBSDKCoreKit (from `https://github.com/facebook/facebook-ios-sdk.git`, tag `sdk-version-4.16.1`)
   - FBSDKLoginKit (from `https://github.com/facebook/facebook-ios-sdk.git`, tag `sdk-version-4.16.1`)
-  - Fusuma (from `https://github.com/Ferrick90/Fusuma.git`, branch `swift3`)
-  - GooglePlacesRow (from `https://github.com/EurekaCommunity/GooglePlacesRow.git`, commit `b56ff3c`)
+  - Fusuma
+  - GooglePlacesRow
   - Hoko
   - ImageRow (from `https://github.com/EurekaCommunity/ImageRow.git`, branch `master`)
   - Instabug (from `https://github.com/Instabug/Instabug-iOS.git`, tag `6.0.3`)
-  - Kingfisher (from `https://github.com/onevcat/Kingfisher.git`, tag `3.0.1`)
+  - Kingfisher
   - MMMarkdown
-  - OAuthSwift (from `https://github.com/skedgo/OAuthSwift/`, branch `swift3.0`)
-  - PagingMenuController (from `https://github.com/kitasuke/PagingMenuController.git`, branch `swift3.0`)
-  - Parse (~> 1.13.0)
+  - OAuthSwift
+  - PagingMenuController
+  - Parse
   - ParseFacebookUtilsV4 (from `https://github.com/white-rabbit-apps/ParseFacebookUtils-iOS.git`, branch `master`)
   - ParseUI
   - SKPhotoBrowser (from `https://github.com/white-rabbit-apps/SKPhotoBrowser.git`, branch `swift3`)
-  - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, tag `3.0.0`)
+  - SlideMenuControllerSwift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ActiveLabel
+    - AFNetworking
+    - BGTableViewRowActionWithImage
+    - Bolts
+    - CRToast
+    - Device
+    - DZNEmptyDataSet
+    - Fusuma
+    - GooglePlacesRow
+    - Hoko
+    - Kingfisher
+    - MMMarkdown
+    - OAuthSwift
+    - PagingMenuController
+    - Parse
+    - ParseUI
+    - SlideMenuControllerSwift
 
 EXTERNAL SOURCES:
-  ActiveLabel:
-    :branch: swift-3
-    :git: https://github.com/optonaut/ActiveLabel.swift.git
   BWWalkthrough:
     :branch: master
     :git: https://github.com/willeeklund/BWWalkthrough.git
@@ -114,41 +133,20 @@ EXTERNAL SOURCES:
   FBSDKLoginKit:
     :git: https://github.com/facebook/facebook-ios-sdk.git
     :tag: sdk-version-4.16.1
-  Fusuma:
-    :branch: swift3
-    :git: https://github.com/Ferrick90/Fusuma.git
-  GooglePlacesRow:
-    :commit: b56ff3c
-    :git: https://github.com/EurekaCommunity/GooglePlacesRow.git
   ImageRow:
     :branch: master
     :git: https://github.com/EurekaCommunity/ImageRow.git
   Instabug:
     :git: https://github.com/Instabug/Instabug-iOS.git
     :tag: 6.0.3
-  Kingfisher:
-    :git: https://github.com/onevcat/Kingfisher.git
-    :tag: 3.0.1
-  OAuthSwift:
-    :branch: swift3.0
-    :git: https://github.com/skedgo/OAuthSwift/
-  PagingMenuController:
-    :branch: swift3.0
-    :git: https://github.com/kitasuke/PagingMenuController.git
   ParseFacebookUtilsV4:
     :branch: master
     :git: https://github.com/white-rabbit-apps/ParseFacebookUtils-iOS.git
   SKPhotoBrowser:
     :branch: swift3
     :git: https://github.com/white-rabbit-apps/SKPhotoBrowser.git
-  SlideMenuControllerSwift:
-    :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
-    :tag: 3.0.0
 
 CHECKOUT OPTIONS:
-  ActiveLabel:
-    :commit: 80fae948262087ebf9006d5d7c454c969aa88427
-    :git: https://github.com/optonaut/ActiveLabel.swift.git
   BWWalkthrough:
     :commit: f4ecfc4f588e2bd3fccc6f447913b1758710a19f
     :git: https://github.com/willeeklund/BWWalkthrough.git
@@ -156,7 +154,7 @@ CHECKOUT OPTIONS:
     :commit: 577e0af315dc6ff5952d5e8711c90a3f7172b96f
     :git: https://github.com/white-rabbit-apps/CLImageEditor.git
   Eureka:
-    :commit: d7d3e05e4b241135e551c49663ea75b1529aec4c
+    :commit: 7b2385efe0fab42ebf4be4263faada1d1cb18d37
     :git: https://github.com/white-rabbit-apps/Eureka.git
   FBSDKCoreKit:
     :git: https://github.com/facebook/facebook-ios-sdk.git
@@ -164,65 +162,47 @@ CHECKOUT OPTIONS:
   FBSDKLoginKit:
     :git: https://github.com/facebook/facebook-ios-sdk.git
     :tag: sdk-version-4.16.1
-  Fusuma:
-    :commit: 503865a12b19b942e395845c91d4dbf1ebc7db54
-    :git: https://github.com/Ferrick90/Fusuma.git
-  GooglePlacesRow:
-    :commit: b56ff3c
-    :git: https://github.com/EurekaCommunity/GooglePlacesRow.git
   ImageRow:
-    :commit: 80df823a1f419c9a4804f85962fcd6483e6ab455
+    :commit: 6e75b9408bd3393daea467afa73c07cc021a87ae
     :git: https://github.com/EurekaCommunity/ImageRow.git
   Instabug:
     :git: https://github.com/Instabug/Instabug-iOS.git
     :tag: 6.0.3
-  Kingfisher:
-    :git: https://github.com/onevcat/Kingfisher.git
-    :tag: 3.0.1
-  OAuthSwift:
-    :commit: 63bdf693004537f23436c8330cd9410e5ad88a54
-    :git: https://github.com/skedgo/OAuthSwift/
-  PagingMenuController:
-    :commit: 4bdfdc7a6b614c581cff7694e99669a462eb0e07
-    :git: https://github.com/kitasuke/PagingMenuController.git
   ParseFacebookUtilsV4:
     :commit: 2f4c455c5120188be79e8eb2618de1508144956d
     :git: https://github.com/white-rabbit-apps/ParseFacebookUtils-iOS.git
   SKPhotoBrowser:
-    :commit: 358ee379a16aca226d36410b80c569bfc90d7191
+    :commit: cf308891ced823e68631b7b9a93f753bf15ed757
     :git: https://github.com/white-rabbit-apps/SKPhotoBrowser.git
-  SlideMenuControllerSwift:
-    :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
-    :tag: 3.0.0
 
 SPEC CHECKSUMS:
-  ActiveLabel: f1670bbd4d6bba563ffeec423120f6d708c4784f
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  BGTableViewRowActionWithImage: 4871f575342221f67645ec937e4db2a7258ed47c
-  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  ActiveLabel: b8b2396fe25308d563601437d6605bf691c3b5db
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  BGTableViewRowActionWithImage: aa5ef7340267b35248c610f17c6d088d7c9c49d0
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BWWalkthrough: 0c27ad2773a25c8f4fb9004bc7d6685deb35fecc
   CLImageEditor: a8a0f4059fe851e89173783c18a4fb311c3fd8de
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
-  Device: 7ed5b87db148886e8c3cbcdde5dc997baddbe10b
+  Device: 62242076214c30fb5760174b3601cefafa70a481
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  Eureka: d014adf16406745e1a78d5790ea37ed130a0a8e5
+  Eureka: e2dd50c3d6e07d2d2501d4141e903ec64fa3724e
   FBSDKCoreKit: 6feac4e8921ccd7afa83fb1df6291dc6eec42c7c
   FBSDKLoginKit: 469a56cebe2e1ed62b1621d0b155970fd6aac2d8
-  Fusuma: 02ffb3a9943792519f2c0972263b750acb550a49
-  GooglePlacesRow: 79ac09e492fea7e5414b9b93bb9598aa7be5749a
-  Hoko: b015751f406d455da0c8acb9404d7c617cb66877
-  ImageRow: 1e37db26f61a0c4ad3bc9a3a803c32d968782857
+  Fusuma: e85c394878a2e1549c67140ba7c038aff8d7581c
+  GooglePlacesRow: 9153512c6277d077f0d28eb1aec4319401bd3c22
+  Hoko: f3905776104e259ed38c418b56e9f103e4cb30a8
+  ImageRow: 1ea483078bfa3d880a7fc76fdfcddfd5f29a9e6b
   Instabug: 4daae5fd154e8a83654f8d974ba008ce87b9a104
-  Kingfisher: d5a491b45ea453d90a31bd2c0831d5243e73a73f
+  Kingfisher: 43c4b802d8b5256cf1f4379e9cd10b329be6d3e2
   MMMarkdown: 1af97166ce0f6d6e0cb05695665492195d27c3f1
-  OAuthSwift: 1ef042d4362e755e24a78f158d817245641a5d24
-  PagingMenuController: a2ee82351f712be10ff31e59c11221a04fcc8a73
-  Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
+  OAuthSwift: 27b34fe80b76b67cd8f45571e0be2432bc9f6de1
+  PagingMenuController: 6176618987bb170096664f2da097313e45ed9c31
+  Parse: d3edaf8c7c722cb33cb83ba7821d015ae32d362d
   ParseFacebookUtilsV4: 8ff88d57d9b1fc99d88e42c36958f98edeb06763
-  ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
+  ParseUI: 2b37a0bc692a3e7666cf0c37b5521dfddd74a1af
   SKPhotoBrowser: 48717c1e2602e6e99a5b1df9d6b43889aaa70e9f
-  SlideMenuControllerSwift: 9c0a84f9a3fba51681debd7be77617094562ebcc
+  SlideMenuControllerSwift: 021d6318201c53d4d4d3710517d43d6c556c7dd0
 
-PODFILE CHECKSUM: e84a2ed6640ded56e1fa2542acc04764b907d932
+PODFILE CHECKSUM: 44f9d077b29f853f578379966cc347e19618b703
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.5.3

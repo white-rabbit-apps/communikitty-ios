@@ -159,7 +159,7 @@ open class SKPhotoBrowser: UIViewController {
             let photo = self.photos[currentPageIndex]
             entryLoadedAction(photo.underlyingObject, photo)
         }
-
+        
         isPerformingLayout = false
     }
     
@@ -333,7 +333,7 @@ public extension SKPhotoBrowser {
         }
         userNameButton.setTitle(name, for: .normal)
     }
-
+    
     
     func updateShareButton(_ image: UIImage, size: CGSize? = nil) {
         if shareButton == nil {
@@ -495,7 +495,7 @@ internal extension SKPhotoBrowser {
             
             userNameButton.alpha = 1
             userNameButton.frame = CGRect(x: userButton.showFrame.minX + 75, y: userButton.showFrame.minY + 10, width: 200, height: 60)
-                userButton.showFrame.offsetBy(dx: 70, dy: 0)
+            userButton.showFrame.offsetBy(dx: 70, dy: 0)
         }
         if SKPhotoBrowserOptions.displayShareButton {
             shareButton.alpha = 1
@@ -629,7 +629,7 @@ internal extension SKPhotoBrowser {
             likeButtonAction(photo.underlyingObject, photo)
         }
     }
-
+    
     func userButtonPressed(_ sender: UIButton) {
         if let userButtonAction = SKPhotoBrowserOptions.handleUserButtonPressed {
             let photo = self.photos[currentPageIndex]
@@ -821,7 +821,7 @@ private extension SKPhotoBrowser {
                             
                             self.likeCountButton.alpha = alpha
                             self.likeCountButton.frame = hidden ? self.likeButton.hideFrame.offsetBy(dx: 30, dy: 0) : self.likeButton.showFrame.offsetBy(dx: 30, dy: 0)
-
+                            
                         }
                         if SKPhotoBrowserOptions.displayUserButton {
                             self.userButton.alpha = alpha

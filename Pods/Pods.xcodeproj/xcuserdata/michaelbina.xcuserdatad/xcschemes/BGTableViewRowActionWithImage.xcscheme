@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '6DEB1257FFCB1CBE0DB9FC1C561CAC06'
-               BlueprintName = 'BGTableViewRowActionWithImage'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'BGTableViewRowActionWithImage.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CF0BD3A12DFE2C755AE9AA4169DB17EB"
+               BlueprintName = "BGTableViewRowActionWithImage"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "BGTableViewRowActionWithImage.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

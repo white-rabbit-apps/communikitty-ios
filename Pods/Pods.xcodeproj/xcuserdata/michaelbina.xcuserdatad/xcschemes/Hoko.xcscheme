@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7F76AA075719E7E25C43AA8652365242'
-               BlueprintName = 'Hoko'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Hoko.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5B1F9C6580BFBD9ED6E104E4030723A7"
+               BlueprintName = "Hoko"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Hoko.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

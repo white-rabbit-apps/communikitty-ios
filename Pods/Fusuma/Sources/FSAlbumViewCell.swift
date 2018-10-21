@@ -13,7 +13,7 @@ final class FSAlbumViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    var creationDate: Date? = nil
+    var selectedLayer = CALayer()
     
     var image: UIImage? {
         
@@ -24,14 +24,28 @@ final class FSAlbumViewCell: UICollectionViewCell {
     }
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         self.isSelected = false
+        
+        selectedLayer.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5).cgColor
     }
     
     override var isSelected : Bool {
+        
         didSet {
-            self.layer.borderColor = isSelected ? fusumaTintColor.cgColor : UIColor.clear.cgColor
-            self.layer.borderWidth = isSelected ? 2 : 0
+
+            if selectedLayer.superlayer == self.layer {
+
+                selectedLayer.removeFromSuperlayer()
+            }
+            
+            if isSelected {
+
+                selectedLayer.frame = self.bounds
+                self.layer.addSublayer(selectedLayer)
+            }
         }
     }
+    
 }

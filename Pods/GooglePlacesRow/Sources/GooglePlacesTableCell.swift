@@ -20,12 +20,12 @@ open class GooglePlacesTableCell<TableViewCell: UITableViewCell>: GooglePlacesCe
     /// Maximum number of candidates to be shown
     public var numberOfCandidates: Int = 5
 
-    required public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    required public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     open override func setup() {

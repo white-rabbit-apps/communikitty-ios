@@ -1,111 +1,266 @@
-# Google Places API for iOS
 
-**NOTE:** This pod is the official pod for the Google Places API for iOS.
-Previously this pod was used by another developer, his content has been moved to
-[Swift Google Maps API](https://github.com/honghaoz/Swift-Google-Maps-API) on
-GitHub.
 
-This pod contains the Google Places API for iOS, supporting both Objective C and
-Swift.
+<p align="left">
+<!--<a href="https://travis-ci.org/EurekaCommunity/GooglePlacesRow"><img src="https://travis-ci.org/EurekaCommunity/GooglePlacesRow.svg?branch=master" alt="Build status" /></a>-->
+<img src="https://img.shields.io/badge/platform-iOS-blue.svg?style=flat" alt="Platform iOS" />
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/swift4-compatible-4BC51D.svg?style=flat" alt="Swift 4 compatible" /></a>
+<a href="https://cocoapods.org/pods/GooglePlacesRow"><img src="https://img.shields.io/cocoapods/v/GooglePlacesRow.svg" alt="CocoaPods compatible" /></a>
+<a href="https://raw.githubusercontent.com/EurekaCommunity/GooglePlacesRow/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" /></a>
+</p>
 
-Use the [Google Places API for iOS]
-(https://developers.google.com/places/ios-api/) for exciting features based
-on the user's location and Google's Places database. You can enable users to
-add a place, autocomplete place names, use a place picker widget, identify
-the user's current place or retrieve full details and photos of a place.
+By [Xmartlabs SRL](http://EurekaCommunity.com).
 
-The Google Places API for iOS is distributed as two Pods to allow developers to
-have more control over what code is included in their apps. This helps to
-create and distribute smaller apps.
+**Current Google Places version used is 2.7**
 
-This Pod contains all the Google Places API for iOS functionality which does not
-require a map. If you wish to use the [Place Picker]
-(https://developers.google.com/places/ios-api/placepicker) in your app then you
-should also add the [GooglePlacePicker Pod]
-(https://cocoapods.org/pods/GooglePlacePicker).
+Swift 4.2 is supported from version 3.1
 
-# Getting Started
+## Contents
 
-*   *Guides*: Read our [Getting Started guides]
-    (https://developers.google.com/places/ios-api/start).
-*   *Demo Videos*: View [pre-recorded online demos]
-    (https://developers.google.com/places/ios-api/#demos).
-*   *Code samples*: In order to try out our demo app, run
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Dependencies](#dependencies)
+* [Requirements](#requirements)
+* [Getting involved](#getting-involved)
+* [Examples](#examples)
+* [Customization](#customization)
+* [FAQ](#faq)
 
+## Introduction
+
+GooglePlacesRow is a row extension for Eureka. It implements a row where the user can use Google Places autocomplete functionality to select a place suggested by the API.
+
+GooglePlacesRow includes two rows with similar functionality but their options are displayed differently:
+* GooglePlacesAccessoryRow: displays a collection view as the `inputAccessoryView` of the cell. The user will be able to scroll horizontally to select the desired place
+* GooglePlacesTableRow: displays a `UITableView` directly below the cell for the user to choose the desired option.
+
+The project is experimental and open to changes although it is already quite customizable.
+
+ <img src="Example/GooglePlacesGif.gif" width="300"/>
+
+## Installation
+
+#### CocoaPods
+
+[CocoaPods](https://cocoapods.org/) is a dependency manager for Cocoa projects.
+
+To install GooglePlacesRow, simply add the following line to your Podfile:
+
+```ruby
+pod 'GooglePlacesRow'
+```
+
+This will also install Eureka and GooglePlaces.
+
+> Note: Do not add `pod 'GooglePlaces'` to your podfile as this library includes it as a vendor framework
+
+<!--#### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a simple, decentralized dependency manager for Cocoa.
+
+To install GooglePlacesRow, simply add the following line to your Cartfile:
+
+```ogdl
+github "EurekaCommunity/GooglePlacesRow"
+```-->
+
+## Usage
+
+### How to get API key
+1. Navigate to [https://console.developers.google.com/](https://console.developers.google.com/)
+2. Create a new project (or choose existing one)
+3. Enable _Google Places API for iOS_
+4. Copy the key and paste in `AppDelegate.swift`
+
+### How to use GooglePlacesRow
+
+1. First, navigate to `AppDelegate.swift` and add `import GooglePlaces` on top.
+
+	```swift
+	// AppDelegate.swift
+	import GooglePlaces
+	```
+
+2. In method `didFinishLaunchingWithOptions` add this code before `return` keyword.
+
+	```swift
+	// AppDelegate.swift, application:didFinishLaunchingWithOptions
+	let apiKey = "YOUR_API_KEY"
+	GMSServices.provideAPIKey(apiKey)
+	```
+3. Subclass your `ViewController` with `FormViewController`
+
+	```swift
+	class YourViewController: FormViewController {
+	    override func viewDidLoad() {
+	        super.viewDidLoad()
+			// Code for setting up Eureka goes here
+	    }
+	}
+	```
+
+2. Use it in your Eureka form, as you would any other Eureka row.
+
+    ```swift
+    // in your controller, in viewDidLoad()
+    form +++ Section("Choose from table view")
+        <<< GooglePlacesTableRow() { row in
+		        row.title = "Location" // Adds a title to a row
+		        row.tag = "location" // Upon parsing a form you get a nice key if you use a tag
+		        row.add(ruleSet: RuleSet<GooglePlace>()) // We can use GooglePlace() as a rule
+		        row.validationOptions = .validatesOnChangeAfterBlurred
+		        row.cell.textLabel?.textColor = UIColor.black
+			}
+			.cellUpdate { cell, row in // Optional
+		        // Do something when cell updates
+			}
+
+	    +++ Section("Customized cell, customized layout")
+	        <<< GooglePlacesAccessoryRow().cellSetup { cell, row in
+	            (cell.collectionViewLayout  as? UICollectionViewFlowLayout)?.sectionInset = UIEdgeInsets.zero
+	            (cell.collectionViewLayout  as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 40
+	            cell.customizeCollectionViewCell = { customCell in
+	                customCell.label.textColor = UIColor.red
+	                customCell.layer.borderColor = UIColor.green.cgColor
+	                customCell.layer.borderWidth = 1
+	                customCell.layer.cornerRadius = 4
+	            }
+	        }
     ```
-    $ pod try GooglePlaces
-    ```
+To see what you can customize have a look at the [Customization](#customization) section or the [FAQ](#faq)
 
-    For a demo of the Place Picker component run
+## Dependencies
+* Eureka
+* GooglePlaces (and all the frameworks it depends on)
+* GoogleMapsBase
 
-    ```
-    $ pod try GooglePlacePicker
-    ```
+> Note: You only need to add `pod 'GooglePlacesRow'` to your podfile and other pods will be installed automatically
 
-    and follow the instructions on our [developer pages]
-    (https://developers.google.com/places/ios-api/code-samples).
+## Requirements
 
-*   *Support*: Find support from various channels and communities.
+* iOS 8.0+
+* Xcode 8.3+
 
-    *   Support pages for [Google Places API for iOS]
-        (https://developers.google.com/places/support).
-    *   Stack Overflow, using the [google-places-api]
-        (https://stackoverflow.com/questions/tagged/google-places-api) tag.
+## Getting involved
 
-*   *Report issues*: Use our issue tracker to [file a bug]
-    (https://code.google.com/p/gmaps-api-issues/issues/entry?template=Places%20API%20for%20iOS%20-%20Bug)
-    or a [feature request]
-    (https://code.google.com/p/gmaps-api-issues/issues/entry?template=Places%20API%20for%20iOS%20-%20Feature%20Request)
+* If you **want to contribute** please feel free to **submit pull requests**.
+* If you **have a feature request** please **open an issue**.
+* If you **found a bug** or **need help** please **check older issues or the [FAQ](#faq) before submitting an issue.**.
 
-# Installation
+Before contributing check the [CONTRIBUTING](https://github.com/EurekaCommunity/GooglePlacesRow/blob/master/CONTRIBUTING.md) file for more info.
 
-To integrate Google Places API for iOS into your Xcode project using CocoaPods,
-specify it in your `Podfile`:
+If you use **GooglePlacesRow** in your app we would love to hear about it! Drop us a line on [twitter](https://twitter.com/EurekaCommunity).
 
+## Examples
+
+### For Swift 2 (1.0.1 or before)
+
+Follow these steps to run Example project:
+* Clone GooglePlacesRow repository
+* Run `carthage update` in the root of the project
+* Open GooglePlacesRow workspace
+* **Set your Google places API KEY in `AppDelegate.swift`**
+* and run the *Example* project.
+
+### For Swift 3
+
+Follow these steps to run Example project:
+* Clone GooglePlacesRow repository
+* Execute `git submodule add https://github.com/xmartlabs/Eureka.git` in the cloned folder.
+* Open GooglePlacesRow workspace
+* **Set your Google places API KEY in `AppDelegate.swift`**
+* and run the *Example* project.
+
+
+## Customization
+
+### General customization
+There are five variables that you can use to modify the default behavior of these rows:
+
+* In the row:
+	* `placeFilter`: Is a `GMSAutocompleteFilter` used in the request to Google Places to define what kind of suggestions will be returned (e.g. cities, addresses, country). Refer to the official documentation of Google for more detailed information.
+	* `placeBounds`: Bounds to limit the search for places. Refer to the official documentation of Google for more detailed information.
+	* `onNetworkingError`: Block that is called when the request to Google Places returns an error
+* In the cell:
+	* `useTimer`: If the request to Google Places should be throttled using a timer. If `true` then it will wait for `timerInterval` seconds before making a request. If the user continues entering text into the row then the previous request will not be fired
+	* `timerInterval`: The interval in seconds used for the timer explained above
+
+### GooglePlacesAccessoryRow
+GooglePlacesAccessoryRow uses a generic `GooglePlacesCollectionCell` cell whose generic parameter is the UICollectionViewCell class used in the inputAccessoryView.
+
+* If you just want to change minor things of the cell (you most probably will want to) then the `customizeCollectionViewCell` callback is for you. This block is called in the delegates `collectionView:cellForItemAtIndexPath:` method.
+
+* If you want to change the **layout of the collectionView** then you can use/modify/override the `collectionViewLayout` attribute in the `cellSetup` method when declaring the row. Have a look at the examples for this.
+
+* If you want to change something about the **collectionView** (e.g. its height, backgroundColor) then you can also do that in the `cellSetup` method. Have a look at the examples for this.
+
+* If you want to **change the collection view cell of the inputAccessoryView** drastically then there is nothing easier than creating your own row (`MyGooglePlacesAccessoryRow`) with your own `MyCollectionViewCell`:
+```swift
+public final class MyGooglePlacesAccessoryRow: _GooglePlacesRow<GooglePlacesCollectionCell<MyCollectionViewCell>>, RowType {
+    required public init(tag: String?) {
+        super.init(tag: tag)
+    }
+}
 ```
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '7.0'
-target 'YOUR_APPLICATION_TARGET_NAME_HERE' do
-  pod 'GooglePlaces'
-end
+In this case just make sure your cell conforms to `EurekaGooglePlacesCollectionViewCell`
+
+### GooglePlacesTableRow
+GooglePlacesTableRow uses a generic `GooglePlacesTableCell` cell whose generic parameter is the UITableViewCell class used to create the cells displayed in a UITableView with the suggested options from Google Places.
+
+* If you just want to change minor things of the cells that display the options (you will most probably want to) then the `customizeTableViewCell` callback is for you. This block is called in the delegates `tableView:cellForRowAtIndexPath:` method.
+
+* You can customize attributes of the `tableView` that is displayed with the options. You should do this in `cellSetup` and keep in mind that the frame of the tableView is reset each time the tableView is displayed.
+
+* If you want to change these cells drastically then there is nothing easier than creating your own row (`MyGooglePlacesAccessoryRow`) with your own `MyCollectionViewCell`:
+```swift
+public final class MyGooglePlacesAccessoryRow: _GooglePlacesRow<GooglePlacesCollectionCell<MyCollectionViewCell>>, RowType {
+    required public init(tag: String?) {
+        super.init(tag: tag)
+    }
+}
+```
+In this case just make sure your cell conforms to `EurekaGooglePlacesTableViewCell`
+
+## FAQ
+
+#### Xcode says `ld: framework not found GoogleMaps for architecture x86_64`.
+
+This is most probably because you forgot to tell Xcode where `GoogleMapsBase.framework` or `GooglePlaces.framework` is or you did forget to download it altogether. Please follow the [example instructions](#examples) or the [installation instructions](#installation).
+
+#### How to use the value from GooglePlacesRow?
+
+The value of a `GooglePlacesRow` is a `GooglePlace` which is an enum.
+
+```swift
+public enum GooglePlace {
+    case userInput(value: String)
+    case prediction(prediction: GMSAutocompletePrediction)
+}
 ```
 
-if you are also using the Place Picker add:
+You can use `switch` to access the value:
+
+```swift
+switch row.value {
+    case .userInput(let value):  
+        print(value)  
+    case .prediction(let prediction):  
+        print(prediction.attributedPrimaryText)  
+        print(prediction.attributedSecondaryText)  
+        print(prediction.placeID)  
+}
 ```
-pod 'GooglePlacePicker'
-```
 
-Then, run the following command:
+## Future work
+* Carthage compatibility
+* Investigate automation of the installation process
 
-```
-$ pod install
-```
 
-Before you can start using the API, you have to activate it in the [Google
-Developer Console](https://console.developers.google.com/) and integrate the
-respective API key in your project. For detailed installation instructions,
-visit Google's Getting Started Guides for the [Google Places API for iOS]
-(https://developers.google.com/places/ios-api/start).
 
-# Migration from version 1
+## Author
 
-If you are using the Google Places API for iOS as part of the Google Maps SDK
-for iOS version 1 please check the [migration guide](https://developers.google.com/places/migrate-to-v2)
-for more information on upgrading your project.
+* [Mathias Claassen](https://github.com/mats-claassen) ([@mClaassen26](https://twitter.com/mClaassen26)) ([@EurekaCommunity](https://twitter.com/EurekaCommunity))
 
-# License and Terms of Service
+# Change Log
 
-By using the Google Places API for iOS, you accept Google's Terms of
-Service and Policies. Pay attention particularly to the following aspects:
-
-*   Depending on your app and use case, you may be required to display
-    attribution. Read more about [attribution requirements]
-    (https://developers.google.com/places/ios-api/attributions).
-*   Your API usage is subject to quota limitations. Read more about [usage
-    limits](https://developers.google.com/places/ios-api/usage).
-*   The [Terms of Service](https://developers.google.com/maps/terms) are a
-    comprehensive description of the legal contract that you enter with Google
-    by using the Google Places API for iOS. You may want to pay special
-    attention to [section 10]
-    (https://developers.google.com/maps/terms#10-license-restrictions), as it
-    talks in detail about what you can do with the API, and what you can't.
+This can be found in the [CHANGELOG.md](CHANGELOG.md) file.

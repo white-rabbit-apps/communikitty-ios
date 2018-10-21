@@ -36,7 +36,6 @@ enum CollectionType {
 //     It contains a DashboardTableViewController for widget and handles the camera.
 //
 class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDelegate {
-    
     var pickedImageDate: Date?
     var refreshOnNextLoad: Bool = false
     
@@ -114,7 +113,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
             let fusuma = FusumaViewController()
             fusuma.delegate = self
             
-            fusuma.hasVideo = false
+//            fusuma.hasVideo = false
             
             fusuma.transitioningDelegate = self.transitioningDelegate
             fusuma.modalPresentationStyle = .custom
@@ -137,13 +136,15 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
         })
     }
     
-    func fusumaImageSelected(_ image: UIImage) {
+    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         self.modalTransitionStyle = .coverVertical
         self.dismiss(animated: false, completion: { () -> Void in
             self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
         })
     }
     
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
+    }
     
     /**
      Handle the video that is returned from the camera

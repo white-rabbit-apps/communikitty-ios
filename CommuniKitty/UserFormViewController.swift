@@ -35,7 +35,7 @@ class UserFormViewController : FormViewController {
     
     func generateForm() {        
         form +++ Section("Info") { section  in
-            section.color   = UIColor.lightOrangeColor()
+//            section.color   = UIColor.lightOrangeColor()
         }
             <<< NameRow(FIRST_NAME_TAG) {
                 $0.title = "First Name"
@@ -73,7 +73,7 @@ class UserFormViewController : FormViewController {
             
         if(!self.isEditMode()) {
             form +++ Section("Password") { section  in
-                section.color   = UIColor.lightYellowColor()
+//                section.color   = UIColor.lightYellowColor()
             }
                 <<< PasswordRow(PASSWORD_TAG) {
                     $0.title = "Password"
@@ -110,7 +110,7 @@ class UserFormViewController : FormViewController {
         if(self.isEditMode()) {
             
             form +++ Section("Connections") { section  in
-                section.color   = UIColor.lightGreenColor()
+//                section.color   = UIColor.lightGreenColor()
             }
                 <<< ButtonRow(FACEBOOK_TAG) {
                     if(PFFacebookUtils.isLinked(with: WRUser.current()!)) {
@@ -132,7 +132,7 @@ class UserFormViewController : FormViewController {
             let buildNumber: String = (infoDict["CFBundleVersion"] as! String)
 
             form +++ Section("Account") { section  in
-                section.color   = UIColor.lightBlueColor()
+//                section.color   = UIColor.lightBlueColor()
             }
                 <<< ButtonRow("password") {
                         $0.title = "Change Password"
@@ -154,7 +154,7 @@ class UserFormViewController : FormViewController {
                 }
         
             form +++ Section("About") { section  in
-                section.color   = UIColor.lightPinkColor()
+//                section.color   = UIColor.lightPinkColor()
             }
                 <<< ButtonRow("about") { $0.title = "About CommuniKitty" }.onCellSelection { cell, row in
                     self.openAboutScreen()

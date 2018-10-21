@@ -74,9 +74,9 @@ class HomeViewController: UIViewController,BWWalkthroughViewControllerDelegate {
             self.userName.text = (user.firstName)! + " " + (user.lastName)!
             
             if let userPhoto = user.profilePhoto {
-                self.imageProfileButton.kf_setImage(with: NSURL(string: userPhoto.url!) as! Resource?, for: .normal, placeholder: UIImage(named: "human_profile_photo_empty"), options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
-                    self.imageProfileButton.imageView?.makeCircular()
-                })
+//                self.imageProfileButton.kf.setImage(with: NSURL(string: userPhoto.url!) as! Resource?, for: .normal, placeholder: UIImage(named: "human_profile_photo_empty"), options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+//                    self.imageProfileButton.imageView?.makeCircular()
+//                })
             }
         }
         

@@ -172,18 +172,18 @@ class QuirksSelectorViewController: UIViewController, UITextFieldDelegate, Typed
     func updateView() {
         
         switch Device.size() {
-        case .Screen3_5Inch:
+        case .screen3_5Inch:
             print("It's a 3.5 inch screen")
             break
-        case .Screen4Inch:
+        case .screen4Inch:
             print("It's a 4 inch screen")
             self.textFieldButtonItem.width = 240.0
             break
-        case .Screen4_7Inch:
+        case .screen4_7Inch:
             self.textFieldButtonItem.width = 300.0
             print("It's a 4.7 inch screen")
             break
-        case .Screen5_5Inch:
+        case .screen5_5Inch:
             self.textFieldButtonItem.width = 340.0
             self.addButtonItem.width = 30.0
             let frame = CGRect(x: textField.frame.minX, y: textField.frame.minY, width: 320, height: textField.frame.height)

@@ -2,27 +2,15 @@
 <img src="https://s3-eu-west-1.amazonaws.com/hokoassets/hoko_logo.png" alt="Hoko" title="Hoko">
 </p>
 
-[![Build Status](https://travis-ci.org/hokolinks/hoko-ios.svg?branch=master)](https://travis-ci.org/hokolinks/hoko-ios)
-
-# What's HOKO?
-
-The HOKO framework is an easy to use deep linking framework that enables an app to map deep linking routes to actual behavior in the app. This behavior can include showing a particular screen or performing a certain action. HOKO also allows users to be redirected to your app regardless of the platform they are on.
-
-After integrating HOKO, you will be able to open your app by using URI links such as...
-
-```
-your.app.scheme://<mapped_route>/<route_param>?<query_params>
-```
-
 # Quick Start - HOKO framework for iOS
 
-This document is a quick start introduction to the HOKO framework for iOS (only <u>iOS 5 and higher</u>). You can read the full documentation at [http://hokolinks.com/documentation#ios](http://support.hokolinks.com/ios/ios-setup/).
+This document is a quick start introduction to the HOKO framework for iOS (only <u>iOS 5 and higher</u>). You can read the full documentation at [http://hokolinks.com/documentation#ios](http://support.hokolinks.com/quickstart/ios/).
 
 To integrate HOKO in your app, simply follow the 3 simple steps below after adding it to your project.
 
 ## Install HOKO in your project
 
-### Cocoapods
+### CocoaPods
 
 1. Install [CocoaPods](http://cocoapods.org/) in your system
 2. Open your Xcode project folder and create a file called `Podfile` with the following content:

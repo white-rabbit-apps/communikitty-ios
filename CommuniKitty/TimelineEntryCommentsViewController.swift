@@ -71,14 +71,14 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
         
 //        self.headerImageView.kf_showIndicatorWhenLoading = true
         if let imageFile = entryObject?.image {
-            self.headerImageView.kf_setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+            self.headerImageView.kf.setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                 if image != nil {
                     self.mainImage = image
                 }
 
             })
         } else if let imageUrl = entryObject?.imageUrl {
-            self.headerImageView.kf_setImage(with: URL(string: imageUrl)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+            self.headerImageView.kf.setImage(with: URL(string: imageUrl)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                 if image != nil {
                     self.mainImage = image
                 }
@@ -108,11 +108,11 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
         })
         //updating headerView height depending on the label height
         switch Device.size() {
-        case .Screen4_7Inch:
+        case .screen4_7Inch:
             if labelHeight != nil {
                 headerView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 420 + labelHeight!)
             }
-        case .Screen5_5Inch:
+        case .screen5_5Inch:
             if labelHeight != nil{
                 headerView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 440 + labelHeight!)
             } else {

@@ -16,7 +16,7 @@
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 //#import <ParseTwitterUtils/ParseTwitterUtils.h>
 #import <MMMarkdown/MMMarkdown.h>
-#import <CLImageEditor/CLImageEditor.h>
+//#import <CLImageEditor/CLImageEditor.h>
 //#import <BGTableViewRowActionWithImage/BGTableViewRowActionWithImage.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <CRToast/CRToast.h>

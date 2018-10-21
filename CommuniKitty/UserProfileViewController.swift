@@ -158,8 +158,7 @@ class UserProfileViewController: UIViewController, CLImageEditorDelegate, Fusuma
         
         present(fusuma, animated: true, completion: nil)
     }
-    
-    
+        
     // Return the image which is selected from camera roll or is taken via the camera.
     func fusumaImageSelected(_ image: UIImage, creationDate: Date?) {
          self.pickedImageDate = creationDate
@@ -171,12 +170,15 @@ class UserProfileViewController: UIViewController, CLImageEditorDelegate, Fusuma
         })
     }
     
-    public func fusumaImageSelected(_ image: UIImage) {
+    public func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         self.modalTransitionStyle = .coverVertical
         
         self.dismiss(animated: false, completion: { () -> Void in
             self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
         })
+    }
+    
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
     }
 
     

@@ -138,15 +138,15 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
 //        self.hideLoader()
         
         let filename = Int.random(lower: 1, upper: 20)
-        GiFHUD.setGif("gif/" + String(filename) + ".gif")
-        GiFHUD.show()
+//        GiFHUD.setGif("gif/" + String(filename) + ".gif")
+//        GiFHUD.show()
     }
     
     /**
      Hide the GifHUD loader window
      */
     func hideLoader() {
-        GiFHUD.dismiss()
+//        GiFHUD.dismiss()
     }
     
     /**
@@ -1012,11 +1012,11 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
                 
                 completionBlock(true, nil)
                 
-                let currentInstallation = PFInstallation.current()
-                
-                currentInstallation.setValue(nil, forKey: "user")
-                currentInstallation.saveInBackground { (succeeded, e) -> Void in
-                    NSLog("Successfully unregistered for push notifications")
+                if let currentInstallation = PFInstallation.current() {
+                    currentInstallation.setValue(nil, forKey: "user")
+                    currentInstallation.saveInBackground { (succeeded, e) -> Void in
+                        NSLog("Successfully unregistered for push notifications")
+                    }
                 }
                 
             }

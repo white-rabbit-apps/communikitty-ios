@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AE4BB87177D682833EDE3EF0FFFFDED2'
-               BlueprintName = 'CLImageEditor'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'CLImageEditor.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5C860FF6791708B07AAC3AB0D6502E0B"
+               BlueprintName = "CLImageEditor"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "CLImageEditor.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

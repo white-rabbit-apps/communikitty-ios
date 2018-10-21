@@ -145,7 +145,7 @@ class BreedsTableViewController: PFQueryTableViewController, TypedRowControllerT
         
         if let imageFile = breed.image {
 //            cell!.thumbnailImage.kf_showIndicatorWhenLoading = true
-            cell!.thumbnailImage.kf_setImage(with: URL(string: imageFile.url!)!, placeholder: nil)
+            cell!.thumbnailImage.kf.setImage(with: URL(string: imageFile.url!)!, placeholder: nil)
         } else {
             cell!.thumbnailImage.image = nil
         }

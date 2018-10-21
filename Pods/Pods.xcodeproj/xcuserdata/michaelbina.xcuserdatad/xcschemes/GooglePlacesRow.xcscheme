@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '99BC47FA17F0E523444AD102CB3EDF36'
-               BlueprintName = 'GooglePlacesRow'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'GooglePlacesRow.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1BD69B051A33498F665631AB43F078D5"
+               BlueprintName = "GooglePlacesRow"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "GooglePlacesRow.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

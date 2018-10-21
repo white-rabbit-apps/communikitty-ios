@@ -31,7 +31,7 @@ struct GoogleAPIConsole {
     
 }
 
-class LocationDetailViewController: UIViewController,UITabBarDelegate,PagingMenuControllerDelegate {
+class LocationDetailViewController: UIViewController,UITabBarDelegate {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var logoButton: UIButton!
@@ -98,7 +98,7 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate,PagingMenu
             
             
             if let logoFile = location.logo {
-                //self.logoImage.kf_setImageWithURL(NSURL(string: logoFile.url!)!)
+                //self.logoImage.kf.setImageWithURL(NSURL(string: logoFile.url!)!)
                 logoFile.getDataInBackground(block: {
                     (data: Data?, error: Error?) -> Void in
                     if(error == nil) {

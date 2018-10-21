@@ -25,30 +25,30 @@ public final class Coat : NSObject {
     }
 }
 
-public final class CoatsPushRow : SelectorRow<PushSelectorCell<Coat>, CoatsTableViewController>, RowType {
-    
-    typealias Cell = BaseCell!
-    
-    public required init(tag: String?) {
-        super.init(tag: tag)
-        
-        presentationMode = .show(controllerProvider: ControllerProvider.callback {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let cvc = storyboard.instantiateViewController(withIdentifier: "CoatsTableView") as! CoatsTableViewController
-            cvc.completionCallback = { vc in
-                _ = vc.navigationController?.popViewController(animated: true)
-            }
-            return cvc
-            }, onDismiss: { vc in
-                _ = vc.navigationController?.popViewController(animated: true)
-        })
-        
-        displayValueFor = {
-            guard let coat = $0 as Coat? else { return "" }
-            return coat.name
-        }
-    }
-}
+//public final class CoatsPushRow : SelectorRow<PushSelectorCell<Coat>, CoatsTableViewController>, RowType {
+//
+//    typealias Cell = BaseCell!
+//
+//    public required init(tag: String?) {
+//        super.init(tag: tag)
+//
+//        presentationMode = .show(controllerProvider: ControllerProvider.callback {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let cvc = storyboard.instantiateViewController(withIdentifier: "CoatsTableView") as! CoatsTableViewController
+//            cvc.completionCallback = { vc in
+//                _ = vc.navigationController?.popViewController(animated: true)
+//            }
+//            return cvc
+//            }, onDismiss: { vc in
+//                _ = vc.navigationController?.popViewController(animated: true)
+//        })
+//
+//        displayValueFor = {
+//            guard let coat = $0 as Coat? else { return "" }
+//            return coat.name
+//        }
+//    }
+//}
 
 
 
@@ -65,57 +65,57 @@ public final class Breed : NSObject {
     }
 }
 
-public final class BreedsPushRow : SelectorRow<PushSelectorCell<Breed>, BreedsTableViewController>, RowType {
-//    public var tag: String?
-
-    typealias Cell = BaseCell!
-    
-    public required init(tag: String?) {
-        super.init(tag: tag)
-        presentationMode = .show(controllerProvider: ControllerProvider.callback {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let bvc = storyboard.instantiateViewController(withIdentifier: "BreedsTableView") as! BreedsTableViewController
-            bvc.completionCallback = { vc in
-                _ = vc.navigationController?.popViewController(animated: true)
-            }
-            return bvc
-            }, onDismiss: { vc in
-                _ = vc.navigationController?.popViewController(animated: true)
-        })
-        
-        displayValueFor = {
-            guard let breed = $0 as Breed? else { return "" }
-            return breed.name
-        }
-    }
-}
-
-// custom SelectorRow class to open Loves/Hates form sections
-final class  QuirksSelectorRow<T: Hashable>: GenericMultipleSelectorRow<String, PushSelectorCell<Set<String>>, QuirksSelectorViewController>, RowType {
-
-    //pass the values of AnimalFormViewController
-    var animalObject: WRAnimal?
-    var animalForm: AnimalFormViewController?
-    var navTitle: String?
-    
-    required public init(tag: String?) {
-        super.init(tag: tag)
-        
-        presentationMode = .show(controllerProvider: ControllerProvider.callback {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let cvc = storyboard.instantiateViewController(withIdentifier: "QuirksSelectorView") as! QuirksSelectorViewController
-            cvc.animalObject = self.animalObject
-            if self.animalForm != nil{
-                cvc.animalFormView = self.animalForm
-            }
-            cvc.navTitle = self.navTitle
-            return cvc
-            }, onDismiss: { vc in
-                _ = vc.navigationController?.popViewController(animated: true)
-        })
-        
-    }
-}
+//public final class BreedsPushRow : SelectorRow<PushSelectorCell<Breed>, BreedsTableViewController>, RowType {
+////    public var tag: String?
+//
+//    typealias Cell = BaseCell!
+//
+//    public required init(tag: String?) {
+//        super.init(tag: tag)
+//        presentationMode = .show(controllerProvider: ControllerProvider.callback {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let bvc = storyboard.instantiateViewController(withIdentifier: "BreedsTableView") as! BreedsTableViewController
+//            bvc.completionCallback = { vc in
+//                _ = vc.navigationController?.popViewController(animated: true)
+//            }
+//            return bvc
+//            }, onDismiss: { vc in
+//                _ = vc.navigationController?.popViewController(animated: true)
+//        })
+//
+//        displayValueFor = {
+//            guard let breed = $0 as Breed? else { return "" }
+//            return breed.name
+//        }
+//    }
+//}
+//
+//// custom SelectorRow class to open Loves/Hates form sections
+//final class  QuirksSelectorRow<T: Hashable>: GenericMultipleSelectorRow<String, PushSelectorCell<Set<String>>, QuirksSelectorViewController>, RowType {
+//
+//    //pass the values of AnimalFormViewController
+//    var animalObject: WRAnimal?
+//    var animalForm: AnimalFormViewController?
+//    var navTitle: String?
+//
+//    required public init(tag: String?) {
+//        super.init(tag: tag)
+//
+//        presentationMode = .show(controllerProvider: ControllerProvider.callback {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let cvc = storyboard.instantiateViewController(withIdentifier: "QuirksSelectorView") as! QuirksSelectorViewController
+//            cvc.animalObject = self.animalObject
+//            if self.animalForm != nil{
+//                cvc.animalFormView = self.animalForm
+//            }
+//            cvc.navTitle = self.navTitle
+//            return cvc
+//            }, onDismiss: { vc in
+//                _ = vc.navigationController?.popViewController(animated: true)
+//        })
+//
+//    }
+//}
 
 
 class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEditorDelegate {
@@ -371,38 +371,38 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                         section.color   = UIColor.lightYellowColor()
         }
             
-            <<< BreedsPushRow(BREED_TAG) {
-                $0.title = "Breed"
-                $0.options = appDelegate.breedsArray!
-                
-                if self.isEditMode() {
-                    if let breedObject = self.animalObject?.breed {
-                        let name = breedObject.name
-                        if name != nil {
-                            $0.value = appDelegate.breedByName![name!]
-                        }
-                    }
-                }
-                
-                }.cellSetup { cell, row in
-                    cell.imageView?.image = UIImage(named: "form_breed")
-            }
-            
-            <<< CoatsPushRow(COAT_TAG) {
-                $0.title = "Coat"
-                $0.options = appDelegate.coatsArray!
-                
-                if self.isEditMode() {
-                    if let coatObject = self.animalObject?.coat {
-                        let name = coatObject.name
-                        if name != nil {
-                            $0.value = appDelegate.coatByName![name!]
-                        }
-                    }
-                }
-                }.cellSetup { cell, row in
-                    cell.imageView?.image = UIImage(named: "form_coat")
-        }
+//            <<< BreedsPushRow(BREED_TAG) {
+//                $0.title = "Breed"
+//                $0.options = appDelegate.breedsArray!
+//
+//                if self.isEditMode() {
+//                    if let breedObject = self.animalObject?.breed {
+//                        let name = breedObject.name
+//                        if name != nil {
+//                            $0.value = appDelegate.breedByName![name!]
+//                        }
+//                    }
+//                }
+//
+//                }.cellSetup { cell, row in
+//                    cell.imageView?.image = UIImage(named: "form_breed")
+//            }
+//
+//            <<< CoatsPushRow(COAT_TAG) {
+//                $0.title = "Coat"
+//                $0.options = appDelegate.coatsArray!
+//
+//                if self.isEditMode() {
+//                    if let coatObject = self.animalObject?.coat {
+//                        let name = coatObject.name
+//                        if name != nil {
+//                            $0.value = appDelegate.coatByName![name!]
+//                        }
+//                    }
+//                }
+//                }.cellSetup { cell, row in
+//                    cell.imageView?.image = UIImage(named: "form_coat")
+//        }
         
         
         form +++ Section("Personality") { section  in
@@ -413,7 +413,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 $0.title = "Traits"
                 $0.options = appDelegate.traitsArray!
                 $0.selectorTitle = "Traits"
-                $0.isTitleForFormSet = false
+//                $0.isTitleForFormSet = false
                 if self.isEditMode() {
                     $0.value = self.selectedTraitStrings
                 }
@@ -421,46 +421,44 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                     cell.imageView?.image = UIImage(named: "form_traits")
             }
             
-            <<< QuirksSelectorRow<String>(LOVES_TAG) {
-                
-                $0.title = "Loves"
-                $0.navTitle = "Loves"
-                // checking if the object exists
-                if self.isEditMode() {
-                    $0.animalObject = self.animalObject
-                    $0.animalForm   = self
-                    //load loves arrys again in case it was updated
-                    self.loadLoves()
-                    $0.value = self.selectedLoveStrings
-                } else {
-                    let animalObject = WRAnimal()
-                    animalObject.loves = [String]()
-                    $0.animalObject = animalObject
-                    $0.animalForm = self
-                }
-            }.cellSetup { cell, row in
-                cell.imageView?.image = UIImage(named: "form_loves")
-            }
-        
-            <<< QuirksSelectorRow<String>(HATES_TAG){
-                $0.title = "Hates"
-                $0.navTitle = "Hates"
-                if self.isEditMode(){
-                    $0.animalObject = self.animalObject
-                    $0.animalForm = self
-                    self.loadHates()
-                    $0.value = self.selectedHatesStrings
-                } else {
-                    let animalObject = WRAnimal()
-                    animalObject.hates = [String]()
-                    $0.animalObject = animalObject
-                    $0.animalForm = self
-                }
-                
-                
-            }.cellSetup { cell, row in
-                cell.imageView?.image = UIImage(named: "form_hates")
-            }
+//            <<< QuirksSelectorRow<String>(LOVES_TAG) {
+//
+//                $0.title = "Loves"
+//                $0.navTitle = "Loves"
+//                // checking if the object exists
+//                if self.isEditMode() {
+//                    $0.animalObject = self.animalObject
+//                    $0.animalForm   = self
+//                    //load loves arrys again in case it was updated
+//                    self.loadLoves()
+//                    $0.value = self.selectedLoveStrings
+//                } else {
+//                    let animalObject = WRAnimal()
+//                    animalObject.loves = [String]()
+//                    $0.animalObject = animalObject
+//                    $0.animalForm = self
+//                }
+//            }.cellSetup { cell, row in
+//                cell.imageView?.image = UIImage(named: "form_loves")
+//            }
+//
+//            <<< QuirksSelectorRow<String>(HATES_TAG){
+//                $0.title = "Hates"
+//                $0.navTitle = "Hates"
+//                if self.isEditMode(){
+//                    $0.animalObject = self.animalObject
+//                    $0.animalForm = self
+//                    self.loadHates()
+//                    $0.value = self.selectedHatesStrings
+//                } else {
+//                    let animalObject = WRAnimal()
+//                    animalObject.hates = [String]()
+//                    $0.animalObject = animalObject
+//                    $0.animalForm = self
+//                }
+//            }.cellSetup { cell, row in
+//                cell.imageView?.image = UIImage(named: "form_hates")
+//            }
         
         form +++ Section("Soshul Meowdia") { section  in
             section.color   = UIColor.lightBlueColor()
@@ -937,12 +935,15 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         })
     }
     
-    func fusumaImageSelected(_ image: UIImage) {
+    func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
         self.modalTransitionStyle = .coverVertical
         
         self.dismiss(animated: false, completion: { () -> Void in
             self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
         })
+    }
+    
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
     }
     
     func fusumaVideoCompleted(withFileURL fileURL: URL) {

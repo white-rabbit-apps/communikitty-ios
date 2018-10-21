@@ -6,7 +6,7 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
-import ImageRow
+//import ImageRow
 import Eureka
 import ParseFacebookUtilsV4
 
@@ -81,14 +81,14 @@ class TimelineEntryFormViewController: FormViewController {
                     cell.imageView?.image = UIImage(named: "form_date")
                     row.maximumDate = Date()
             }
-            <<< ImageRow("photo") {
-                $0.title = "Photo"
-                $0.disabled = true
-                $0.value = self.image
-            }.cellSetup { cell, row in
-                cell.imageView?.image = UIImage(named: "form_photo")
-                cell.height = { 100 }
-            }
+//            <<< ImageRow("photo") {
+//                $0.title = "Photo"
+//                $0.disabled = true
+//                $0.value = self.image
+//            }.cellSetup { cell, row in
+//                cell.imageView?.image = UIImage(named: "form_photo")
+//                cell.height = { 100 }
+//            }
             <<< TextAreaRow("text") {
                 $0.title = "Kapshun"
                 $0.placeholder = "Enter kapshun here..."

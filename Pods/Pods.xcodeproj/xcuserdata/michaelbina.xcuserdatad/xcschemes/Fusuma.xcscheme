@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7380ABD049E12DCFEC9B9E1D2D52C627'
-               BlueprintName = 'Fusuma'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Fusuma.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CEFA904692BCDF59130C14315EAFEEBE"
+               BlueprintName = "Fusuma"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Fusuma.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

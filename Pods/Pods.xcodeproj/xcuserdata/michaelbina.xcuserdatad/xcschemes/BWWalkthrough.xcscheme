@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '17664F8F0232329D875EC690EB653867'
-               BlueprintName = 'BWWalkthrough'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'BWWalkthrough.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EB65E17144597AE160381B045E74BBC3"
+               BlueprintName = "BWWalkthrough"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "BWWalkthrough.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

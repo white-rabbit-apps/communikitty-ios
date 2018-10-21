@@ -41,7 +41,7 @@ class BreedDetailViewController: UIViewController {
 
             if let imageFile = breed.image {
 //                self.breedImage.kf_showIndicatorWhenLoading = true
-                self.breedImage.kf_setImage(with: URL(string: imageFile.url!)!, placeholder: nil)
+//                self.breedImage.kf.setImage(with: URL(string: imageFile.url!)!, placeholder: nil)
             }
 
             nameLabel.text = breed.name!
@@ -108,7 +108,7 @@ class BreedDetailViewController: UIViewController {
             
             if let imageFile = breed["image"] as? PFFile {
 //                self.breedImage.kf_showIndicatorWhenLoading = true
-                self.breedImage.kf_setImage(with: URL(string: imageFile.url!)!, placeholder: nil)
+//                self.breedImage.kf.setImage(with: URL(string: imageFile.url!)!, placeholder: nil)
             }
             
 //            let appDelegate = AppDelegate.getAppDelegate()

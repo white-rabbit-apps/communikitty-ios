@@ -42,16 +42,16 @@ class PostsTableViewCell: EntryCell {
     }
     func setSpacing() {
         switch Device.size() {
-        case .Screen3_5Inch:
+        case .screen3_5Inch:
             self.shareToCommentConstraint.constant = 54
             self.commentToLikeConstraint.constant = 54
-        case .Screen4Inch:
+        case .screen4Inch:
             self.shareToCommentConstraint.constant = 64
             self.commentToLikeConstraint.constant = 64
-        case .Screen4_7Inch:
+        case .screen4_7Inch:
             self.shareToCommentConstraint.constant = 79
             self.commentToLikeConstraint.constant = 79
-        case .Screen5_5Inch:
+        case .screen5_5Inch:
             self.shareToCommentConstraint.constant = 94
             self.commentToLikeConstraint.constant = 94
         default:
@@ -292,9 +292,9 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
         
 //        cell!.largeImageView.kf_showIndicatorWhenLoading = true
         if let imageFile = entry.image {
-            cell?.largeImageView.kf_setImage(with: URL(string: imageFile.url!)!)
+            cell?.largeImageView.kf.setImage(with: URL(string: imageFile.url!)!)
         } else if let imageUrl = entry.imageUrl {
-            cell?.largeImageView.kf_setImage(with: URL(string: imageUrl)!)
+            cell?.largeImageView.kf.setImage(with: URL(string: imageUrl)!)
         }
         cell!.largeImageView.isUserInteractionEnabled = true
         
@@ -341,7 +341,7 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
             cell!.usernameLink.setTitle(animalObject.username, for: .normal)
             
             if let profilePhotoFile = animalObject.profilePhoto {
-                cell!.profilePhotoPFImageView.kf_setImage(with: URL(string: profilePhotoFile.url!)!)
+                cell!.profilePhotoPFImageView.kf.setImage(with: URL(string: profilePhotoFile.url!)!)
                 cell!.profilePhotoPFImageView.makeCircular()
             } else {
                 cell!.profilePhotoPFImageView.image = UIImage(named: "animal_profile_photo_empty")

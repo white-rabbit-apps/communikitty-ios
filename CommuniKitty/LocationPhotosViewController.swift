@@ -64,7 +64,7 @@ class LocationPhotosViewController: UICollectionViewController {
         
         let photoUrl = googlePlacePhotos![indexPath.row]
         let thumbnailImage = UIImageView(frame: CGRect(x:0, y:0, width:90, height: 90))
-        thumbnailImage.kf_setImage(with: URL(string: photoUrl!)!, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+        thumbnailImage.kf.setImage(with: URL(string: photoUrl!)!, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             
         })
         thumbnailImage.contentMode = .scaleAspectFill

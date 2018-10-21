@@ -17,6 +17,7 @@ import Hoko
 import UserNotifications
 import Instabug
 import GooglePlaces
+import GooglePlacesRow
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -155,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEVELOPMENT
             let SERVER_URL = "http://whiterabbitapps-dev.herokuapp.com/api/"
         #else
-            let SERVER_URL = "http://www.whiterabbitapps.net/api/"
+            let SERVER_URL = "http://api.communikitty.com/"
         #endif
         
         
@@ -165,11 +166,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DispatchQueue.main.async {
             GMSPlacesClient.provideAPIKey("AIzaSyB02jXQAR8Zw1ZMA62Jgr8BUQysN10nE74")
-            //            GooglePlacesRow.provideApiKey("AIzaSyBSUv9V99TBfnXNtRW2FC3pyTgRpAwuKCc")
+//            GooglePlacesRow.provideApiKey("AIzaSyBSUv9V99TBfnXNtRW2FC3pyTgRpAwuKCc")
             PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
             //        PFTwitterUtils.initializeWithConsumerKey("C16iyeaMoc91iPOQnBTnQkXgm", consumerSecret: "gvedI21p7UaJxEJKxyTttbkUydE37cnq3RBSUFB86erwjHAkt1")
             //            self.client = CDAClient(spaceKey:"8mu31kgi73w0", accessToken:"3bd31581398aa28d0b9c05aa86573763aa4dfd4119eb020625cd0989fee99836")
-            if Device.type() != .Simulator {
+            if Device.type() != .simulator {
                 Instabug.start(withToken: "b97c87481a11e4f5469722434cef6a24", invocationEvent: IBGInvocationEvent.screenshot)
                 Instabug.setColorTheme(.light)
                 Instabug.setCrashReportingEnabled(true)
@@ -195,16 +196,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         TextAreaRow.defaultCellUpdate = { cell, row in
             cell.textView.font = font
         }
-//        GooglePlacesTableRow.defaultCellUpdate = { cell, row in
-//            cell.textField.font = font
-//        }
+        GooglePlacesTableRow.defaultCellUpdate = { cell, row in
+            cell.textField.font = font
+        }
         fusumaBackgroundColor = UIColor.mainColor()
         fusumaCheckImage = UIImage(named: "icon_next")
         fusumaCloseImage = UIImage(named: "icon_close")
         
-        fusumaAlbumImage = UIImage(named: "icon_library")
-        fusumaCameraImage = UIImage(named: "icon_camera")
-        fusumaVideoImage = UIImage(named: "icon_video")
+//        fusumaAlbumImage = UIImage(named: "icon_library")
+//        fusumaCameraImage = UIImage(named: "icon_camera")
+//        fusumaVideoImage = UIImage(named: "icon_video")
         
         fusumaFlashOnImage = UIImage(named: "icon_flash_on")
         fusumaFlashOffImage = UIImage(named: "icon_flash_off")
@@ -217,14 +218,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fusumaCameraTitle = "Catmera"
         fusumaVideoTitle = "Video"
         
-        fusumaTintIcons = false
+//        fusumaTintIcons = false
     }
     
     /**
      Ask the user to authorize the ability to receive push notifications
      */
     func registerForPushNotifications() {
-        if Device.type() == .Simulator {
+        if Device.type() == .simulator {
         } else {
             print("registering for push notifications")
             DispatchQueue.main.async {
@@ -241,12 +242,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 
-        let currentInstallation = PFInstallation.current()
-        
-        currentInstallation.setDeviceTokenFrom(deviceToken)
-        currentInstallation.setValue(WRUser.current(), forKey: "user")
-        currentInstallation.saveInBackground { (succeeded, e) -> Void in
-            NSLog("Successfully registered for push notifications")
+        if let currentInstallation = PFInstallation.current() {
+            currentInstallation.setDeviceTokenFrom(deviceToken)
+            currentInstallation.setValue(WRUser.current(), forKey: "user")
+            currentInstallation.saveInBackground { (succeeded, e) -> Void in
+                NSLog("Successfully registered for push notifications")
+            }
         }
     }
     
