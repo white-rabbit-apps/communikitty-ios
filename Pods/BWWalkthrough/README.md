@@ -1,7 +1,12 @@
-BWWalkthrough
-======================
+<p align="center" >
+<img src="http://www.thinkandbuild.it/gifs/bwwalkthrough.png" width="200"/>
+</p>
+<br>
 
-Author: Yari D'areglia [@Bitwaker](http://www.twitter.com/bitwaker)
+[![CocoaPods](https://img.shields.io/cocoapods/v/BWWalkthrough.svg)]()
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Platform](https://img.shields.io/cocoapods/p/BWWalkthrough.svg?style=flat)](http://cocoadocs.org/docsets/BWWalkthrough)
+[![Twitter](https://img.shields.io/badge/twitter-@bitwaker-59ADEB.svg?style=flat)](http://twitter.com/bitwaker)
 
 
 ## What is BWWalkthrough?
@@ -24,6 +29,11 @@ BWWT is essentially defined by 2 classes:
 BWWT is not a copy-paste-and-it-just-works class and it is not a fixed walkthrough template. If you need a simple no-configuration walkthrough, BWWT is not the right choice.
 
 ## Installation
+> Note: There is a known issue with IBOutlets and Carthage that prevents Outlets from working correctly. 
+> I see something similar reported for other [projects](https://github.com/xmartlabs/Eureka/issues/295) too. 
+> My suggestion is to follow the manual installation instructions, as it is just matter of drag and drop 2 files in your project. 
+> I know you cannot update the library automatically going that route... but IBOutlets are needed for a project like BWWalkthrough. 
+
 ### With CocoaPods
 
 BWWalkthrough is available through [CocoaPods](http://cocoapods.org). To install
@@ -33,7 +43,7 @@ it, simply add the following line to your Podfile:
 pod "BWWalkthrough"
 ```
 
-### With Carthage 
+### With Carthage
 
 Include this line into your `Cartfile`:
 
@@ -45,7 +55,7 @@ Run carthage update to build the framework and drag the built BWWalkthrough.fram
 
 ### Manually
 
-Include the `Pod/Classes/BWWalkthroughViewController.swift` and the `Pod/Classes/BWWalkthroughPageViewController.swift` files into your project.
+Include the `BWWalkthrough/BWWalkthroughViewController.swift` and the `BWWalkthrough/BWWalkthroughPageViewController.swift` files into your project.
 
 ## How to use it?
 
@@ -76,9 +86,9 @@ let page_three = stb.instantiateViewControllerWithIdentifier(“page3”) as UIV
 
 // Attach the pages to the master
 walkthrough.delegate = self
-walkthrough.addViewController(page_one)
-walkthrough.addViewController(page_two)
-walkthrough.addViewController(page_three)
+walkthrough.add(viewController:page_one)
+walkthrough.add(viewController:page_two)
+walkthrough.add(viewController:page_three)
 ```
 
 ## Prebuilt Animations
@@ -127,4 +137,3 @@ The **BWWalkthroughViewControllerDelegate** protocol defines some useful methods
         @objc optional func walkthroughPageDidChange(pageNumber:Int)
 }
 ```
-

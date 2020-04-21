@@ -25,7 +25,7 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 58
         self.tableView.separatorStyle = .singleLine
         self.replacePFLoadingView()
@@ -47,9 +47,9 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
     func closeView() {
         let transition: CATransition = CATransition()
         transition.duration = 0.3
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.type = kCATransition
-        transition.subtype = kCATransitionFromTop
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType(rawValue: kCATransition)
+        transition.subtype = CATransitionSubtype.fromTop
         self.view.window!.layer.add(transition, forKey: nil)
         self.dismiss(animated: false, completion: { _ in })
     }
@@ -73,7 +73,7 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
         return NSAttributedString(string: "Follows and Meows will show up here", attributes: attributes)
     }
     
-    func buttonTitleForEmptyDataSet(scrollView: UIScrollView, forState state: UIControlState) -> NSAttributedString {
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView, forState state: UIControl.State) -> NSAttributedString {
         let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 17.0)]
         
         return NSAttributedString(string: "Get posting!", attributes: attributes)
@@ -175,7 +175,7 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
         
         var cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath as IndexPath) as? ActivityViewCell
         if cell == nil  {
-            cell = ActivityViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "CommentCell")
+            cell = ActivityViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "CommentCell")
         }
 
         let activity = object as! WRActivity

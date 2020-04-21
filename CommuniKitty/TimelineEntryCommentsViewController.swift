@@ -51,7 +51,7 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
         self.replacePFLoadingView()
         
         isLoadFirstTime = true
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 160.0
         
         headerView.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 440)
@@ -219,7 +219,7 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
         if let _ = comment?.gifName {
             var cell: TimelineEntryCommentGifViewCell? = tableView.dequeueReusableCell(withIdentifier: "CommentGifCell", for: indexPath as IndexPath) as? TimelineEntryCommentGifViewCell
             if cell == nil  {
-                cell = TimelineEntryCommentGifViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "CommentGifCell")
+                cell = TimelineEntryCommentGifViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "CommentGifCell")
             }
             
             cell!.commentObject = comment
@@ -249,7 +249,7 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
             var cell: TimelineEntryCommentViewCell? = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath as IndexPath) as? TimelineEntryCommentViewCell
             
             if cell == nil  {
-                cell = TimelineEntryCommentViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "CommentCell")
+                cell = TimelineEntryCommentViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "CommentCell")
             }
             
             cell!.commentObject = comment
@@ -338,7 +338,7 @@ extension String {
     func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
         
-        let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         
         return boundingBox.height
     }

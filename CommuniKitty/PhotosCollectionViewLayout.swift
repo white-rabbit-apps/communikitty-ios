@@ -114,7 +114,7 @@ class PhotosCollectionViewLayout: UICollectionViewLayout {
         self.columnCount = 3
         self.minimumInteritemSpacing = 5
         self.minimumColumnSpacing = 5
-        self.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2)
+        self.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         self.itemRenderDirection = .shortestFirst
         
         headersAttributes = NSMutableDictionary()

@@ -72,8 +72,8 @@ class QuirksSelectorViewController: UIViewController, UITextFieldDelegate, Typed
         }
         
         //triggers keyboard on field focus
-        NotificationCenter.default.addObserver(self, selector: #selector(QuirksSelectorViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(QuirksSelectorViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(QuirksSelectorViewController.keyboardWillShow), name: NSNotification.Name.UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(QuirksSelectorViewController.keyboardWillHide), name: NSNotification.Name.UIResponder.keyboardWillHideNotification, object: nil)
         
         self.textField.delegate = self
         self.textField.addTarget(self, action: #selector(self.textWasChanged), for: .editingChanged)
@@ -84,12 +84,12 @@ class QuirksSelectorViewController: UIViewController, UITextFieldDelegate, Typed
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(UIViewController.respondToSwipeGesture))
         
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
     }
     
     
-    func saveStrings(){
+    @objc func saveStrings(){
         if self.addedStrings?.isEmpty != nil {
             if self.animalObject?.name?.isEmpty != nil {
                 self.arrayOfObjects = self.addedStrings
@@ -195,30 +195,30 @@ class QuirksSelectorViewController: UIViewController, UITextFieldDelegate, Typed
         }
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         self.objectContainerView.isHidden = false
         var info = notification.userInfo!
         
-        let duration = (info[UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue!
-        let curve = info[UIKeyboardAnimationCurveUserInfoKey] as! UInt
+        let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue!
+        let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
         
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(rawValue: curve), animations: {
+        UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
             self.bottomToolbarContraint.constant = keyboardFrame.size.height
             self.view.layoutIfNeeded()
             }, completion: { (value: Bool) in
         })
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         self.objectContainerView.isHidden = true
         var info = notification.userInfo!
         
-        let duration = (info[UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue!
-        let curve = info[UIKeyboardAnimationCurveUserInfoKey] as! UInt
+        let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue!
+        let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
         
-        UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(rawValue: curve), animations: {
+        UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
             self.bottomToolbarContraint.constant = 0
             self.view.layoutIfNeeded()
             }, completion: { (value: Bool) in

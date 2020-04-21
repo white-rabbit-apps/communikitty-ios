@@ -294,7 +294,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         //        }
         
         form +++ Section("Info") { section  in
-            section.color   = UIColor.lightOrangeColor()
+            section.color   = UIColor.orange// lightOrangeColor()
         }
 
         <<< NameRow(NAME_TAG) {
@@ -356,7 +356,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             $0.onChange({ (row: TextAreaRow) -> () in
                 let val = row.baseValue as? String
                 let maxLength = 300
-                if (val?.characters.count)! > maxLength {
+                if (val?.count)! > maxLength {
                     row.cell!.textView.text = val?[0...maxLength]
                 }
             })
@@ -650,7 +650,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             let shelter = self.animalObject!.shelter
             
             if (fosters.count + owners.count) > 1 || (adoptable && shelter != nil) {
-                let refreshAlert = UIAlertController(title: "Remove Your Ownership of This Profile?", message: "The profile data will remain intact but you will no longer be able to access it as an owner.  All other owners will stay in place.", preferredStyle: UIAlertControllerStyle.alert)
+                let refreshAlert = UIAlertController(title: "Remove Your Ownership of This Profile?", message: "The profile data will remain intact but you will no longer be able to access it as an owner.  All other owners will stay in place.", preferredStyle: UIAlertController.Style.alert)
                 
                 refreshAlert.addAction(UIAlertAction(title: "Do it", style: .default, handler: { (action: UIAlertAction!) in
                     
@@ -698,7 +698,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 self.showError(message: "Can't remove the profile while there are other owners or fosters.  Please remove ownership.")
                 
             } else {
-                let refreshAlert = UIAlertController(title: "Remove This Profile?", message: "All data will be lost and cannot be recovered.", preferredStyle: UIAlertControllerStyle.alert)
+                let refreshAlert = UIAlertController(title: "Remove This Profile?", message: "All data will be lost and cannot be recovered.", preferredStyle: UIAlertController.Style.alert)
                 
                 refreshAlert.addAction(UIAlertAction(title: "Do it", style: .default, handler: { (action: UIAlertAction!) in
                     _ = self.animalObject!.username!
@@ -746,7 +746,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         }
     }
     
-    func saveAnimal() {
+    @objc func saveAnimal() {
         let appDelegate = AppDelegate.getAppDelegate()
         
         var animal = WRAnimal()
@@ -755,7 +755,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         }
         
         if let nameValue = self.form.rowBy(tag: self.NAME_TAG)?.baseValue as? String {
-            animal.name = nameValue.trim()
+            animal.name = nameValue//.trim(to: <#Int#>)
         }
         
         if let hometown = self.form.rowBy(tag: self.HOMETOWN_TAG)!.baseValue as? GooglePlace {
@@ -787,42 +787,46 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             animal.gender = genderValue
         }
         if let introValue = self.form.rowBy(tag: self.INTRO_TAG)?.baseValue as? String {
-            animal.intro = introValue.trim()
+            animal.intro = introValue
         } else {
             animal.intro = ""
         }
         if var usernameValue = self.form.rowBy(tag: self.USERNAME_TAG)?.baseValue as? String {
-            if usernameValue[0] == "@" {
-                usernameValue = String(usernameValue.characters.dropFirst())
-            }
-            animal.username = usernameValue.lowercased().trim()
+//            if usernameValue.first! == "@" {
+//            }
+            
+            usernameValue = String(usernameValue.dropFirst())
+
+            animal.username = usernameValue.lowercased()
         }
         if let facebookValue = self.form.rowBy(tag: self.FACEBOOK_TAG)?.baseValue as? String {
-            animal.facebookPageId = facebookValue.trim()
+            animal.facebookPageId = facebookValue
         } else {
             animal.facebookPageId = nil
         }
         
         if var instagramValue = self.form.rowBy(tag: self.INSTAGRAM_TAG)?.baseValue as? String {
-            if instagramValue[0] == "@" {
-                instagramValue = String(instagramValue.characters.dropFirst())
-            }
+//            if instagramValue[0] == "@" {
+//            }
+            instagramValue = String(instagramValue.dropFirst())
             animal.instagramUsername = instagramValue
         } else {
             animal.instagramUsername = nil
         }
         
         if var twitterValue = self.form.rowBy(tag: self.TWITTER_TAG)?.baseValue as? String {
-            if twitterValue[0] == "@" {
-                twitterValue = String(twitterValue.characters.dropFirst())
-            }
+//            if twitterValue[0] == "@" {
+//            }
+            
+            twitterValue = String(twitterValue.dropFirst())
+
             animal.twitterUsername = twitterValue
         } else {
             animal.twitterUsername = nil
         }
         
         if let youtubeValue = self.form.rowBy(tag: self.YOUTUBE_TAG)?.baseValue as? String {
-            animal.youtubeUsername = youtubeValue.trim()
+            animal.youtubeUsername = youtubeValue//youtubeValue.trim()
         } else {
             animal.youtubeUsername = nil
         }
@@ -877,7 +881,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         }
         
         if let image = self.profileImage {
-            let imageData = UIImageJPEGRepresentation(image, 0.5)
+            let imageData = image.jpegData(compressionQuality: 0.5)
             
             let fileName : String
             if let name = self.form.rowBy(tag: self.NAME_TAG)?.baseValue as? String {
@@ -922,7 +926,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         })
     }
     
-    func cancel() {
+    @objc func cancel() {
         self.dismiss(animated: true, completion: nil)
     }
     

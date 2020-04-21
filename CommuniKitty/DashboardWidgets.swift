@@ -37,7 +37,7 @@ class UserAnimalsDashboardWidget : DashboardWidget {
             cell.titleButton?.removeTarget(self.parentTableView, action: #selector(UIViewController.openExplore), for: .touchUpInside)
             cell.titleButton?.addTarget(self.parentTableView, action: #selector(UIViewController.showAddAnimalForm), for: .touchUpInside)
             
-            cell.emptyStateButton?.setImage(UIImage(named: "empty_state_mine"), for: UIControlState())
+            cell.emptyStateButton?.setImage(UIImage(named: "empty_state_mine"), for: UIControl.State())
             cell.emptyStateButton?.removeTarget(self.parentTableView, action: #selector(UIViewController.openExplore), for: .touchUpInside)
             cell.emptyStateButton?.addTarget(self.parentTableView, action: #selector(UIViewController.showAddAnimalForm), for: .touchUpInside)
         }
@@ -122,7 +122,7 @@ class UserPhotosDashboardWidget : DashboardWidget {
             cell.titleLabel?.text = "My Photos"
             cell.titleLabel?.backgroundColor = UIColor.lightBlueColor()
             
-            cell.emptyStateButton?.setImage(UIImage(named: "empty_state_following"), for: UIControlState())
+            cell.emptyStateButton?.setImage(UIImage(named: "empty_state_following"), for: UIControl.State())
             cell.emptyStateButton?.removeTarget(self.parentTableView, action: #selector(UIViewController.showAddAnimalForm), for: .touchUpInside)
             cell.emptyStateButton?.addTarget(self.parentTableView, action: #selector(UIViewController.openExplore), for: .touchUpInside)
         }

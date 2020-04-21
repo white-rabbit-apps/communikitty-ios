@@ -114,7 +114,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
         self.timelineView.isHidden = false
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
         
         let coverTapGesture = UITapGestureRecognizer(target: self, action: #selector(AnimalDetailViewController.respondToCovertTapGesture(_:)))
@@ -282,10 +282,10 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
                 if(objects!.count > 0) {
                     let follow = objects![0] as! WRFollow
                     self.followObject = follow
-                    self.followButton.setImage(UIImage(named: "button_following"), for: UIControlState())
+                    self.followButton.setImage(UIImage(named: "button_following"), for: UIControl.State())
                     self.isFollowing = true
                 } else {
-                    self.followButton.setImage(UIImage(named: "button_follow"), for: UIControlState())
+                    self.followButton.setImage(UIImage(named: "button_follow"), for: UIControl.State())
                     self.isFollowing = false
                 }
                 self.followButton.isEnabled = true
@@ -301,7 +301,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
         
         followQuery.countObjectsInBackground { (count: Int32, error: Error?) in
             if (error == nil) {
-                self.followerCountButton.setTitle("\(count)", for: UIControlState())
+                self.followerCountButton.setTitle("\(count)", for: UIControl.State())
                 self.followerView.isHidden = false
             }
         }
@@ -453,7 +453,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
         }
     }
     
-    func respondToCovertTapGesture(_ gesture: UIGestureRecognizer) {
+    @objc func respondToCovertTapGesture(_ gesture: UIGestureRecognizer) {
         if(currentUserIsOwner || currentUserIsShelterCaregiver) {
             self.isSettingCoverPhoto = true
             self.takeFusumaPhoto()
@@ -461,7 +461,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
     }
     
     func setProfilePhoto(_ image: UIImage!) {
-        let imageData = UIImageJPEGRepresentation(image, 0.5)
+        let imageData = image.jpegData(compressionQuality: 0.5)
         let fileName:String = (String)(WRUser.current()!.username!) + ".jpg"
         let imageFile:PFFile = PFFile(name: fileName, data: imageData!)!
         
@@ -482,7 +482,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
         }
     }
     
-    func showEditAminalView() {
+    @objc func showEditAminalView() {
         let editScene =  AnimalFormViewController()
         editScene.detailController = self
 //        editScene.animalTableController = self.animalTableController
@@ -580,7 +580,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
             
             if let profilePhotoFile = animal.profilePhoto {
                 
-                self.profileThumb.kf.setImage(with: URL(string: profilePhotoFile.url!)!, for: UIControlState(), placeholder: UIImage(named: "animal_profile_photo_empty"), options: nil, progressBlock: nil, completionHandler: { (image: Image?, error: NSError?, cache: CacheType, url: URL?) in
+                self.profileThumb.kf.setImage(with: URL(string: profilePhotoFile.url!)!, for: UIControl.State(), placeholder: UIImage(named: "animal_profile_photo_empty"), options: nil, progressBlock: nil, completionHandler: { (image: Image?, error: NSError?, cache: CacheType, url: URL?) in
                     let frame = self.profileThumb.frame
                     self.profileThumb.frame = CGRect(x: frame.minX, y: frame.minY, width: 76, height: 76)
                     self.profileThumb.imageView?.makeCircular()
@@ -593,7 +593,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
             if self.shelterObject != nil {
                 self.shelterObject?.fetchIfNeededInBackground(block: { (locationObject: PFObject?, error: Error?) -> Void in
                     let adoptable = animal.adoptable
-                    self.shelterButton.setTitle(self.shelterObject!.name, for: UIControlState())
+                    self.shelterButton.setTitle(self.shelterObject!.name, for: UIControl.State())
                     if adoptable {
                         self.adoptableLabel.text = "Adoptable through:"
                     } else {

@@ -106,7 +106,7 @@ class UserProfileViewController: UIViewController, CLImageEditorDelegate, Fusuma
             dashboard.widgets = widgets
             dashboard.parentView = self
             
-            dashboard.tableView.contentInset = UIEdgeInsetsMake(-8, 0, 0, 0)
+            dashboard.tableView.contentInset = UIEdgeInsets(top: -8, left: 0, bottom: 0, right: 0)
         }
     }
     
@@ -118,16 +118,16 @@ class UserProfileViewController: UIViewController, CLImageEditorDelegate, Fusuma
         self.nameLabel.text = (currentUser?.firstName)! + " " + (currentUser?.lastName)!
         
         if currentUserIsOwner {
-            self.userProfilePhotoButton.setImage(UIImage(named: "human_profile_photo_empty_add"), for: UIControlState())
+            self.userProfilePhotoButton.setImage(UIImage(named: "human_profile_photo_empty_add"), for: UIControl.State())
         }
         
-        self.userProfilePhotoButton.imageView!.contentMode = UIViewContentMode.scaleAspectFit
+        self.userProfilePhotoButton.imageView!.contentMode = UIView.ContentMode.scaleAspectFit
         let imageFile = currentUser?.profilePhoto
         if imageFile != nil {
             imageFile!.getDataInBackground(block: { (imageData: Data?, error: Error?) in
                 if(error == nil) {
                     let image = UIImage(data:imageData!)
-                    self.userProfilePhotoButton.setImage(image?.circle, for: UIControlState())
+                    self.userProfilePhotoButton.setImage(image?.circle, for: UIControl.State())
                 }
             })
         }
@@ -192,7 +192,7 @@ class UserProfileViewController: UIViewController, CLImageEditorDelegate, Fusuma
         let alert = UIAlertController(title: "Access Requested", message: "Saving image needs to access your photo album", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { (action) -> Void in
-            if let url = URL(string:UIApplicationOpenSettingsURLString) {
+            if let url = URL(string:UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
 
             }
@@ -219,7 +219,7 @@ class UserProfileViewController: UIViewController, CLImageEditorDelegate, Fusuma
     }
     
     func setProfilePhoto(_ image: UIImage!) {
-        let imageData = UIImageJPEGRepresentation(image, 0.5)
+        let imageData = image.jpegData(compressionQuality: 0.5)
         let fileName:String = (String)(WRUser.current()!.username!) + "-" + (String)(Date().description.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: ":", with: "-").replacingOccurrences(of: "+", with: "~")) + ".jpg"
         let imageFile:PFFile = PFFile(name: fileName, data: imageData!)!
         

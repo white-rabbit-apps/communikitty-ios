@@ -11,12 +11,11 @@ import UIKit
 // MARK: - SKLocalPhoto
 open class SKLocalPhoto: NSObject, SKPhotoProtocol {
     
-    open var underlyingObject: NSObject?
     open var underlyingImage: UIImage!
     open var photoURL: String!
-    open var contentMode: UIViewContentMode = .scaleToFill
+    open var contentMode: UIView.ContentMode = .scaleToFill
     open var shouldCachePhotoURLImage: Bool = false
-    open var caption: String!
+    open var caption: String?
     open var index: Int = 0
     
     override init() {
@@ -32,12 +31,6 @@ open class SKLocalPhoto: NSObject, SKPhotoProtocol {
         self.init()
         photoURL = url
         underlyingImage = holder
-    }
-    
-    convenience init(url: String, object: NSObject?) {
-        self.init()
-        photoURL = url
-        underlyingObject = object
     }
     
     open func checkCache() {}
@@ -71,11 +64,7 @@ open class SKLocalPhoto: NSObject, SKPhotoProtocol {
         return SKLocalPhoto(url: url)
     }
     
-    //    open class func photoWithImageURL(_ url: String, holder: UIImage?) -> SKLocalPhoto {
-    //        return SKLocalPhoto(url: url, holder: holder)
-    //    }
-    
-    open class func photoWithImageURL(url: String, object: NSObject?) -> SKLocalPhoto {
-        return SKLocalPhoto(url: url, object: object)
+    open class func photoWithImageURL(_ url: String, holder: UIImage?) -> SKLocalPhoto {
+        return SKLocalPhoto(url: url, holder: holder)
     }
 }

@@ -22,7 +22,7 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
-  - BWWalkthrough (1.1.0)
+  - BWWalkthrough (4.0.0)
   - CLImageEditor (0.1.6):
     - CLImageEditor/Core (= 0.1.6)
   - CLImageEditor/Core (0.1.6)
@@ -49,7 +49,7 @@ PODS:
   - Instabug (6.0.3)
   - Kingfisher (4.10.0)
   - MMMarkdown (0.5.5)
-  - OAuthSwift (1.2.2)
+  - OAuthSwift (2.0.0)
   - PagingMenuController (2.2.0)
   - Parse (1.17.1):
     - Parse/Core (= 1.17.1)
@@ -64,14 +64,14 @@ PODS:
   - ParseUI (1.2.0):
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
-  - SKPhotoBrowser (3.1.0)
+  - SKPhotoBrowser (6.1.0)
   - SlideMenuControllerSwift (4.0.0)
 
 DEPENDENCIES:
   - ActiveLabel
   - AFNetworking (~> 3.0)
   - BGTableViewRowActionWithImage
-  - BWWalkthrough (from `https://github.com/willeeklund/BWWalkthrough.git`, branch `master`)
+  - BWWalkthrough
   - CLImageEditor (from `https://github.com/white-rabbit-apps/CLImageEditor.git`, branch `master`)
   - CLImageEditor/SplashTool (from `https://github.com/white-rabbit-apps/CLImageEditor.git`, branch `master`)
   - CLImageEditor/StickerTool (from `https://github.com/white-rabbit-apps/CLImageEditor.git`, branch `master`)
@@ -89,20 +89,21 @@ DEPENDENCIES:
   - Instabug (from `https://github.com/Instabug/Instabug-iOS.git`, tag `6.0.3`)
   - Kingfisher
   - MMMarkdown
-  - OAuthSwift
+  - OAuthSwift (~> 2.0.0)
   - PagingMenuController
   - Parse
   - ParseFacebookUtilsV4 (from `https://github.com/white-rabbit-apps/ParseFacebookUtils-iOS.git`, branch `master`)
   - ParseUI
-  - SKPhotoBrowser (from `https://github.com/white-rabbit-apps/SKPhotoBrowser.git`, branch `swift3`)
+  - SKPhotoBrowser
   - SlideMenuControllerSwift
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - ActiveLabel
     - AFNetworking
     - BGTableViewRowActionWithImage
     - Bolts
+    - BWWalkthrough
     - CRToast
     - Device
     - DZNEmptyDataSet
@@ -115,12 +116,10 @@ SPEC REPOS:
     - PagingMenuController
     - Parse
     - ParseUI
+    - SKPhotoBrowser
     - SlideMenuControllerSwift
 
 EXTERNAL SOURCES:
-  BWWalkthrough:
-    :branch: master
-    :git: https://github.com/willeeklund/BWWalkthrough.git
   CLImageEditor:
     :branch: master
     :git: https://github.com/white-rabbit-apps/CLImageEditor.git
@@ -142,14 +141,8 @@ EXTERNAL SOURCES:
   ParseFacebookUtilsV4:
     :branch: master
     :git: https://github.com/white-rabbit-apps/ParseFacebookUtils-iOS.git
-  SKPhotoBrowser:
-    :branch: swift3
-    :git: https://github.com/white-rabbit-apps/SKPhotoBrowser.git
 
 CHECKOUT OPTIONS:
-  BWWalkthrough:
-    :commit: f4ecfc4f588e2bd3fccc6f447913b1758710a19f
-    :git: https://github.com/willeeklund/BWWalkthrough.git
   CLImageEditor:
     :commit: 577e0af315dc6ff5952d5e8711c90a3f7172b96f
     :git: https://github.com/white-rabbit-apps/CLImageEditor.git
@@ -171,16 +164,13 @@ CHECKOUT OPTIONS:
   ParseFacebookUtilsV4:
     :commit: 2f4c455c5120188be79e8eb2618de1508144956d
     :git: https://github.com/white-rabbit-apps/ParseFacebookUtils-iOS.git
-  SKPhotoBrowser:
-    :commit: cf308891ced823e68631b7b9a93f753bf15ed757
-    :git: https://github.com/white-rabbit-apps/SKPhotoBrowser.git
 
 SPEC CHECKSUMS:
   ActiveLabel: b8b2396fe25308d563601437d6605bf691c3b5db
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  BGTableViewRowActionWithImage: aa5ef7340267b35248c610f17c6d088d7c9c49d0
+  BGTableViewRowActionWithImage: dd7449b3e345ac3b8b07009748353cf3e28bd407
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-  BWWalkthrough: 0c27ad2773a25c8f4fb9004bc7d6685deb35fecc
+  BWWalkthrough: 9f46edbd1a145c74f3e5287b01cb4a884c840bf2
   CLImageEditor: a8a0f4059fe851e89173783c18a4fb311c3fd8de
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   Device: 62242076214c30fb5760174b3601cefafa70a481
@@ -195,14 +185,14 @@ SPEC CHECKSUMS:
   Instabug: 4daae5fd154e8a83654f8d974ba008ce87b9a104
   Kingfisher: 43c4b802d8b5256cf1f4379e9cd10b329be6d3e2
   MMMarkdown: 1af97166ce0f6d6e0cb05695665492195d27c3f1
-  OAuthSwift: 27b34fe80b76b67cd8f45571e0be2432bc9f6de1
+  OAuthSwift: 6805456763cf1c7ae0c16765257ed430b7aacae7
   PagingMenuController: 6176618987bb170096664f2da097313e45ed9c31
   Parse: d3edaf8c7c722cb33cb83ba7821d015ae32d362d
   ParseFacebookUtilsV4: 8ff88d57d9b1fc99d88e42c36958f98edeb06763
   ParseUI: 2b37a0bc692a3e7666cf0c37b5521dfddd74a1af
-  SKPhotoBrowser: 48717c1e2602e6e99a5b1df9d6b43889aaa70e9f
+  SKPhotoBrowser: 343de95d89dc7913763c5dda243cc6e606e4a168
   SlideMenuControllerSwift: 021d6318201c53d4d4d3710517d43d6c556c7dd0
 
-PODFILE CHECKSUM: 44f9d077b29f853f578379966cc347e19618b703
+PODFILE CHECKSUM: 1beacbd8d861f986bf0786f0c82bee9d0b24be06
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4

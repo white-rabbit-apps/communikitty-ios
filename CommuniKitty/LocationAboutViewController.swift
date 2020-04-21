@@ -164,12 +164,12 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
         let vc = locationsStoryboard.instantiateViewController(withIdentifier: "LocationPhotosView") as! LocationPhotosViewController
         vc.googlePlacePhotos = googlePlacePhotos
         //adding child vc to LocationAboutViewController
-        self.addChildViewController(vc)
+        self.addChild(vc)
         //setting the vc size equal to container's sizes
         vc.view.frame = CGRect(x:0, y:0, width:self.containerPhotoCollection.frame.size.width, height: self.containerPhotoCollection.frame.size.height)
         self.containerPhotoCollection.addSubview(vc.view)
         //let vc know about its parent vc
-        vc.didMove(toParentViewController: self)
+        vc.didMove(toParent: self)
     }
     
     
@@ -238,7 +238,7 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
     func openMapsAppWithDirections() {
         if let coordinates = self.getCoordinates() {
             let regionDistance:CLLocationDistance = 10000
-            let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+            let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
             
             let options = [
                 MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),

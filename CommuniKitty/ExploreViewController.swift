@@ -35,7 +35,7 @@ class ExploreViewController: UIViewController {
         self.view.setNeedsUpdateConstraints()
     }
     
-    func getContacts() {
+    @objc func getContacts() {
         self.showLoader()
         
         requestForContactsAccess(completionHandler: { (accessGranted) -> Void in

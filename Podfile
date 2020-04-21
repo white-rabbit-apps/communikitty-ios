@@ -11,9 +11,12 @@ def shared_pods
     pod 'CLImageEditor/SplashTool', :git => 'https://github.com/white-rabbit-apps/CLImageEditor.git', :branch => 'master'
     pod 'Eureka', :git => 'https://github.com/white-rabbit-apps/Eureka.git', :branch => 'master'
 #    pod 'Eureka'
-#    pod 'GooglePlacesRow', :git => 'https://github.com/white-rabbit-apps/GooglePlacesRow', :branch => 'master'
+#    pod 'GooglePlacesRow', :git => 'https://github.com/white-rabbit-app  s/GooglePlacesRow', :branch => 'master'
 #    pod 'GooglePlacesRow', :git => 'https://github.com/EurekaCommunity/GooglePlacesRow.git', :commit => 'b56ff3c'
     pod 'GooglePlacesRow'
+
+    
+    
     pod 'ImageRow', :git => 'https://github.com/EurekaCommunity/ImageRow.git', :branch => 'master'
 
 #    pod 'Fusuma', :git => 'https://github.com/Ferrick90/Fusuma.git', :branch => 'swift3'
@@ -29,7 +32,12 @@ def shared_pods
     pod 'ActiveLabel'
     pod 'AFNetworking', '~> 3.0'
     pod 'BGTableViewRowActionWithImage'
-    pod 'BWWalkthrough', :git => 'https://github.com/willeeklund/BWWalkthrough.git', :branch => 'master'
+    
+    #pod 'BWWalkthrough', :git => 'https://github.com/willeeklund/BWWalkthrough.git', :branch => 'master'
+    pod "BWWalkthrough"
+
+    
+    
     pod 'CRToast'
     pod 'Device'
     pod 'DZNEmptyDataSet'
@@ -41,10 +49,19 @@ def shared_pods
     pod 'Kingfisher'
     pod 'MMMarkdown'
 #    pod 'OAuthSwift', :git => 'https://github.com/skedgo/OAuthSwift/', :branch => 'swift3.0'
-    pod 'OAuthSwift'
+
+
+    #pod 'OAuthSwift'
+    pod 'OAuthSwift', '~> 2.0.0'
+
+    
+    
 #    pod 'PagingMenuController', :git => 'https://github.com/kitasuke/PagingMenuController.git', :branch => 'swift3.0'
     pod 'PagingMenuController'
-   pod 'SKPhotoBrowser', :git => 'https://github.com/white-rabbit-apps/SKPhotoBrowser.git', :branch => 'swift3'
+    
+    pod 'SKPhotoBrowser'
+
+   #pod 'SKPhotoBrowser', :git => 'https://github.com/white-rabbit-apps/SKPhotoBrowser.git', :branch => 'swift3'
 #    pod 'SlideMenuControllerSwift', :git => 'https://github.com/dekatotoro/SlideMenuControllerSwift.git', :tag => '3.0.0'
     pod 'SlideMenuControllerSwift'
 end
@@ -60,7 +77,7 @@ end
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '3.0'
+            config.build_settings['SWIFT_VERSION'] = '5.0'
         end
     end
 end

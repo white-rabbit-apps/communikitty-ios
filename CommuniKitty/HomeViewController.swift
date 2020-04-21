@@ -83,7 +83,7 @@ class HomeViewController: UIViewController,BWWalkthroughViewControllerDelegate {
         self.imageProfileButton.addTarget(self, action: #selector(HomeViewController.closeAndOpenUserProfile), for: .touchUpInside)
     }
     
-    func closeAndOpenUserProfile() {
+    @objc func closeAndOpenUserProfile() {
         slideMenuController()?.closeLeft()
         self.openUserProfile(user: WRUser.current(), push: false)
     }
@@ -95,7 +95,7 @@ class HomeViewController: UIViewController,BWWalkthroughViewControllerDelegate {
 //        self.checkForUser(completionBlock: nil)
     }
     
-    func showView(sender: UIButton!) {
+    @objc func showView(sender: UIButton!) {
         switch sender.currentTitle! {
             case "socialize":
                 slideMenuController()?.changeMainViewController(self.mainViewController, close: true)

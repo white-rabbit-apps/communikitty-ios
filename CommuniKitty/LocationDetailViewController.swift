@@ -62,7 +62,7 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate {
         
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(UIViewController.goBack))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
         
         if let location = currentLocationObject {
@@ -104,7 +104,7 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate {
                     if(error == nil) {
                         let image = UIImage(data:data!)
                         if image != nil {
-                            self.logoButton.setImage(image, for: UIControlState.normal)
+                            self.logoButton.setImage(image, for: UIControl.State.normal)
                         }
                     }
                 })

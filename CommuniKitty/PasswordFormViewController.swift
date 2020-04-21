@@ -49,7 +49,7 @@ class PasswordFormViewController : FormViewController {
         self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "icon_save", action: #selector(PasswordFormViewController.savePassword), height: 20, width: 25)
     }
     
-    func savePassword() {
+    @objc func savePassword() {
         let user = self.userObject!
         
         let passwordValue = self.form.rowBy(tag: self.PASSWORD_TAG)?.baseValue as? String
@@ -75,7 +75,7 @@ class PasswordFormViewController : FormViewController {
 
     }
     
-    func cancel() {
+    @objc func cancel() {
         self.dismiss(animated: true, completion: nil)
     }
 

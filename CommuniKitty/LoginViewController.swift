@@ -36,13 +36,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.usernameField.delegate = self
         self.passwordField.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIResponder.keyboardWillHideNotification, object: nil)
         
     }
     
-    func keyboardWillShow(_ notification: Notification) {
-        let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+    @objc func keyboardWillShow(_ notification: Notification) {
+        let keyboardSize = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
         
         if activeTextField != nil {
             if viewWasMoved == false {
@@ -54,9 +54,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
         if (self.viewWasMoved){
-            if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if let keyboardSize = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
                 self.view.frame.origin.y += keyboardSize.height/2
                 self.viewWasMoved = false
             }
@@ -132,7 +132,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func loginWithEmail() {
         self.showLoader()
         let query: PFQuery = WRUser.query()!
-        let usernameValue = usernameField.text!.lowercased().trim()
+        let usernameValue = usernameField.text!.lowercased()
         query.whereKey("email", equalTo: usernameValue)
         query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) -> Void in
             if objects != nil && objects!.count > 0 {

@@ -18,8 +18,8 @@ class QuirksContainerViewCell: PFTableViewCell{
 class QuirksContainerViewController: PFQueryTableViewController {
     
     var quirksViewController: QuirksSelectorViewController?
-    
-    override init(style: UITableViewStyle, className: String!) {
+
+    override init(style: UITableView.Style, className: String!) {
         super.init(style: style, className: className)
     }
     

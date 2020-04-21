@@ -56,7 +56,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
      Called when a notification is received that the users animals list is finished downloading
      - hide or show the camera button
      */
-    func finishedGettingMyAnimals(notifiation: NSNotification) -> Void {
+    @objc func finishedGettingMyAnimals(notifiation: NSNotification) -> Void {
         
         //if there are no list of Animals yet, check it again after login
         if AppDelegate.getAppDelegate().myAnimalsArray == nil {
@@ -97,7 +97,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
     /**
      Show the notifications screen
      */
-    func showNotifications() {
+    @objc func showNotifications() {
         self.checkForUser {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let activityNav = storyboard.instantiateViewController(withIdentifier: "ActivityNavigation") as! UINavigationController
@@ -197,7 +197,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
         }
     }
     
-    func loadDashboard() {
+    @objc func loadDashboard() {
         var widgets: [DashboardWidget] = [FeaturedPhotosDashboardWidget(), FollowingPhotosDashboardWidget(), MyAnimalsDashboardWidget()]
         
         if AppDelegate.getAppDelegate().hasFosters {

@@ -41,7 +41,7 @@ class BreedsTableViewController: PFQueryTableViewController, TypedRowControllerT
         self.hideLoader()
     }
     
-    override init(style: UITableViewStyle, className: String!) {
+    override init(style: UITableView.Style, className: String!) {
         super.init(style: style, className: className)
     }
     
@@ -135,7 +135,7 @@ class BreedsTableViewController: PFQueryTableViewController, TypedRowControllerT
         var cell = tableView.dequeueReusableCell(withIdentifier: "BreedCell", for: indexPath) as? BreedsTableViewCell
         
         if cell == nil  {
-            cell = BreedsTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "BreedCell")
+            cell = BreedsTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "BreedCell")
         }
         
         let breed = object as! WRBreed

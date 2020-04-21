@@ -6,47 +6,71 @@
 //  Copyright © 2016年 suzuki_keishi. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public struct SKPhotoBrowserOptions {
+    public static var displayStatusbar: Bool = false
+    public static var displayCloseButton: Bool = true
+    public static var displayDeleteButton: Bool = false
+
     public static var displayAction: Bool = true
-    public static var shareExtraCaption: String? = nil
+    public static var shareExtraCaption: String?
     public static var actionButtonTitles: [String]?
     
-    public static var displayToolbar: Bool = true
-    public static var displayCustomToolbar: Bool = false
     public static var displayCounterLabel: Bool = true
     public static var displayBackAndForwardButton: Bool = true
+
+    public static var displayHorizontalScrollIndicator: Bool = true
+    public static var displayVerticalScrollIndicator: Bool = true
+    public static var displayPagingHorizontalScrollIndicator: Bool = true
+    
+    public static var bounceAnimation: Bool = false
+    public static var enableZoomBlackArea: Bool = true
+    public static var enableSingleTapDismiss: Bool = false
+    
+    public static var backgroundColor: UIColor = .black
+    public static var indicatorColor: UIColor = .white
+    public static var indicatorStyle: UIActivityIndicatorView.Style = .whiteLarge
+
+    /// By default close button is on left side and delete button is on right.
+    ///
+    /// Set this property to **true** for swap they.
+    ///
+    /// Default: false
+    public static var swapCloseAndDeleteButtons: Bool = false
     public static var disableVerticalSwipe: Bool = false
-    
-    public static var displayCloseButton = true
-    public static var displayDeleteButton = false
-    
-    public static var displayCommentButton = false
-    public static var displayLikeButton = false
-    public static var displayMoreButton = false
-    public static var displayShareButton = false
-    
-    public static var displayUserButton = false
-    
-    public static var handleUserButtonPressed : ((_ object: NSObject?)->Void)? = nil
-    public static var handleCommentButtonPressed : ((_ object: NSObject?)->Void)? = nil
-    public static var handleLikeButtonPressed : ((_ object: NSObject?, _ photo: SKPhotoProtocol?)->Void)? = nil
-    public static var handleMoreButtonPressed : ((_ object: NSObject?)->Void)? = nil
-    public static var handleShareButtonPressed : ((_ object: NSObject?, _ image: UIImage)->Void)? = nil
-    
-    public static var handleEntryLoaded : ((_ object: NSObject?, _ photo: SKPhotoProtocol?)->Void)? = nil
-    
-    public static var customCloseButtonImage : UIImage? = nil
-    public static var customLikeButtonImage : UIImage? = nil
-    public static var customCommentButtonImage : UIImage? = nil
-    public static var customMoreButtonImage : UIImage? = nil
-    public static var customShareButtonImage : UIImage? = nil
-    public static var customDeleteButtonImage : UIImage? = nil
-    public static var customUserButtonDefaultImage : UIImage? = nil
-    
-    public static var bounceAnimation = false
-    public static var enableZoomBlackArea = true
-    public static var enableSingleTapDismiss = false
-    public static var autoHideControls = true
+
+    /// if this value is true, the long photo width will match the screen,
+    /// and the minScale is 1.0, the maxScale is 2.5
+    /// Default: false
+    public static var longPhotoWidthMatchScreen: Bool = false
+
+    /// Provide custom session configuration (eg. for headers, etc.)
+    public static var sessionConfiguration: URLSessionConfiguration = .default
+}
+
+public struct SKButtonOptions {
+    public static var closeButtonPadding: CGPoint = CGPoint(x: 5, y: 20)
+    public static var deleteButtonPadding: CGPoint = CGPoint(x: 5, y: 20)
+}
+
+public struct SKCaptionOptions {
+    public enum CaptionLocation {
+        case basic
+        case bottom
+    }
+
+    public static var textColor: UIColor = .white
+    public static var textAlignment: NSTextAlignment = .center
+    public static var numberOfLine: Int = 3
+    public static var lineBreakMode: NSLineBreakMode = .byTruncatingTail
+    public static var font: UIFont = .systemFont(ofSize: 17.0)
+    public static var backgroundColor: UIColor = .clear
+    public static var captionLocation: CaptionLocation = .basic
+}
+
+public struct SKToolbarOptions {
+    public static var textColor: UIColor = .white
+    public static var font: UIFont = .systemFont(ofSize: 17.0)
+    public static var textShadowColor: UIColor = .black
 }

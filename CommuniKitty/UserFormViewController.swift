@@ -282,7 +282,7 @@ class UserFormViewController : FormViewController {
     }
 
     
-    func saveUser() {
+    @objc func saveUser() {
         let appDelegate = AppDelegate.getAppDelegate()
 
         var user = WRUser()
@@ -292,22 +292,22 @@ class UserFormViewController : FormViewController {
         }
         
         if let firstNameValue = self.form.rowBy(tag: self.FIRST_NAME_TAG)?.baseValue as? String {
-            user.setObject(firstNameValue.trim(), forKey: FIRST_NAME_TAG)
+            user.setObject(firstNameValue, forKey: "")
         }
         if let lastNameValue = self.form.rowBy(tag: self.LAST_NAME_TAG)?.baseValue as? String {
-            user.setObject(lastNameValue.trim(), forKey: LAST_NAME_TAG)
+            user.setObject(lastNameValue, forKey: "")
         }
         var usernameValue = self.form.rowBy(tag: self.USERNAME_TAG)?.baseValue as? String
         if usernameValue != nil {
             if usernameValue![0] == "@" {
-                usernameValue = String(usernameValue!.characters.dropFirst())
+                usernameValue = String(usernameValue!.dropFirst())
             }
 
-            user.setObject(usernameValue!.lowercased().trim(), forKey: USERNAME_TAG)
+            user.setObject(usernameValue!.lowercased(), forKey: USERNAME_TAG)
         }
         let emailValue = self.form.rowBy(tag: self.EMAIL_TAG)?.baseValue as? String
         if emailValue != nil {
-            user.setObject(emailValue!.lowercased().trim(), forKey: EMAIL_TAG)
+            user.setObject(emailValue!.lowercased(), forKey: EMAIL_TAG)
 //            user.setObject(emailValue!, forKey: USERNAME_TAG)
         }
         let passwordValue = self.form.rowBy(tag: self.PASSWORD_TAG)?.baseValue as? String
@@ -357,7 +357,7 @@ class UserFormViewController : FormViewController {
     }
     
     func removeUser() {
-        let refreshAlert = UIAlertController(title: "Remove?", message: "All data will be lost.", preferredStyle: UIAlertControllerStyle.alert)
+        let refreshAlert = UIAlertController(title: "Remove?", message: "All data will be lost.", preferredStyle: UIAlertController.Style.alert)
         
         refreshAlert.addAction(UIAlertAction(title: "Do it", style: .default, handler: { (action: UIAlertAction!) in
             self.showLoader()
@@ -386,7 +386,7 @@ class UserFormViewController : FormViewController {
         self.present(nav, animated: true, completion: nil)
     }
     
-    func cancel() {
+    @objc func cancel() {
         self.dismiss(animated: true, completion: nil)
     }
 

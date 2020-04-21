@@ -675,6 +675,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -778,7 +779,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-resources.sh",
 				"${PODS_ROOT}/Instabug/Instabug.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -787,7 +788,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		26C8D9B29E0AD317EBBBDABC /* [CP] Check Pods Manifest.lock */ = {
@@ -814,7 +815,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/BGTableViewRowActionWithImage/BGTableViewRowActionWithImage.framework",
@@ -871,7 +872,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EDBB49051D9F923C00BF68CB /* [CP] Check Pods Manifest.lock */ = {
@@ -898,7 +899,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/BGTableViewRowActionWithImage/BGTableViewRowActionWithImage.framework",
@@ -955,7 +956,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EDBB495B1D9F923C00BF68CB /* [CP] Copy Pods Resources */ = {
@@ -964,7 +965,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-resources.sh",
 				"${PODS_ROOT}/Instabug/Instabug.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -973,7 +974,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1180,7 +1181,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1208,7 +1209,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1321,14 +1322,14 @@
 					"$(PROJECT_DIR)/Pods/GooglePlacesRow/Frameworks",
 				);
 				INFOPLIST_FILE = CommuniKitty/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1347,14 +1348,14 @@
 					"$(PROJECT_DIR)/Pods/GooglePlacesRow/Frameworks",
 				);
 				INFOPLIST_FILE = CommuniKitty/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.communikitty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "CommuniKitty/CommuniKitty-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1368,7 +1369,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.CommuniKittyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CommuniKitty.app/CommuniKitty";
 			};
 			name = Debug;
@@ -1383,7 +1384,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.CommuniKittyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CommuniKitty.app/CommuniKitty";
 			};
 			name = Release;
@@ -1397,7 +1398,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.CommuniKittyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = CommuniKitty;
 			};
 			name = Debug;
@@ -1411,7 +1412,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.whiterabbitapps.CommuniKittyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = CommuniKitty;
 			};
 			name = Release;

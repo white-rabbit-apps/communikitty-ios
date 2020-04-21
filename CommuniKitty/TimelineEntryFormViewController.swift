@@ -95,7 +95,7 @@ class TimelineEntryFormViewController: FormViewController {
                 $0.onChange({ (row: TextAreaRow) -> () in
                     let val = row.baseValue as? String
                     let maxLength = 500
-                    if (val?.characters.count)! > maxLength {
+                    if (val?.count)! > maxLength {
                         row.cell!.textView.text = val?[0...maxLength]
                     }
                 })
@@ -154,7 +154,7 @@ class TimelineEntryFormViewController: FormViewController {
         }
     }
     
-    func saveImageData() {
+    @objc func saveImageData() {
         let appDelegate = AppDelegate.getAppDelegate()
         
         var timelineEntry = WRTimelineEntry()
@@ -174,8 +174,11 @@ class TimelineEntryFormViewController: FormViewController {
         
         let imageValue = self.form.rowBy(tag: "photo")?.baseValue as? UIImage
         if imageValue != nil {
-            let imageData = UIImageJPEGRepresentation(imageValue!, 0.5)
+            
+            
+            //let imageDimageValue = imageValue!.jpegDatatcompressionQuality: lue!, 0.5)
             let fileName:String = (String)(WRUser.current()!.objectId!) + "-" + (String)(Date().description.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: ":", with: "-").replacingOccurrences(of: "+", with: "~")) + ".jpg"
+            let imageData = imageValue?.pngData()
             let imageFile:PFFile = PFFile(name: fileName, data: imageData!)!
             
             timelineEntry.image = imageFile
@@ -243,7 +246,7 @@ class TimelineEntryFormViewController: FormViewController {
                             while let presentedViewController = topController.presentedViewController {
                                 topController = presentedViewController
                             }
-                            let child = topController.childViewControllers[0]
+                            let child = topContrchildrenollers[0]
                             child.openAnimalDetail(animalObject: newAnimal!, push: true, timelineObjectId: timelineEntry.objectId!)
                         }
                     }

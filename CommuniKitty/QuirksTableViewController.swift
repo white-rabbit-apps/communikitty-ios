@@ -26,7 +26,7 @@ public class QuirksTableViewController: PFQueryTableViewController{
     
     var quirksPushView: QuirksSelectorViewController?
     
-    override init(style: UITableViewStyle, className: String!) {
+    override init(style: UITableView.Style, className: String!) {
         super.init(style: style, className: className)
     }
     
@@ -56,7 +56,7 @@ public class QuirksTableViewController: PFQueryTableViewController{
         
         self.replacePFLoadingView()
         isLoadFirstTime = true
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 60.0
         
         if let animal = entryObject {
@@ -106,10 +106,10 @@ public class QuirksTableViewController: PFQueryTableViewController{
             let index = self.tableView.numberOfRows(inSection: 0)
             if index > 0 {
                 let indextPath = NSIndexPath(row: index-1, section: 0)
-                self.tableView.scrollToRow(at: indextPath as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                self.tableView.scrollToRow(at: indextPath as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
             } else {
                 let indextPath = NSIndexPath(index:0)
-                self.tableView.scrollToRow(at: indextPath as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                self.tableView.scrollToRow(at: indextPath as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
             }
         }
         isLoadFirstTime = false
@@ -147,7 +147,7 @@ public class QuirksTableViewController: PFQueryTableViewController{
         var cell = tableView.dequeueReusableCell(withIdentifier: "QuirksCell", for: indexPath as IndexPath) as? QuirksTableViewCell
         
         if cell == nil  {
-            cell = QuirksTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "QuirksCell")
+            cell = QuirksTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "QuirksCell")
         }
         
         cell?.name.text = self.arrayOfStrings![indexPath.row]
@@ -176,7 +176,7 @@ public class QuirksTableViewController: PFQueryTableViewController{
         return cell!
     }
     
-    func deleteString(sender:UIButton){
+    @objc func deleteString(sender:UIButton){
         let tag = sender.tag
         
         if (self.arrayOfStrings?.count)! > 1{

@@ -33,8 +33,8 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidLoad() {
@@ -48,7 +48,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
         self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "button_share", action: #selector(showShareSheet), height: 45, width: 35)
 
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -109,11 +109,11 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
                     (imageData: Data?, error: Error?) -> Void in
                     if(error == nil) {
                         let image = UIImage(data:imageData!)
-                        self.commentAnimalProfilePhoto.setImage(image?.circle, for: UIControlState())
+//                        self.commentAnimalProfilePhoto.setImage(image?, for: UIControl.State())
                     }
                 })
             } else {
-                self.commentAnimalProfilePhoto.setImage(UIImage(named: "animal_profile_photo_empty"), for: UIControlState())
+                self.commentAnimalProfilePhoto.setImage(UIImage(named: "animal_profile_photo_empty"), for: UIControl.State())
             }
             
             self.commentAnimalProfilePhoto.tag = index
@@ -152,7 +152,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func showShareSheet() {
+    @objc func showShareSheet() {
         if let image = self.commentsView?.mainImage {
             self.showShareActionSheet(image: image)
         }
@@ -191,12 +191,12 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     func keyboardWillShow(_ notification: Notification) {
         var info = (notification as NSNotification).userInfo!
 
-        let duration = (info[UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue!
-        let curve = info[UIKeyboardAnimationCurveUserInfoKey] as! UInt
+        let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue!
+        let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
         
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(rawValue: curve), animations: {
+        UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
             self.commentToolbarBottomContraint.constant = keyboardFrame.size.height
             self.view.layoutIfNeeded()
         }, completion: { (value: Bool) in
@@ -206,10 +206,10 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     func keyboardWillHide(_ notification: Notification) {
         var info = (notification as NSNotification).userInfo!
         
-        let duration = (info[UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue!
-        let curve = info[UIKeyboardAnimationCurveUserInfoKey] as! UInt
+        let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue!
+        let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
         
-        UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(rawValue: curve), animations: {
+        UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(rawValue: curve), animations: {
             self.commentToolbarBottomContraint.constant = 0
             self.view.layoutIfNeeded()
             }, completion: { (value: Bool) in

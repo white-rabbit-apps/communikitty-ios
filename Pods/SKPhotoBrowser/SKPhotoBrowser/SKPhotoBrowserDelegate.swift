@@ -15,7 +15,7 @@ import Foundation
      
      - Parameter index: the index of the new photo
      */
-    @objc optional func didShowPhotoAtIndex(_ index: Int)
+    @objc optional func didShowPhotoAtIndex(_ browser: SKPhotoBrowser, index: Int)
     
     /**
      Tells the delegate the browser will start to dismiss
@@ -51,7 +51,7 @@ import Foundation
      
      - Parameter index: the index of the photo where the user had scroll
      */
-    @objc optional func didScrollToIndex(_ index: Int)
+    @objc optional func didScrollToIndex(_ browser: SKPhotoBrowser, index: Int)
     
     /**
      Tells the delegate the user removed a photo, when implementing this call, be sure to call reload to finish the deletion process
@@ -60,7 +60,7 @@ import Foundation
      - Parameter index: the index of the removed photo
      - Parameter reload: function that needs to be called after finishing syncing up
      */
-    @objc optional func removePhoto(_ browser: SKPhotoBrowser, index: Int, reload: (() -> Void))
+    @objc optional func removePhoto(_ browser: SKPhotoBrowser, index: Int, reload: @escaping (() -> Void))
     
     /**
      Asks the delegate for the view for a certain photo. Needed to detemine the animation when presenting/closing the browser.
@@ -71,5 +71,20 @@ import Foundation
      - Returns: the view to animate to
      */
     @objc optional func viewForPhoto(_ browser: SKPhotoBrowser, index: Int) -> UIView?
+    
+    /**
+     Tells the delegate that the controls view toggled visibility
+     
+     - Parameter browser: reference to the calling SKPhotoBrowser
+     - Parameter hidden: the status of visibility control
+     */
+    @objc optional func controlsVisibilityToggled(_ browser: SKPhotoBrowser, hidden: Bool)
+    
+    /**
+     Allows  the delegate to create its own caption view
+     
+     - Parameter index: the index of the photo
+     */
+    @objc optional func captionViewForPhotoAtIndex(index: Int) -> SKCaptionView?
 }
 

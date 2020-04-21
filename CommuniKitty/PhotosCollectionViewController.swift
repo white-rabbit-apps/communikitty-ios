@@ -118,7 +118,7 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
 
     }
     
-    func tapOnCameraButton(){
+    @objc func tapOnCameraButton(){
         let fusuma = FusumaViewController()
         
         fusuma.delegate = self

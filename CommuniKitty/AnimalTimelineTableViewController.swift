@@ -44,7 +44,7 @@ class AnimalTimelineTableViewCell: EntryCell {
     var parentTable: AnimalTimelineTableViewController?
     var type: String?
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String?, type: String) {
+    init(style: UITableViewCell.CellStyle, reuseIdentifier: String?, type: String) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
@@ -121,7 +121,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
      - Parameters:
      - objects: An array of the objects to scroll to
      */
-    func scrollToIndexPathForEntity(objects: [PFObject]?) {
+    @objc func scrollToIndexPathForEntity(objects: [PFObject]?) {
         if (self.timelineObjectId != nil) {
             for (index, object) in objects!.enumerated(){
                 if object.objectId == self.timelineObjectId {
@@ -142,7 +142,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     
     func initGestureRecognizers() {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
     }
 
@@ -163,7 +163,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
 //        }
 //    }
 //    
-    func handlePress(gestureRecognizer : UILongPressGestureRecognizer) {
+    @objc func handlePress(gestureRecognizer : UILongPressGestureRecognizer) {
         let p = gestureRecognizer.location(in: self.tableView)
         let indexPath = self.tableView.indexPathForRow(at: p)
         let cell = tableView.cellForRow(at: indexPath!) as? AnimalTimelineTableViewCell
@@ -227,7 +227,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     
     func imageEditor(_ editor: CLImageEditor!, didFinishEdittingWith image: UIImage!) {
         NSLog("got new image")
-        let imageFile = PFFile(data: UIImageJPEGRepresentation(image, 0.5)!)
+        let imageFile = PFFile(data: image.jpegData(compressionQuality: 0.5)!)
         
         if let object = self.animalObject {
             if self.isEditingProfile {
@@ -297,7 +297,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         return nextIndexPath
     }
     
-    func tapOnEmptyDataSetButton(){
+    @objc func tapOnEmptyDataSetButton(){
         if currentUserIsOwner {
             self.takeFusumaPhoto()
         } else {
@@ -357,7 +357,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         self.modalTransitionStyle = .coverVertical
         self.dismiss(animated: false, completion: { () -> Void in
             self.isAddingFirstImage = true
-            self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
+//            self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
         })
     }
     
@@ -365,7 +365,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         self.modalTransitionStyle = .coverVertical
         self.dismiss(animated: false, completion: { () -> Void in
             self.isAddingFirstImage = true
-            self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
+//            self.showEditor(image: image, delegate: self, ratios: [1, 1], fromController: self)
         })
     }
     
@@ -432,7 +432,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         
         var cell = tableView.dequeueReusableCell(withIdentifier: "AnimalTimelineCell", for: indexPath) as? AnimalTimelineTableViewCell
         if cell == nil  {
-            cell = AnimalTimelineTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "AnimalTimelineCell", type: object?["type"] as! String)
+            cell = AnimalTimelineTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "AnimalTimelineCell", type: object?["type"] as! String)
         }
         
         cell!.indexPath = indexPath

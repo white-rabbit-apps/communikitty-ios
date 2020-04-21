@@ -113,7 +113,7 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
         self.performSegue(withIdentifier: "PostsToAnimalDetail", sender: sender)
     }
     
-    func ProfilePhotoPFImageViewTaped(gestureRecognizer: UITapGestureRecognizer) {
+    @objc func ProfilePhotoPFImageViewTaped(gestureRecognizer: UITapGestureRecognizer) {
         let tappedImageView = gestureRecognizer.view!
         self.setSelectedIndexPathFromSender(sender: tappedImageView)
         self.performSegue(withIdentifier: "PostsToAnimalDetail", sender: tappedImageView)
@@ -211,7 +211,7 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
         super.viewDidLoad()
         self.initEmptyState()
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 550.0
         
         self.replacePFLoadingView()
@@ -248,7 +248,7 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
         return NSAttributedString(string: "You're not following any kittehs yet!", attributes: attributes)
     }
     
-    func buttonTitleForEmptyDataSet(scrollView: UIScrollView, forState state: UIControlState) -> NSAttributedString {
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView, forState state: UIControl.State) -> NSAttributedString {
         let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 17.0)]
         
         return NSAttributedString(string: "Find some to follow", attributes: attributes)
@@ -282,7 +282,7 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
         var cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostsTableViewCell
         
         if cell == nil  {
-            cell = PostsTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "PostCell")
+            cell = PostsTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "PostCell")
         }
         
         cell!.setSpacing()

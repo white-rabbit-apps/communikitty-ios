@@ -33,7 +33,7 @@ class BreedDetailViewController: UIViewController {
         self.setUpNavigationBar()
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(UIViewController.goBack))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
         
         if let breed = currentBreedObject {
@@ -47,63 +47,63 @@ class BreedDetailViewController: UIViewController {
             nameLabel.text = breed.name!
 
             if let type = breed.type {
-                typeButton.setTitle(type, for: UIControlState())
+                typeButton.setTitle(type, for: UIControl.State())
             } else {
-                typeButton.setTitle("Unknown", for: UIControlState())
+                typeButton.setTitle("Unknown", for: UIControl.State())
             }
             
             if let country = breed.originCountry {
-                countryButton.setTitle(country, for: UIControlState())
+                countryButton.setTitle(country, for: UIControl.State())
             } else {
-                countryButton.setTitle("Unknown", for: UIControlState())
+                countryButton.setTitle("Unknown", for: UIControl.State())
             }
             
             if let shedding = breed.sheddingFrequency {
-                sheddingButton.setTitle(shedding, for: UIControlState())
+                sheddingButton.setTitle(shedding, for: UIControl.State())
             } else {
-                sheddingButton.setTitle("Unknown", for: UIControlState())
+                sheddingButton.setTitle("Unknown", for: UIControl.State())
             }
             
             if let grooming = breed.groomingFrequency {
-                groomingButton.setTitle(grooming, for: UIControlState())
+                groomingButton.setTitle(grooming, for: UIControl.State())
             } else {
-                groomingButton.setTitle("Unknown", for: UIControlState())
+                groomingButton.setTitle("Unknown", for: UIControl.State())
             }
             
             let minLifeExpectancy = breed.minLifeExpectancy
             let maxLifeExpectancy = breed.maxLifeExpectancy
             if(minLifeExpectancy != nil && maxLifeExpectancy != nil) {
-                lifeExpectancyRangeButton.setTitle("\(minLifeExpectancy!) - \(maxLifeExpectancy!) years", for: UIControlState())
+                lifeExpectancyRangeButton.setTitle("\(minLifeExpectancy!) - \(maxLifeExpectancy!) years", for: UIControl.State())
             } else {
-                lifeExpectancyRangeButton.setTitle("Unknown", for: UIControlState())
+                lifeExpectancyRangeButton.setTitle("Unknown", for: UIControl.State())
             }
             
             let minWeight = breed.minWeightLbs
             let maxWeight = breed.maxWeightLbs
             if(minWeight != nil && maxWeight != nil) {
-                weightRangeButton.setTitle("\(minWeight!) - \(maxWeight!) lbs", for: UIControlState())
+                weightRangeButton.setTitle("\(minWeight!) - \(maxWeight!) lbs", for: UIControl.State())
             } else {
-                weightRangeButton.setTitle("Unknown", for: UIControlState())
+                weightRangeButton.setTitle("Unknown", for: UIControl.State())
             }
             
             if let lapCat = breed.lapCat {
                 if lapCat {
-                    lapCatButton.setTitle("Yes", for: UIControlState())
+                    lapCatButton.setTitle("Yes", for: UIControl.State())
                 } else {
-                    lapCatButton.setTitle("No", for: UIControlState())
+                    lapCatButton.setTitle("No", for: UIControl.State())
                 }
             } else {
-                lapCatButton.setTitle("Unknown", for: UIControlState())
+                lapCatButton.setTitle("Unknown", for: UIControl.State())
             }
             
             if let hypoallergenic = breed.hypoallergenic {
                 if hypoallergenic {
-                    hypoallergenicButton.setTitle("Yes", for: UIControlState())
+                    hypoallergenicButton.setTitle("Yes", for: UIControl.State())
                 } else {
-                    hypoallergenicButton.setTitle("No", for: UIControlState())
+                    hypoallergenicButton.setTitle("No", for: UIControl.State())
                 }
             } else {
-                hypoallergenicButton.setTitle("Unknown", for: UIControlState())
+                hypoallergenicButton.setTitle("Unknown", for: UIControl.State())
             }
             
             if let imageFile = breed["image"] as? PFFile {

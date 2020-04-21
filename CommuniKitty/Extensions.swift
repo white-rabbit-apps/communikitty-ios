@@ -107,7 +107,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         let cameraImage = UIButton()
         
         if currentUserIsOwner {
-            cameraImage.setImage(UIImage(named: "arrow_to_button_camera"), for: UIControlState())
+            cameraImage.setImage(UIImage(named: "arrow_to_button_camera"), for: UIControl.State())
             cameraImage.sizeToFit()
             
             
@@ -124,7 +124,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             }
             
         } else {
-            cameraImage.setImage(UIImage(named: "button_nudge"), for: UIControlState())
+            cameraImage.setImage(UIImage(named: "button_nudge"), for: UIControl.State())
             cameraImage.sizeToFit()
             let imageWidth = cameraImage.frame.width
             let imageHeight = cameraImage.frame.height
@@ -152,7 +152,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     /**
      Pop back to the previous view controller in the current UINavigationController
      */
-    func goBack() {
+    @objc func goBack() {
         _ = self.navigationController?.popViewController(animated: true)
     }
 
@@ -170,7 +170,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     /**
      Close the current view controller
      */
-    func close() {
+    @objc func close() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -208,7 +208,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         return UIBarButtonItem(customView: editButton)
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -236,8 +236,8 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
      - buttonText: The title of the button
      */
     func displayAlert(title:String, message:String, buttonText: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: buttonText, style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: buttonText, style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -291,7 +291,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             nav?.frame = frame
         }
         
-        nav?.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Nunito-Black", size: 20)!,  NSForegroundColorAttributeName: UIColor.white]
+        nav?.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Nunito-Black", size: 20)!,  NSAttributedString.Key.foregroundColor: UIColor.white]
         
         self.navigationItem.title = title
         
@@ -316,7 +316,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
             nav?.frame = frame
         }
         
-        nav?.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Nunito-Black", size: 20)!,  NSForegroundColorAttributeName: UIColor.white]
+        nav?.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Nunito-Black", size: 20)!,  NSAttributedString.Key.foregroundColor: UIColor.white]
         
         self.navigationItem.title = title
         self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "icon_back", action: #selector(UIViewController.goBack), height: 30, width: 25)
@@ -330,14 +330,14 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     func setUpNavigationBarImage(image: UIImage, height: CGFloat, title: String, showButton: Bool = true) {
         let nav = self.navigationController?.navigationBar
         
-        nav?.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Nunito-Black", size: 20)!,  NSForegroundColorAttributeName: UIColor.white]
+        nav?.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Nunito-Black", size: 20)!,  NSAttributedString.Key.foregroundColor: UIColor.white]
         
         self.navigationItem.title = title
         
         nav?.barStyle = UIBarStyle.blackOpaque
         
         nav!.isTranslucent = false
-        nav!.setBackgroundImage(image.resizableImage(withCapInsets: UIEdgeInsetsMake(0, 0, 0, 0), resizingMode: .stretch), for: .default)
+        nav!.setBackgroundImage(image.resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), resizingMode: .stretch), for: .default)
         var frame = nav!.frame
         frame.size.height = height
         nav!.frame = frame
@@ -430,10 +430,104 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     func showMenu() {
 //        self.slideMenuController()?.openLeft()
     }
+
+func isLoggedIn() -> Bool {
+    return WRUser.current() != nil
+}
+
+func openUserProfile(user: WRUser? = nil, push: Bool = true) {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let userView = storyboard.instantiateViewController(withIdentifier: "UserProfile") as! UserProfileViewController
+    userView.currentUser = user
+    
+    if(push) {
+        userView.showAsNav = true
+        self.navigationController?.pushViewController(userView, animated: true)
+    } else {
+        userView.showClose = true
+        self.present(UINavigationController(rootViewController: userView), animated: true, completion: nil)
+    }
+}
+ 
+func showError(message: String) {
+    self.showError(message: message, timeToShow: 3.0)
+}
+
+func showError(message: String, timeToShow: Double) {
+    self.playASound(soundName: "chirp1")
+    
+    let errorMessage = message.capitalized
+    
+    let options = getToastOptions(message: errorMessage, type: "error", timeToShow: timeToShow)
+    CRToastManager.showNotification(options: options, completionBlock: nil)
+}
+    
+    
+    func getToastOptions(message: String, type: String, timeToShow: Double) -> [AnyHashable : Any] {
+        var fontSize = 14.0
+        if(message.count > 60) {
+            fontSize = 12.0
+        }
+        
+        var options = [
+            kCRToastSubtitleTextKey : message,
+            kCRToastUnderStatusBarKey : NSNumber(value: false),
+            kCRToastTimeIntervalKey : NSNumber(value:timeToShow),
+            kCRToastNotificationPreferredPaddingKey: 15 as NSNumber,
+            kCRToastNotificationPreferredHeightKey : 150 as NSNumber,
+            kCRToastFontKey: UIFont.italicSystemFont(ofSize: 16),
+            kCRToastSubtitleFontKey : UIFont(name: "Nunito-Regular", size: CGFloat(fontSize))!,
+            kCRToastNotificationTypeKey  : NSNumber(value:CRToastType.navigationBar.rawValue),
+            kCRToastSubtitleTextAlignmentKey : NSNumber(value:NSTextAlignment.left.rawValue),
+            kCRToastTextAlignmentKey : NSNumber(value:NSTextAlignment.left.rawValue),
+            kCRToastAnimationInTypeKey : NSNumber(value:CRToastAnimationType.spring.rawValue),
+            kCRToastAnimationOutTypeKey : NSNumber(value:CRToastAnimationType.spring.rawValue),
+            kCRToastAnimationInDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue),
+            kCRToastAnimationOutDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue)
+        ] as [AnyHashable : Any]
+        
+        if(type == "error") {
+//            options[kCRToastBackgroundColorKey] = UIColor.red
+//            
+//            options[kCRToastTextKey] = ["Taht dint werk.", "Ruh roh.", "Ar yoo kitten me?"]
+//            
+//            let filename = Int.random(lower: 1, upper: 8)
+//            options[kCRToastImageKey] = UIImage(named: "error" + String(filename))
+        } else if(type == "success") {
+//            options[kCRToastBackgroundColorKey] = UIColor.lightGreenColor()
+//
+//            options[kCRToastTextKey] = ["Errrmahgerd!", "Pawesum.", "It werkd.", "Clawesome!"].randomItem()
+//
+//            let filename = Int.random(lower: 1, upper: 5)
+//            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
+        } else if(type == "info") {
+//            options[kCRToastBackgroundColorKey] = UIColor.lightBlueColor()
+//
+//            options[kCRToastTextKey] = ["Oh hai."].randomItem()
+//
+//            let filename = Int.random(lower: 1, upper: 5)
+//            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
+        }
+        
+        return options
+    }
+    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizer.Direction.right:
+                self.goBack()
+            default:
+                break
+            }
+        }
+    }
+    
+    
     
     /**
      Show the create animal form
-     */
+ *@obj@objc c /
     func showAddAnimalForm() {
         self.checkForUser { 
             let animalForm = AnimalFormViewController()
@@ -680,7 +774,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     
     /**
      Open the explore screen
-     */
+ *@obj@objc c /
     func openExplore() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let exploreView = storyboard.instantiateViewController(withIdentifier: "Explore") as! ExploreViewController
@@ -763,7 +857,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
     }
     
-    func openUserSettings() {
+    @objc func openUserSettings() {
         self.checkForUser {
             
             let userSettingsVC = UserFormViewController()
@@ -1454,7 +1548,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         self.present(optionMenu, animated: true, completion: nil)
     }
     
-    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
@@ -2080,4 +2174,6 @@ public struct MenuItemCustom: MenuItemViewCustomizable {
             return .custom(view: view)
         }
     }
+ }*/*/
+
 }

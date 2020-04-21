@@ -80,7 +80,7 @@ class AnimalTransferFormViewController : FormViewController {
                 $0.onChange({ (row: TextAreaRow) -> () in
                     let val = row.baseValue as? String
                     let maxLength = 140
-                    if val?.characters.count > maxLength {
+                    if val?.count > maxLength {
                         row.cell!.textView.text = val?[0...maxLength]
                     }
                 })
@@ -139,7 +139,7 @@ class AnimalTransferFormViewController : FormViewController {
         })
     }
     
-    func cancel() {
+    @objc func cancel() {
         self.dismiss(animated: true, completion: nil)
     }
 }

@@ -55,7 +55,7 @@ class YelpAPIClient: NSObject {
     func searchPlacesWithParameters(_ searchParameters: Dictionary<String, String>, successSearch: @escaping (_ data: Data, _ response: HTTPURLResponse) -> Void, failureSearch: @escaping (_ error: Error) -> Void) {
         let searchUrl = APIBaseUrl + "search/"
         
-        _ = clientOAuth!.get(searchUrl, parameters: searchParameters, headers: nil, success: { (response: OAuthSwiftResponse) in
+        _ = clientOAuth!.get(searchUrl, parameters: searchParameters, headers: nil, completionHandler: nil, success: { (response: OAuthSwiftResponse) in
             successSearch(response.data, response.response)
         }, failure: { (error: OAuthSwiftError) in
             failureSearch(error.underlyingError!)

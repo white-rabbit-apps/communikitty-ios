@@ -226,6 +226,14 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             selectedElement = nil
         case .stationary:
             break
+        case .regionEntered:
+            print("do nothing")
+        case .regionMoved:
+            print("do nothing")
+        case .regionExited:
+            print("do nothing")
+        @unknown default:
+            print("do nothing")
         }
 
         return avoidSuperCall

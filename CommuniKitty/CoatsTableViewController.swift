@@ -33,7 +33,7 @@ class CoatsTableViewController: PFQueryTableViewController, TypedRowControllerTy
         self.hideLoader()
     }
     
-    override init(style: UITableViewStyle, className: String!) {
+    override init(style: UITableView.Style, className: String!) {
         super.init(style: style, className: className)
     }
     
@@ -78,7 +78,7 @@ class CoatsTableViewController: PFQueryTableViewController, TypedRowControllerTy
         var cell = tableView.dequeueReusableCell(withIdentifier: "CoatCell", for: indexPath) as? CoatsTableViewCell
         
         if cell == nil  {
-            cell = CoatsTableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "CoatCell")
+            cell = CoatsTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "CoatCell")
         }
         
         let coat = object as! WRCoat

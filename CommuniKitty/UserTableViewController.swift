@@ -194,7 +194,7 @@ class UserTableViewController: PFQueryTableViewController {
         if((indexPath as IndexPath).section == 0) {
             var cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as? UserViewCell
             if cell == nil  {
-                cell = UserViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "UserCell")
+                cell = UserViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "UserCell")
             }
             
             let user = object as! WRUser
@@ -205,16 +205,16 @@ class UserTableViewController: PFQueryTableViewController {
             cell!.nameLabel.text = "\(firstName!) \(lastName!)"
             
             if let username = user.username {
-                cell!.usernameButton.setTitle(username, for: UIControlState())
+                cell!.usernameButton.setTitle(username, for: UIControl.State())
             }
             
-            cell!.profilePhotoButton.setImage(UIImage(named: "human_profile_photo_empty"), for: UIControlState())
+            cell!.profilePhotoButton.setImage(UIImage(named: "human_profile_photo_empty"), for: UIControl.State())
             if let profilePhotoFile = user.profilePhoto {
                 profilePhotoFile.getDataInBackground(block: {
                     (imageData: Data?, error: Error?) -> Void in
                     if(error == nil) {
                         let image = UIImage(data:imageData!)
-                        cell!.profilePhotoButton.setImage(image?.circle, for: UIControlState())
+                        cell!.profilePhotoButton.setImage(image?.circle, for: UIControl.State())
                     }
                 })
             }
@@ -224,7 +224,7 @@ class UserTableViewController: PFQueryTableViewController {
 
             var cell = tableView.dequeueReusableCell(withIdentifier: "UserInviteCell", for: indexPath) as? UserInviteViewCell
             if cell == nil  {
-                cell = UserInviteViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "UserInviteCell")
+                cell = UserInviteViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "UserInviteCell")
             }
             
             if self.myContacts != nil {
@@ -236,9 +236,9 @@ class UserTableViewController: PFQueryTableViewController {
                 cell!.nameLabel.text = "\(contact.givenName) \(contact.familyName)"
                 
                 if let image = contact.thumbnailImageData {
-                    cell!.profilePhotoButton.setImage(UIImage(data: image)?.circle, for: UIControlState())
+                    cell!.profilePhotoButton.setImage(UIImage(data: image)?.circle, for: UIControl.State())
                 } else {
-                    cell!.profilePhotoButton.setImage(UIImage(named: "human_profile_photo_empty"), for: UIControlState())
+                    cell!.profilePhotoButton.setImage(UIImage(named: "human_profile_photo_empty"), for: UIControl.State())
                 }
                 
                 if(contact.emailAddresses.count > 0) {
