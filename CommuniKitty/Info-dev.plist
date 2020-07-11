@@ -26,14 +26,14 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>communikitty-dev</string>
-				<string>fb597932527055802</string>
+				<string>fb597512767097778</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>597932527055802</string>
+	<string>597512767097778</string>
 	<key>FacebookDisplayName</key>
 	<string>CommuniKitty Dev</string>
 	<key>LSApplicationCategoryType</key>
@@ -128,6 +128,8 @@
 	<string>Find your friends kitties</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>White Rabbit Apps</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Record your kitties</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Kitty photos from your catmera roll</string>
 	<key>UIAppFonts</key>
@@ -151,7 +153,5 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Record your kitties</string>
 </dict>
 </plist>

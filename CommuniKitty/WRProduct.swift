@@ -17,7 +17,7 @@ class WRProduct: PFObject, PFSubclassing {
     @NSManaged var color: String?
     @NSManaged var size: String?
 
-    @NSManaged var mainPhoto: PFFile?
+    @NSManaged var mainPhoto: PFFileObject?
     
     static func parseClassName() -> String {
         return "Product"

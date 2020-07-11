@@ -55,11 +55,14 @@ class YelpAPIClient: NSObject {
     func searchPlacesWithParameters(_ searchParameters: Dictionary<String, String>, successSearch: @escaping (_ data: Data, _ response: HTTPURLResponse) -> Void, failureSearch: @escaping (_ error: Error) -> Void) {
         let searchUrl = APIBaseUrl + "search/"
         
-        _ = clientOAuth!.get(searchUrl, parameters: searchParameters, headers: nil, completionHandler: nil, success: { (response: OAuthSwiftResponse) in
-            successSearch(response.data, response.response)
-        }, failure: { (error: OAuthSwiftError) in
-            failureSearch(error.underlyingError!)
-        })        
+        _ = clientOAuth!.get(searchUrl, parameters: searchParameters, headers: nil, completionHandler: { (result) in
+            switch result {
+            case .success(let response):
+                successSearch(response.data, response.response)
+            case .failure(let error):
+                failureSearch(error.underlyingError!)
+            }
+        })
     }
     
     /*
@@ -90,10 +93,13 @@ class YelpAPIClient: NSObject {
             parameters = Dictionary<String, String>()
         }
         
-        _ = clientOAuth!.get(businessInformationUrl, parameters: parameters!, headers: nil, success: { (response: OAuthSwiftResponse) in
-            successSearch(response.data, response.response)
-        }, failure: { (error: OAuthSwiftError) in
-            failureSearch(error.underlyingError!)
+        _ = clientOAuth!.get(businessInformationUrl, parameters: parameters!, headers: nil, completionHandler: { (result) in
+            switch result {
+            case .success(let response):
+                successSearch(response.data, response.response)
+            case .failure(let error):
+                failureSearch(error.underlyingError!)
+            }
         })
     }
     
@@ -127,10 +133,13 @@ class YelpAPIClient: NSObject {
         
         parameters!["phone"] = phoneNumber
         
-        _ = clientOAuth!.get(phoneSearchUrl, parameters: parameters!, headers: nil, success: { (response: OAuthSwiftResponse) in
-            successSearch(response.data, response.response)
-        }, failure: { (error: OAuthSwiftError) in
-            failureSearch(error.underlyingError!)
+        _ = clientOAuth!.get(phoneSearchUrl, parameters: parameters!, headers: nil, completionHandler: { (result) in
+            switch result {
+            case .success(let response):
+                successSearch(response.data, response.response)
+            case .failure(let error):
+                failureSearch(error.underlyingError!)
+            }
         })
     }
 }

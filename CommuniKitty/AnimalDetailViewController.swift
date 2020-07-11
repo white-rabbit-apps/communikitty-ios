@@ -17,7 +17,7 @@ private struct MenuOptions: MenuViewCustomizable {
     var displayMode: MenuDisplayMode
     
     var backgroundColor = UIColor.white
-    var selectedBackgroundColor = UIColor(colorLiteralRed: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 248/255.0)
+    var selectedBackgroundColor = UIColor(displayP3Red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 248/255.0)
     
     var focusMode: MenuFocusMode {
         return .underline(height: 2.0, color: UIColor.black, horizontalPadding: 0.0, verticalPadding: 0.0)
@@ -189,7 +189,8 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
         
         // Set the transparency of elements that shouldn't show in the shrunken header
         if(shrunkHeaderAvatarXOffset != nil) {
-            let offsetOpacity = (100 - (offset * (100 / shrunkHeaderAvatarXOffset))) / 100
+            let offsett = (offset * (100 / shrunkHeaderAvatarXOffset))
+            let offsetOpacity = (100 - offsett) / 100
             
             self.followerView.alpha = offsetOpacity
             self.genderLabel.alpha = offsetOpacity
@@ -255,7 +256,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
             if(self.isFollowing) {
                 self.stopFollowing({ () -> () in
                     self.followButton.isEnabled = true
-                    self.followButton.setImage(UIImage(named: "button_follow"), for: UIControlState())
+                    self.followButton.setImage(UIImage(named: "button_follow"), for: UIControl.State())
                     self.isFollowing = false
                     self.loadFollowerCount()
                 })
@@ -263,7 +264,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
                 self.playASound(soundName: "chirp1")
                 self.startFollowing({ () -> () in
                     self.followButton.isEnabled = true
-                    self.followButton.setImage(UIImage(named: "button_following"), for: UIControlState())
+                    self.followButton.setImage(UIImage(named: "button_following"), for: UIControl.State())
                     self.isFollowing = true
                     self.loadFollowerCount()
                 })
@@ -274,7 +275,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
     func loadFollow(_ completion: @escaping ()->()) {
         let followQuery = WRFollow.query()!
         followQuery.whereKey("following", equalTo: self.currentAnimalObject!)
-        followQuery.whereKey("follower", equalTo: WRUser.current()!)
+        followQuery.whereKey("follower", equalTo: WRUser.current() ?? "")
         
         self.followButton.isEnabled = false
         followQuery.findObjectsInBackground { (objects: [PFObject]?, error: Error?) -> Void in
@@ -463,7 +464,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
     func setProfilePhoto(_ image: UIImage!) {
         let imageData = image.jpegData(compressionQuality: 0.5)
         let fileName:String = (String)(WRUser.current()!.username!) + ".jpg"
-        let imageFile:PFFile = PFFile(name: fileName, data: imageData!)!
+        let imageFile:PFFileObject = PFFileObject(name: fileName, data: imageData!)!
         
         if isSettingCoverPhoto {
             self.currentAnimalObject!.coverPhoto = imageFile
@@ -579,12 +580,16 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
             }
             
             if let profilePhotoFile = animal.profilePhoto {
-                
-                self.profileThumb.kf.setImage(with: URL(string: profilePhotoFile.url!)!, for: UIControl.State(), placeholder: UIImage(named: "animal_profile_photo_empty"), options: nil, progressBlock: nil, completionHandler: { (image: Image?, error: NSError?, cache: CacheType, url: URL?) in
-                    let frame = self.profileThumb.frame
-                    self.profileThumb.frame = CGRect(x: frame.minX, y: frame.minY, width: 76, height: 76)
-                    self.profileThumb.imageView?.makeCircular()
-                })
+                self.profileThumb.kf.setImage(with: URL(string: profilePhotoFile.url!)!, for: UIControl.State(), placeholder: UIImage(named: "animal_profile_photo_empty")) { (result) in
+                    switch result {
+                    case .success(_):
+                        let frame = self.profileThumb.frame
+                        self.profileThumb.frame = CGRect(x: frame.minX, y: frame.minY, width: 76, height: 76)
+                        self.profileThumb.imageView?.makeCircular()
+                    case .failure(_):
+                        break
+                    }
+                }
             } else {
                 self.profileThumb.imageView?.image = UIImage(named: "animal_profile_photo_empty")!
             }
@@ -803,7 +808,7 @@ open class AnimalImagesRepository {
      */
     
     func unsubscribe(_ subscriber:ImagesLoadedHandler){
-        let index = self.arrayOfSubscribers.index(where: { (sub: ImagesLoadedHandler) -> Bool in
+        let index = self.arrayOfSubscribers.firstIndex(where: { (sub: ImagesLoadedHandler) -> Bool in
             return (subscriber as AnyObject?) === sub
         })!
             

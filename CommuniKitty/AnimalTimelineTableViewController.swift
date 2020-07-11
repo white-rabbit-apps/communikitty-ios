@@ -6,7 +6,7 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
-import ParseUI
+import Parse
 import CLImageEditor
 import ActiveLabel
 import Device
@@ -227,7 +227,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     
     func imageEditor(_ editor: CLImageEditor!, didFinishEdittingWith image: UIImage!) {
         NSLog("got new image")
-        let imageFile = PFFile(data: image.jpegData(compressionQuality: 0.5)!)
+        let imageFile = PFFileObject(data: image.jpegData(compressionQuality: 0.5)!)
         
         if let object = self.animalObject {
             if self.isEditingProfile {

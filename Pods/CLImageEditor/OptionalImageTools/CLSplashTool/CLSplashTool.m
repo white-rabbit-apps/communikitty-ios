@@ -88,7 +88,7 @@ static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
     _menuView.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuView.top);
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuView.transform = CGAffineTransformIdentity;
+                         self->_menuView.transform = CGAffineTransformIdentity;
                      }];
 }
 
@@ -100,17 +100,19 @@ static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuView.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuView.top);
+                         self->_menuView.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-self->_menuView.top);
                      }
                      completion:^(BOOL finished) {
-                         [_menuView removeFromSuperview];
+                         [self->_menuView removeFromSuperview];
                      }];
 }
 
 - (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock
 {
+    UIImage *backgroundImage = self.editor.imageView.image;
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self buildImage];
+        UIImage *image = [self buildImageWithBackgroundImage:backgroundImage];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             completionBlock(image, nil, nil);
@@ -270,13 +272,13 @@ static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
     UIGraphicsEndImageContext();
 }
 
-- (UIImage*)buildImage
+- (UIImage*)buildImageWithBackgroundImage:(UIImage*)backgroundImage
 {
-    _grayImage = [self.editor.imageView.image grayScaleImage];
+    _grayImage = [backgroundImage grayScaleImage];
     
-    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, self.editor.imageView.image.scale);
+    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, backgroundImage.scale);
     
-    [self.editor.imageView.image drawAtPoint:CGPointZero];
+    [backgroundImage drawAtPoint:CGPointZero];
     [[_grayImage maskedImage:_maskImage] drawInRect:CGRectMake(0, 0, _originalImageSize.width, _originalImageSize.height)];
     
     UIImage *tmp = UIGraphicsGetImageFromCurrentImageContext();

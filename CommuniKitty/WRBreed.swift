@@ -29,7 +29,7 @@ class WRBreed: PFObject, PFSubclassing {
 
     @NSManaged var wikipediaUrl: String?
     
-    @NSManaged var image: PFFile?
+    @NSManaged var image: PFFileObject?
 
     var hypoallergenic: Bool? {
         get { return self["lapCat"] as? Bool }

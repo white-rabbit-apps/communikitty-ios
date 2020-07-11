@@ -6,7 +6,7 @@
 //  Copyright © 2016 White Rabbit Technology. All rights reserved.
 //
 
-import ParseUI
+import Parse
 
 class PFQueryTableAutoLoadingViewController : PFQueryTableViewController {
     
@@ -34,6 +34,7 @@ class PFQueryTableAutoLoadingViewController : PFQueryTableViewController {
         super.objectsDidLoad(error)
         self.hideLoader()
         let objectCount = self.objects!.count
+        guard objectCount > 0 else {return}
         let lastObjectId = (self.objects![self.objects!.count - 1]).objectId!
         
         if((objectCount - previousObjectCount >= 0) && (objectCount - previousObjectCount < Int(self.objectsPerPage)) && lastObjectId != self.previousLastId) {

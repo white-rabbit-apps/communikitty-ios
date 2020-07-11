@@ -6,7 +6,7 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
-import ParseFacebookUtilsV4
+import Parse
 //import ParseTwitterUtils
 
 
@@ -36,8 +36,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.usernameField.delegate = self
         self.passwordField.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
     
@@ -89,7 +89,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let forgotPasswordForm = ForgotPasswordFormViewController()
         forgotPasswordForm.loginController = self
         nav.viewControllers = [forgotPasswordForm]
-        
+        nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
     }
     
@@ -179,13 +179,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func loginWithFacebook() {
         self.showLoader()
-        PFFacebookUtils.facebookLoginManager().loginBehavior = FBSDKLoginBehavior.systemAccount
+//        PFFacebookUtils.facebookLoginManager().loginBehavior = LoginBehavior.systemAccount
         
         PFFacebookUtils.logInInBackground(withReadPermissions: self.permissions) { (user: PFUser?, error: Error?) in
             self.hideLoader()
             if error != nil {
                 self.showError(message: error!.localizedDescription)
-            } else if user!.isNew {
+            } else if user?.isNew ?? false {
                 NSLog("User signed up and logged in through Facebook! \(user!.username)")
                 self.closeAndRun(completion: {
                     self.saveUserDataFromFacebook {
@@ -194,7 +194,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     }
                 })
             } else {
-                NSLog("User logged in through Facebook! \(user!.username)")
+                NSLog("User logged in through Facebook! \(user?.username ?? "")")
                 self.closeAndRun(completion: {
                     self.completionBlock()
                     AppDelegate.getAppDelegate().postLogin()
@@ -277,8 +277,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func saveUserDataFromFacebook(completionBlock: @escaping () -> Void) {
         
-        let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email,name,first_name,last_name,gender"])
-        _ = fbRequest?.start(completionHandler: { (FBSDKGraphRequestConnection, result, error) -> Void in
+        let fbRequest = GraphRequest(graphPath: "me", parameters: ["fields": "email,name,first_name,last_name,gender"])
+        _ = fbRequest.start(completionHandler: { (FBSDKGraphRequestConnection, result, error) -> Void in
             
             if (error == nil && result != nil) {
                 let facebookData = result as! NSDictionary //FACEBOOK DATA IN DICTIONARY
@@ -322,7 +322,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             if let data = try? Data(contentsOf: url){
                                 
                                 let fileName:String = fbId! + ".jpg"
-                                let imageFile:PFFile = PFFile(name: fileName, data: data)!
+                                let imageFile:PFFileObject = PFFileObject(name: fileName, data: data)!
                                 
                                 user.profilePhoto = imageFile
                             }

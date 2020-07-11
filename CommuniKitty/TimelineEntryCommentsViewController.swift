@@ -6,12 +6,22 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
-import ParseUI
+import Parse
 import ActiveLabel
-import BGTableViewRowActionWithImage
+//import BGTableViewRowActionWithImage
 import Device
 
 class TimelineEntryCommentViewCell: PFTableViewCell {
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        cellActionButtonLabel?.textColor = .black // you color goes here
+    }
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        cellActionButtonLabel?.textColor = .black // you color goes here
+    }
+    
     var commentObject: WRComment?
     
     @IBOutlet weak var commentLabel: ActiveLabel!
@@ -71,18 +81,23 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
         
 //        self.headerImageView.kf_showIndicatorWhenLoading = true
         if let imageFile = entryObject?.image {
-            self.headerImageView.kf.setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-                if image != nil {
-                    self.mainImage = image
+            self.headerImageView.kf.setImage(with: URL(string: imageFile.url!)!) { (result) in
+                switch result {
+                case .success(let response):
+                    self.mainImage = response.image
+                case .failure(_):
+                    break
                 }
-
-            })
+            }
         } else if let imageUrl = entryObject?.imageUrl {
-            self.headerImageView.kf.setImage(with: URL(string: imageUrl)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-                if image != nil {
-                    self.mainImage = image
+            self.headerImageView.kf.setImage(with: URL(string: imageUrl)!) { (result) in
+                switch result {
+                case .success(let response):
+                    self.mainImage = response.image
+                case .failure(_):
+                    break
                 }
-            })
+            }
         }
         
         if let date = entryObject?.createdAt {
@@ -158,7 +173,78 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
         isLoadFirstTime = false
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//
+//        let cell = tableView.cellForRow(at: indexPath as IndexPath) as? TimelineEntryCommentViewCell
+//
+//        let animal = entryObject!.animal
+//        let owners = animal?.owners
+//        let fosters = animal?.fosters
+//        let comment = cell!.commentObject
+//        let commenter = comment!.animal
+//        let commenterUsername = commenter!.username
+//
+//        var currentUserIsOwner = false
+//        var currentUserIsCommenter = false
+//
+//        // Find out if the logged in user is the owner of the animal that the entry is for
+//        for owner in owners! {
+//            if (!currentUserIsOwner) {
+//                currentUserIsOwner = (WRUser.current()?.objectId == owner.objectId)
+//            }
+//        }
+//        for foster in fosters! {
+//            if (!currentUserIsOwner) {
+//                currentUserIsOwner = (WRUser.current()?.objectId == foster.objectId)
+//            }
+//        }
+//
+//        // Find out if the logged in user is an owner of the animal who made the comment
+//        for animalName in AppDelegate.getAppDelegate().myAnimalsArray! {
+//            if animalName.lowercased() == commenterUsername {
+//                currentUserIsCommenter = true
+//                break
+//            } else {
+//                currentUserIsCommenter = false
+//            }
+//        }
+//
+//        let removeRowAction = BGTableViewRowActionWithImage.rowAction(with: .normal, title: "Remove", titleColor: UIColor.black, backgroundColor: UIColor.white, image: UIImage(named: "button_delete")!, forCellHeight: UInt((cell?.frame.height)!)) { action, index in
+//            self.removeComment(indexPath: indexPath as IndexPath)
+//        }
+//
+//        let flagRowAction = BGTableViewRowActionWithImage.rowAction(with: .normal, title: "Flag", titleColor: UIColor.black, backgroundColor: UIColor.white, image: UIImage(named: "button_flag")!, forCellHeight: UInt((cell?.frame.height)!)) { action, index in
+////            self.showFlagActionSheet(entryCell: nil, flaggedObject: self.objectAtCell(indexPath: indexPath as IndexPath)!)
+//            self.tableView.setEditing(false, animated: true)
+//        }
+//
+//        if(currentUserIsCommenter) {
+//            return [removeRowAction!]
+//        } else if(currentUserIsOwner) {
+//            return [removeRowAction!, flagRowAction!]
+//        } else {
+//            return [flagRowAction!]
+//        }
+//    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Remove Action
+        let removeRowAction = UIContextualAction(style: .destructive, title: "Remove") { (action, view, handler) in
+            print("Delete Action Tapped")
+            self.removeComment(indexPath: indexPath as IndexPath)
+        }
+        removeRowAction.backgroundColor = .white
+        removeRowAction.image = UIImage(named: "button_delete")!
+        
+        // Flag Action
+        let flagRowAction = UIContextualAction(style: .destructive, title: "Flag") { (action, view, handler) in
+            print("Flag Action Tapped")
+            //            self.showFlagActionSheet(entryCell: nil, flaggedObject: self.objectAtCell(indexPath: indexPath as IndexPath)!)
+            self.tableView.setEditing(false, animated: true)
+        }
+        flagRowAction.backgroundColor = .white
+        flagRowAction.image = UIImage(named: "button_flag")!
+        
         
         let cell = tableView.cellForRow(at: indexPath as IndexPath) as? TimelineEntryCommentViewCell
         
@@ -194,22 +280,16 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
             }
         }
         
-        let removeRowAction = BGTableViewRowActionWithImage.rowAction(with: .normal, title: "Remove", titleColor: UIColor.black, backgroundColor: UIColor.white, image: UIImage(named: "button_delete")!, forCellHeight: UInt((cell?.frame.height)!)) { action, index in
-            self.removeComment(indexPath: indexPath as IndexPath)
-        }
-        
-        let flagRowAction = BGTableViewRowActionWithImage.rowAction(with: .normal, title: "Flag", titleColor: UIColor.black, backgroundColor: UIColor.white, image: UIImage(named: "button_flag")!, forCellHeight: UInt((cell?.frame.height)!)) { action, index in
-//            self.showFlagActionSheet(entryCell: nil, flaggedObject: self.objectAtCell(indexPath: indexPath as IndexPath)!)
-            self.tableView.setEditing(false, animated: true)
-        }
-        
+        var configuration: UISwipeActionsConfiguration!
         if(currentUserIsCommenter) {
-            return [removeRowAction!]
+            configuration = UISwipeActionsConfiguration(actions: [removeRowAction])
         } else if(currentUserIsOwner) {
-            return [removeRowAction!, flagRowAction!]
+            configuration = UISwipeActionsConfiguration(actions: [removeRowAction, flagRowAction])
         } else {
-            return [flagRowAction!]
+            configuration = UISwipeActionsConfiguration(actions: [flagRowAction])
         }
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, object: PFObject?) -> PFTableViewCell? {
@@ -295,6 +375,12 @@ class TimelineEntryCommentsViewController: PFQueryTableViewController {
         let cell = tableView.cellForRow(at: indexPath! as IndexPath) as? TimelineEntryCommentViewCell
         let object = cell?.commentObject
         return object
+    }
+    
+    override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            tableView.cellForRow(at: indexPath)?.layoutIfNeeded()
+        }
     }
     
     @IBAction func usernameTapped(sender: AnyObject) {

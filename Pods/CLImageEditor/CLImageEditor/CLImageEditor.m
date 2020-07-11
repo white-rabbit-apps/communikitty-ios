@@ -23,12 +23,12 @@
 
 - (id)initWithImage:(UIImage*)image
 {
-    return [self initWithImage:image delegate:nil forceToCrop:NO];
+    return [self initWithImage:image delegate:nil];
 }
 
-- (id)initWithImage:(UIImage*)image delegate:(id<CLImageEditorDelegate>)delegate forceToCrop:(BOOL)forceToCrop
+- (id)initWithImage:(UIImage*)image delegate:(id<CLImageEditorDelegate>)delegate
 {
-    return [[_CLImageEditorViewController alloc] initWithImage:image delegate:delegate forceToCrop:forceToCrop];
+    return [[_CLImageEditorViewController alloc] initWithImage:image delegate:delegate];
 }
 
 - (id)initWithDelegate:(id<CLImageEditorDelegate>)delegate
@@ -38,14 +38,13 @@
 
 - (void)showInViewController:(UIViewController*)controller withImageView:(UIImageView*)imageView;
 {
-
+    
 }
 
-- (void)setCurrentTool:(CLImageToolBase *)currentTool
+- (void)refreshToolSettings
 {
-
+    
 }
-
 
 - (CLImageEditorTheme*)theme
 {
@@ -53,3 +52,4 @@
 }
 
 @end
+

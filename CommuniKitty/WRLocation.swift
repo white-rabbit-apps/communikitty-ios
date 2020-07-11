@@ -25,7 +25,7 @@ class WRLocation: PFObject, PFSubclassing {
 
     @NSManaged var geo: PFGeoPoint?
 
-    @NSManaged var logo: PFFile?
+    @NSManaged var logo: PFFileObject?
     
     @NSManaged var instagramId: String?
     @NSManaged var instagramPlaceId: String?

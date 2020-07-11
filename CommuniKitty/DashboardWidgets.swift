@@ -59,7 +59,7 @@ class UserAnimalsDashboardWidget : DashboardWidget {
         if(self.user != nil) {
             query.whereKey(owner, equalTo: self.user!)
         } else if(WRUser.current() != nil) {
-            query.whereKey(owner, equalTo: WRUser.current()!)
+            query.whereKey(owner, equalTo: WRUser.current() ?? "")
         }
         if(!self.deceased) {
             query.whereKeyDoesNotExist("deceasedDate")
@@ -140,7 +140,7 @@ class UserPhotosDashboardWidget : DashboardWidget {
         if(self.user != nil) {
             query.whereKey("createdBy", equalTo: self.user!)
         } else {
-            query.whereKey("createdBy", equalTo: WRUser.current()!)
+            query.whereKey("createdBy", equalTo: WRUser.current() ?? "")
         }
         query.includeKey("animal")
         
@@ -343,11 +343,11 @@ class FollowingPhotosDashboardWidget : DashboardWidget {
         cell.rowContent = .Following
         
         cell.titleButton?.isHidden = false
-        cell.titleButton?.setImage(UIImage(named: "button_search"), for: UIControlState())
+        cell.titleButton?.setImage(UIImage(named: "button_search"), for: .normal)
         cell.titleButton?.removeTarget(self.parentTableView, action: #selector(UIViewController.showAddAnimalForm), for: .touchUpInside)
         cell.titleButton?.addTarget(self.parentTableView, action: #selector(UIViewController.openExplore), for: .touchUpInside)
         
-        cell.emptyStateButton?.setImage(UIImage(named: "empty_state_following"), for: UIControlState())
+        cell.emptyStateButton?.setImage(UIImage(named: "empty_state_following"), for: .normal)
         cell.emptyStateButton?.removeTarget(self.parentTableView, action: #selector(UIViewController.showAddAnimalForm), for: .touchUpInside)
         cell.emptyStateButton?.addTarget(self.parentTableView, action: #selector(UIViewController.openExplore), for: .touchUpInside)
         
@@ -360,7 +360,7 @@ class FollowingPhotosDashboardWidget : DashboardWidget {
         query.whereKey("type", equalTo: "image")
         
         let followingQuery = WRFollow.query()!
-        followingQuery.whereKey("follower", equalTo: WRUser.current()!)
+        followingQuery.whereKey("follower", equalTo: WRUser.current() ?? "")
         
         query.whereKey("animal", matchesKey: "following", in: followingQuery)
         

@@ -6,7 +6,7 @@
 //  Copyright © 2016 White Rabbit Apps. All rights reserved.
 //
 
-import ParseUI
+import Parse
 import Eureka
 
 class QuirksContainerViewCell: PFTableViewCell{

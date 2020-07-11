@@ -11,9 +11,9 @@
 //
 
 #import <Parse/Parse.h>
-#import <ParseUI/ParseUI.h>
+//#import <Parse/UI.h>
 #import <Parse/PFSubclassing.h>
-#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+//#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 //#import <ParseTwitterUtils/ParseTwitterUtils.h>
 #import <MMMarkdown/MMMarkdown.h>
 //#import <CLImageEditor/CLImageEditor.h>

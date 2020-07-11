@@ -106,7 +106,7 @@ class BreedDetailViewController: UIViewController {
                 hypoallergenicButton.setTitle("Unknown", for: UIControl.State())
             }
             
-            if let imageFile = breed["image"] as? PFFile {
+            if let imageFile = breed["image"] as? PFFileObject {
 //                self.breedImage.kf_showIndicatorWhenLoading = true
 //                self.breedImage.kf.setImage(with: URL(string: imageFile.url!)!, placeholder: nil)
             }

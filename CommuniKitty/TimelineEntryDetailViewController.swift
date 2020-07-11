@@ -108,7 +108,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
                 profilePhotoFile.getDataInBackground(block: {
                     (imageData: Data?, error: Error?) -> Void in
                     if(error == nil) {
-                        let image = UIImage(data:imageData!)
+                        _ = UIImage(data:imageData!)
 //                        self.commentAnimalProfilePhoto.setImage(image?, for: UIControl.State())
                     }
                 })
@@ -131,7 +131,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
             let animalAction = UIAlertAction(title: username, style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
 
-                self.setAnimalToComment(appDelegate.myAnimalsArray!.index(of: username!)!)
+                self.setAnimalToComment(appDelegate.myAnimalsArray!.firstIndex(of: username!)!)
             })
 
             optionMenu.addAction(animalAction)
@@ -189,7 +189,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     func keyboardWillShow(_ notification: Notification) {
-        var info = (notification as NSNotification).userInfo!
+        let info = (notification as NSNotification).userInfo!
 
         let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue!
         let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
@@ -204,7 +204,7 @@ class TimelineEntryDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     func keyboardWillHide(_ notification: Notification) {
-        var info = (notification as NSNotification).userInfo!
+        let info = (notification as NSNotification).userInfo!
         
         let duration = (info[UIResponder.keyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue!
         let curve = info[UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt

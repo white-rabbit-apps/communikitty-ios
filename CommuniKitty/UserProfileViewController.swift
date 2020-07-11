@@ -221,7 +221,7 @@ class UserProfileViewController: UIViewController, CLImageEditorDelegate, Fusuma
     func setProfilePhoto(_ image: UIImage!) {
         let imageData = image.jpegData(compressionQuality: 0.5)
         let fileName:String = (String)(WRUser.current()!.username!) + "-" + (String)(Date().description.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: ":", with: "-").replacingOccurrences(of: "+", with: "~")) + ".jpg"
-        let imageFile:PFFile = PFFile(name: fileName, data: imageData!)!
+        let imageFile:PFFileObject = PFFileObject(name: fileName, data: imageData!)!
         
         self.currentUser!.profilePhoto = imageFile
         

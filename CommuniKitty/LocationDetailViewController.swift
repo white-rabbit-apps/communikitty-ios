@@ -81,7 +81,7 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate {
                 let googleRequestUrl = googleApi.googlePlaceDetailBaseUrl + "placeid=" + googlePlaceId + "&key=" + googleApi.googleApiKey
 
                 manager.get( googleRequestUrl,
-                            parameters: nil,
+                             parameters: nil, headers: nil,
                             progress :nil,
                             success: { (operation: URLSessionDataTask!, responseObject: Any!) in
                                 print("JSON: " ,(responseObject as AnyObject).object(forKey:"result"))

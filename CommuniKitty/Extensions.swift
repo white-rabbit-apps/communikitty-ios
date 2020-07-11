@@ -6,7 +6,7 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
-import ParseUI
+import Parse
 import CLImageEditor
 import SKPhotoBrowser
 import DZNEmptyDataSet
@@ -74,7 +74,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         }
         (view as AnyObject).addSubview(backImage)
         
-        let attr: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0), NSForegroundColorAttributeName: UIColor.darkGray]
+        let attr = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18.0), NSAttributedString.Key.foregroundColor: UIColor.darkGray]
         let label = UILabel(frame:CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-30, width: screenBounds.width-30, height: 20))
         label.textAlignment = .center
         
@@ -90,7 +90,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
         let par: NSMutableParagraphStyle = NSMutableParagraphStyle()
         par.lineBreakMode = .byWordWrapping
         par.alignment = .center
-        let parAttributes: [String : AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: par]
+        let parAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0), NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.paragraphStyle: par]
         
         let secondLabel = UILabel(frame:CGRect(x: 15,y: controllerHeight/4+backImage.frame.height-30+label.frame.height, width: screenBounds.width-30, height: 40))
         
@@ -449,86 +449,86 @@ func openUserProfile(user: WRUser? = nil, push: Bool = true) {
     }
 }
  
-func showError(message: String) {
-    self.showError(message: message, timeToShow: 3.0)
-}
-
-func showError(message: String, timeToShow: Double) {
-    self.playASound(soundName: "chirp1")
-    
-    let errorMessage = message.capitalized
-    
-    let options = getToastOptions(message: errorMessage, type: "error", timeToShow: timeToShow)
-    CRToastManager.showNotification(options: options, completionBlock: nil)
-}
-    
-    
-    func getToastOptions(message: String, type: String, timeToShow: Double) -> [AnyHashable : Any] {
-        var fontSize = 14.0
-        if(message.count > 60) {
-            fontSize = 12.0
-        }
-        
-        var options = [
-            kCRToastSubtitleTextKey : message,
-            kCRToastUnderStatusBarKey : NSNumber(value: false),
-            kCRToastTimeIntervalKey : NSNumber(value:timeToShow),
-            kCRToastNotificationPreferredPaddingKey: 15 as NSNumber,
-            kCRToastNotificationPreferredHeightKey : 150 as NSNumber,
-            kCRToastFontKey: UIFont.italicSystemFont(ofSize: 16),
-            kCRToastSubtitleFontKey : UIFont(name: "Nunito-Regular", size: CGFloat(fontSize))!,
-            kCRToastNotificationTypeKey  : NSNumber(value:CRToastType.navigationBar.rawValue),
-            kCRToastSubtitleTextAlignmentKey : NSNumber(value:NSTextAlignment.left.rawValue),
-            kCRToastTextAlignmentKey : NSNumber(value:NSTextAlignment.left.rawValue),
-            kCRToastAnimationInTypeKey : NSNumber(value:CRToastAnimationType.spring.rawValue),
-            kCRToastAnimationOutTypeKey : NSNumber(value:CRToastAnimationType.spring.rawValue),
-            kCRToastAnimationInDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue),
-            kCRToastAnimationOutDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue)
-        ] as [AnyHashable : Any]
-        
-        if(type == "error") {
-//            options[kCRToastBackgroundColorKey] = UIColor.red
-//            
-//            options[kCRToastTextKey] = ["Taht dint werk.", "Ruh roh.", "Ar yoo kitten me?"]
-//            
-//            let filename = Int.random(lower: 1, upper: 8)
-//            options[kCRToastImageKey] = UIImage(named: "error" + String(filename))
-        } else if(type == "success") {
-//            options[kCRToastBackgroundColorKey] = UIColor.lightGreenColor()
+//func showError(message: String) {
+//    self.showError(message: message, timeToShow: 3.0)
+//}
 //
-//            options[kCRToastTextKey] = ["Errrmahgerd!", "Pawesum.", "It werkd.", "Clawesome!"].randomItem()
-//
-//            let filename = Int.random(lower: 1, upper: 5)
-//            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
-        } else if(type == "info") {
-//            options[kCRToastBackgroundColorKey] = UIColor.lightBlueColor()
-//
-//            options[kCRToastTextKey] = ["Oh hai."].randomItem()
-//
-//            let filename = Int.random(lower: 1, upper: 5)
-//            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
-        }
-        
-        return options
-    }
+//func showError(message: String, timeToShow: Double) {
+//    self.playASound(soundName: "chirp1")
+//    
+//    let errorMessage = message.capitalized
+//    
+//    let options = getToastOptions(message: errorMessage, type: "error", timeToShow: timeToShow)
+//    CRToastManager.showNotification(options: options, completionBlock: nil)
+//}
     
-    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizer.Direction.right:
-                self.goBack()
-            default:
-                break
-            }
-        }
-    }
+    
+//    func getToastOptions(message: String, type: String, timeToShow: Double) -> [AnyHashable : Any] {
+//        var fontSize = 14.0
+//        if(message.count > 60) {
+//            fontSize = 12.0
+//        }
+//
+//        var options = [
+//            kCRToastSubtitleTextKey : message,
+//            kCRToastUnderStatusBarKey : NSNumber(value: false),
+//            kCRToastTimeIntervalKey : NSNumber(value:timeToShow),
+//            kCRToastNotificationPreferredPaddingKey: 15 as NSNumber,
+//            kCRToastNotificationPreferredHeightKey : 150 as NSNumber,
+//            kCRToastFontKey: UIFont.italicSystemFont(ofSize: 16),
+//            kCRToastSubtitleFontKey : UIFont(name: "Nunito-Regular", size: CGFloat(fontSize))!,
+//            kCRToastNotificationTypeKey  : NSNumber(value:CRToastType.navigationBar.rawValue),
+//            kCRToastSubtitleTextAlignmentKey : NSNumber(value:NSTextAlignment.left.rawValue),
+//            kCRToastTextAlignmentKey : NSNumber(value:NSTextAlignment.left.rawValue),
+//            kCRToastAnimationInTypeKey : NSNumber(value:CRToastAnimationType.spring.rawValue),
+//            kCRToastAnimationOutTypeKey : NSNumber(value:CRToastAnimationType.spring.rawValue),
+//            kCRToastAnimationInDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue),
+//            kCRToastAnimationOutDirectionKey : NSNumber(value:CRToastAnimationDirection.top.rawValue)
+//        ] as [AnyHashable : Any]
+//
+//        if(type == "error") {
+////            options[kCRToastBackgroundColorKey] = UIColor.red
+////
+////            options[kCRToastTextKey] = ["Taht dint werk.", "Ruh roh.", "Ar yoo kitten me?"]
+////
+////            let filename = Int.random(lower: 1, upper: 8)
+////            options[kCRToastImageKey] = UIImage(named: "error" + String(filename))
+//        } else if(type == "success") {
+////            options[kCRToastBackgroundColorKey] = UIColor.lightGreenColor()
+////
+////            options[kCRToastTextKey] = ["Errrmahgerd!", "Pawesum.", "It werkd.", "Clawesome!"].randomItem()
+////
+////            let filename = Int.random(lower: 1, upper: 5)
+////            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
+//        } else if(type == "info") {
+////            options[kCRToastBackgroundColorKey] = UIColor.lightBlueColor()
+////
+////            options[kCRToastTextKey] = ["Oh hai."].randomItem()
+////
+////            let filename = Int.random(lower: 1, upper: 5)
+////            options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
+//        }
+//
+//        return options
+//    }
+    
+//    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+//        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+//            switch swipeGesture.direction {
+//            case UISwipeGestureRecognizer.Direction.right:
+//                self.goBack()
+//            default:
+//                break
+//            }
+//        }
+//    }
     
     
     
     /**
      Show the create animal form
- *@obj@objc c /
-    func showAddAnimalForm() {
+     */
+@objc func showAddAnimalForm() {
         self.checkForUser { 
             let animalForm = AnimalFormViewController()
             self.present(UINavigationController(rootViewController: animalForm), animated: true, completion: nil)
@@ -537,7 +537,7 @@ func showError(message: String, timeToShow: Double) {
     
     func getToastOptions(message: String, type: String, timeToShow: Double) -> [AnyHashable : Any] {
         var fontSize = 14.0
-        if(message.characters.count > 60) {
+        if(message.count > 60) {
             fontSize = 12.0
         }
         
@@ -575,7 +575,7 @@ func showError(message: String, timeToShow: Double) {
         } else if(type == "info") {
             options[kCRToastBackgroundColorKey] = UIColor.lightBlueColor()
             
-            options[kCRToastTextKey] = ["Oh hai."].randomItem()
+            options[kCRToastTextKey] = ["Oh hai."].randomItem() as Any
             
             let filename = Int.random(lower: 1, upper: 5)
             options[kCRToastImageKey] = UIImage(named: "success" + String(filename))
@@ -743,19 +743,19 @@ func showError(message: String, timeToShow: Double) {
     /**
      Open the user profile screen for the current user
      */
-    func openUserProfile(user: WRUser? = nil, push: Bool = true) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let userView = storyboard.instantiateViewController(withIdentifier: "UserProfile") as! UserProfileViewController
-        userView.currentUser = user
-        
-        if(push) {
-            userView.showAsNav = true
-            self.navigationController?.pushViewController(userView, animated: true)
-        } else {
-            userView.showClose = true
-            self.present(UINavigationController(rootViewController: userView), animated: true, completion: nil)
-        }
-    }
+//    func openUserProfile(user: WRUser? = nil, push: Bool = true) {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let userView = storyboard.instantiateViewController(withIdentifier: "UserProfile") as! UserProfileViewController
+//        userView.currentUser = user
+//
+//        if(push) {
+//            userView.showAsNav = true
+//            self.navigationController?.pushViewController(userView, animated: true)
+//        } else {
+//            userView.showClose = true
+//            self.present(UINavigationController(rootViewController: userView), animated: true, completion: nil)
+//        }
+//    }
     
     /**
      Open a user profile screen for the given user username
@@ -774,8 +774,8 @@ func showError(message: String, timeToShow: Double) {
     
     /**
      Open the explore screen
- *@obj@objc c /
-    func openExplore() {
+ */
+    @objc func openExplore() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let exploreView = storyboard.instantiateViewController(withIdentifier: "Explore") as! ExploreViewController
 //        exploreView.showAsNav = true
@@ -783,7 +783,9 @@ func showError(message: String, timeToShow: Double) {
 //        if let nav = self.navigationController {
 //            nav.pushViewController(UINavigationController(rootViewController: exploreView), animated: true)
 //        } else {
-            self.present(UINavigationController(rootViewController: exploreView), animated: true, completion: nil)
+        let navVc = UINavigationController(rootViewController: exploreView)
+        navVc.modalPresentationStyle = .overFullScreen
+            self.present(navVc, animated: true, completion: nil)
 //        }
     }
     
@@ -868,9 +870,9 @@ func showError(message: String, timeToShow: Double) {
         }
     }
     
-    func isLoggedIn() -> Bool {
-        return WRUser.current() != nil
-    }
+//    func isLoggedIn() -> Bool {
+//        return WRUser.current() != nil
+//    }
     
     func checkForUser(completionBlock: @escaping () -> Void) {
         let currentUser = WRUser.current()
@@ -886,7 +888,7 @@ func showError(message: String, timeToShow: Double) {
             let lvc = storyboard.instantiateViewController(withIdentifier: "lvc") as! LoginViewController
             lvc.completionBlock = completionBlock
             //            lvc.menuController = self
-            
+            lvc.modalPresentationStyle = .overFullScreen
             self.present(lvc, animated: true, completion: nil)
         }
     }
@@ -955,11 +957,12 @@ func showError(message: String, timeToShow: Double) {
      - forceCrop: Boolean value to force CropView opening
      */
     func showEditor(image : UIImage, delegate: CLImageEditorDelegate, ratios: [Int]?, fromController: UIViewController, forceCrop: Bool = false) {
-        let editor = CLImageEditor(image: image, delegate: delegate, forceToCrop: forceCrop)
+        let editor = CLImageEditor(image: image, delegate: delegate)
         
         let stickerTool = editor?.toolInfo.subToolInfo(withToolName: "CLStickerTool", recursive: false)
         stickerTool?.available = true
-        stickerTool?.customIcon = "icon_stickers"
+//        stickerTool?.customIcon = "icon_stickers"
+        stickerTool?.iconImagePath = "icon_stickers"
 //        stickerTool?.optionalInfo["stickerPath"] = "stickers/"
         stickerTool?.optionalInfo["deleteIconAssetsName"] = "button_delete"
         stickerTool?.optionalInfo["resizeIconAssetsName"] = "icon_resize"
@@ -986,21 +989,21 @@ func showError(message: String, timeToShow: Double) {
         let filterTool = editor?.toolInfo.subToolInfo(withToolName: "CLFilterTool", recursive: false)
         //        filterTool.optionalInfo["flipHorizontalIconAssetsName"] = "button_filter"
         filterTool?.available = true
-        filterTool?.customIcon = "icon_filters"
+//        filterTool?.customIcon = "icon_filters"
         let invertFilter = filterTool?.subToolInfo(withToolName: "CLDefaultInvertFilter", recursive: false)
         invertFilter?.available = false
         
         let rotateTool = editor?.toolInfo.subToolInfo(withToolName: "CLRotateTool", recursive: false)
         rotateTool?.available = true
         rotateTool?.dockedNumber = -1
-        rotateTool?.customIcon = "icon_rotate"
+//        rotateTool?.customIcon = "icon_rotate"
         
         rotateTool?.optionalInfo["rotateIconAssetsName"] = "icon_rotate"
         rotateTool?.optionalInfo["flipHorizontalIconAssetsName"] = "icon_flip_horizontal"
         rotateTool?.optionalInfo["flipVerticalIconAssetsName"] = "icon_flip_vertical"
         
         let textTool = editor?.toolInfo.subToolInfo(withToolName: "CLTextTool", recursive: false)
-        textTool?.customIcon = "icon_text"
+//        textTool?.customIcon = "icon_text"
         textTool?.optionalInfo["newTextIconAssetsName"] = "button_add_small"
         textTool?.optionalInfo["editTextIconAssetsName"] = "icon_text_edit"
         textTool?.optionalInfo["deleteIconAssetsName"] = "button_delete"
@@ -1012,7 +1015,7 @@ func showError(message: String, timeToShow: Double) {
         let cropTool = editor?.toolInfo.subToolInfo(withToolName: "CLClippingTool", recursive: false)
         cropTool?.optionalInfo["flipHorizontalIconAssetsName"] = "button_crop"
         cropTool?.available = true
-        cropTool?.customIcon = "icon_crop"
+//        cropTool?.customIcon = "icon_crop"
         cropTool?.dockedNumber = -2
         cropTool?.optionalInfo["swapButtonHidden"] = true
         
@@ -1041,7 +1044,7 @@ func showError(message: String, timeToShow: Double) {
                 nav.barTintColor = UIColor.mainColor()
                 nav.tintColor = UIColor.white
                 
-                nav.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Nunito-Regular", size: 19)!,  NSForegroundColorAttributeName: UIColor.white]
+                nav.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Nunito-Regular", size: 19)!,  NSAttributedString.Key.foregroundColor: UIColor.white]
                 
                 nav.topItem!.leftBarButtonItem = self.getNavBarItem(imageId: "icon_close", action: #selector(UIViewController.closeEditor), height: 25, width: 25)
                 nav.frame = CGRect(x: self.view.frame.size.width, y: nav.frame.origin.y, width: nav.frame.size.width, height: nav.frame.size.height)
@@ -1064,7 +1067,7 @@ func showError(message: String, timeToShow: Double) {
     /**
      Close the currently open instance of CLImageEditor if one is open
      */
-    func closeEditor() {
+    @objc func closeEditor() {
         if(currentEditor != nil) {
             // currentEditor!.delegate.imageEditorDidCancel!(currentEditor)
             for subview in currentEditor!.view.subviews {
@@ -1128,196 +1131,201 @@ func showError(message: String, timeToShow: Double) {
     func showImagesBrowser(entries: [WRTimelineEntry], startIndex: Int?, animatedFromView: UIView?, displayUser: Bool = false, vc:UIViewController = UIViewController()) {
         var idmImages = Array<SKPhoto>()
         entries.forEach { (entry) -> Void in
-            let idmPhoto : SKPhoto = SKPhoto.photoWithImageURL(url: entry.getImageUrl()!, object: entry)
+            let idmPhoto : SKPhoto = SKPhoto.photoWithImageURL(entry.getImageUrl()!)//, holder: entry)
             idmPhoto.shouldCachePhotoURLImage = true
             idmPhoto.caption = entry.text
-            idmPhoto.commentCount = entry.getCommentCount()
-            idmPhoto.likeCount = entry.getLikeCount()
+            //m
+//            idmPhoto.commentCount = entry.getCommentCount()
+//            idmPhoto.likeCount = entry.getLikeCount()
             idmImages.append(idmPhoto)
         }
-        
+
         var browser: SKPhotoBrowser! = SKPhotoBrowser(photos: idmImages)
         if let originImageView = animatedFromView as? UIImageView {
             if originImageView.image != nil {
-                browser = SKPhotoBrowser(originImage: originImageView.image!, photos: idmImages, animatedFromView: originImageView)
+                //m
+//                browser = SKPhotoBrowser(originImage: originImageView.image!, photos: idmImages, animatedFromView: originImageView)
+                browser = SKPhotoBrowser(photos: idmImages)
             }
         }
-        
+
         if(startIndex != nil) {
             browser.initializePageIndex(startIndex!)
         }
-        
-        SKPhotoBrowserOptions.displayToolbar = false
+        //m
+//        SKPhotoBrowserOptions.displayToolbar = false
         SKPhotoBrowserOptions.displayAction = true
         SKPhotoBrowserOptions.displayDeleteButton = false
-        
-        if(displayUser) {
-            SKPhotoBrowserOptions.displayUserButton = true
-            
-            SKPhotoBrowserOptions.handleUserButtonPressed = { (object: NSObject?)->Void in
-                NSLog("user button pressed")
-                if let entry = object as? WRTimelineEntry {
-                    if let animal = entry.animal {
-                        self.dismiss(animated: true, completion: {
-                            self.openAnimalDetail(animalObject: animal, push: true)
-                        })
-                    }
-                }
-            }
-        }
-        
-        SKPhotoBrowserOptions.handleEntryLoaded = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-            if let entry = object as? WRTimelineEntry {
 
-                if let animal = entry.animal {
-                    try! animal.fetchIfNeeded()
-                    
-                    browser.updateUserName(animal.username!)
+//        if(displayUser) {
+//            //m
+////            SKPhotoBrowserOptions.displayUserButton = true
+//
+//            SKPhotoBrowserOptions.handleUserButtonPressed = { (object: NSObject?)->Void in
+//                NSLog("user button pressed")
+//                if let entry = object as? WRTimelineEntry {
+//                    if let animal = entry.animal {
+//                        self.dismiss(animated: true, completion: {
+//                            self.openAnimalDetail(animalObject: animal, push: true)
+//                        })
+//                    }
+//                }
+//            }
+//        }
 
-                    animal.fetchProfilePhoto({ (error, image) in
-                        if image != nil {
-                            browser.updateUserButton(image!.circle)
-                        } else {
-                            browser.updateUserButton(UIImage(named: "animal_profile_photo_empty")!)
-                        }
-                    })
-                }
-                
-                if entry.commentCount != nil {
-                    browser.updateCommentCount(entry.commentCount!)
-                }
-                if entry.likeCount != nil {
-                    browser.updateLikeCount(entry.likeCount!)
-                }
-                
-                if self.isLoggedIn() {
-                    entry.isLikedWithBlock({ (likeObject, error) in
-                        NSLog("entry is liked: \(likeObject)")
-                        if(likeObject != nil) {
-                            
-                            switch(likeObject!.actionValue!) {
-                            case .Meow:
-                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
-                            case .Hiss:
-                                browser.updateLikeButton(UIImage(named: "emoji_hiss")!)
-                            case .Purr:
-                                browser.updateLikeButton(UIImage(named: "emoji_purr")!)
-                            case .HeadBump:
-                                browser.updateLikeButton(UIImage(named: "emoji_headbump")!)
-                            case .Lick:
-                                browser.updateLikeButton(UIImage(named: "emoji_lick")!)
-                            default:
-                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
-                            }
-                            self.setLikeHandlerOn(browser: browser)
-                        } else {
-                            browser.updateLikeButton(UIImage(named: "button_paw")!)
-                            self.setLikeHandlerOff(browser: browser)
-                        }
-                    })
-                } else {
-                    self.setLikeHandlerOff(browser: browser)
-                }
-            }
-        }
+//        SKPhotoBrowserOptions.handleEntryLoaded = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
+//            if let entry = object as? WRTimelineEntry {
+//
+//                if let animal = entry.animal {
+//                    try! animal.fetchIfNeeded()
+//
+//                    browser.updateUserName(animal.username!)
+//
+//                    animal.fetchProfilePhoto({ (error, image) in
+//                        if image != nil {
+//                            browser.updateUserButton(image!.circle)
+//                        } else {
+//                            browser.updateUserButton(UIImage(named: "animal_profile_photo_empty")!)
+//                        }
+//                    })
+//                }
+//
+//                if entry.commentCount != nil {
+//                    browser.updateCommentCount(entry.commentCount!)
+//                }
+//                if entry.likeCount != nil {
+//                    browser.updateLikeCount(entry.likeCount!)
+//                }
+//
+//                if self.isLoggedIn() {
+//                    entry.isLikedWithBlock({ (likeObject, error) in
+//                        NSLog("entry is liked: \(likeObject)")
+//                        if(likeObject != nil) {
+//
+//                            switch(likeObject!.actionValue!) {
+//                            case .Meow:
+//                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+//                            case .Hiss:
+//                                browser.updateLikeButton(UIImage(named: "emoji_hiss")!)
+//                            case .Purr:
+//                                browser.updateLikeButton(UIImage(named: "emoji_purr")!)
+//                            case .HeadBump:
+//                                browser.updateLikeButton(UIImage(named: "emoji_headbump")!)
+//                            case .Lick:
+//                                browser.updateLikeButton(UIImage(named: "emoji_lick")!)
+//                            default:
+//                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+//                            }
+//                            self.setLikeHandlerOn(browser: browser)
+//                        } else {
+//                            browser.updateLikeButton(UIImage(named: "button_paw")!)
+//                            self.setLikeHandlerOff(browser: browser)
+//                        }
+//                    })
+//                } else {
+//                    self.setLikeHandlerOff(browser: browser)
+//                }
+//            }
+//        }
         
-        SKPhotoBrowserOptions.customCloseButtonImage = UIImage(named: "icon_close")
+        //m
+//        SKPhotoBrowserOptions.customCloseButtonImage = UIImage(named: "icon_close")
+//
+//        SKPhotoBrowserOptions.displayCommentButton = true
+//        SKPhotoBrowserOptions.customCommentButtonImage = UIImage(named: "emoji_comment")
+//        SKPhotoBrowserOptions.handleCommentButtonPressed = { (object: NSObject?)->Void in
+//            NSLog("comment button pressed")
+//            if let entry = object as? WRTimelineEntry {
+//                self.dismiss(animated: true, completion: {
+//                    self.openEntryComments(entryObject: entry, push: false)
+//                })
+//            }
+//        }
+//
+//        SKPhotoBrowserOptions.displayLikeButton = true
+//        SKPhotoBrowserOptions.customLikeButtonImage = UIImage(named: "button_paw")
+//
+//        SKPhotoBrowserOptions.customUserButtonDefaultImage = UIImage(named: "animal_profile_photo_empty")
+//
+//        SKPhotoBrowserOptions.displayShareButton = true
+//        SKPhotoBrowserOptions.customShareButtonImage = UIImage(named: "button_share")
+//        SKPhotoBrowserOptions.handleShareButtonPressed = { (object: NSObject?, image: UIImage)->Void in
+//            NSLog("share button pressed")
+//            browser.showShareActionSheet(image: image)
+//        }
+//
+//
+//        if(self.isLoggedIn()) {
+//            SKPhotoBrowserOptions.displayMoreButton = true
+//            SKPhotoBrowserOptions.customMoreButtonImage = UIImage(named: "button_more")
+//            SKPhotoBrowserOptions.handleMoreButtonPressed = { (object: NSObject?)->Void in
+//                NSLog("more button pressed")
+//                if let entry = object as? WRTimelineEntry {
+//                    browser.showMoreActionSheet(entry: entry, vc:vc)
+//                }
+//            }
+//        }
 
-        SKPhotoBrowserOptions.displayCommentButton = true
-        SKPhotoBrowserOptions.customCommentButtonImage = UIImage(named: "emoji_comment")
-        SKPhotoBrowserOptions.handleCommentButtonPressed = { (object: NSObject?)->Void in
-            NSLog("comment button pressed")
-            if let entry = object as? WRTimelineEntry {
-                self.dismiss(animated: true, completion: {
-                    self.openEntryComments(entryObject: entry, push: false)
-                })
-            }
-        }
-        
-        SKPhotoBrowserOptions.displayLikeButton = true
-        SKPhotoBrowserOptions.customLikeButtonImage = UIImage(named: "button_paw")
-        
-        SKPhotoBrowserOptions.customUserButtonDefaultImage = UIImage(named: "animal_profile_photo_empty")
-        
-        SKPhotoBrowserOptions.displayShareButton = true
-        SKPhotoBrowserOptions.customShareButtonImage = UIImage(named: "button_share")
-        SKPhotoBrowserOptions.handleShareButtonPressed = { (object: NSObject?, image: UIImage)->Void in
-            NSLog("share button pressed")
-            browser.showShareActionSheet(image: image)
-        }
-
-        
-        if(self.isLoggedIn()) {
-            SKPhotoBrowserOptions.displayMoreButton = true
-            SKPhotoBrowserOptions.customMoreButtonImage = UIImage(named: "button_more")
-            SKPhotoBrowserOptions.handleMoreButtonPressed = { (object: NSObject?)->Void in
-                NSLog("more button pressed")
-                if let entry = object as? WRTimelineEntry {
-                    browser.showMoreActionSheet(entry: entry, vc:vc)
-                }
-            }
-        }
-        
-        SKPhotoBrowserOptions.autoHideControls = false
+//        SKPhotoBrowserOptions.autoHideControls = false
         self.present(browser, animated: true, completion: nil)
     }
     
-    func setLikeHandlerOn(browser: SKPhotoBrowser) {
-        SKPhotoBrowserOptions.handleLikeButtonPressed = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-            NSLog("like filled button pressed")
-            browser.checkForUser {
-                if let entry = object as? WRTimelineEntry {
-                    entry.unlikeWithBlock({ (result, error) in
-                        if(result) {
-                            browser.updateLikeButton(UIImage(named: "button_paw")!)
-
-                            if let skPhoto = photo as? SKPhoto {
-                                skPhoto.likeCount = skPhoto.likeCount - 1
-                                browser.updateLikeCount(skPhoto.likeCount as NSNumber)
-                            }
-                            self.setLikeHandlerOff(browser: browser)
-                            //                        browser.updateToolbar()
-                        }
-                    })
-                }
-            }
-        }
-    }
+//    func setLikeHandlerOn(browser: SKPhotoBrowser) {
+//        SKPhotoBrowserOptions.handleLikeButtonPressed = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
+//            NSLog("like filled button pressed")
+//            browser.checkForUser {
+//                if let entry = object as? WRTimelineEntry {
+//                    entry.unlikeWithBlock({ (result, error) in
+//                        if(result) {
+//                            browser.updateLikeButton(UIImage(named: "button_paw")!)
+//
+//                            if let skPhoto = photo as? SKPhoto {
+//                                skPhoto.likeCount = skPhoto.likeCount - 1
+//                                browser.updateLikeCount(skPhoto.likeCount as NSNumber)
+//                            }
+//                            self.setLikeHandlerOff(browser: browser)
+//                            //                        browser.updateToolbar()
+//                        }
+//                    })
+//                }
+//            }
+//        }
+//    }
     
-    func setLikeHandlerOff(browser: SKPhotoBrowser) {
-        SKPhotoBrowserOptions.handleLikeButtonPressed = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
-            NSLog("like button pressed")
-            browser.checkForUser {
-                if let entry = object as? WRTimelineEntry {
-                    browser.showLikeActionSheet(entry: entry, completionBlock: { (likeObject, error) in
-                        NSLog("like action completed")
-
-                        if(likeObject != nil) {
-                            switch(likeObject!.actionValue!) {
-                            case .Meow:
-                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
-                            case .Hiss:
-                                browser.updateLikeButton(UIImage(named: "emoji_hiss")!)
-                            case .Purr:
-                                browser.updateLikeButton(UIImage(named: "emoji_purr")!)
-                            case .HeadBump:
-                                browser.updateLikeButton(UIImage(named: "emoji_headbump")!)
-                            case .Lick:
-                                browser.updateLikeButton(UIImage(named: "emoji_lick")!)
-                            default:
-                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
-                            }
-                            if let skPhoto = photo as? SKPhoto {
-                                skPhoto.likeCount = skPhoto.likeCount + 1
-                                browser.updateLikeCount(skPhoto.likeCount as NSNumber)
-                            }
-                        }
-                        self.setLikeHandlerOn(browser: browser)
-                    })
-                }
-            }
-        }
-    }
+//    func setLikeHandlerOff(browser: SKPhotoBrowser) {
+//        SKPhotoBrowserOptions.handleLikeButtonPressed = { (object: NSObject?, photo: SKPhotoProtocol?)->Void in
+//            NSLog("like button pressed")
+//            browser.checkForUser {
+//                if let entry = object as? WRTimelineEntry {
+//                    browser.showLikeActionSheet(entry: entry, completionBlock: { (likeObject, error) in
+//                        NSLog("like action completed")
+//
+//                        if(likeObject != nil) {
+//                            switch(likeObject!.actionValue!) {
+//                            case .Meow:
+//                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+//                            case .Hiss:
+//                                browser.updateLikeButton(UIImage(named: "emoji_hiss")!)
+//                            case .Purr:
+//                                browser.updateLikeButton(UIImage(named: "emoji_purr")!)
+//                            case .HeadBump:
+//                                browser.updateLikeButton(UIImage(named: "emoji_headbump")!)
+//                            case .Lick:
+//                                browser.updateLikeButton(UIImage(named: "emoji_lick")!)
+//                            default:
+//                                browser.updateLikeButton(UIImage(named: "emoji_meow")!)
+//                            }
+//                            if let skPhoto = photo as? SKPhoto {
+//                                skPhoto.likeCount = skPhoto.likeCount + 1
+//                                browser.updateLikeCount(skPhoto.likeCount as NSNumber)
+//                            }
+//                        }
+//                        self.setLikeHandlerOn(browser: browser)
+//                    })
+//                }
+//            }
+//        }
+//    }
     
     
     /**
@@ -1337,9 +1345,9 @@ func showError(message: String, timeToShow: Double) {
         }
         
         var browser: SKPhotoBrowser! = SKPhotoBrowser(photos: idmImages)
-        if let originImageView = animatedFromView as? UIImageView {
-            browser = SKPhotoBrowser(originImage: originImageView.image!, photos: idmImages, animatedFromView: animatedFromView!)
-        }
+//        if let originImageView = animatedFromView as? UIImageView {
+            browser = SKPhotoBrowser(photos: idmImages)
+//        }
         
         if(startIndex != nil) {
             browser.initializePageIndex(startIndex!)
@@ -1551,7 +1559,7 @@ func showError(message: String, timeToShow: Double) {
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.right:
+            case UISwipeGestureRecognizer.Direction.right:
                 self.goBack()
             default:
                 break
@@ -1559,10 +1567,10 @@ func showError(message: String, timeToShow: Double) {
         }
     }
     
-    func textWasChanged(textField: UITextField) {
+    @objc func textWasChanged(textField: UITextField) {
         let val = textField.text
         let maxLength = 500
-        if (val?.characters.count)! > maxLength {
+        if (val?.count)! > maxLength {
             textField.text = val?[0...maxLength]
         }
     }
@@ -1602,7 +1610,7 @@ extension PFQueryTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDele
     }
     
     func stylePFLoadingView() {
-        let activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        let activityIndicatorViewStyle = UIActivityIndicatorView.Style.gray
         
         // go through all of the subviews until you find a PFLoadingView subclass
         for view in self.view.subviews {
@@ -1617,7 +1625,7 @@ extension PFQueryTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDele
                     
                     if loadingViewSubview is UIActivityIndicatorView {
                         let indicator:UIActivityIndicatorView = loadingViewSubview as! UIActivityIndicatorView
-                        indicator.activityIndicatorViewStyle = activityIndicatorViewStyle
+                        indicator.style = activityIndicatorViewStyle
                         
                     }
                 }
@@ -1667,50 +1675,50 @@ public extension UIApplicationDelegate {
 }
 
 public extension UIColor {
-    public class func mainColor() -> UIColor {
+    class func mainColor() -> UIColor {
         return UIColor(red: 0/255, green: 42/255, blue: 79/255, alpha: 1.0)
     }
     
-    public class func secondaryColor() -> UIColor {
+    class func secondaryColor() -> UIColor {
         return UIColor.lightGray
     }
     
-    public class func linkColor() -> UIColor {
+    class func linkColor() -> UIColor {
         return UIColor(red: 0/255, green: 94/255, blue: 183/255, alpha: 1.0)
     }
     
-    public class func lightOrangeColor() -> UIColor {
+    class func lightOrangeColor() -> UIColor {
         return UIColor(red: 254/255, green: 122/255, blue: 96/255, alpha: 1.0)
     }
     
-    public class func lightYellowColor() -> UIColor {
+    class func lightYellowColor() -> UIColor {
         return UIColor(red: 244/255, green: 166/255, blue: 54/255, alpha: 1.0)
     }
     
-    public class func lightGreenColor() -> UIColor {
+    class func lightGreenColor() -> UIColor {
         return UIColor(red: 163/255, green: 202/255, blue: 123/255, alpha: 1.0)
     }
     
-    public class func lightBlueColor() -> UIColor {
+    class func lightBlueColor() -> UIColor {
         return UIColor(red: 94/255, green: 126/255, blue: 147/255, alpha: 1.0)
     }
     
-    public class func lightRedColor() -> UIColor {
+    class func lightRedColor() -> UIColor {
         return UIColor(red: 148/255, green: 135/255, blue: 114/255, alpha: 1.0)
     }
     
-    public class func lightPinkColor() -> UIColor {
+    class func lightPinkColor() -> UIColor {
         return UIColor(red: 168/255, green: 183/255, blue: 196/255, alpha: 1.0)
     }
     
-    public class func facebookThemeColor() -> UIColor {
+    class func facebookThemeColor() -> UIColor {
         return UIColor(red: 63/255, green: 81/255, blue: 121/255, alpha: 1.0)
     }
     
 }
 
 public extension Int {
-    public static func random(lower: Int , upper: Int) -> Int {
+    static func random(lower: Int , upper: Int) -> Int {
         let limit = UInt32(upper - lower + 1)
         return lower + Int(arc4random_uniform(limit))
     }
@@ -1765,7 +1773,7 @@ public extension Dictionary {
 }
 
 public extension UITextField {
-    @IBInspectable public var leftSpacer:CGFloat {
+    @IBInspectable var leftSpacer:CGFloat {
         get {
             if let l = leftView {
                 return l.frame.size.width
@@ -1895,7 +1903,7 @@ public extension UIView {
         self.layer.addSublayer(topBorder)
     }
     // adds a label to at center of a view
-    public func drawLabel(text : String) {
+    func drawLabel(text : String) {
         let label = UILabel()
         label.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 30)
         label.textColor = UIColor.white
@@ -1912,8 +1920,8 @@ public extension UIStoryboard {
 
 public extension String {
     func capitalizeFirstLetter() -> String {
-        let first = String(characters.prefix(1)).capitalized
-        let other = String(characters.dropFirst())
+        let first = String(self.prefix(1)).capitalized
+        let other = String(self.dropFirst())
         return first + other
     }
     
@@ -1922,34 +1930,48 @@ public extension String {
     }
     
     subscript(i: Int) -> String {
-        guard i >= 0 && i < characters.count else { return "" }
+        guard i >= 0 && i < self.count else { return "" }
         return String(self[index(startIndex, offsetBy: i)])
     }
     
-    subscript(range: Range<Int>) -> String {
-        let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex) ?? endIndex
-        return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) ?? endIndex))
+    subscript (bounds: CountableClosedRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start...end])
+    }
+
+    subscript (bounds: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start..<end])
     }
     
-    subscript(range: ClosedRange<Int>) -> String {
-        let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex) ?? endIndex
-        return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex) ?? endIndex))
-    }
+//    subscript(range: Range<Int>) -> String {
+//        let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex) ?? endIndex
+//        return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) ?? endIndex))
+//    }
+//
+//    subscript(range: ClosedRange<Int>) -> String {
+//        let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex) ?? endIndex
+//        return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex) ?? endIndex))
+//    }
 }
 
 public extension UILabel {
     func resizeHeightToFit(heightConstraint: NSLayoutConstraint) {
-        let attributes = [NSFontAttributeName : font]
+        let attributes = [NSAttributedString.Key.font : font]
         numberOfLines = 0
         lineBreakMode = NSLineBreakMode.byWordWrapping
-        let rect = text!.boundingRect(with: CGSize(width: frame.size.width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes, context: nil)
+        let rect = text!.boundingRect(with: CGSize(width: frame.size.width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes as [NSAttributedString.Key : Any], context: nil)
         heightConstraint.constant = rect.height
         setNeedsLayout()
     }
     
     var substituteFontName : String {
         get { return self.font.fontName }
-        set { self.font = UIFont(name: newValue, size: self.font.pointSize) }
+        //m
+//        set { self.font = UIFont(name: newValue, size: self.font.pointSize) }
+        set { self.font = UIFont.systemFont(ofSize: 14.0) }
     }
 }
 
@@ -1967,7 +1989,7 @@ public extension UIImage {
     var circle: UIImage {
         let square = size.width < size.height ? CGSize(width: size.width, height: size.width) : CGSize(width: size.height, height: size.height)
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
-        imageView.contentMode = UIViewContentMode.scaleAspectFill
+        imageView.contentMode = UIView.ContentMode.scaleAspectFill
         imageView.image = self
         imageView.layer.cornerRadius = square.width/2
         imageView.layer.masksToBounds = true
@@ -1997,7 +2019,7 @@ public extension UIButton {
         addTarget(self, action: #selector(handleActionBlock), for: .touchUpInside)
     }
     
-    func handleActionBlock(sender: UIButton) {
+    @objc func handleActionBlock(sender: UIButton) {
         let wrapper = objc_getAssociatedObject(self, &ActionBlockKey) as! ActionBlockWrapper
         wrapper.block(sender)
     }
@@ -2011,7 +2033,7 @@ public extension UINavigationController {
         CATransaction.commit()
     }
     
-    public func pushViewController(viewController: UIViewController, animated: Bool, completion: @escaping ()->()) {
+    func pushViewController(viewController: UIViewController, animated: Bool, completion: @escaping ()->()) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         self.pushViewController(viewController, animated: animated)
@@ -2174,6 +2196,15 @@ public struct MenuItemCustom: MenuItemViewCustomizable {
             return .custom(view: view)
         }
     }
- }*/*/
+ }
 
+extension UITableViewCell {
+    var cellActionButtonLabel: UILabel? {
+        superview?.subviews
+            .filter { String(describing: $0).range(of: "UISwipeActionPullView") != nil }
+            .flatMap { $0.subviews }
+            .filter { String(describing: $0).range(of: "UISwipeActionStandardButton") != nil }
+            .flatMap { $0.subviews }
+            .compactMap { $0 as? UILabel }.first
+    }
 }

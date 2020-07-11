@@ -6,7 +6,7 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
-import ParseUI
+import Parse
 import Contacts
 
 class UserViewCell: PFTableViewCell {
@@ -90,8 +90,8 @@ class UserTableViewController: PFQueryTableViewController {
     }
     
     func getFacebookFriends() {
-        let fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters: nil)
-        _ = fbRequest?.start(completionHandler: { (connection: FBSDKGraphRequestConnection?, result: Any?, error: Error?) in
+        let fbRequest = GraphRequest(graphPath:"/me/friends")
+        _ = fbRequest.start(completionHandler: { (connection: GraphRequestConnection?, result: Any?, error: Error?) in
             if error == nil {
                 let resultIds = [String]()
 //                let resultVals = result.object(forKey: "data") as! NSArray

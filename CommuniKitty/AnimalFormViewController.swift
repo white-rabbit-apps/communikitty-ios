@@ -294,7 +294,17 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         //        }
         
         form +++ Section("Info") { section  in
-            section.color   = UIColor.orange// lightOrangeColor()
+//            //section.color = UIColor.lightOrangeColor()
+            section.header = {
+                let header = HeaderFooterView<UIView>(.callback({
+//                          let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+                        let view = UIView()
+                          view.backgroundColor = UIColor.lightOrangeColor()
+                          return view
+                      }))
+//                      header.height = { 100 }
+                      return header
+                    }()
         }
 
         <<< NameRow(NAME_TAG) {
@@ -318,7 +328,8 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             
             $0.title = "Gender"
             $0.options = ["Male", "Female"]
-            $0.optionImages = [UIImage(named: "icon_gender_male")!, UIImage(named: "icon_gender_female")!]
+            //m
+//            $0.optionImages = [UIImage(named: "icon_gender_male")!, UIImage(named: "icon_gender_female")!]
             if self.isEditMode() {
                 $0.value = self.animalObject?.gender
             }
@@ -357,7 +368,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 let val = row.baseValue as? String
                 let maxLength = 300
                 if (val?.count)! > maxLength {
-                    row.cell!.textView.text = val?[0...maxLength]
+                    row.cell!.textView.text = String(val?.prefix(maxLength) ?? "")
                 }
             })
             if self.isEditMode() {
@@ -368,7 +379,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         }
         
         form +++ Section("Details"){ section  in
-                        section.color   = UIColor.lightYellowColor()
+                        //section.color   = UIColor.lightYellowColor()
         }
             
 //            <<< BreedsPushRow(BREED_TAG) {
@@ -406,7 +417,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         
         
         form +++ Section("Personality") { section  in
-            section.color   = UIColor.lightGreenColor()
+            //section.color   = UIColor.lightGreenColor()
         }
             
             <<< MultipleSelectorRow<String>(TRAITS_TAG) {
@@ -461,7 +472,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
 //            }
         
         form +++ Section("Soshul Meowdia") { section  in
-            section.color   = UIColor.lightBlueColor()
+            //section.color   = UIColor.lightBlueColor()
         }
             
             <<< TwitterRow(TWITTER_TAG) {
@@ -518,7 +529,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         
         if(self.isEditMode()) {
             form +++ Section("Memorial") { section  in
-                section.color   = UIColor.orange
+                //section.color   = UIColor.orange
             }
                 
             <<< DateInlineRow(DECEASED_TAG) {
@@ -545,7 +556,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             }
             
             form +++ Section("Adoption") { section  in
-                section.color   = UIColor.lightRedColor()
+                //section.color   = UIColor.lightRedColor()
             }
                 <<< SwitchRow(ADOPTABLE_TAG) {
                     $0.title = "Adoptable"
@@ -581,7 +592,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         
         if(isAdmin) {
             form +++ Section("Admin") { section  in
-                section.color   = UIColor.lightPinkColor()
+                //section.color   = UIColor.lightPinkColor()
             }
                 
             <<< SwitchRow(FEATURED_TAG) {
@@ -595,7 +606,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
         
         if(self.isEditMode()) {
             form +++ Section("Options") { section  in
-                section.color   = UIColor.facebookThemeColor()
+                //section.color   = UIColor.facebookThemeColor()
             }
                 
 //            <<< ButtonRow("transfer") { $0.title = "Transfer Profile" }.onCellSelection { cell, row in
@@ -890,7 +901,7 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 fileName = "profileImage.jpg"
             }
             
-            let imageFile:PFFile = PFFile(name: fileName, data: imageData!)!
+            let imageFile:PFFileObject = PFFileObject(name: fileName, data: imageData!)!
             
             animal.profilePhoto = imageFile
         }

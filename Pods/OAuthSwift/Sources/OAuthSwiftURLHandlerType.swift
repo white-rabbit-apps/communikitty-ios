@@ -45,13 +45,16 @@ import SafariServices
 import AuthenticationServices
 #endif
 
-    @available(iOS 12.0, *)
+    @available(iOS 13.0, macCatalyst 13.0, *)
     open class ASWebAuthenticationURLHandler: OAuthSwiftURLHandlerType {
         var webAuthSession: ASWebAuthenticationSession!
         let callbackUrlScheme: String
 
-        init(callbackUrlScheme: String) {
+        weak var presentationContextProvider: ASWebAuthenticationPresentationContextProviding?
+
+        public init(callbackUrlScheme: String, presentationContextProvider: ASWebAuthenticationPresentationContextProviding?) {
             self.callbackUrlScheme = callbackUrlScheme
+            self.presentationContextProvider = presentationContextProvider
         }
 
         public func handle(_ url: URL) {
@@ -62,22 +65,28 @@ import AuthenticationServices
                                                                 let msg = error?.localizedDescription.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
                                                                 let urlString = "\(self.callbackUrlScheme)?error=\(msg ?? "UNKNOWN")"
                                                                 let url = URL(string: urlString)!
-                                                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                                                #if !OAUTH_APP_EXTENSIONS
+                                                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                                                #endif
                                                                 return
                                                             }
-                                                            UIApplication.shared.open(successURL, options: [:], completionHandler: nil)
+                                                            #if !OAUTH_APP_EXTENSIONS
+                                                                UIApplication.shared.open(successURL, options: [:], completionHandler: nil)
+                                                            #endif
             })
+            webAuthSession.presentationContextProvider = presentationContextProvider
 
             _ = webAuthSession.start()
         }
     }
 
-    @available(iOS 11.0, *)
+#if !targetEnvironment(macCatalyst)
+    @available(iOS, introduced: 11.0, deprecated: 12.0)
     open class SFAuthenticationURLHandler: OAuthSwiftURLHandlerType {
         var webAuthSession: SFAuthenticationSession!
         let callbackUrlScheme: String
 
-        init(callbackUrlScheme: String) {
+        public init(callbackUrlScheme: String) {
             self.callbackUrlScheme = callbackUrlScheme
         }
 
@@ -89,15 +98,20 @@ import AuthenticationServices
                                                             let msg = error?.localizedDescription.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
                                                             let urlString = "\(self.callbackUrlScheme)?error=\(msg ?? "UNKNOWN")"
                                                             let url = URL(string: urlString)!
-                                                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                                            #if !OAUTH_APP_EXTENSIONS
+                                                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                                            #endif
                                                             return
                                                         }
-                                                        UIApplication.shared.open(successURL, options: [:], completionHandler: nil)
+                                                        #if !OAUTH_APP_EXTENSIONS
+                                                            UIApplication.shared.open(successURL, options: [:], completionHandler: nil)
+                                                        #endif
             })
 
             _ = webAuthSession.start()
         }
     }
+    #endif
 
     @available(iOS 9.0, *)
     open class SafariURLHandler: NSObject, OAuthSwiftURLHandlerType, SFSafariViewControllerDelegate {

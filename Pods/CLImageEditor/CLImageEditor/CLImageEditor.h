@@ -13,23 +13,21 @@
 @protocol CLImageEditorDelegate;
 @protocol CLImageEditorTransitionDelegate;
 
-@class CLImageToolBase;
-
 @interface CLImageEditor : UIViewController
 {
-
+    
 }
 @property (nonatomic, weak) id<CLImageEditorDelegate> delegate;
 @property (nonatomic, readonly) CLImageEditorTheme *theme;
 @property (nonatomic, readonly) CLImageToolInfo *toolInfo;
-@property BOOL forceToCrop;
 
 - (id)initWithImage:(UIImage*)image;
-- (id)initWithImage:(UIImage*)image delegate:(id<CLImageEditorDelegate>)delegate forceToCrop:(BOOL)forceToCrop;
+- (id)initWithImage:(UIImage*)image delegate:(id<CLImageEditorDelegate>)delegate;
 - (id)initWithDelegate:(id<CLImageEditorDelegate>)delegate;
 
-- (void)setCurrentTool:(CLImageToolBase *)currentTool;
 - (void)showInViewController:(UIViewController<CLImageEditorTransitionDelegate>*)controller withImageView:(UIImageView*)imageView;
+
+- (void)refreshToolSettings;
 
 @end
 
@@ -37,7 +35,8 @@
 
 @protocol CLImageEditorDelegate <NSObject>
 @optional
-- (void)imageEditor:(CLImageEditor*)editor didFinishEdittingWithImage:(UIImage*)image;
+- (void)imageEditor:(CLImageEditor*)editor didFinishEdittingWithImage:(UIImage*)image __attribute__ ((deprecated));
+- (void)imageEditor:(CLImageEditor*)editor didFinishEditingWithImage:(UIImage*)image;
 - (void)imageEditorDidCancel:(CLImageEditor*)editor;
 
 @end
@@ -49,3 +48,4 @@
 - (void)imageEditor:(CLImageEditor*)editor didDismissWithImageView:(UIImageView*)imageView canceled:(BOOL)canceled;
 
 @end
+

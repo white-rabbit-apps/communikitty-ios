@@ -7,7 +7,7 @@
 //
 
 import Eureka
-import ParseFacebookUtilsV4
+import Parse
 
 class UserFormViewController : FormViewController {
     
@@ -127,7 +127,7 @@ class UserFormViewController : FormViewController {
                     }
                 }
         
-            var infoDict: [AnyHashable: Any] = Bundle.main.infoDictionary!
+            let infoDict: [AnyHashable: Any] = Bundle.main.infoDictionary!
             let appVersion: String = (infoDict["CFBundleShortVersionString"] as! String)
             let buildNumber: String = (infoDict["CFBundleVersion"] as! String)
 
@@ -188,7 +188,7 @@ class UserFormViewController : FormViewController {
     }
     
     func connectFacebook() {
-        PFFacebookUtils.facebookLoginManager().loginBehavior = FBSDKLoginBehavior.systemAccount
+        PFFacebookUtils.facebookLoginManager().loginBehavior = LoginBehavior.browser
         
         self.showLoader()
         PFFacebookUtils.linkUser(inBackground: WRUser.current()!, withReadPermissions: self.permissions) { (success: Bool, error: Error?) -> Void in
@@ -206,8 +206,8 @@ class UserFormViewController : FormViewController {
     }
     
     func saveUserDataFromFacebook() {
-        let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email,name,first_name,last_name,gender"])
-        _ = fbRequest?.start(completionHandler: { (FBSDKGraphRequestConnection, result, error) -> Void in
+        let fbRequest = GraphRequest(graphPath: "me", parameters: ["fields": "email,name,first_name,last_name,gender"])
+        _ = fbRequest.start(completionHandler: { (FBSDKGraphRequestConnection, result, error) -> Void in
             
             if (error == nil && result != nil) {
                 let facebookData = result as! NSDictionary //FACEBOOK DATA IN DICTIONARY
@@ -226,7 +226,7 @@ class UserFormViewController : FormViewController {
                         if let data = try? Data(contentsOf: url){
                             
                             let fileName:String = fbId! + ".jpg"
-                            let imageFile:PFFile = PFFile(name: fileName, data: data)!
+                            let imageFile:PFFileObject = PFFileObject(name: fileName, data: data)!
                             
                             user.profilePhoto = imageFile
                         }

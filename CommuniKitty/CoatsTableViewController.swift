@@ -6,7 +6,7 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
-import ParseUI
+import Parse
 import Eureka
 
 class CoatsTableViewCell: PFTableViewCell {

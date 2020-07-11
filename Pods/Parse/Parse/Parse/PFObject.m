@@ -32,7 +32,7 @@
 #import "PFErrorUtilities.h"
 #import "PFEventuallyQueue_Private.h"
 #import "PFFileManager.h"
-#import "PFFile_Private.h"
+#import "PFFileObject_Private.h"
 #import "PFJSONSerialization.h"
 #import "PFLogging.h"
 #import "PFMacros.h"
@@ -69,7 +69,7 @@ static void PFObjectAssertValueIsKindOfValidClass(id object) {
     dispatch_once(&onceToken, ^{
         classes = @[ [NSDictionary class], [NSArray class],
                      [NSString class], [NSNumber class], [NSNull class], [NSDate class], [NSData class],
-                     [PFObject class], [PFFile class], [PFACL class], [PFGeoPoint class] ];
+                     [PFObject class], [PFFileObject class], [PFACL class], [PFGeoPoint class], [PFPolygon class] ];
     });
 
     for (Class class in classes) {
@@ -311,8 +311,8 @@ static void PFObjectAssertValueIsKindOfValidClass(id object) {
         if ([object isDirty:NO]) {
             [dirtyChildren addObject:object];
         }
-    } else if ([node isKindOfClass:[PFFile class]]) {
-        PFFile *file = (PFFile *)node;
+    } else if ([node isKindOfClass:[PFFileObject class]]) {
+        PFFileObject *file = (PFFileObject *)node;
         if (!file.url) {
             [dirtyFiles addObject:node];
         }
@@ -343,7 +343,7 @@ static void PFObjectAssertValueIsKindOfValidClass(id object) {
 // @param error  The reason why it can't be serialized.
 + (BOOL)canBeSerializedAsValue:(id)value
                    afterSaving:(NSMutableArray *)saved
-                         error:(NSError * __autoreleasing *)error {
+                         error:(NSError **)error {
     if ([value isKindOfClass:[PFObject class]]) {
         PFObject *object = (PFObject *)value;
         if (!object.objectId && ![saved containsObject:object]) {
@@ -356,14 +356,18 @@ static void PFObjectAssertValueIsKindOfValidClass(id object) {
 
     } else if ([value isKindOfClass:[NSDictionary class]]) {
         __block BOOL retValue = YES;
+        __block NSError *localError = nil;
         [value enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             if (![[self class] canBeSerializedAsValue:obj
                                           afterSaving:saved
-                                                error:error]) {
+                                                error:&localError]) {
                 retValue = NO;
                 *stop = YES;
             }
         }];
+        if (error) {
+            *error = localError;
+        }
         return retValue;
     } else if ([value isKindOfClass:[NSArray class]]) {
         NSArray *array = (NSArray *)value;
@@ -427,7 +431,7 @@ static void PFObjectAssertValueIsKindOfValidClass(id object) {
     }
 
     BFTask *task = [BFTask taskWithResult:@YES];
-    for (PFFile *file in uniqueFiles) {
+    for (PFFileObject *file in uniqueFiles) {
         task = [task continueAsyncWithSuccessBlock:^id(BFTask *task) {
             return [[file saveInBackground] continueAsyncWithBlock:^id(BFTask *task) {
                 // This is a stupid hack because our current behavior is to fail file
@@ -595,10 +599,10 @@ static void PFObjectAssertValueIsKindOfValidClass(id object) {
             return [BFTask taskWithError:error];
         }
 
-        for (PFFile *file in uniqueFiles) {
+        for (PFFileObject *file in uniqueFiles) {
             if (!file.url) {
                 NSError *error = [PFErrorUtilities errorWithCode:kPFErrorUnsavedFile
-                                                         message:@"Unable to saveEventually a PFObject with a relation to a new, unsaved PFFile."];
+                                                         message:@"Unable to saveEventually a PFObject with a relation to a new, unsaved PFFileObject."];
                 return [BFTask taskWithError:error];
             }
         }
@@ -953,7 +957,7 @@ static void PFObjectAssertValueIsKindOfValidClass(id object) {
         id operationDict = [operation RESTDictionaryUsingObjectEncoder:objectEncoder
                                                      operationSetUUIDs:&ooSetUUIDs
                                                                  error:error];
-        PFPreconditionBailOnError(operation, error, nil);
+        PFPreconditionBailOnError(operationDict, error, nil);
         [operations addObject:operationDict];
         [mutableOperationSetUUIDs addObjectsFromArray:ooSetUUIDs];
     }
@@ -1326,6 +1330,10 @@ static void PFObjectAssertValueIsKindOfValidClass(id object) {
 
 - (void)_mergeAfterSaveWithResult:(NSDictionary *)result decoder:(PFDecoder *)decoder {
     @synchronized (lock) {
+        if (operationSetQueue.count == 0)
+        { // it should never be empty at this point. if it is, add a dummy:
+            [operationSetQueue addObject:[[PFOperationSet alloc] init]];
+        }
         PFOperationSet *operationsBeforeSave = operationSetQueue[0];
         [operationSetQueue removeObjectAtIndex:0];
 
