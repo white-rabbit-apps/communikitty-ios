@@ -15,7 +15,7 @@ class ForgotPasswordFormViewController : FormViewController {
     
     func generateForm() {        
         form +++ Section("Your Info") { section  in
-            section.color   = UIColor.lightOrangeColor()
+            //section.color   = UIColor.lightOrangeColor()
         }
             <<< EmailRow(EMAIL_TAG) {
                 $0.title = "Email"

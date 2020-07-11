@@ -16,9 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "TargetConditionals.h"
+
+#if !TARGET_OS_TV
+
 #import "FBSDKLoginTooltipView.h"
 
+#ifdef FBSDKCOCOAPODS
+#import <FBSDKCoreKit/FBSDKCoreKit+Internal.h>
+#else
 #import "FBSDKCoreKit+Internal.h"
+#endif
 
 @interface FBSDKLoginTooltipView ()
 @end
@@ -29,7 +37,7 @@
 {
   NSString *tooltipMessage =
   NSLocalizedStringWithDefaultValue(@"LoginTooltip.Message", @"FacebookSDK", [FBSDKInternalUtility bundleForStrings],
-                                    @"New! You're in control - choose what info you want to share with apps.",
+                                    @"You're in control - choose what info you want to share with apps.",
                                     @"The message of the FBSDKLoginTooltipView");
   return [super initWithTagline:nil message:tooltipMessage colorStyle:FBSDKTooltipColorStyleFriendlyBlue];
 }
@@ -60,3 +68,5 @@
   }
 }
 @end
+
+#endif

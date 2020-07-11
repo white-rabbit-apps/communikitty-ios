@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Walkthrough View Controller-->
@@ -17,25 +15,25 @@
                         <viewControllerLayoutGuide type="bottom" id="Cns-xt-niI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GGf-Yk-TIz">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="UMj-xb-Wu4">
                                 <rect key="frame" x="280" y="540" width="39" height="37"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ici-5n-Gqu">
-                                <rect key="frame" x="536" y="30" width="48" height="29"/>
+                                <rect key="frame" x="369" y="52" width="30" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Skip">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="close:" destination="H2S-Sd-doW" eventType="touchUpInside" id="m8i-X4-klX"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="UMj-xb-Wu4" secondAttribute="centerX" id="6De-D9-yOE"/>
                             <constraint firstItem="eTc-Le-aKh" firstAttribute="top" secondItem="UMj-xb-Wu4" secondAttribute="bottom" constant="-280" id="8vO-Qx-MTd"/>
@@ -83,12 +81,12 @@
                         <viewControllerLayoutGuide type="bottom" id="VZN-Y0-0Zl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="s2v-FS-4Px">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="bg_walkthrough_b" translatesAutoresizingMaskIntoConstraints="NO" id="HdC-d5-s0q">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bg_walkthrough_b" translatesAutoresizingMaskIntoConstraints="NO" id="HdC-d5-s0q">
                                 <rect key="frame" x="1" y="0.0" width="400" height="600"/>
-                                <color key="backgroundColor" red="0.83921568629999999" green="0.37647058820000001" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.83921568629999999" green="0.37647058820000001" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="HdC-d5-s0q" secondAttribute="height" multiplier="9:16" id="fZ4-dy-wrg"/>
                                 </constraints>
@@ -104,7 +102,7 @@
                                 </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.44996994410000002" blue="0.59837911109999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.44996994410000002" blue="0.59837911109999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="HdC-d5-s0q" firstAttribute="height" secondItem="s2v-FS-4Px" secondAttribute="height" id="88V-3h-V6E"/>
                             <constraint firstAttribute="centerX" secondItem="HdC-d5-s0q" secondAttribute="centerX" id="KaD-Tg-2dr"/>
@@ -137,11 +135,11 @@
                         <viewControllerLayoutGuide type="bottom" id="mdc-vo-ghg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rhq-VN-S5L">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walkthrough_bg5" translatesAutoresizingMaskIntoConstraints="NO" id="LKP-u1-WFk">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <rect key="frame" x="-45" y="0.0" width="504" height="896"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LKP-u1-WFk" secondAttribute="height" multiplier="9:16" id="eEa-o4-srY"/>
                                 </constraints>
@@ -157,22 +155,22 @@
                                 </variation>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CxT-8a-QxX">
-                                <rect key="frame" x="4" y="407" width="592" height="193"/>
+                                <rect key="frame" x="4" y="669" width="406" height="193"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RnG-xG-jFV">
-                                        <rect key="frame" x="536" y="30" width="48" height="29"/>
+                                        <rect key="frame" x="111.5" y="77" width="183" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Log In Right Meow!">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="closeWalkthrough:" destination="zvZ-0K-1iO" eventType="touchUpInside" id="dcW-b4-swR"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.85067111559999997" green="0.94226300600000001" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.85067111559999997" green="0.94226300600000001" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="RnG-xG-jFV" firstAttribute="centerY" secondItem="CxT-8a-QxX" secondAttribute="centerY" id="ZOM-Dk-1ec"/>
                                     <constraint firstItem="RnG-xG-jFV" firstAttribute="centerX" secondItem="CxT-8a-QxX" secondAttribute="centerX" id="h32-Z3-Q68"/>
@@ -198,7 +196,7 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.32980523950000001" green="0.74408280770000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.32980523950000001" green="0.74408280770000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="LKP-u1-WFk" firstAttribute="centerY" secondItem="rhq-VN-S5L" secondAttribute="centerY" id="4yI-vy-pDq"/>
                             <constraint firstItem="mdc-vo-ghg" firstAttribute="top" secondItem="CxT-8a-QxX" secondAttribute="bottom" id="7Ub-Ud-LeF"/>
@@ -242,12 +240,12 @@
                         <viewControllerLayoutGuide type="bottom" id="vjL-iD-VAm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="f36-cm-3h2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="bg_walkthrough_c" translatesAutoresizingMaskIntoConstraints="NO" id="EAc-57-mXv">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bg_walkthrough_c" translatesAutoresizingMaskIntoConstraints="NO" id="EAc-57-mXv">
                                 <rect key="frame" x="131" y="0.0" width="337.5" height="600"/>
-                                <color key="backgroundColor" red="0.48627450979999998" green="0.1450980392" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.48627450979999998" green="0.1450980392" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EAc-57-mXv" secondAttribute="height" multiplier="9:16" id="19W-VT-4yg"/>
                                 </constraints>
@@ -263,7 +261,7 @@
                                 </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.39651343319999999" blue="0.3770228987" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.39651343319999999" blue="0.3770228987" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EAc-57-mXv" firstAttribute="centerY" secondItem="f36-cm-3h2" secondAttribute="centerY" id="90d-VJ-nqG"/>
                             <constraint firstAttribute="centerX" secondItem="EAc-57-mXv" secondAttribute="centerX" id="e5F-qd-Y4E"/>
@@ -296,12 +294,12 @@
                         <viewControllerLayoutGuide type="bottom" id="efG-xM-RdV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XWm-MC-f85">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_walkthrough_a" translatesAutoresizingMaskIntoConstraints="NO" id="s6z-qM-Xf9">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" red="0.90980392160000001" green="0.76862745099999996" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="-45" y="0.0" width="504" height="896"/>
+                                <color key="backgroundColor" red="0.90980392160000001" green="0.76862745099999996" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="s6z-qM-Xf9" secondAttribute="height" multiplier="400:711" id="Pd6-h2-abo"/>
                                 </constraints>
@@ -317,7 +315,7 @@
                                 </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.32980523950000001" green="0.74408280770000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.32980523950000001" green="0.74408280770000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="s6z-qM-Xf9" firstAttribute="height" secondItem="XWm-MC-f85" secondAttribute="height" id="Pbj-wW-SsM"/>
                             <constraint firstItem="s6z-qM-Xf9" firstAttribute="centerX" secondItem="XWm-MC-f85" secondAttribute="centerX" id="ka5-Su-UrO"/>
@@ -358,12 +356,12 @@
                         <viewControllerLayoutGuide type="bottom" id="gz5-1s-YTV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="x5v-nP-C8L">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="bg_walkthrough_d" translatesAutoresizingMaskIntoConstraints="NO" id="X5y-pz-3Zg">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bg_walkthrough_d" translatesAutoresizingMaskIntoConstraints="NO" id="X5y-pz-3Zg">
                                 <rect key="frame" x="131" y="0.0" width="337.5" height="600"/>
-                                <color key="backgroundColor" red="0.25098039220000001" green="0.1450980392" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.25098039220000001" green="0.1450980392" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="X5y-pz-3Zg" secondAttribute="height" multiplier="9:16" id="5fU-dQ-WsP"/>
                                 </constraints>
@@ -379,7 +377,7 @@
                                 </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.39651343319999999" blue="0.3770228987" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.39651343319999999" blue="0.3770228987" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="X5y-pz-3Zg" firstAttribute="centerY" secondItem="x5v-nP-C8L" secondAttribute="centerY" id="CQo-MZ-K8h"/>
                             <constraint firstAttribute="centerX" secondItem="X5y-pz-3Zg" secondAttribute="centerX" id="HWM-t9-CES"/>

@@ -9,7 +9,7 @@
 import UIKit
 import Device
 import Eureka
-import ParseUI
+import Parse
 
 class QuirksSelectorViewController: UIViewController, UITextFieldDelegate, TypedRowControllerType {
     
@@ -72,8 +72,8 @@ class QuirksSelectorViewController: UIViewController, UITextFieldDelegate, Typed
         }
         
         //triggers keyboard on field focus
-        NotificationCenter.default.addObserver(self, selector: #selector(QuirksSelectorViewController.keyboardWillShow), name: NSNotification.Name.UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(QuirksSelectorViewController.keyboardWillHide), name: NSNotification.Name.UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(QuirksSelectorViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(QuirksSelectorViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         self.textField.delegate = self
         self.textField.addTarget(self, action: #selector(self.textWasChanged), for: .editingChanged)

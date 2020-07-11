@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import ParseFacebookUtilsV4
+import Parse
 import SlideMenuControllerSwift
 import Eureka
 import Device
@@ -67,17 +67,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         loadBackgroundData()
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        return ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     public func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+        return ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
     }
     
     public func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(
+        return ApplicationDelegate.shared.application(
             application,
-            open: url as URL?,
+            open: url,
             sourceApplication: sourceApplication,
             annotation: annotation)
     }
@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        FBSDKAppEvents.activateApp()
+        AppEvents.activateApp()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -171,9 +171,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //        PFTwitterUtils.initializeWithConsumerKey("C16iyeaMoc91iPOQnBTnQkXgm", consumerSecret: "gvedI21p7UaJxEJKxyTttbkUydE37cnq3RBSUFB86erwjHAkt1")
             //            self.client = CDAClient(spaceKey:"8mu31kgi73w0", accessToken:"3bd31581398aa28d0b9c05aa86573763aa4dfd4119eb020625cd0989fee99836")
             if Device.type() != .simulator {
-                Instabug.start(withToken: "b97c87481a11e4f5469722434cef6a24", invocationEvent: IBGInvocationEvent.screenshot)
+                Instabug.start(withToken: "b97c87481a11e4f5469722434cef6a24", invocationEvents: IBGInvocationEvent.screenshot)
                 Instabug.setColorTheme(.light)
-                Instabug.setCrashReportingEnabled(true)
+                CrashReporting.enabled = true
+//                Instabug.setCrashReportingEnabled(true)
                 //                Fabric.with([Crashlytics.self, Answers.self])
             }
         }
@@ -295,7 +296,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         return Hoko.deeplinking().continue(userActivity, restorationHandler:restorationHandler)
     }
     
@@ -384,8 +385,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.registerForPushNotifications()
             self.hasRegisteredForPush = true
         }
-        
-        Instabug.setUserEmail((WRUser.current()?.email)!)
+        if let user = WRUser.current() {
+            Instabug.identifyUser(withEmail: (user.email!), name: (user.username!))
+        }
 //        self.refreshDashboard()
     }
     
@@ -480,10 +482,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.checkFosters()
         
         let ownerQuery = WRAnimal.query()!
-        ownerQuery.whereKey("owners", equalTo: WRUser.current()!)
+        ownerQuery.whereKey("owners", equalTo: WRUser.current() ?? "")
         
         let fosterQuery = WRAnimal.query()!
-        fosterQuery.whereKey("fosters", equalTo: WRUser.current()!)
+        fosterQuery.whereKey("fosters", equalTo: WRUser.current() ?? "")
         
         let animalQuery = PFQuery.orQuery(withSubqueries: [ownerQuery, fosterQuery])
         animalQuery.whereKeyDoesNotExist("deceasedDate")
@@ -551,7 +553,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func checkFosters() {
         let animalQuery = WRAnimal.query()!
-        animalQuery.whereKey("fosters", equalTo: WRUser.current()!)
+        animalQuery.whereKey("fosters", equalTo: WRUser.current() ?? "")
         
         animalQuery.findObjectsInBackground {
             (objects: [PFObject]?, error: Error?) -> Void in
@@ -568,10 +570,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func loadMyAnimalsWithDeceased() {
         let ownerQuery = WRAnimal.query()!
-        ownerQuery.whereKey("owners", equalTo: WRUser.current()!)
+        ownerQuery.whereKey("owners", equalTo: WRUser.current() ?? "")
         
         let fosterQuery = WRAnimal.query()!
-        fosterQuery.whereKey("fosters", equalTo: WRUser.current()!)
+        fosterQuery.whereKey("fosters", equalTo: WRUser.current() ?? "")
         
         let animalQuery = PFQuery.orQuery(withSubqueries: [ownerQuery, fosterQuery])
         animalQuery.includeKey("breed")
@@ -710,7 +712,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if breedObject.name != nil {
                         var breedImage = UIImage(named: "animal_profile_photo_empty")
-                        if let imageFile = object["image"] as? PFFile {
+                        if let imageFile = object["image"] as? PFFileObject {
                             imageFile.getDataInBackground(block: {
                                 (imageData: Data?, error: Error?) -> Void in
                                 if(error == nil) {

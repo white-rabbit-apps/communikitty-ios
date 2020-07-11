@@ -15,8 +15,8 @@ class WRTimelineEntry: PFObject, PFSubclassing {
     @NSManaged var createdBy: WRUser?
     @NSManaged var actingUser: WRUser?
     
-    @NSManaged var image: PFFile?
-    @NSManaged var video: PFFile?
+    @NSManaged var image: PFFileObject?
+    @NSManaged var video: PFFileObject?
     @NSManaged var imageUrl: String?
     
     @NSManaged var type: String?

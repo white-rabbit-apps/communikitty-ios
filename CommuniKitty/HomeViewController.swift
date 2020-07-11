@@ -57,9 +57,9 @@ class HomeViewController: UIViewController,BWWalkthroughViewControllerDelegate {
         careViewController = learnStoryboard.instantiateViewController(withIdentifier: "CareNavigation")
         
         let aboutStoryboard = UIStoryboard(name: "About", bundle: nil)
-        aboutViewController = aboutStoryboard.instantiateViewController(withIdentifier: "AboutNav") as! UINavigationController
+        aboutViewController = aboutStoryboard.instantiateViewController(withIdentifier: "AboutNav") as? UINavigationController
         
-        userFormController = mainStoryboard.instantiateViewController(withIdentifier: "UserNavigation") as! UINavigationController
+        userFormController = mainStoryboard.instantiateViewController(withIdentifier: "UserNavigation") as? UINavigationController
         let userForm = self.userFormController.topViewController as! UserFormViewController
         userForm.userObject = self.currentUser
 //        userForm.menuController = self
@@ -73,7 +73,7 @@ class HomeViewController: UIViewController,BWWalkthroughViewControllerDelegate {
         if let user = self.currentUser {
             self.userName.text = (user.firstName)! + " " + (user.lastName)!
             
-            if let userPhoto = user.profilePhoto {
+            if user.profilePhoto != nil {
 //                self.imageProfileButton.kf.setImage(with: NSURL(string: userPhoto.url!) as! Resource?, for: .normal, placeholder: UIImage(named: "human_profile_photo_empty"), options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
 //                    self.imageProfileButton.imageView?.makeCircular()
 //                })

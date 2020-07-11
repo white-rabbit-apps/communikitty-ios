@@ -6,7 +6,7 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
-import ParseUI
+import Parse
 import ActiveLabel
 import Device
 
@@ -234,7 +234,7 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
     }
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0), NSForegroundColorAttributeName: UIColor.darkGray]
+        let attributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18.0), NSAttributedString.Key.foregroundColor: UIColor.darkGray]
         
         return NSAttributedString(string: "No posts", attributes: attributes)
     }
@@ -243,13 +243,13 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
         let paragraph: NSMutableParagraphStyle = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
-        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: paragraph]
+        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0), NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.paragraphStyle: paragraph]
         
         return NSAttributedString(string: "You're not following any kittehs yet!", attributes: attributes)
     }
     
     func buttonTitleForEmptyDataSet(scrollView: UIScrollView, forState state: UIControl.State) -> NSAttributedString {
-        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 17.0)]
+        let attributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17.0)]
         
         return NSAttributedString(string: "Find some to follow", attributes: attributes)
     }
@@ -269,7 +269,7 @@ class PostsTableViewController: PFQueryTableAutoLoadingViewController {
             query.whereKey("text", contains: "#\(self.hashtag!)")
         } else if(self.following) {
             let followingQuery = WRFollow.query()!
-            followingQuery.whereKey("follower", equalTo: WRUser.current()!)
+            followingQuery.whereKey("follower", equalTo: WRUser.current() ?? "")
             
             query.whereKey("animal", matchesKey: "following", in: followingQuery)
         }

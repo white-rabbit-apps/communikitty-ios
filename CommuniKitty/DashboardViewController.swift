@@ -101,6 +101,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
         self.checkForUser {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let activityNav = storyboard.instantiateViewController(withIdentifier: "ActivityNavigation") as! UINavigationController
+            activityNav.modalPresentationStyle = .fullScreen
             self.present(activityNav, animated: true, completion: nil)
         }
     }

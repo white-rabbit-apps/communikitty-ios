@@ -23,6 +23,7 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
 // MARK: SegmentedCell
 
@@ -46,6 +47,7 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
         self.titleLabel = self.textLabel
         self.titleLabel?.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel?.setContentHuggingPriority(UILayoutPriority(rawValue: 500), for: .horizontal)
+        self.titleLabel?.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { [weak self] _ in
             guard let me = self else { return }
@@ -113,7 +115,7 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
     }
 
     @objc func valueChanged() {
-        row.value =  (row as! SegmentedRow<T>).options?[segmentedControl.selectedSegmentIndex]
+        row.value = (row as! SegmentedRow<T>).options?[segmentedControl.selectedSegmentIndex]
     }
 
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -128,31 +130,12 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
 
     func updateSegmentedControl() {
         segmentedControl.removeAllSegments()
-        //check if images or text should be in segmentedControl
-        if row.optionImages != nil {
-            //set custom color for segmentedControl
-            segmentedControl.tintColor = UIColor(red: 198/255.0, green: 198/255.0, blue: 198/255.0, alpha: 1.0)
-            items().enumerated().forEach {
-                segmentedControl.insertSegment(with: $0.element as? UIImage, at: $0.offset, animated: false)
-                //set constraints for segmentedControl
-                segmentedControl.setWidth(60, forSegmentAt: $0.offset)
-                contentView.addConstraint(NSLayoutConstraint(item: segmentedControl, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: 20))
-                //check the screen size
-                let screenSize: CGRect = UIScreen.main.bounds
-                if screenSize.width < 400{
-                    contentView.addConstraint(NSLayoutConstraint(item: segmentedControl, attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: contentView, attribute: .leading, multiplier: 1, constant: 240))
-                } else {
-                    contentView.addConstraint(NSLayoutConstraint(item: segmentedControl, attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: contentView, attribute: .leading, multiplier: 1, constant: 275))
-                }
-                
-            }
-        } else {
-            (row as! SegmentedRow<T>).options?.reversed().forEach {
-                if let image = $0 as? UIImage {
-                    segmentedControl.insertSegment(with: image, at: 0, animated: false)
-                } else {
-                    segmentedControl.insertSegment(withTitle: row.displayValueFor?($0) ?? "", at: 0, animated: false)
-                }
+
+        (row as! SegmentedRow<T>).options?.reversed().forEach {
+            if let image = $0 as? UIImage {
+                segmentedControl.insertSegment(with: image, at: 0, animated: false)
+            } else {
+                segmentedControl.insertSegment(withTitle: row.displayValueFor?($0) ?? "", at: 0, animated: false)
             }
         }
     }
@@ -180,7 +163,7 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
             dynamicConstraints.append(NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0))
         }
 
-        dynamicConstraints.append(NSLayoutConstraint(item: segmentedControl, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: contentView, attribute: .width, multiplier: 0.3, constant: 0.0))
+        dynamicConstraints.append(NSLayoutConstraint(item: segmentedControl!, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: contentView, attribute: .width, multiplier: 0.3, constant: 0.0))
 
         if hasImageView && hasTitleLabel {
             dynamicConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:[imageView]-(15)-[titleLabel]-[segmentedControl]-|", options: [], metrics: nil, views: views)
@@ -194,22 +177,10 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
         contentView.addConstraints(dynamicConstraints)
         super.updateConstraints()
     }
-    
-    func items() -> [Any] {// or create protocol for options
-        var result = [Any]()
-        for (index, object) in ((row as! SegmentedRow<T>).options?.enumerated())! {
-            if row.optionImages != nil {
-                result.append(row.optionImages![index].withRenderingMode(.alwaysOriginal) )
-            } else {
-                result.append(row.displayValueFor?(object) ?? "")
-            }
-        }
-        return result
-    }
-    
+
     func selectedIndex() -> Int? {
         guard let value = row.value else { return nil }
-        return (row as! SegmentedRow<T>).options?.index(of: value)
+        return (row as! SegmentedRow<T>).options?.firstIndex(of: value)
     }
 }
 

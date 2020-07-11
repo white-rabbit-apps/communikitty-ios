@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "17990528-4677-42B2-9A76-CD8506DB1417"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1530BE57-93D2-4AB7-AC31-FE0103497706"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CommuniKitty/Extensions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "863"
+            endingLineNumber = "863"
+            landmarkName = "openUserSettings()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1530BE57-93D2-4AB7-AC31-FE0103497706 - 47f54a79a26811e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in CommuniKitty_Dev):__C.UIViewController.openUserSettings() -&gt; ()"
+                  moduleName = "CommuniKitty Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MAC%20DATA%203/Mayur&apos;s%20BackUp/MayurHome/Projects/Communikitty/communikitty-ios-master/CommuniKitty/Extensions.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "863"
+                  endingLineNumber = "863"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "1530BE57-93D2-4AB7-AC31-FE0103497706 - 8c2a05ae740ebb97"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in (extension in CommuniKitty_Dev):__C.UIViewController.openUserSettings() -&gt; ()"
+                  moduleName = "CommuniKitty Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MAC%20DATA%203/Mayur&apos;s%20BackUp/MayurHome/Projects/Communikitty/communikitty-ios-master/CommuniKitty/Extensions.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "865"
+                  endingLineNumber = "865"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            uuid = "8C84473F-AB90-459B-8738-0177257A40E5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            breakpointStackSelectionBehavior = "1"
+            scope = "1"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SwiftErrorBreakpoint">
+         <BreakpointContent
+            uuid = "49C48110-F285-4549-8367-81E1ABA469CC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            uuid = "92EABDDC-11C3-4FFA-B34F-2BF0CC2A2E63"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = ""
+            moduleName = "">
+            <Locations>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

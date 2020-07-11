@@ -16,49 +16,67 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "TargetConditionals.h"
+
+#if !TARGET_OS_TV
+
 #import <Foundation/Foundation.h>
 
 @class FBSDKLoginManager;
+@class FBSDKLoginCompletionParameters;
 
-/*!
- @abstract Structured interface for accessing the parameters used to complete a log in request.
+/**
+ Success Block
+ */
+typedef void (^FBSDKLoginCompletionParametersBlock)(FBSDKLoginCompletionParameters *parameters)
+NS_SWIFT_NAME(LoginCompletionParametersBlock);
+
+/**
+  Structured interface for accessing the parameters used to complete a log in request.
  If \c accessTokenString is non-<code>nil</code>, the authentication succeeded. If \c error is
  non-<code>nil</code> the request failed. If both are \c nil, the request was cancelled.
  */
+NS_SWIFT_NAME(LoginCompletionParameters)
 @interface FBSDKLoginCompletionParameters : NSObject
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithError:(NSError *)error;
 
 @property (nonatomic, copy, readonly) NSString *accessTokenString;
+@property (nonatomic, copy, readonly) NSString *nonceString;
 
 @property (nonatomic, copy, readonly) NSSet *permissions;
 @property (nonatomic, copy, readonly) NSSet *declinedPermissions;
+@property (nonatomic, copy, readonly) NSSet *expiredPermissions;
 
 @property (nonatomic, copy, readonly) NSString *appID;
 @property (nonatomic, copy, readonly) NSString *userID;
 
 @property (nonatomic, copy, readonly) NSError *error;
 
-@property (nonatomic, readonly, getter=isSystemAccount) BOOL systemAccount;
 @property (nonatomic, copy, readonly) NSDate *expirationDate;
+@property (nonatomic, copy, readonly) NSDate *dataAccessExpirationDate;
+
 @property (nonatomic, copy, readonly) NSString *challenge;
+
+@property (nonatomic, copy, readonly) NSString *graphDomain;
 @end
 
+NS_SWIFT_NAME(LoginCompleting)
 @protocol FBSDKLoginCompleting
 
-/*!
- @abstract Invoke \p handler with the login parameters derived from the authentication result.
+/**
+  Invoke \p handler with the login parameters derived from the authentication result.
  See the implementing class's documentation for whether it completes synchronously or asynchronously.
  */
-- (void)completeLogIn:(FBSDKLoginManager *)loginManager withHandler:(void(^)(FBSDKLoginCompletionParameters *parameters))handler;
+- (void)completeLoginWithHandler:(FBSDKLoginCompletionParametersBlock)handler;
 
 @end
 
 #pragma mark - Completers
 
-/*!
- @abstract Extracts the log in completion parameters from the \p parameters dictionary,
+/**
+  Extracts the log in completion parameters from the \p parameters dictionary,
  which must contain the parsed result of the return URL query string.
 
  The \c user_id key is first used to derive the User ID. If that fails, \c signed_request
@@ -66,31 +84,13 @@
 
  Completion occurs synchronously.
  */
+NS_SWIFT_NAME(LoginURLCompleter)
 @interface FBSDKLoginURLCompleter : NSObject <FBSDKLoginCompleting>
 
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)initWithURLParameters:(NSDictionary *)parameters appID:(NSString *)appID NS_DESIGNATED_INITIALIZER;
 
 @end
 
-/*!
- @abstract Requests the User ID, granted permissions and declined permissions from the server
- using the given access token, which must occur before authentication can be completed.
-
- Completion occurs asynchronously.
- */
-@interface FBSDKLoginSystemAccountCompleter : NSObject <FBSDKLoginCompleting>
-
-- (instancetype)initWithTokenString:(NSString *)tokenString appID:(NSString *)appID NS_DESIGNATED_INITIALIZER;
-
-@end
-
-/*!
- @abstract Converts an Accounts framework error in to an error or cancellation result
-
- Completion occurs synchronously.
- */
-@interface FBSDKLoginSystemAccountErrorCompleter : NSObject <FBSDKLoginCompleting>
-
-- (instancetype)initWithError:(NSError *)accountStoreError permissions:(NSSet *)permissions NS_DESIGNATED_INITIALIZER;
-
-@end
+#endif

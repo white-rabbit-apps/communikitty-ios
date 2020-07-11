@@ -268,10 +268,17 @@
     configuration.HTTPCookieAcceptPolicy = NSHTTPCookieAcceptPolicyNever;
     configuration.HTTPShouldSetCookies = NO;
 
+#if TARGET_OS_MACCATALYST
+    // Completely disable caching of responses for security reasons.
+    configuration.URLCache = [[NSURLCache alloc] initWithMemoryCapacity:[NSURLCache sharedURLCache].memoryCapacity
+                                                           diskCapacity:0
+                                                           directoryURL:nil];
+#else
     // Completely disable caching of responses for security reasons.
     configuration.URLCache = [[NSURLCache alloc] initWithMemoryCapacity:[NSURLCache sharedURLCache].memoryCapacity
                                                            diskCapacity:0
                                                                diskPath:nil];
+#endif
 
     NSBundle *bundle = [NSBundle mainBundle];
     NSDictionary *headers = [PFCommandURLRequestConstructor defaultURLRequestHeadersForApplicationId:applicationId
@@ -294,7 +301,7 @@
 
 - (void)urlSession:(PFURLSession *)session willPerformURLRequest:(NSURLRequest *)request {
     [[BFExecutor defaultPriorityBackgroundExecutor] execute:^{
-        NSDictionary *userInfo = ([PFLogger sharedLogger].logLevel == PFLogLevelDebug ?
+        NSDictionary *userInfo = ([PFSystemLogger sharedLogger].logLevel == PFLogLevelDebug ?
                                   @{ PFNetworkNotificationURLRequestUserInfoKey : request } : nil);
         [self.notificationCenter postNotificationName:PFNetworkWillSendURLRequestNotification
                                                object:self
@@ -308,7 +315,7 @@ didPerformURLRequest:(NSURLRequest *)request
     responseString:(nullable NSString *)responseString {
     [[BFExecutor defaultPriorityBackgroundExecutor] execute:^{
         NSMutableDictionary *userInfo = nil;
-        if ([PFLogger sharedLogger].logLevel == PFLogLevelDebug) {
+        if ([PFSystemLogger sharedLogger].logLevel == PFLogLevelDebug) {
             userInfo = [NSMutableDictionary dictionaryWithObject:request
                                                           forKey:PFNetworkNotificationURLRequestUserInfoKey];
             if (response) {

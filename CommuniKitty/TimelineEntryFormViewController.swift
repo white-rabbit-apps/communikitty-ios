@@ -8,7 +8,7 @@
 
 //import ImageRow
 import Eureka
-import ParseFacebookUtilsV4
+import Parse
 
 
 class TimelineEntryFormViewController: FormViewController {
@@ -59,7 +59,7 @@ class TimelineEntryFormViewController: FormViewController {
         let appDelegate = AppDelegate.getAppDelegate()
         
         form +++ Section("Info") { section  in
-            section.color   = UIColor.lightOrangeColor()
+            //section.color   = UIColor.lightOrangeColor()
         }
             <<< ActionSheetRow<String>("animal") {
                 $0.title = "Kitty"
@@ -110,7 +110,7 @@ class TimelineEntryFormViewController: FormViewController {
         
         if(!isEditMode()) {
             form +++ Section("Share") { section  in
-                section.color   = UIColor.lightYellowColor()
+                //section.color   = UIColor.lightYellowColor()
             }
                 <<< SwitchRow("facebook") {
                     $0.title = "Share to Facebook"
@@ -135,9 +135,9 @@ class TimelineEntryFormViewController: FormViewController {
     }
     
     func requestFacebookPublishPermission() {
-        let token = FBSDKAccessToken.current()
-        if token == nil || !(token?.hasGranted("publish_actions"))! {
-            PFFacebookUtils.facebookLoginManager().loginBehavior = FBSDKLoginBehavior.systemAccount
+        let token = AccessToken.current
+        if token == nil || !(token?.hasGranted(permission: "publish_actions"))! {
+            PFFacebookUtils.facebookLoginManager().loginBehavior = LoginBehavior.browser
             PFFacebookUtils.linkUser(inBackground: WRUser.current()!, withPublishPermissions: ["publish_actions"], block: { (success: Bool, error: Error?) -> Void in
                 
                 //                let user = PFUser.currentUser()!
@@ -179,7 +179,7 @@ class TimelineEntryFormViewController: FormViewController {
             //let imageDimageValue = imageValue!.jpegDatatcompressionQuality: lue!, 0.5)
             let fileName:String = (String)(WRUser.current()!.objectId!) + "-" + (String)(Date().description.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: ":", with: "-").replacingOccurrences(of: "+", with: "~")) + ".jpg"
             let imageData = imageValue?.pngData()
-            let imageFile:PFFile = PFFile(name: fileName, data: imageData!)!
+            let imageFile:PFFileObject = PFFileObject(name: fileName, data: imageData!)!
             
             timelineEntry.image = imageFile
         }
@@ -246,8 +246,8 @@ class TimelineEntryFormViewController: FormViewController {
                             while let presentedViewController = topController.presentedViewController {
                                 topController = presentedViewController
                             }
-                            let child = topContrchildrenollers[0]
-                            child.openAnimalDetail(animalObject: newAnimal!, push: true, timelineObjectId: timelineEntry.objectId!)
+                            let child = UIApplication.topViewController()
+                            child?.openAnimalDetail(animalObject: newAnimal!, push: true, timelineObjectId: timelineEntry.objectId!)
                         }
                     }
                     

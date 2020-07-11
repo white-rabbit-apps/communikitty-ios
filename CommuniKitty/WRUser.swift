@@ -11,7 +11,7 @@ import Parse
 class WRUser: PFUser {
     @NSManaged var firstName: String?
     @NSManaged var lastName: String?
-    @NSManaged var profilePhoto: PFFile?
+    @NSManaged var profilePhoto: PFFileObject?
 
     @NSManaged var facebookId: String?
 
@@ -22,8 +22,11 @@ class WRUser: PFUser {
         set { self["admin"] = newValue }
     }
     
-    override static func current() -> WRUser? {
-        return PFUser.current() as? WRUser
+//    override static func current() -> WRUser? {
+//        return PFUser.current() as? WRUser
+//    }
+    override class func current() -> Self? {
+        return PFUser.current() as? Self
     }
     
     /**

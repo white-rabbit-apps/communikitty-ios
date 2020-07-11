@@ -6,7 +6,7 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
-import ParseUI
+import Parse
 import ActiveLabel
 
 class ActivityViewCell: PFTableViewCell {
@@ -32,7 +32,7 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
 
         self.initEmptyState()
         
-        self.userObject = WRUser.current()!
+        self.userObject = WRUser.current()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +51,7 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
         transition.type = CATransitionType(rawValue: kCATransition)
         transition.subtype = CATransitionSubtype.fromTop
         self.view.window!.layer.add(transition, forKey: nil)
-        self.dismiss(animated: false, completion: { _ in })
+        self.dismiss(animated: false, completion: nil)
     }
     
     func imageForEmptyDataSet(scrollView: UIScrollView) -> UIImage {
@@ -59,7 +59,7 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
     }
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0), NSForegroundColorAttributeName: UIColor.darkGray]
+        let attributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18.0), NSAttributedString.Key.foregroundColor: UIColor.darkGray]
         
         return NSAttributedString(string: "No cativity yet", attributes: attributes)
     }
@@ -68,13 +68,13 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
         let paragraph: NSMutableParagraphStyle = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
-        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.systemFont(ofSize: 14.0), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: paragraph]
+        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0), NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.paragraphStyle: paragraph]
         
         return NSAttributedString(string: "Follows and Meows will show up here", attributes: attributes)
     }
     
     func buttonTitleForEmptyDataSet(scrollView: UIScrollView, forState state: UIControl.State) -> NSAttributedString {
-        let attributes: [String : AnyObject] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 17.0)]
+        let attributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17.0)]
         
         return NSAttributedString(string: "Get posting!", attributes: attributes)
     }
@@ -94,7 +94,7 @@ class ActivityTableViewController: PFQueryTableAutoLoadingViewController {
         query.includeKey("animalActedOn")
         query.includeKey("entryActedOn")
         query.includeKey("commentMade")
-        query.whereKey("forUser", equalTo: WRUser.current()!)
+        query.whereKey("forUser", equalTo: WRUser.current() ?? "")
         return query
     }
     

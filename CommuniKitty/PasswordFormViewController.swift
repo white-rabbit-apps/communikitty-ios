@@ -18,7 +18,7 @@ class PasswordFormViewController : FormViewController {
     
     func generateForm() {
         form +++ Section("Password") { section  in
-            section.color   = UIColor.lightOrangeColor()
+            //section.color   = UIColor.lightOrangeColor()
         }
         <<< PasswordRow(PASSWORD_TAG) {
             $0.title = "Current Password"

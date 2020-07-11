@@ -503,7 +503,7 @@ extension PagingMenuController {
         move(toPage: newPage)
     }
     
-    @objc  internal func handleSwipeGesture(_ recognizer: UISwipeGestureRecognizer) {
+    @objc internal func handleSwipeGesture(_ recognizer: UISwipeGestureRecognizer) {
         guard let menuView = recognizer.view as? MenuView,
             let menuOptions = menuOptions else { return }
         

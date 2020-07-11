@@ -30,7 +30,7 @@ class DashboardTableViewController: UITableViewController {
             // Add a pull to refresh control for the table view
             refreshControl = UIRefreshControl()
             refreshControl!.attributedTitle = NSAttributedString(string: "Paw to refresh")
-            refreshControl!.addTarget(self, action: #selector(DashboardTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
+            refreshControl!.addTarget(self, action: #selector(DashboardTableViewController.refresh(_:)), for: UIControl.Event.valueChanged)
             tableView.addSubview(refreshControl!) // not required when using UITableViewController
         }
         
@@ -40,7 +40,7 @@ class DashboardTableViewController: UITableViewController {
     /**
      Refresh the dashboard data
      */
-    func refresh(_ sender:AnyObject) {
+    @objc func refresh(_ sender:AnyObject) {
         // Code to refresh table view
         
         if let dashboard = self.parentView as? DashboardViewController {
@@ -80,7 +80,7 @@ class DashboardTableViewController: UITableViewController {
         cell.parentTableView = self
         
         cell.emptyStateButton?.isHidden = true
-        cell.emptyStateButton?.setImage(UIImage(named: "blank"), for: UIControlState())
+        cell.emptyStateButton?.setImage(UIImage(named: "blank"), for: UIControl.State())
         
         cell.parent = self.parentView
         
@@ -262,7 +262,7 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
             query.skip = (page - 1) * self.photosPerPage
             
             query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-                for object in objects! {
+                for object in objects ?? [] {
                     self.sourceArray.append(object)
                 }
                 
@@ -270,7 +270,7 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
                 self.currentlyLoading = false
                 self.refresh()
                 
-                if(objects!.count < self.photosPerPage) {
+                if(objects?.count ?? 0 < self.photosPerPage) {
                     self.currentlyLoading = true
                 }
             }
@@ -351,12 +351,16 @@ class AnimalThumbnailCell: UICollectionViewCell, DashboardCollectionViewCell {
             self.thumbnailImage?.image = nil
             if let profilePhoto = animal.profilePhoto {
                 self.thumbnailImage!.kf.indicatorType = .activity
-                self.thumbnailImage!.kf.setImage(with: URL(string: profilePhoto.url!), placeholder: placeholderImage, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
-                    let frame = self.thumbnailImage!.frame
-                    self.thumbnailImage!.frame = CGRect(x: frame.minX, y: frame.minY, width: 90, height: 90)
-                    self.thumbnailImage!.makeCircular()
-                    self.thumbnailImage!.isHidden = false
-                })
+                self.thumbnailImage!.kf.setImage(with: URL(string: profilePhoto.url!), placeholder: placeholderImage, options: nil, progressBlock: nil) { (result) in
+                    switch result {
+                    case .success(_):
+                        let frame = self.thumbnailImage!.frame
+                        self.thumbnailImage!.frame = CGRect(x: frame.minX, y: frame.minY, width: 90, height: 90)
+                        self.thumbnailImage!.makeCircular()
+                        self.thumbnailImage!.isHidden = false
+                    case .failure(_): break
+                    }
+                }
             } else {
                 self.thumbnailImage?.image = placeholderImage
                 self.thumbnailImage!.isHidden = false

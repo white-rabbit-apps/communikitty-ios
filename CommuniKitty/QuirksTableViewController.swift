@@ -7,7 +7,7 @@
 //
 
 
-import ParseUI
+import Parse
 import Eureka
 //import Crashlytics
 

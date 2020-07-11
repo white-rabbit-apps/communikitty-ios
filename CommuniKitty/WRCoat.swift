@@ -14,7 +14,7 @@ class WRCoat: PFObject, PFSubclassing {
 
     @NSManaged var groupOrder: NSNumber?
     
-    @NSManaged var image: PFFile?
+    @NSManaged var image: PFFileObject?
     
     static func parseClassName() -> String {
         return "Coat"

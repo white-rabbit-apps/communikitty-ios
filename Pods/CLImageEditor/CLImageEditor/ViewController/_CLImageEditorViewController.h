@@ -5,9 +5,7 @@
 //  Copyright (c) 2013年 CALACULU. All rights reserved.
 //
 
-#import "CLImageEditor.h"
-
-@class CLImageToolBase;
+#import "../CLImageEditor.h"
 
 @interface _CLImageEditorViewController : CLImageEditor
 <UIScrollViewDelegate, UIBarPositioningDelegate>
@@ -18,15 +16,14 @@
 @property (nonatomic, strong) UIImageView  *imageView;
 @property (nonatomic, weak) IBOutlet UIScrollView *menuView;
 @property (nonatomic, readonly) UIScrollView *scrollView;
-@property  BOOL forceToCrop;
 
 - (IBAction)pushedCloseBtn:(id)sender;
 - (IBAction)pushedFinishBtn:(id)sender;
 
 
-- (id)initWithImage:(UIImage*)image forceToCrop:(BOOL)forceToCrop;
+- (id)initWithImage:(UIImage*)image;
 
-- (void)setCurrentTool:(CLImageToolBase *)currentTool;
+
 - (void)fixZoomScaleWithAnimated:(BOOL)animated;
 - (void)resetZoomScaleWithAnimated:(BOOL)animated;
 

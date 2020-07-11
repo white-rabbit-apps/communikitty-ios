@@ -23,8 +23,8 @@ class WRAnimal: PFObject, PFSubclassing {
     @NSManaged var birthDate: Date?
     @NSManaged var deceasedDate: Date?
     
-    @NSManaged var coverPhoto: PFFile?
-    @NSManaged var profilePhoto: PFFile?
+    @NSManaged var coverPhoto: PFFileObject?
+    @NSManaged var profilePhoto: PFFileObject?
 
     @NSManaged var shelter: WRLocation?
 

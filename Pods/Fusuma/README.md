@@ -42,13 +42,10 @@ use_frameworks!
 pod 'Fusuma'
 ```
 
-#### Using [Carthage](https://github.com/Carthage/Carthage)
+#### Swift 3
+The latest version does support Swift 4.2. If you're still using Swift 3, you can install Fusuma as follows:
 
-Add `github "ytakzk/Fusuma"` to your `Cartfile` and run `carthage update`. If unfamiliar with Carthage then checkout their [Getting Started section](https://github.com/Carthage/Carthage#getting-started).
-
-```
-github "ytakzk/Fusuma"
-```
+`pod 'Fusuma', github: 'git@github.com:ytakzk/Fusuma.git', branch: 'swift-3'`
 
 ## Fusuma Usage
 Import Fusuma ```import Fusuma``` then use the following codes in some function except for viewDidLoad and give FusumaDelegate to the view controller.  
@@ -56,17 +53,17 @@ Import Fusuma ```import Fusuma``` then use the following codes in some function 
 ```Swift
 let fusuma = FusumaViewController()
 fusuma.delegate = self
-fusuma.availableModes = [.library, .camera, .video] // The default value is [.library, .camera].
+fusuma.availableModes = [FusumaMode.library, FusumaMode.camera, FusumaMode.video] // Add .video capturing mode to the default .library and .camera modes
 fusuma.cropHeightRatio = 0.6 // Height-to-width ratio. The default value is 1, which means a squared-size photo.
 fusuma.allowMultipleSelection = true // You can select multiple photos from the camera roll. The default value is false.
-self.presentViewController(fusuma, animated: true, completion: nil)
+self.present(fusuma, animated: true, completion: nil)
 ```
 
 #### Delegate methods
 
 ```Swift
 // Return the image which is selected from camera roll or is taken via the camera.
-func fusumaImageSelected(image: UIImage, source: FusumaMode) {
+func fusumaImageSelected(_ image: UIImage, source: FusumaMode) {
 
   print("Image selected")
 }
@@ -77,7 +74,7 @@ func fusumaDismissedWithImage(image: UIImage, source: FusumaMode) {
   print("Called just after FusumaViewController is dismissed.")
 }
 
-func fusumaVideoCompleted(withFileURL fileURL: NSURL) {
+func fusumaVideoCompleted(withFileURL fileURL: URL) {
 
   print("Called just after a video has been selected.")
 }
@@ -89,7 +86,7 @@ func fusumaCameraRollUnauthorized() {
 }
 
 // Return selected images when you allow to select multiple photos.
-func fusumaMultipleImageSelected(images: [UIImage], source: FusumaMode) {
+func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode) {
 
 }
 
@@ -109,7 +106,7 @@ fusumaCameraRollTitle = "CustomizeCameraRollTitle"
 fusumaCameraTitle = "CustomizeCameraTitle" // Camera Title
 fusumaTintColor: UIColor // tint color
 // ...
-self.presentViewController(fusuma, animated: true, completion: nil)
+self.present(fusuma, animated: true, completion: nil)
 
 ```
 
@@ -127,7 +124,7 @@ self.presentViewController(fusuma, animated: true, completion: nil)
 |**`fusumaCameraRollTitle `**| String |Text of camera roll title.| `"Library"` |
 |**`fusumaCameraTitle `**| String |Text of carmera title text.| `Photo` |
 |**`fusumaVideoTitle `**| String |Text of video title.| `Video` |
-|**`fusumaTitleFont `**| UIFont |Whether to save the taken image.| `UIFont(name: "AvenirNext-DemiBold", size: 15)` |
+|**`fusumaTitleFont `**| UIFont |Font for title text.| `UIFont(name: "AvenirNext-DemiBold", size: 15)` |
 
 ## Fusuma for Xamarin
 Cheesebaron developed Chafu for Xamarin.  

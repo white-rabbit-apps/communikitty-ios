@@ -29,7 +29,7 @@
 #import "PFPersistenceController.h"
 #import "ParseManagerPrivate.h"
 
-#if !TARGET_OS_WATCH && !TARGET_OS_TV
+#if !TARGET_OS_WATCH
 #import "PFPushManager.h"
 #import "PFInstallation.h"
 #endif
@@ -76,7 +76,7 @@ static NSString *const _ParseApplicationIdFileName = @"applicationId";
 @synthesize keyValueCache = _keyValueCache;
 @synthesize coreManager = _coreManager;
 @synthesize analyticsController = _analyticsController;
-#if !TARGET_OS_WATCH && !TARGET_OS_TV
+#if !TARGET_OS_WATCH
 @synthesize pushManager = _pushManager;
 #endif
 #if TARGET_OS_IOS || TARGET_OS_TV
@@ -161,8 +161,8 @@ static NSString *const _ParseApplicationIdFileName = @"applicationId";
     __block PFEventuallyQueue *queue = nil;
     dispatch_sync(_eventuallyQueueAccessQueue, ^{
 #if TARGET_OS_TV
-        if (!_eventuallyQueue) {
-            _eventuallyQueue = [PFMemoryEventuallyQueue newDefaultMemoryEventuallyQueueWithDataSource:self];
+        if (!self->_eventuallyQueue) {
+            self->_eventuallyQueue = [PFMemoryEventuallyQueue newDefaultMemoryEventuallyQueueWithDataSource:self];
         }
 #else
         if (!self->_eventuallyQueue ||
@@ -361,7 +361,7 @@ static NSString *const _ParseApplicationIdFileName = @"applicationId";
     });
 }
 
-#if !TARGET_OS_WATCH && !TARGET_OS_TV
+#if !TARGET_OS_WATCH
 
 #pragma mark PushManager
 
@@ -440,7 +440,7 @@ static NSString *const _ParseApplicationIdFileName = @"applicationId";
         NSArray *tasks = @[
                            [PFUser getCurrentUserInBackground],
                            [PFConfig getCurrentConfigInBackground],
-#if !TARGET_OS_WATCH && !TARGET_OS_TV
+#if !TARGET_OS_WATCH
                            [PFInstallation getCurrentInstallationInBackground],
 #endif
                            ];
@@ -457,7 +457,7 @@ static NSString *const _ParseApplicationIdFileName = @"applicationId";
 
 - (void)_migrateSandboxDataToApplicationGroupContainerIfNeeded {
     // There is no need to migrate anything on OSX, since we are using globally available folder.
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_TV
     // Do nothing if there is no application group container or containing application is specified.
     if (!self.configuration.applicationGroupIdentifier || self.configuration.containingApplicationBundleIdentifier) {
         return;
