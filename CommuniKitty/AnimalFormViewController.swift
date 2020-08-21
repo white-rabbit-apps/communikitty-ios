@@ -52,17 +52,14 @@ public final class Coat : NSObject {
 
 
 
-public final class Breed : NSObject {
+public struct Breed : Codable,Equatable {
     var name: String?
-    var image: UIImage?
-    var object: WRBreed?
+    var thumbnailUrl: String?
+//    var object: WRBreed?
+    var id: String?
+    var slug: String?
+    var __typename: String?
     
-    init(object: WRBreed, name: String, image: UIImage) {
-        self.object = object
-        self.name = name
-        self.image = image
-        super.init()
-    }
 }
 
 //public final class BreedsPushRow : SelectorRow<PushSelectorCell<Breed>, BreedsTableViewController>, RowType {
@@ -543,17 +540,17 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             }
         }
         
-        let isAdmin : Bool = WRUser.current()!.admin
-        let userShelter = WRUser.current()!.shelter
+        let isAdmin : Bool = GraphQLServiceManager.sharedManager.signInUser?.user?.admin ?? false
+//        let userShelter = WRUser.current()!.shelter
         let isShelterCaregiver : Bool = false //(userShelter != nil)
         
         if(isAdmin || isShelterCaregiver) {
             var shelterOptions = appDelegate.sheltersArray!
             
-            if isShelterCaregiver && !isAdmin {
-                let shelterName = userShelter?.name
-                shelterOptions = [shelterName!]
-            }
+//            if isShelterCaregiver && !isAdmin {
+//                let shelterName = userShelter?.name
+//                shelterOptions = [shelterName!]
+//            }
             
             form +++ Section("Adoption") { section  in
                 //section.color   = UIColor.lightRedColor()
@@ -570,22 +567,22 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
                 
                 <<< PushRow<String>(SHELTER_TAG) {
                     $0.title = "Shelter"
-                    $0.options = shelterOptions
+//                    $0.options = shelterOptions
                     $0.hidden = .function([self.ADOPTABLE_TAG], { form -> Bool in
                         let row: RowOf<Bool>! = form.rowBy(tag: self.ADOPTABLE_TAG)
                         return row.value ?? false == false
                     })
                     if self.isEditMode() {
-                        let shelterObject = self.animalObject?.shelter
+//                        let shelterObject = self.animalObject?.shelter
                         
                         let field = $0
-                        shelterObject?.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) -> Void in
-                            if(shelterObject != nil) {
-                                field.value = shelterObject!.name
-                            }
-                        })
+//                        shelterObject?.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) -> Void in
+//                            if(shelterObject != nil) {
+//                                field.value = shelterObject!.name
+//                            }
+//                        })
                     } else if self.adoptableSelected && !isAdmin {
-                        $0.value = shelterOptions[0]
+                        $0.value = shelterOptions[0].name
                     }
             }
         }
@@ -780,9 +777,9 @@ class AnimalFormViewController : FormViewController, FusumaDelegate, CLImageEdit
             animal.setObject(hometownVal, forKey: HOMETOWN_TAG)
         }
         
-        if let breedValue = self.form.rowBy(tag: self.BREED_TAG)?.baseValue as? Breed {
-            animal.breed = breedValue.object!
-        }
+//        if let breedValue = self.form.rowBy(tag: self.BREED_TAG)?.baseValue as? Breed {
+//            animal.breed = breedValue.object!
+//        }
         
         if let coatValue = self.form.rowBy(tag: self.COAT_TAG)?.baseValue as? Coat {
             animal.setObject(coatValue.object!, forKey: COAT_TAG)

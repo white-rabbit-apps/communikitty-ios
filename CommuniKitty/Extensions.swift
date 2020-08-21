@@ -875,9 +875,8 @@ func openUserProfile(user: WRUser? = nil, push: Bool = true) {
 //    }
     
     func checkForUser(completionBlock: @escaping () -> Void) {
-        let currentUser = WRUser.current()
         
-        if (currentUser != nil) {
+        if (GraphQLServiceManager.sharedManager.getUSer() != nil) {
 //
 //            self.checkForTransfer()
             completionBlock()

@@ -55,9 +55,9 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
             bvc.row = breedRow
             bvc.completionCallback = { vc in
                 
-                if let breedValue = breedRow.value {
-                    self.animalObject!.breed = breedValue.object!
-                }
+//                if let breedValue = breedRow.value {
+//                    self.animalObject!.breed = breedValue.object!
+//                }
                 
                 self.animalObject!.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
                     self.hideLoader()

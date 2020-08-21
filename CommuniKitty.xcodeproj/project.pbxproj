@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		56EF53AAFC1EB62A008239D4 /* Pods_CommuniKitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */; };
+		5B528B2524E8C98000C1BB20 /* GraphQLServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B528B2424E8C98000C1BB20 /* GraphQLServiceManager.swift */; };
+		5B528B2724E8D5F800C1BB20 /* QueryConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B528B2624E8D5F800C1BB20 /* QueryConstant.swift */; };
 		9F53780F40047EE7C355EA91 /* Pods_CommuniKitty_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E810CF4F8607A3558ABC3BE /* Pods_CommuniKitty_Dev.framework */; };
 		B810F8EE1D9D136B005DEAE7 /* QuirksSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8ED1D9D136B005DEAE7 /* QuirksSelectorViewController.swift */; };
 		B810F8F01D9D191F005DEAE7 /* QuirksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B810F8EF1D9D191F005DEAE7 /* QuirksTableViewController.swift */; };
@@ -195,6 +197,8 @@
 		310024AB01E230C7918E3E38 /* Pods-CommuniKitty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommuniKitty.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty.debug.xcconfig"; sourceTree = "<group>"; };
 		3474979882F65A0B4B21C302 /* Pods-CommuniKitty Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommuniKitty Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev.release.xcconfig"; sourceTree = "<group>"; };
 		47EF696EF1977CCE9802F269 /* Pods-CommuniKitty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommuniKitty.release.xcconfig"; path = "Pods/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty.release.xcconfig"; sourceTree = "<group>"; };
+		5B528B2424E8C98000C1BB20 /* GraphQLServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLServiceManager.swift; sourceTree = "<group>"; };
+		5B528B2624E8D5F800C1BB20 /* QueryConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryConstant.swift; sourceTree = "<group>"; };
 		929D3D4399F7F1ED46102C0F /* Pods_CommuniKitty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CommuniKitty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B810F8ED1D9D136B005DEAE7 /* QuirksSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuirksSelectorViewController.swift; sourceTree = "<group>"; };
 		B810F8EF1D9D191F005DEAE7 /* QuirksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuirksTableViewController.swift; sourceTree = "<group>"; };
@@ -336,6 +340,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		5B528B2324E8C94200C1BB20 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5B528B2424E8C98000C1BB20 /* GraphQLServiceManager.swift */,
+				5B528B2624E8D5F800C1BB20 /* QueryConstant.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		A3E53B142558A0798B14AE5A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +466,7 @@
 				EDBB49021D9F917500BF68CB /* Info-dev.plist */,
 				EDEC77D41D9221C7007CF613 /* CommuniKitty-Bridging-Header.h */,
 				ED51266A1D97ABC500EB9027 /* CommuniKitty.entitlements */,
+				5B528B2324E8C94200C1BB20 /* Utils */,
 				ED45124C1D92752C00B95BB5 /* Account */,
 				EDEC78091D923AEB007CF613 /* Social Network */,
 				ED4512491D926FCF00B95BB5 /* Locations */,
@@ -778,6 +792,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-CommuniKitty/Pods-CommuniKitty-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BWWalkthrough/BWWalkthrough.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CLImageEditor/CLImageEditor.framework",
@@ -805,6 +820,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActiveLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BWWalkthrough.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CLImageEditor.framework",
@@ -860,6 +876,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-CommuniKitty Dev/Pods-CommuniKitty Dev-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BWWalkthrough/BWWalkthrough.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CLImageEditor/CLImageEditor.framework",
@@ -887,6 +904,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActiveLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BWWalkthrough.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CLImageEditor.framework",
@@ -1024,6 +1042,7 @@
 				EDEC77DF1D922246007CF613 /* GiFHUD.swift in Sources */,
 				ED36AF171D92DA8E007CC1F9 /* CoatsTableViewController.swift in Sources */,
 				EDEC78011D9224BB007CF613 /* WRUser.swift in Sources */,
+				5B528B2524E8C98000C1BB20 /* GraphQLServiceManager.swift in Sources */,
 				ED36AF151D928219007CC1F9 /* BreedDetailViewController.swift in Sources */,
 				ED3A845E1D9750BE00EDED2A /* HomeViewController.swift in Sources */,
 				EDEC77DC1D922246007CF613 /* Extensions.swift in Sources */,
@@ -1038,6 +1057,7 @@
 				ED4512481D926FBE00B95BB5 /* LocationPhotosViewController.swift in Sources */,
 				ED4512471D926FBE00B95BB5 /* LocationAboutViewController.swift in Sources */,
 				B810F8EE1D9D136B005DEAE7 /* QuirksSelectorViewController.swift in Sources */,
+				5B528B2724E8D5F800C1BB20 /* QueryConstant.swift in Sources */,
 				EDEC77F51D9224BB007CF613 /* WRAnimalTransfer.swift in Sources */,
 				EDEC77FE1D9224BB007CF613 /* WRProduct.swift in Sources */,
 				ED4512241D92561200B95BB5 /* AnimalAboutViewController.swift in Sources */,

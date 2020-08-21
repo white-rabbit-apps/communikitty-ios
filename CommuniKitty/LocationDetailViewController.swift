@@ -97,17 +97,17 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate {
             }
             
             
-            if let logoFile = location.logo {
+            if let logoFile = location.logoUrl {
                 //self.logoImage.kf.setImageWithURL(NSURL(string: logoFile.url!)!)
-                logoFile.getDataInBackground(block: {
-                    (data: Data?, error: Error?) -> Void in
-                    if(error == nil) {
-                        let image = UIImage(data:data!)
-                        if image != nil {
-                            self.logoButton.setImage(image, for: UIControl.State.normal)
-                        }
-                    }
-                })
+//                logoFile.getDataInBackground(block: {
+//                    (data: Data?, error: Error?) -> Void in
+//                    if(error == nil) {
+//                        let image = UIImage(data:data!)
+//                        if image != nil {
+//                            self.logoButton.setImage(image, for: UIControl.State.normal)
+//                        }
+//                    }
+//                })
                 
             }
             

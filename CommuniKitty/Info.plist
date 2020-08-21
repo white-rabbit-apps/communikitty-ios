@@ -69,13 +69,6 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
-			<key>amazonaws.com</key>
-			<dict>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-			</dict>
 			<key>cdninstagram.com</key>
 			<dict>
 				<key>NSExceptionRequiresForwardSecrecy</key>

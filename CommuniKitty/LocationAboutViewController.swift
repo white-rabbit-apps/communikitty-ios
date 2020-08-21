@@ -60,8 +60,7 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
         
         if let location = currentLocationObject {
             
-            let countryInfo = (location.city != nil ? location.city! : "") + ", " + (location.state != nil ? location.state! : "") + " " + (location.zip != nil ? location.zip! : "")
-            addressLabel.text = (location.address != nil ? location.address! : "") + "\n" + countryInfo
+            addressLabel.text = (location.address != nil ? location.address! : "") 
             
             self.phoneView.isHidden = true
             self.hoursView.isHidden = true
@@ -127,7 +126,7 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
                 twitterButton.isHidden = true
             }
             
-            if let instagramId = location.instagramId {
+            if let instagramId = location.instagramUsername {
                 let instagramUrl = SocialMediaUrl.instagramUrlSuffix + instagramId
                 instagramButton.setTitle(instagramUrl, for: .reserved)
             } else {
@@ -146,7 +145,7 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
                 websiteButton.isHidden = true
             }
             
-            if location.facebookPageId == nil && location.twitterId == nil && location.instagramId == nil && location.pinterestId == nil && location.instagramId == nil && location.website == nil {
+            if location.facebookPageId == nil && location.twitterId == nil && location.instagramUsername == nil && location.pinterestId == nil  && location.website == nil {
                 self.linksView.isHidden = true
             }
         }
@@ -255,8 +254,8 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
     
     func getCoordinates() -> CLLocationCoordinate2D? {
         if let locationGeo = currentLocationObject!.geo {
-            let latitute:CLLocationDegrees =  locationGeo.latitude
-            let longitute:CLLocationDegrees =  locationGeo.longitude
+            let latitute:CLLocationDegrees =  Double(string: locationGeo.first ?? "0") ?? 0
+            let longitute:CLLocationDegrees =  Double(string: locationGeo.last ?? "0") ?? 0
             
             let coordinates = CLLocationCoordinate2DMake(latitute, longitute)
             
@@ -281,11 +280,11 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         if let location = currentLocationObject {
-            if let types = location.types {
-                return types.count
-            } else {
+//            if let types = location.types {
+//                return types.count
+//            } else {
                 return 0
-            }
+//            }
         } else {
             return 0
         }
@@ -304,48 +303,48 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
         
         if let location = currentLocationObject {
             
-            if let types = location.types {
-                
-                let currentType = types[indexPath.item]
-                
-                if(currentType != "_new") {
-                    let imageName = "icon_location_type_" + currentType
-                    let image = UIImage(named: imageName)
-                    if image != nil {
-                        let containerView=UIView(frame: CGRect(x:0, y:0, width:86, height:96))
-                        
-                        let typeLogo = UIImageView(image: image!)
-                        typeLogo.contentMode = .scaleAspectFit
-                        typeLogo.frame = CGRect(x: 8, y: 2, width: 70, height: 70)
-                        containerView.addSubview(typeLogo)
-                        
-                        let typeName = UILabel(frame: CGRect(x:0, y:75, width:86, height:20))
-                        typeName.font = typeName.font.withSize(15)
-                        typeName.text = currentType.capitalizeFirstLetter()
-                        typeName.textColor = UIColor.gray
-                        typeName.textAlignment = .center
-                        containerView.addSubview(typeName)
-                        
-                        
-                        self.collectionViewWidthConstraint.constant = 86*CGFloat((types.count))
-                        
-                        if types.count < 5 {
-                            collectionView.isScrollEnabled = false
-                            if  indexPath.item == 0 {
-                                self.collectionViewCenterXConstraint.constant = 0
-                            } else if indexPath.item < 4 {
-                                self.collectionViewCenterXConstraint.constant = -86*CGFloat(indexPath.item)/2
-                            }
-                            
-                        } else {
-                            self.collectionViewCenterXConstraint.isActive = false
-                        }
-                        
-                        cell.addSubview(containerView)
-                        
-                    }
-                }
-            }
+//            if let types = location.types {
+//
+//                let currentType = types[indexPath.item]
+//
+//                if(currentType != "_new") {
+//                    let imageName = "icon_location_type_" + currentType
+//                    let image = UIImage(named: imageName)
+//                    if image != nil {
+//                        let containerView=UIView(frame: CGRect(x:0, y:0, width:86, height:96))
+//
+//                        let typeLogo = UIImageView(image: image!)
+//                        typeLogo.contentMode = .scaleAspectFit
+//                        typeLogo.frame = CGRect(x: 8, y: 2, width: 70, height: 70)
+//                        containerView.addSubview(typeLogo)
+//
+//                        let typeName = UILabel(frame: CGRect(x:0, y:75, width:86, height:20))
+//                        typeName.font = typeName.font.withSize(15)
+//                        typeName.text = currentType.capitalizeFirstLetter()
+//                        typeName.textColor = UIColor.gray
+//                        typeName.textAlignment = .center
+//                        containerView.addSubview(typeName)
+//
+//
+//                        self.collectionViewWidthConstraint.constant = 86*CGFloat((types.count))
+//
+//                        if types.count < 5 {
+//                            collectionView.isScrollEnabled = false
+//                            if  indexPath.item == 0 {
+//                                self.collectionViewCenterXConstraint.constant = 0
+//                            } else if indexPath.item < 4 {
+//                                self.collectionViewCenterXConstraint.constant = -86*CGFloat(indexPath.item)/2
+//                            }
+//
+//                        } else {
+//                            self.collectionViewCenterXConstraint.isActive = false
+//                        }
+//
+//                        cell.addSubview(containerView)
+//
+//                    }
+//                }
+//            }
         }
         
         

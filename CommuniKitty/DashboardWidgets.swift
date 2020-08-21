@@ -48,26 +48,26 @@ class UserAnimalsDashboardWidget : DashboardWidget {
         cell.sourceArray = self.sourceArray
     }
     
-    override func getQuery() -> PFQuery<PFObject> {
-        let query = WRAnimal.query()!
-        query.order(byDescending: "createdAt")
-        var owner = "owners"
-        if(self.foster) {
-            owner = "fosters"
-        }
+    override func getQuery() -> String {
+//        let query = WRAnimal.query()!
+//        query.order(byDescending: "createdAt")
+//        var owner = "owners"
+//        if(self.foster) {
+//            owner = "fosters"
+//        }
+//
+//        if(self.user != nil) {
+//            query.whereKey(owner, equalTo: self.user!)
+//        } else if(WRUser.current() != nil) {
+//            query.whereKey(owner, equalTo: WRUser.current() ?? "")
+//        }
+//        if(!self.deceased) {
+//            query.whereKeyDoesNotExist("deceasedDate")
+//        } else {
+//            query.whereKeyExists("deceasedDate")
+//        }
         
-        if(self.user != nil) {
-            query.whereKey(owner, equalTo: self.user!)
-        } else if(WRUser.current() != nil) {
-            query.whereKey(owner, equalTo: WRUser.current() ?? "")
-        }
-        if(!self.deceased) {
-            query.whereKeyDoesNotExist("deceasedDate")
-        } else {
-            query.whereKeyExists("deceasedDate")
-        }
-        
-        return query
+        return GETCURRENTANIMAL
     }
 }
 
@@ -83,7 +83,7 @@ class ShelterAnimalsDashboardWidget : DashboardWidget {
         self.parentCell = cell
         
         if(self.shelter != nil) {
-            try! self.shelter?.fetchIfNeeded()
+//            try! self.shelter?.fetchIfNeeded()
             cell.titleLabel?.text = "\(self.shelter!.name!)'s Kitties"
             cell.titleLabel?.backgroundColor = UIColor.lightGreenColor()
         }
@@ -96,13 +96,14 @@ class ShelterAnimalsDashboardWidget : DashboardWidget {
         cell.sourceArray = self.sourceArray
     }
     
-    override func getQuery() -> PFQuery<PFObject> {
-        let query = WRAnimal.query()!
-        query.order(byDescending: "createdAt")
-        if(self.shelter != nil) {
-            query.whereKey("shelter", equalTo: self.shelter!)
-        }
-        return query
+    override func getQuery() -> String {
+//        let query = WRAnimal.query()!
+//        query.order(byDescending: "createdAt")
+//        if(self.shelter != nil) {
+//            query.whereKey("shelter", equalTo: self.shelter!)
+//        }
+        
+        return GETLOCATIONS
     }
 }
 
@@ -133,18 +134,18 @@ class UserPhotosDashboardWidget : DashboardWidget {
         cell.sourceArray = self.sourceArray
     }
     
-    override func getQuery() -> PFQuery<PFObject> {
-        let query = WRTimelineEntry.query()!
-        query.order(byDescending: "createdAt")
-        query.whereKey("type", equalTo: "image")
-        if(self.user != nil) {
-            query.whereKey("createdBy", equalTo: self.user!)
-        } else {
-            query.whereKey("createdBy", equalTo: WRUser.current() ?? "")
-        }
-        query.includeKey("animal")
+    override func getQuery() -> String {
+//        let query = WRTimelineEntry.query()!
+//        query.order(byDescending: "createdAt")
+//        query.whereKey("type", equalTo: "image")
+//        if(self.user != nil) {
+//            query.whereKey("createdBy", equalTo: self.user!)
+//        } else {
+//            query.whereKey("createdBy", equalTo: WRUser.current() ?? "")
+//        }
+//        query.includeKey("animal")
         
-        return query
+        return ""
     }
 }
 
@@ -165,15 +166,15 @@ class PopularAnimalsDashboardWidget : DashboardWidget {
         cell.sourceArray = self.sourceArray
     }
     
-    override func getQuery() -> PFQuery<PFObject> {
-        let query = WRAnimal.query()!
-        query.order(byDescending: "followerCount")
-        
-        if(!includeFeatured) {
-            query.whereKey("featured", equalTo: false)
-        }
-        
-        return query
+    override func getQuery() -> String {
+//        let query = WRAnimal.query()!
+//        query.order(byDescending: "followerCount")
+//
+//        if(!includeFeatured) {
+//            query.whereKey("featured", equalTo: false)
+//        }
+//
+        return ""
     }
 }
 
@@ -194,11 +195,11 @@ class FeaturedAnimalsDashboardWidget : DashboardWidget {
         cell.sourceArray = self.sourceArray
     }
     
-    override func getQuery() -> PFQuery<PFObject> {
-        let query = WRAnimal.query()!
-        query.whereKey("featured", equalTo: true)
+    override func getQuery() -> String {
+//        let query = WRAnimal.query()!
+//        query.whereKey("featured", equalTo: true)
         
-        return query
+        return ""
     }
 }
 
@@ -230,15 +231,15 @@ class HashtagPhotosDashboardWidget : DashboardWidget {
         cell.sourceArray = self.sourceArray
     }
     
-    override func getQuery() -> PFQuery<PFObject> {
-        let query = WRTimelineEntry.query()!
-        query.order(byDescending: "createdAt")
-        query.whereKey("type", equalTo: "image")
-        query.whereKey("text", contains: "#\(self.hashtag!)")
+    override func getQuery() -> String {
+//        let query = WRTimelineEntry.query()!
+//        query.order(byDescending: "createdAt")
+//        query.whereKey("type", equalTo: "image")
+//        query.whereKey("text", contains: "#\(self.hashtag!)")
+//
+//        query.includeKey("animal")
         
-        query.includeKey("animal")
-        
-        return query
+        return ""
     }
 }
 
@@ -258,14 +259,14 @@ class PopularPhotosDashboardWidget : DashboardWidget {
         cell.sourceArray = self.sourceArray
     }
     
-    override func getQuery() -> PFQuery<PFObject> {
-        let query = WRTimelineEntry.query()!
-        query.order(byDescending: "likeCount")
-        query.whereKey("type", equalTo: "image")
+    override func getQuery() -> String {
+//        let query = WRTimelineEntry.query()!
+//        query.order(byDescending: "likeCount")
+//        query.whereKey("type", equalTo: "image")
+//
+//        query.includeKey("animal")
         
-        query.includeKey("animal")
-        
-        return query
+        return ""
     }
 }
 
@@ -285,14 +286,14 @@ class MostCommentedOnPhotosDashboardWidget : DashboardWidget {
         cell.sourceArray = self.sourceArray
     }
     
-    override func getQuery() -> PFQuery<PFObject> {
-        let query = WRTimelineEntry.query()!
-        query.order(byDescending: "commentCount")
-        query.whereKey("type", equalTo: "image")
+    override func getQuery() -> String {
+//        let query = WRTimelineEntry.query()!
+//        query.order(byDescending: "commentCount")
+//        query.whereKey("type", equalTo: "image")
+//
+//        query.includeKey("animal")
         
-        query.includeKey("animal")
-        
-        return query
+        return ""
     }
 }
 
@@ -313,19 +314,19 @@ class FeaturedPhotosDashboardWidget : DashboardWidget {
         cell.sourceArray = self.sourceArray
     }
     
-    override func getQuery() -> PFQuery<PFObject> {
-        let query = WRTimelineEntry.query()!
-        query.order(byDescending: "date")
-        query.whereKey("type", equalTo: "image")
+    override func getQuery() -> String{
+//        let query = WRTimelineEntry.query()!
+//        query.order(byDescending: "date")
+//        query.whereKey("type", equalTo: "image")
+//
+//        let animalQuery = WRAnimal.query()!
+//        animalQuery.whereKey("featured", equalTo: true)
+//
+//        query.whereKey("animal", matchesQuery: animalQuery)
+//
+//        query.includeKey("animal")
         
-        let animalQuery = WRAnimal.query()!
-        animalQuery.whereKey("featured", equalTo: true)
-        
-        query.whereKey("animal", matchesQuery: animalQuery)
-        
-        query.includeKey("animal")
-        
-        return query
+        return GETANIMALS
     }
 }
 
@@ -354,18 +355,18 @@ class FollowingPhotosDashboardWidget : DashboardWidget {
         cell.sourceArray = self.sourceArray
     }
     
-    override func getQuery() -> PFQuery<PFObject> {
-        let query = WRTimelineEntry.query()!
-        query.order(byDescending: "date")
-        query.whereKey("type", equalTo: "image")
+    override func getQuery() -> String {
+//        let query = WRTimelineEntry.query()!
+//        query.order(byDescending: "date")
+//        query.whereKey("type", equalTo: "image")
+//
+//        let followingQuery = WRFollow.query()!
+//        followingQuery.whereKey("follower", equalTo: WRUser.current() ?? "")
+//
+//        query.whereKey("animal", matchesKey: "following", in: followingQuery)
+//
+//        query.includeKey("animal")
         
-        let followingQuery = WRFollow.query()!
-        followingQuery.whereKey("follower", equalTo: WRUser.current() ?? "")
-        
-        query.whereKey("animal", matchesKey: "following", in: followingQuery)
-        
-        query.includeKey("animal")
-        
-        return query
+        return ""
     }
 }

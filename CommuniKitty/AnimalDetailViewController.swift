@@ -518,12 +518,12 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
                 }
             }
             
-            let currentUserShelter = currentUser?.shelter
-            let animalShelter = self.currentAnimalObject!.shelter
-            
-            if(currentUserShelter != nil && animalShelter != nil) {
-                currentUserIsShelterCaregiver = (currentUserShelter!.objectId == animalShelter!.objectId)
-            }
+//            let currentUserShelter = currentUser?.shelter
+//            let animalShelter = self.currentAnimalObject!.shelter
+//
+//            if(currentUserShelter != nil && animalShelter != nil) {
+//                currentUserIsShelterCaregiver = (currentUserShelter!.objectId == animalShelter!.objectId)
+//            }
         }
         
         if(self.timelineTableController != nil) {
@@ -596,15 +596,15 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
             
             self.shelterObject = animal.shelter
             if self.shelterObject != nil {
-                self.shelterObject?.fetchIfNeededInBackground(block: { (locationObject: PFObject?, error: Error?) -> Void in
-                    let adoptable = animal.adoptable
-                    self.shelterButton.setTitle(self.shelterObject!.name, for: UIControl.State())
-                    if adoptable {
-                        self.adoptableLabel.text = "Adoptable through:"
-                    } else {
-                        self.adoptableLabel.text = "Adopted through:"
-                    }
-                })
+//                self.shelterObject?.fetchIfNeededInBackground(block: { (locationObject: PFObject?, error: Error?) -> Void in
+//                    let adoptable = animal.adoptable
+//                    self.shelterButton.setTitle(self.shelterObject!.name, for: UIControl.State())
+//                    if adoptable {
+//                        self.adoptableLabel.text = "Adoptable through:"
+//                    } else {
+//                        self.adoptableLabel.text = "Adopted through:"
+//                    }
+//                })
             } else {
                 shelterButton.isHidden = true
             }

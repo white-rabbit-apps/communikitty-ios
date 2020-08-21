@@ -32,6 +32,7 @@ def shared_pods
     pod 'PagingMenuController'
     pod 'SKPhotoBrowser'
     pod 'SlideMenuControllerSwift'
+    pod 'Alamofire'
 end
 
 target 'CommuniKitty' do
