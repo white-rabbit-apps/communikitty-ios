@@ -211,12 +211,10 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
             // open an image browser with the selected image shown first
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoThumbnailCell", for: indexPath) as! PhotoThumbnailCell
             
-            let entries = sourceArray as! [WRTimelineEntry]
-            
-            self.parent?.showImagesBrowser(entries: entries, startIndex: (indexPath as IndexPath).row, animatedFromView: cell.thumbnailImage!, displayUser: true)
+            self.parent?.showImagesBrowser(entries: sourceArray, startIndex: (indexPath as IndexPath).row, animatedFromView: cell.thumbnailImage!, displayUser: true)
         } else {
             // open the detail screen for the animal selected
-            let animal = sourceArray[(indexPath as IndexPath).row] as! WRAnimal
+            let animal = sourceArray[(indexPath as IndexPath).row]
             self.parent?.openAnimalDetail(animalObject: animal, push: true)
         }
     }

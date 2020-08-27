@@ -31,7 +31,7 @@ class TimelineEntryFormViewController: FormViewController {
         let appDelegate = AppDelegate.getAppDelegate()
         
         if self.animalObject == nil {
-            if (appDelegate.myAnimalsArray?.count)! > 0 {
+            if (appDelegate.myAnimalsArray?.count ?? 0) > 0 {
                 self.animalObject = appDelegate.myAnimalByName![appDelegate.myAnimalsArray![0]]
             }
         }

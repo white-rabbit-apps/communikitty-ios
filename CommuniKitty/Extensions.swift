@@ -826,7 +826,7 @@ func openUserProfile(user: WRUser? = nil, push: Bool = true) {
      - animalObject: The WRAnimal object for the animal to open
      - push: True if you'd like to show the screen by push on the navigation controller, False for cover
      */
-    func openAnimalDetail(animalObject: WRAnimal, push: Bool, timelineObjectId: String? = nil) {
+    func `openAnimalDetail`(animalObject: AnyObject, push: Bool, timelineObjectId: String? = nil) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let animalView = storyboard.instantiateViewController(withIdentifier: "AnimalDetailView") as! AnimalDetailViewController
         animalView.currentAnimalObject = animalObject
@@ -1127,16 +1127,18 @@ func openUserProfile(user: WRUser? = nil, push: Bool = true) {
      - startIndex: the index of the photo to start the slideshow at
      - animatedFromView: the UIView or subclass object from which to animate to the gallery
      */
-    func showImagesBrowser(entries: [WRTimelineEntry], startIndex: Int?, animatedFromView: UIView?, displayUser: Bool = false, vc:UIViewController = UIViewController()) {
+    func showImagesBrowser(entries: [AnyObject], startIndex: Int?, animatedFromView: UIView?, displayUser: Bool = false, vc:UIViewController = UIViewController()) {
         var idmImages = Array<SKPhoto>()
         entries.forEach { (entry) -> Void in
-            let idmPhoto : SKPhoto = SKPhoto.photoWithImageURL(entry.getImageUrl()!)//, holder: entry)
+            if let imageUrl = entry["thumbnailUrl"] as? String {
+            let idmPhoto : SKPhoto = SKPhoto.photoWithImageURL(imageUrl)//, holder: entry)
             idmPhoto.shouldCachePhotoURLImage = true
             idmPhoto.caption = entry.text
             //m
 //            idmPhoto.commentCount = entry.getCommentCount()
 //            idmPhoto.likeCount = entry.getLikeCount()
             idmImages.append(idmPhoto)
+            }
         }
 
         var browser: SKPhotoBrowser! = SKPhotoBrowser(photos: idmImages)
