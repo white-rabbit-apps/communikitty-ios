@@ -91,9 +91,18 @@ let GETANIMALS = """
 query getAnimals {
  records: animals {
     id
+  avatarUrl
+  age
+  birthDate
+  gender
+  followersCount
+  isFollowed
+  facebookPageName
+  instagramUsername
     name
     thumbnailUrl
     slug
+  twitterUsername
     __typename
   }
 }
@@ -153,11 +162,20 @@ mutation logoutUser($userId: String!) {
 let GETCURRENTANIMAL = """
 query getCurrentAnimals {
  records: currentAnimals {
-    id
-    name
-    thumbnailUrl
-    slug
-    __typename
+      id
+    avatarUrl
+    age
+    birthDate
+    gender
+    followersCount
+    isFollowed
+    facebookPageName
+    instagramUsername
+      name
+      thumbnailUrl
+      slug
+    twitterUsername
+      __typename
   }
 }
 """

@@ -258,7 +258,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
                     self.followButton.isEnabled = true
                     self.followButton.setImage(UIImage(named: "button_follow"), for: UIControl.State())
                     self.isFollowing = false
-                    self.loadFollowerCount()
+//                    self.loadFollowerCount()
                 })
             } else {
                 self.playASound(soundName: "chirp1")
@@ -266,23 +266,15 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
                     self.followButton.isEnabled = true
                     self.followButton.setImage(UIImage(named: "button_following"), for: UIControl.State())
                     self.isFollowing = true
-                    self.loadFollowerCount()
+//                    self.loadFollowerCount()
                 })
             }
         }
     }
     
-    func loadFollow(_ completion: @escaping ()->()) {
-        let followQuery = WRFollow.query()!
-        followQuery.whereKey("following", equalTo: self.currentAnimalObject!)
-        followQuery.whereKey("follower", equalTo: WRUser.current() ?? "")
-        
+    func loadFollow(animal: [String:Any]) {
         self.followButton.isEnabled = false
-        followQuery.findObjectsInBackground { (objects: [PFObject]?, error: Error?) -> Void in
-            if(error == nil) {
-                if(objects!.count > 0) {
-                    let follow = objects![0] as! WRFollow
-                    self.followObject = follow
+                if let isFollowed = animal["isFollowed"] as? Bool, isFollowed {
                     self.followButton.setImage(UIImage(named: "button_following"), for: UIControl.State())
                     self.isFollowing = true
                 } else {
@@ -290,23 +282,10 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
                     self.isFollowing = false
                 }
                 self.followButton.isEnabled = true
-                completion()
-            }
-        }
+                
         
     }
     
-    func loadFollowerCount() {
-        let followQuery = WRFollow.query()!
-        followQuery.whereKey("following", equalTo: self.currentAnimalObject!)
-        
-        followQuery.countObjectsInBackground { (count: Int32, error: Error?) in
-            if (error == nil) {
-                self.followerCountButton.setTitle("\(count)", for: UIControl.State())
-                self.followerView.isHidden = false
-            }
-        }
-    }
     
     func startFollowing(_ completion: @escaping ()->()) {
         //TODO: Follow Api
@@ -335,9 +314,9 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
                 }
             })
         } else {
-            self.loadFollow({ () -> () in
-                self.stopFollowing(completion)
-            })
+//            self.loadFollow({ () -> () in
+//                self.stopFollowing(completion)
+//            })
         }
     }
     
@@ -538,36 +517,35 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
     
     func loadAnimal() {
         //TODO: Load Animal
-//        if let animal = currentAnimalObject {
-//            if(self.timelineObjectId != nil) {
-//                self.timelineTableController?.timelineObjectId = self.timelineObjectId
-//                self.timelineObjectId = nil
-//            }
-//            self.animalImagesRepository!.loadAllImages()
-//            self.loadFollowerCount()
-//
-//            self.checkOwner()
-//
-//            if(WRUser.current() == nil) {
-//            } else if(currentUserIsOwner || currentUserIsFoster) {
-//                self.followButton.isHidden = true
-//            } else {
-//                self.loadFollow({ () -> () in
-//                })
-//            }
-//
-//            if(currentUserIsOwner || currentUserIsShelterCaregiver || currentUserIsFoster) {
-//                self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "icon_edit_profile", action: #selector(AnimalDetailViewController.showEditAminalView), height: 25, width: 25)
-//            }
-//
-//
-//
-//            nameLabel.adjustsFontSizeToFitWidth = true
-//            nameLabel.text = animal.name
-//
-//            genderLabel.text = animal.gender
+        if let animal = currentAnimalObject as? [String: Any]{
+            if(self.timelineObjectId != nil) {
+                self.timelineTableController?.timelineObjectId = self.timelineObjectId
+                self.timelineObjectId = nil
+            }
+            self.animalImagesRepository?.loadAllImages()
+            
+            self.checkOwner()
+
+             if(currentUserIsOwner || currentUserIsFoster) {
+                self.followButton.isHidden = true
+            } else {
+                self.loadFollow(animal: animal)
+            }
+
+            if(currentUserIsOwner || currentUserIsShelterCaregiver || currentUserIsFoster) {
+                self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "icon_edit_profile", action: #selector(AnimalDetailViewController.showEditAminalView), height: 25, width: 25)
+            }
+
+
+
+            nameLabel.adjustsFontSizeToFitWidth = true
+            nameLabel.text = animal["name"] as? String
+
+            genderLabel.text = animal["gender"] as? String
+            self.followerCountButton.setTitle("\(animal["followersCount"] as? Int ?? 0)", for: UIControl.State())
+            self.followerView.isHidden = false
 //            let deceasedDate = animal.deceasedDate
-//            if let birthDate = animal.birthDate {
+//            if let birthDate = animal["birthDate"] as? String{
 //                var ageString = getAgeString(birthDate as Date, deceasedDate: deceasedDate as Date?)
 //                if deceasedDate == nil {
 //                    ageString = ageString + " " + genderLabel.text!.lowercased()
@@ -575,70 +553,70 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
 //                genderLabel.text = ageString
 //
 //            }
-//
-//            if let coverPhotoFile = animal.coverPhoto {
-//                self.coverPhoto.kf.setImage(with: URL(string: coverPhotoFile.url!)!)
-//                self.coverOverlay.isHidden = false
-//            } else {
-//                self.coverPhoto.image = nil
-//                self.coverOverlay.isHidden = true
-//            }
-//
-//            if let profilePhotoFile = animal.profilePhoto {
-//                self.profileThumb.kf.setImage(with: URL(string: profilePhotoFile.url!)!, for: UIControl.State(), placeholder: UIImage(named: "animal_profile_photo_empty")) { (result) in
-//                    switch result {
-//                    case .success(_):
-//                        let frame = self.profileThumb.frame
-//                        self.profileThumb.frame = CGRect(x: frame.minX, y: frame.minY, width: 76, height: 76)
-//                        self.profileThumb.imageView?.makeCircular()
-//                    case .failure(_):
-//                        break
-//                    }
-//                }
-//            } else {
-//                self.profileThumb.imageView?.image = UIImage(named: "animal_profile_photo_empty")!
-//            }
-//
+
+            if let coverPhotoFile = animal["avatarUrl"] as? String {
+                self.coverPhoto.kf.setImage(with: URL(string: coverPhotoFile)!)
+                self.coverOverlay.isHidden = false
+            } else {
+                self.coverPhoto.image = nil
+                self.coverOverlay.isHidden = true
+            }
+
+            if let profilePhotoFile = animal["thumbnailUrl"] as? String  {
+                self.profileThumb.kf.setImage(with: URL(string: profilePhotoFile)!, for: UIControl.State(), placeholder: UIImage(named: "animal_profile_photo_empty")) { (result) in
+                    switch result {
+                    case .success(_):
+                        let frame = self.profileThumb.frame
+                        self.profileThumb.frame = CGRect(x: frame.minX, y: frame.minY, width: 76, height: 76)
+                        self.profileThumb.imageView?.makeCircular()
+                    case .failure(_):
+                        break
+                    }
+                }
+            } else {
+                self.profileThumb.imageView?.image = UIImage(named: "animal_profile_photo_empty")!
+            }
+//TODO: SET SELTER
 //            self.shelterObject = animal.shelter
-//            if self.shelterObject != nil {
-////                self.shelterObject?.fetchIfNeededInBackground(block: { (locationObject: PFObject?, error: Error?) -> Void in
-////                    let adoptable = animal.adoptable
-////                    self.shelterButton.setTitle(self.shelterObject!.name, for: UIControl.State())
-////                    if adoptable {
-////                        self.adoptableLabel.text = "Adoptable through:"
-////                    } else {
-////                        self.adoptableLabel.text = "Adopted through:"
-////                    }
-////                })
-//            } else {
-//                shelterButton.isHidden = true
-//            }
-//
-//            if(animal.instagramUsername == nil) {
-//                instagramButton.isHidden = true
-//            } else {
-//                instagramButton.isHidden = false
-//            }
-//
-//            if(animal.facebookPageId == nil) {
-//                facebookButton.isHidden = true
-//            } else {
-//                facebookButton.isHidden = false
-//            }
-//
-//            if(animal.twitterUsername == nil) {
-//                twitterButton.isHidden = true
-//            } else {
-//                twitterButton.isHidden = false
-//            }
-//
-//            if (instagramButton.isHidden && facebookButton.isHidden && twitterButton.isHidden) {
-//                socialView.isHidden = true
-//            } else {
-//                socialView.isHidden = false
-//            }
-//
-//        }
+            if self.shelterObject != nil {
+//                self.shelterObject?.fetchIfNeededInBackground(block: { (locationObject: PFObject?, error: Error?) -> Void in
+//                    let adoptable = animal.adoptable
+//                    self.shelterButton.setTitle(self.shelterObject!.name, for: UIControl.State())
+//                    if adoptable {
+//                        self.adoptableLabel.text = "Adoptable through:"
+//                    } else {
+//                        self.adoptableLabel.text = "Adopted through:"
+//                    }
+//                })
+            } else {
+                shelterButton.isHidden = true
+            }
+
+            if let _ = animal["instagramUsername"] as? String  {
+                instagramButton.isHidden = true
+            } else {
+                instagramButton.isHidden = false
+            }
+
+            if let _ = animal["facebookPageName"] as? String{
+                facebookButton.isHidden = true
+            } else {
+                facebookButton.isHidden = false
+            }
+
+            if let _ = animal["twitterUsername"] as? String {
+                twitterButton.isHidden = true
+            } else {
+                twitterButton.isHidden = false
+            }
+
+            if (instagramButton.isHidden && facebookButton.isHidden && twitterButton.isHidden) {
+                socialView.isHidden = true
+            } else {
+                socialView.isHidden = false
+            }
+
+        }
     }
     
     func getAgeString(_ birthDate: Date, deceasedDate: Date?) -> String {
