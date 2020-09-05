@@ -526,11 +526,11 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
                 cell!.locationButton.isHidden = false
             })
         } else if let location = entry.location {
-            location.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) -> Void in
-                cell!.locationButton.titleLabel?.textAlignment = .center
-                cell!.locationButton.setTitle(location.name, for: .normal)
-                cell!.locationButton.isHidden = false
-            })
+//            location.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) -> Void in
+//                cell!.locationButton.titleLabel?.textAlignment = .center
+//                cell!.locationButton.setTitle(location.name, for: .normal)
+//                cell!.locationButton.isHidden = false
+//            })
         } else {
             cell!.locationButton.setTitle("", for: .normal)
         }

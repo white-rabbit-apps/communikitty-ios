@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var traitsArray: [String]?
     var traitByName: [String: WRTrait]?
-    var sheltersArray: [String]?
+    var sheltersArray: [WRLocation]?
     var shelterByName: [String: WRLocation]?
     var vetsArray: [String]?
     var vetByName: [String: WRLocation]?
@@ -130,7 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         WRFlag.registerSubclass()
         WRFollow.registerSubclass()
         WRLike.registerSubclass()
-        WRLocation.registerSubclass()
+//        WRLocation.registerSubclass()
         WRPoke.registerSubclass()
         WRProduct.registerSubclass()
         WRTimelineEntry.registerSubclass()
@@ -675,28 +675,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      TODO - Remove this since the number of shelters is growing quickly
      */
     func loadShelters() {
-        let sheltersQuery = WRLocation.query()!
-        sheltersQuery.whereKey("type", equalTo: "shelter")
-        sheltersQuery.limit = 10
         
-        self.sheltersArray = [String]()
+        self.sheltersArray = [WRLocation]()
         self.shelterByName = [String:WRLocation]()
-        
-        sheltersQuery.findObjectsInBackground { (objects: [PFObject]?, error: Error?) -> Void in
-            if error == nil {
-                for object in objects! {
-                    let shelter = object as! WRLocation
-                    
-                    let name = shelter.name
-                    if name != nil {
-                        self.sheltersArray?.append(name!)
-                        self.shelterByName![name!] = shelter
-                    }
-                }
-            } else {
-                print("Error: %@", error!)
+        let params = [:] as [String : Any]
+        let url =  GETLOCATIONS
+        GraphQLServiceManager.sharedManager.createGraphQLRequestWith(query: url, variableParam: params, success: { (response) in
+            guard let dataToParse = response else {
+                return
             }
+            do {
+                let data = try JSONSerialization.jsonObject(with: dataToParse, options: .mutableLeaves)
+               if let userData = ((data as? [String:Any])?["data"] as? [String:Any])?["locations"] as? [String:Any]{
+                  let jsonData = try JSONSerialization.data(withJSONObject: userData)
+                  print(String(data: jsonData, encoding: .utf8))
+                  
+                  let shelters = try JSONDecoder().decode(Shelters.self, from: jsonData)
+                self.sheltersArray = shelters.records ?? []
+                for shelter in shelters.records ?? []{
+                       self.shelterByName?[shelter.name ?? ""] = shelter
+                   }
+                   
+                }
+               
+            } catch let error {
+                print(error.localizedDescription)
+            }
+            
+        }) { (error) in
+          print( error.userInfo["errorMessage"] as? String ?? error.localizedDescription)
         }
+        
     }
     
     func loadBreeds() {
@@ -704,33 +713,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         breedQuery.limit = 500
         self.breedsArray = [Breed]()
         self.breedByName = [String:Breed]()
-        
-        breedQuery.findObjectsInBackground { (objects: [PFObject]?, error: Error?) -> Void in
-            if error == nil {
-                for object in objects! {
-                    let breedObject = object as! WRBreed
-                    
-                    if breedObject.name != nil {
-                        var breedImage = UIImage(named: "animal_profile_photo_empty")
-                        if let imageFile = object["image"] as? PFFileObject {
-                            imageFile.getDataInBackground(block: {
-                                (imageData: Data?, error: Error?) -> Void in
-                                if(error == nil) {
-                                    let image = UIImage(data:imageData!)
-                                    breedImage = image
-                                    
-                                    let breed = Breed(object: breedObject, name: breedObject.name!, image: breedImage!)
-                                    self.breedsArray?.append(breed)
-                                    self.breedByName![breed.name!] = breed
-                                }
-                            })
-                        }
-                    }
-                }
-            } else {
-                print("Error: %@", error!)
-            }
-        }
+        let params = [:] as [String : Any]
+                 let url =  GETBREADS
+                 GraphQLServiceManager.sharedManager.createGraphQLRequestWith(query: url, variableParam: params, success: { (response) in
+                     guard let dataToParse = response else {
+                         return
+                     }
+                     do {
+                         let data = try JSONSerialization.jsonObject(with: dataToParse, options: .mutableLeaves)
+                        if let userData = ((data as? [String:Any])?["data"] as? [String:Any])?["breeds"] as? [[String:Any]]{
+                           let jsonData = try JSONSerialization.data(withJSONObject: userData)
+                           print(String(data: jsonData, encoding: .utf8))
+                           
+                           let breeds = try JSONDecoder().decode([Breed].self, from: jsonData)
+                           self.breedsArray = breeds
+                            for breed in breeds{
+                                self.breedByName?[breed.name ?? ""] = breed
+                            }
+                            
+                         }
+                        
+                     } catch let error {
+                         print(error.localizedDescription)
+                     }
+                     
+                 }) { (error) in
+                   print( error.userInfo["errorMessage"] as? String ?? error.localizedDescription)
+                 }
     }
     
     func loadCoats() {

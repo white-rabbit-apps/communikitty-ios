@@ -126,7 +126,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginWithUsername(_ sender: AnyObject) {
-        self.loginWithEmail()
+        self.login(email: usernameField.text?.lowercased() ?? "", password: self.passwordField.text ?? "")
     }
     
     func loginWithEmail() {
@@ -172,6 +172,46 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
+    
+    
+    func login( email: String, password: String){
+        let params = ["email": email, "password": password] as [String : Any]
+          let url =  LOGIN
+          self.view.endEditing(true)
+        self.showLoader()
+          GraphQLServiceManager.sharedManager.createGraphQLRequestWith(query: url, variableParam: params, success: { (response) in
+            self.hideLoader()
+              guard let dataToParse = response else {
+                  return
+              }
+              do {
+                  let data = try JSONSerialization.jsonObject(with: dataToParse, options: .mutableLeaves)
+                 if let userData = ((data as? [String:Any])?["data"] as? [String:Any])?["signIn"] as? [String:Any]{
+                    let jsonData = try JSONSerialization.data(withJSONObject: userData)
+                    print(String(data: jsonData, encoding: .utf8))
+                    
+                    let signIn = try JSONDecoder().decode(SignIn.self, from: jsonData)
+                    GraphQLServiceManager.sharedManager.signInUser = signIn
+                    let userDefaults = UserDefaults.standard
+                    let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: signIn)
+                    userDefaults.set(encodedData, forKey: "user")
+                    userDefaults.synchronize()
+                        self.goToHome()
+                        self.closeAndRun(completion: {
+                            self.completionBlock()
+                            AppDelegate.getAppDelegate().postLogin()
+                        })
+                  }
+                 
+              } catch let error {
+                  print(error.localizedDescription)
+              }
+              
+          }) { (error) in
+            self.hideLoader()
+            self.showError(message: error.userInfo["errorMessage"] as? String ?? error.localizedDescription)
+          }
+      }
     
     @IBAction func loginWithFacebook(_ sender: UIButton) {
         self.loginWithFacebook()

@@ -30,7 +30,7 @@ class WRTimelineEntry: PFObject, PFSubclassing {
 
     @NSManaged var instagramId: String?
 
-    @NSManaged var location: WRLocation?
+     var location: WRLocation?
     
     open var currentUserLikeEntry: WRLike?
     

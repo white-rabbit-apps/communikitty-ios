@@ -50,7 +50,7 @@ class DashboardTableViewController: UITableViewController {
         for widget in self.widgets {
             widget.reloadData()
         }
-
+        
         self.tableView.reloadData()
         refreshControl?.endRefreshing()
     }
@@ -193,11 +193,11 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
         
         if(collectionType == .Photos) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoThumbnailCell", for: indexPath) as! PhotoThumbnailCell
-            cell.loadData(sourceArray[(indexPath as IndexPath).row] as! PFObject)
+            cell.loadData(sourceArray[(indexPath as IndexPath).row] as! [String : Any])
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AnimalThumbnailCell", for: indexPath) as! AnimalThumbnailCell
-            cell.loadData(sourceArray[(indexPath as IndexPath).row] as! PFObject)
+            cell.loadData(sourceArray[(indexPath as IndexPath).row] as! [String : Any])
             return cell
         }
     }
@@ -211,12 +211,10 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
             // open an image browser with the selected image shown first
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoThumbnailCell", for: indexPath) as! PhotoThumbnailCell
             
-            let entries = sourceArray as! [WRTimelineEntry]
-            
-            self.parent?.showImagesBrowser(entries: entries, startIndex: (indexPath as IndexPath).row, animatedFromView: cell.thumbnailImage!, displayUser: true)
+            self.parent?.showImagesBrowser(entries: sourceArray, startIndex: (indexPath as IndexPath).row, animatedFromView: cell.thumbnailImage!, displayUser: true)
         } else {
             // open the detail screen for the animal selected
-            let animal = sourceArray[(indexPath as IndexPath).row] as! WRAnimal
+            let animal = sourceArray[(indexPath as IndexPath).row]
             self.parent?.openAnimalDetail(animalObject: animal, push: true)
         }
     }
@@ -250,34 +248,48 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
      Load the featured photos from the server
      */
     func loadData(_ page: Int) {
-        if(self.requiresLogin && WRUser.current() == nil) {
+        if( GraphQLServiceManager.sharedManager.getUSer() == nil) {
             return
         }
         
         if(!self.currentlyLoading) {
             self.currentlyLoading = true
             
-            let query = self.getQuery()
-            query.limit = self.photosPerPage
-            query.skip = (page - 1) * self.photosPerPage
-            
-            query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) in
-                for object in objects ?? [] {
-                    self.sourceArray.append(object)
+            let params = ["page": page, "perPage": 12] as [String : Any]
+            let url =  self.getQuery()
+            GraphQLServiceManager.sharedManager.createGraphQLRequestWith(query: url, variableParam: params, success: { (response) in
+             
+                guard let dataToParse = response else {
+                    return
+                }
+                do {
+                    let data = try JSONSerialization.jsonObject(with: dataToParse, options: .mutableLeaves)
+                    if let userData = ((data as? [String:Any])?["data"] as? [String:Any])?["records"] as? [[String:Any]]{
+                        for object in userData {
+                            self.sourceArray.append(object as AnyObject)
+                        }
+                        
+                        self.nextPage += 1
+                        self.currentlyLoading = false
+                        self.refresh()
+                        
+                        if(userData.count  < self.photosPerPage) {
+                            self.currentlyLoading = true
+                        }
+                    }
+                    
+                } catch let error {
+                    print(error.localizedDescription)
                 }
                 
-                self.nextPage += 1
-                self.currentlyLoading = false
-                self.refresh()
+            }) { (error) in
                 
-                if(objects?.count ?? 0 < self.photosPerPage) {
-                    self.currentlyLoading = true
-                }
+                print(error.userInfo["errorMessage"] as? String ?? error.localizedDescription)
             }
         }
     }
     
-    func getQuery() -> PFQuery<PFObject> {
+    func getQuery() -> String {
         preconditionFailure("This method must be overridden")
     }
     
@@ -294,7 +306,7 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
 protocol DashboardCollectionViewCell {
     
     // load the data from the object into the cell
-    func loadData(_ object: PFObject)
+    func loadData(_ object: [String:Any])
 }
 
 
@@ -310,16 +322,12 @@ class PhotoThumbnailCell: UICollectionViewCell, DashboardCollectionViewCell {
     }
     
     // object should be a WRTimelineEntry object
-    func loadData(_ object: PFObject) {
-        if let entry = object as? WRTimelineEntry {
+    func loadData(_ object: [String:Any]) {
             
             self.thumbnailImage!.kf.indicatorType = .activity
-            if let imageFile = entry.image {
-                self.thumbnailImage!.kf.setImage(with: URL(string: imageFile.url!))
-            } else if let imageUrl = entry.imageUrl {
+             if let imageUrl = object["thumbnailUrl"] as? String{
                 self.thumbnailImage!.kf.setImage(with: URL(string: imageUrl))
             }
-        }
     }
 }
 
@@ -337,9 +345,9 @@ class AnimalThumbnailCell: UICollectionViewCell, DashboardCollectionViewCell {
     }
     
     // object should be a WRAnimal object
-    func loadData(_ object: PFObject) {
-        if let animal = object as? WRAnimal {
-            self.nameLabel?.text = animal.name
+    func loadData(_ object: [String:Any]) {
+      
+            self.nameLabel?.text = object["name"] as? String
             self.nameLabel?.textColor = UIColor.black
             self.nameLabel?.highlightedTextColor = UIColor.black
             
@@ -349,9 +357,9 @@ class AnimalThumbnailCell: UICollectionViewCell, DashboardCollectionViewCell {
             self.thumbnailImage!.isHidden = true
             
             self.thumbnailImage?.image = nil
-            if let profilePhoto = animal.profilePhoto {
+            if let imageUrl = object["thumbnailUrl"] as? String {
                 self.thumbnailImage!.kf.indicatorType = .activity
-                self.thumbnailImage!.kf.setImage(with: URL(string: profilePhoto.url!), placeholder: placeholderImage, options: nil, progressBlock: nil) { (result) in
+                self.thumbnailImage!.kf.setImage(with: URL(string: imageUrl), placeholder: placeholderImage, options: nil, progressBlock: nil) { (result) in
                     switch result {
                     case .success(_):
                         let frame = self.thumbnailImage!.frame
@@ -364,7 +372,6 @@ class AnimalThumbnailCell: UICollectionViewCell, DashboardCollectionViewCell {
             } else {
                 self.thumbnailImage?.image = placeholderImage
                 self.thumbnailImage!.isHidden = false
-            }
         }
     }
 }

@@ -41,15 +41,43 @@ class ForgotPasswordFormViewController : FormViewController {
 
     func saveForgotPassword() {
         if let emailValue = self.form.rowBy(tag: self.EMAIL_TAG)?.baseValue as? String {
-            WRUser.requestPasswordResetForEmail(inBackground: emailValue)
-            
-            self.dismiss(animated: true, completion: { () -> Void in
-                self.loginController?.showSuccess(message: "Password change email sent.")
-            })
+//            WRUser.requestPasswordResetForEmail(inBackground: emailValue)
+            self.requestPasswordReset(email: emailValue)
+           
         } else {
             self.showError(message: "Please enter your email address")
         }
     }
+    
+    
+    func requestPasswordReset( email: String){
+        let params = ["email": email] as [String : Any]
+          let url =  FORGETPASSWORD
+          self.view.endEditing(true)
+        self.showLoader()
+          GraphQLServiceManager.sharedManager.createGraphQLRequestWith(query: url, variableParam: params, success: { (response) in
+            self.hideLoader()
+              guard let dataToParse = response else {
+                  return
+              }
+              do {
+                  let data = try JSONSerialization.jsonObject(with: dataToParse, options: .mutableLeaves)
+                 if let userData = ((data as? [String:Any])?["data"] as? [String:Any])?["forgotEmail"] as? [String:Any]{
+                    print(userData)
+                    self.dismiss(animated: true, completion: { () -> Void in
+                        self.loginController?.showSuccess(message: userData["message"] as? String ?? "")
+                    })
+                  }
+                 
+              } catch let error {
+                  print(error.localizedDescription)
+              }
+              
+          }) { (error) in
+            self.hideLoader()
+            self.showSuccess(message: error.userInfo["errorMessage"] as? String ?? error.localizedDescription)
+          }
+      }
     
     @objc func cancel() {
         self.dismiss(animated: true, completion: nil)

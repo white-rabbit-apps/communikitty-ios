@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - Alamofire (5.2.2)
   - Bolts/Tasks (1.9.1)
   - BWWalkthrough (4.0.0)
   - CLImageEditor (0.2.4):
@@ -46,10 +47,10 @@ PODS:
   - Hoko (2.5.0)
   - ImageRow (4.0.0):
     - Eureka (~> 5.0)
-  - Instabug (9.1.5)
-  - Kingfisher (5.14.0):
-    - Kingfisher/Core (= 5.14.0)
-  - Kingfisher/Core (5.14.0)
+  - Instabug (9.1.6)
+  - Kingfisher (5.14.1):
+    - Kingfisher/Core (= 5.14.1)
+  - Kingfisher/Core (5.14.1)
   - MMMarkdown (0.5.5)
   - OAuthSwift (2.1.0)
   - PagingMenuController (2.2.0)
@@ -69,6 +70,7 @@ PODS:
 DEPENDENCIES:
   - ActiveLabel
   - AFNetworking
+  - Alamofire
   - BWWalkthrough
   - CLImageEditor
   - CLImageEditor/SplashTool
@@ -99,6 +101,7 @@ SPEC REPOS:
   trunk:
     - ActiveLabel
     - AFNetworking
+    - Alamofire
     - Bolts
     - BWWalkthrough
     - CLImageEditor
@@ -124,6 +127,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   BWWalkthrough: 9f46edbd1a145c74f3e5287b01cb4a884c840bf2
   CLImageEditor: dc3e5358f641368da3a76fc1c744a4c2ceb270ad
@@ -137,8 +141,8 @@ SPEC CHECKSUMS:
   GooglePlacesRow: 4cd1b667226b951baf6fcf33c64f56e03d9a05ee
   Hoko: f3905776104e259ed38c418b56e9f103e4cb30a8
   ImageRow: e65b2e1a33f89062bf2a553a2aad61d975eb7428
-  Instabug: 1548d150fd89713288a3ceceb59de7e615b1d0d7
-  Kingfisher: 7b64389a43139c903ec434788344c288217c792d
+  Instabug: 17c397e8dcaa93655c9ac112baddce937e36a0d0
+  Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
   MMMarkdown: 1af97166ce0f6d6e0cb05695665492195d27c3f1
   OAuthSwift: ab1675598273e04355e0282459c328e65c9ddacd
   PagingMenuController: 6176618987bb170096664f2da097313e45ed9c31
@@ -146,6 +150,6 @@ SPEC CHECKSUMS:
   SKPhotoBrowser: 343de95d89dc7913763c5dda243cc6e606e4a168
   SlideMenuControllerSwift: 021d6318201c53d4d4d3710517d43d6c556c7dd0
 
-PODFILE CHECKSUM: 4eae96a9c02b79f824bb4a2d2fe0e73e283c5634
+PODFILE CHECKSUM: ba1ed16fae67c5dec358dc3950ef87b0b14e8f3c
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.8.4

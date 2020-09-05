@@ -272,7 +272,6 @@ class UserFormViewController : FormViewController {
         
         if !self.isEditMode() {
             self.navigationItem.title = "New User"
-            self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "icon_close", action: #selector(UserFormViewController.cancel), height: 25, width: 25)
 
         } else {
             self.navigationItem.title = "Settings"
@@ -285,29 +284,29 @@ class UserFormViewController : FormViewController {
     @objc func saveUser() {
         let appDelegate = AppDelegate.getAppDelegate()
 
-        var user = WRUser()
+        var user:[String:Any] = [:]
         let wasEditMode = self.isEditMode()
         if self.isEditMode() {
-            user = self.userObject!
+//            user = self.userObject!
         }
         
         if let firstNameValue = self.form.rowBy(tag: self.FIRST_NAME_TAG)?.baseValue as? String {
-            user.setObject(firstNameValue, forKey: "")
+            user["firstName"] = firstNameValue
         }
         if let lastNameValue = self.form.rowBy(tag: self.LAST_NAME_TAG)?.baseValue as? String {
-            user.setObject(lastNameValue, forKey: "")
+            user["lastName"] = lastNameValue
         }
-        var usernameValue = self.form.rowBy(tag: self.USERNAME_TAG)?.baseValue as? String
-        if usernameValue != nil {
-            if usernameValue![0] == "@" {
-                usernameValue = String(usernameValue!.dropFirst())
-            }
-
-            user.setObject(usernameValue!.lowercased(), forKey: USERNAME_TAG)
-        }
+//        var usernameValue = self.form.rowBy(tag: self.USERNAME_TAG)?.baseValue as? String
+//        if usernameValue != nil {
+//            if usernameValue![0] == "@" {
+//                usernameValue = String(usernameValue!.dropFirst())
+//            }
+//
+//            user.setObject(usernameValue!.lowercased(), forKey: USERNAME_TAG)
+//        }
         let emailValue = self.form.rowBy(tag: self.EMAIL_TAG)?.baseValue as? String
         if emailValue != nil {
-            user.setObject(emailValue!.lowercased(), forKey: EMAIL_TAG)
+            user["email"] = emailValue!.lowercased()
 //            user.setObject(emailValue!, forKey: USERNAME_TAG)
         }
         let passwordValue = self.form.rowBy(tag: self.PASSWORD_TAG)?.baseValue as? String
@@ -316,44 +315,71 @@ class UserFormViewController : FormViewController {
             self.showError(message: "Passwords must match.")
             return
         } else if passwordValue != nil {
-            user.setObject(passwordValue!, forKey: PASSWORD_TAG)
+            user["password"] = passwordValue!
+            user["passwordConfirmation"] = passwordValue!
         }
         
-        if let shelterValue = self.form.rowBy(tag: self.SHELTER_TAG)?.baseValue as? String {
-            let shelter = appDelegate.shelterByName![shelterValue]
-            user.setObject(shelter!, forKey: SHELTER_TAG)
-        }
+//        if let shelterValue = self.form.rowBy(tag: self.SHELTER_TAG)?.baseValue as? String {
+//            let shelter = appDelegate.shelterByName![shelterValue]
+//            user.setObject(shelter!, forKey: SHELTER_TAG)
+//        }
         
         if(wasEditMode) {
-            self.showLoader()
-            user.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
-                if success {
-                    self.showSuccess(message: "User info saved.")
-
-                    self.dismiss(animated: true, completion: nil)
-                } else {
-                    self.showError(message: error!.localizedDescription)
-                }
-                self.hideLoader()
-            })
+//            self.showLoader()
+//            user.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
+//                if success {
+//                    self.showSuccess(message: "User info saved.")
+//
+//                    self.dismiss(animated: true, completion: nil)
+//                } else {
+//                    self.showError(message: error!.localizedDescription)
+//                }
+//                self.hideLoader()
+//            })
         } else {
-            self.showLoader()
-            user.signUpInBackground(block: { (success: Bool, error: Error?) -> Void in
-                if success {
-                    WRUser.logInWithUsername(inBackground: emailValue!.lowercased(), password: passwordValue!, block: { (user: PFUser?, error: Error?) -> Void in
-                        self.dismiss(animated: true, completion: nil)
-                        let appDelegate = AppDelegate.getAppDelegate()
-                        appDelegate.loadMainController()
-                    })
-                    NSLog("signed up")
-                    self.dismiss(animated: true, completion: nil)
-                } else {
-                    print("%@", error!)
-                    self.showError(message: error!.localizedDescription)
-                }
-                self.hideLoader()
-            })
+            self.register(user: user)
+           
         }
+    }
+    
+    
+    func register( user:[String:Any] ){
+          self.view.endEditing(true)
+        self.showLoader()
+          GraphQLServiceManager.sharedManager.createGraphQLRequestWith(query: SIGNUP, variableParam: user, success: { (response) in
+            self.hideLoader()
+              guard let dataToParse = response else {
+                  return
+              }
+              do {
+                  let data = try JSONSerialization.jsonObject(with: dataToParse, options: .mutableLeaves)
+                 if let userData = ((data as? [String:Any])?["data"] as? [String:Any])?["signIn"] as? [String:Any]{
+                    let jsonData = try JSONSerialization.data(withJSONObject: userData)
+                    print(String(data: jsonData, encoding: .utf8))
+                    
+//                    let signIn = try JSONDecoder().decode(SignIn.self, from: jsonData)
+//                    GraphQLServiceManager.sharedManager.signInUser = signIn
+//                    let userDefaults = UserDefaults.standard
+//                    let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: signIn)
+//                    userDefaults.set(encodedData, forKey: "user")
+//                    userDefaults.synchronize()
+                    self.dismiss(animated: true, completion: nil)
+                        self.goToHome()
+                  }
+                 
+              } catch let error {
+                  print(error.localizedDescription)
+              }
+              
+          }) { (error) in
+            self.hideLoader()
+            self.showError(message: error.userInfo["errorMessage"] as? String ?? error.localizedDescription)
+          }
+      }
+    func goToHome() {
+        let appDelegate = AppDelegate.getAppDelegate()
+        appDelegate.loadMainController()
+        self.playASound(soundName: "purr1", vibrate: true)
     }
     
     func removeUser() {

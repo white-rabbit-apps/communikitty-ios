@@ -26,7 +26,7 @@ class WRAnimal: PFObject, PFSubclassing {
     @NSManaged var coverPhoto: PFFileObject?
     @NSManaged var profilePhoto: PFFileObject?
 
-    @NSManaged var shelter: WRLocation?
+    var shelter: WRLocation?
 
     @NSManaged var loves: [String]?
     @NSManaged var hates: [String]?
