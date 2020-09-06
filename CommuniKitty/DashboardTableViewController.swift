@@ -34,6 +34,9 @@ class DashboardTableViewController: UITableViewController {
             tableView.addSubview(refreshControl!) // not required when using UITableViewController
         }
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         self.refresh(self)
     }
     

@@ -887,7 +887,7 @@ func openUserProfile(user: WRUser? = nil, push: Bool = true) {
             let lvc = storyboard.instantiateViewController(withIdentifier: "lvc") as! LoginViewController
             lvc.completionBlock = completionBlock
             //            lvc.menuController = self
-            lvc.modalPresentationStyle = .overFullScreen
+            lvc.modalPresentationStyle = .fullScreen
             self.present(lvc, animated: true, completion: nil)
         }
     }
