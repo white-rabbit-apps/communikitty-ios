@@ -54,9 +54,10 @@ class AnimalTimelineTableViewCell: EntryCell {
 
 }
 
-class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEditorDelegate, FusumaDelegate, ImagesLoadedHandler {
+class AnimalTimelineTableViewController: UITableViewController, CLImageEditorDelegate, FusumaDelegate, ImagesLoadedHandler {
 
-    var animalObject : WRAnimal?
+    var animalObject : [String:Any]?
+    var stories: [[String:Any]] = []
     var animalDetailController : AnimalDetailViewController?
     var photosCollectionViewController: PhotosCollectionViewController?
     var timelineObjectId : String?
@@ -88,13 +89,45 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     override func viewDidLoad() {
         super.viewDidLoad()
         self.replacePFLoadingView(verticalOffset: self.tableView.rowHeight/3)
-        self.animalImagesRepository?.loadAllImages()
         let screenSize: CGRect = UIScreen.main.bounds
         self.tableView.rowHeight = screenSize.width + 15
         self.initGestureRecognizers()
     }
     
-    
+    func loadObjects(){
+        if( GraphQLServiceManager.sharedManager.getUSer() == nil) {
+            return
+        }
+        
+        if let slug = animalObject?["slug"] as? String {
+           let params = ["animalSlug": slug] as [String : Any]
+            let url =  self.queryForTable()
+            GraphQLServiceManager.sharedManager.createGraphQLRequestWith(query: url, variableParam: params, success: { (response) in
+             
+                guard let dataToParse = response else {
+                    return
+                }
+                do {
+                    let data = try JSONSerialization.jsonObject(with: dataToParse, options: .mutableLeaves)
+                    if let stories = ((data as? [String:Any])?["data"] as? [String:Any])?["animalStories"] as? [[String:Any]]{
+                      
+                            self.stories = stories
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                        
+                    }
+                    
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+                
+            }) { (error) in
+                
+                print(error.userInfo["errorMessage"] as? String ?? error.localizedDescription)
+            }
+        }
+    }
    
     /**
      Loads imageEntries and imageIndexById. Conforms ImagesLoadedHandler protocol
@@ -225,57 +258,57 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     }
 
     
-    func imageEditor(_ editor: CLImageEditor!, didFinishEdittingWith image: UIImage!) {
-        NSLog("got new image")
-        let imageFile = PFFileObject(data: image.jpegData(compressionQuality: 0.5)!)
-        
-        if let object = self.animalObject {
-            if self.isEditingProfile {
-                object.setValue(imageFile, forKey: "profilePhoto")
-            } else if self.isEditingCover {
-                object.setValue(imageFile, forKey: "coverPhoto")
-            } else if self.isAddingFirstImage{
-                if image != nil {
-                    let detailScene =  TimelineEntryFormViewController()
-                    detailScene.type = "image"
-                    detailScene.image = image
-                    detailScene.pickedImageDate = self.pickedImageDate as Date?
-                    detailScene.animalObject = self.animalObject
-                    detailScene.isFromTimelineController = true
-                    detailScene.animalTimelineTableVC = self
-                    detailScene.animalDetailController = self.animalDetailController
-                    
-                    let nav = UINavigationController(rootViewController: detailScene)
-                    nav.modalTransitionStyle = .coverVertical
-                    
-                    self.dismiss(animated: false) { () -> Void in
-                        self.present(nav, animated: false, completion: { () -> Void in
-                            self.hideLoader()
-                        })
-                    }
-                } else {
-                    self.dismiss(animated: false, completion: { () -> Void in
-                        self.hideLoader()
-                    })
-                }
-
-                
-            }
-            self.showLoader()
-            object.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
-                NSLog("finished saving profile photo")
-                if success {
-                    self.dismiss(animated: false, completion: nil)
-                } else {
-                    self.showError(message: error!.localizedDescription)
-                }
-                self.hideLoader()
-            })
-        }
-        self.isEditingProfile = false
-        self.isEditingCover = false
-        self.isAddingFirstImage = false
-    }
+//    func imageEditor(_ editor: CLImageEditor!, didFinishEdittingWith image: UIImage!) {
+//        NSLog("got new image")
+//        let imageFile = PFFileObject(data: image.jpegData(compressionQuality: 0.5)!)
+//        
+//        if let object = self.animalObject {
+//            if self.isEditingProfile {
+//                object.setValue(imageFile, forKey: "profilePhoto")
+//            } else if self.isEditingCover {
+//                object.setValue(imageFile, forKey: "coverPhoto")
+//            } else if self.isAddingFirstImage{
+//                if image != nil {
+//                    let detailScene =  TimelineEntryFormViewController()
+//                    detailScene.type = "image"
+//                    detailScene.image = image
+//                    detailScene.pickedImageDate = self.pickedImageDate as Date?
+//                    detailScene.animalObject = self.animalObject
+//                    detailScene.isFromTimelineController = true
+//                    detailScene.animalTimelineTableVC = self
+//                    detailScene.animalDetailController = self.animalDetailController
+//                    
+//                    let nav = UINavigationController(rootViewController: detailScene)
+//                    nav.modalTransitionStyle = .coverVertical
+//                    
+//                    self.dismiss(animated: false) { () -> Void in
+//                        self.present(nav, animated: false, completion: { () -> Void in
+//                            self.hideLoader()
+//                        })
+//                    }
+//                } else {
+//                    self.dismiss(animated: false, completion: { () -> Void in
+//                        self.hideLoader()
+//                    })
+//                }
+//
+//                
+//            }
+//            self.showLoader()
+//            object.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
+//                NSLog("finished saving profile photo")
+//                if success {
+//                    self.dismiss(animated: false, completion: nil)
+//                } else {
+//                    self.showError(message: error!.localizedDescription)
+//                }
+//                self.hideLoader()
+//            })
+//        }
+//        self.isEditingProfile = false
+//        self.isEditingCover = false
+//        self.isAddingFirstImage = false
+//    }
     
     func setCoverPhoto(image : UIImage) {
         self.isEditingCover = true
@@ -397,25 +430,12 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     }
     
     func animalDeceased() -> Bool {
-        return self.animalObject?.deceasedDate != nil
+        return false
+//            self.animalObject?.deceasedDate != nil
     }
     
-    override func queryForTable() -> PFQuery<PFObject> {
-        let query = WRTimelineEntry.query()!
-        
-        query.order(byDescending: "date")
-        if self.animalDeceased() {
-            query.order(byAscending: "date")
-        }
-        query.includeKey("shelter")
-        query.includeKey("animal")
-        if(self.animalObject != nil) {
-            query.whereKey("animal", equalTo: animalObject!)
-        } else {
-            query.whereKeyDoesNotExist("animal")
-        }
-        
-        return query
+    func queryForTable() -> String {
+        return GETANIMALTIMELINE
     }
     
     func loadIndexPaths() {
@@ -427,27 +447,24 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
         }
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.stories.count
+    }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, object: PFObject?) -> PFTableViewCell? {
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: "AnimalTimelineCell", for: indexPath) as? AnimalTimelineTableViewCell
-        if cell == nil  {
-            cell = AnimalTimelineTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "AnimalTimelineCell", type: object?["type"] as! String)
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AnimalTimelineCell", for: indexPath) as? AnimalTimelineTableViewCell
         
         cell!.indexPath = indexPath
         cell!.parentTable = self
 
-        let entry = object as! WRTimelineEntry
-        cell!.entryObject = entry
+        let entry = stories[indexPath.row]
+//        cell!.entryObject = entry
         
         cell!.timelineImageView.isHidden = true
         cell!.timelineImageView.kf.indicatorType = .activity
-        if let imageFile = entry.image {
-            cell!.timelineImageView.kf.setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-            })
-            cell!.timelineImageView.isHidden = false
-        } else if let imageUrl = entry.imageUrl {
+       if let imageUrl = entry["thumbnailUrl"] as? String{
             cell!.timelineImageView.kf.setImage(with: URL(string: imageUrl)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             })
             cell!.timelineImageView.isHidden = false
@@ -455,88 +472,84 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
             cell!.timelineImageView.isHidden = true
         }
         
-        if entry.isInstagramImage() {
-            cell!.instagramButton.isHidden = false
-        } else {
+//        if entry.isInstagramImage() {
+//            cell!.instagramButton.isHidden = false
+//        } else {
             cell!.instagramButton.isHidden = true
-        }
+//        }
 
-        if let text = entry.text {
-            cell!.eventTextLabel.text = text
+            cell!.eventTextLabel.text = entry["title"] as? String
             cell!.eventTextLabel.isHidden = false
             
-            cell!.captionLabel.text = ""
-            cell!.captionLabel.isHidden = true
+            cell!.captionLabel.text = entry["body"] as? String
+            cell!.captionLabel.isHidden = false
             
             cell!.largeIcon.isHidden = true
-            switch entry.type! {
-                case "medical":
-                    cell!.largeIcon.image = UIImage(named: "timeline_medical")
-                    cell!.largeIcon.isHidden = false
-                    break
-                case "adopted":
-                    cell!.largeIcon.image = UIImage(named: "timeline_adopted")
-                    cell!.largeIcon.isHidden = false
-                    break
-                case "fostered":
-                    cell!.largeIcon.image = UIImage(named: "timeline_foster")
-                    cell!.largeIcon.isHidden = false
-                    break
-                case "birth":
-                    cell!.largeIcon.image = UIImage(named: "timeline_born")
-                    cell!.largeIcon.isHidden = false
-                    break
-                case "birthday":
-                    cell!.largeIcon.image = UIImage(named: "timeline_birthday")
-                    cell!.largeIcon.isHidden = false
-                    break
-                case "image":
-                    // cell!.captionLabel.handleHashtagTap(self.openHashTagFeed)
-                    // cell!.captionLabel.handleMentionTap(self.openUsername)
-                    
-                    cell!.captionLabel.text = text
-                    if(text != "") {
-                        cell!.captionLabel.isHidden = false
-                    }
-                    cell!.eventTextLabel.isHidden = true
-                    break
-                default:
-                    cell!.largeIcon.image = UIImage()
-                    cell!.largeIcon.isHidden = true
-                    break
-            }
+//            switch entry["title"] as? String {
+//                case "medical":
+//                    cell!.largeIcon.image = UIImage(named: "timeline_medical")
+//                    cell!.largeIcon.isHidden = false
+//                    break
+//                case "adopted":
+//                    cell!.largeIcon.image = UIImage(named: "timeline_adopted")
+//                    cell!.largeIcon.isHidden = false
+//                    break
+//                case "fostered":
+//                    cell!.largeIcon.image = UIImage(named: "timeline_foster")
+//                    cell!.largeIcon.isHidden = false
+//                    break
+//                case "birth":
+//                    cell!.largeIcon.image = UIImage(named: "timeline_born")
+//                    cell!.largeIcon.isHidden = false
+//                    break
+//                case "birthday":
+//                    cell!.largeIcon.image = UIImage(named: "timeline_birthday")
+//                    cell!.largeIcon.isHidden = false
+//                    break
+//                case "image":
+//                    // cell!.captionLabel.handleHashtagTap(self.openHashTagFeed)
+//                    // cell!.captionLabel.handleMentionTap(self.openUsername)
+//
+//                    cell!.captionLabel.text = text
+//                    if(text != "") {
+//                        cell!.captionLabel.isHidden = false
+//                    }
+//                    cell!.eventTextLabel.isHidden = true
+//                    break
+//                default:
+//                    cell!.largeIcon.image = UIImage()
+//                    cell!.largeIcon.isHidden = true
+//                    break
+//            }
 
-        } else {
-            cell!.captionLabel.text = ""
-            cell!.captionLabel.isHidden = true
-            cell!.eventTextLabel.isHidden = true
-        }
+        
 
-        if let actingUser = entry.actingUser {
-            actingUser.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) -> Void in
-                cell!.locationButton.titleLabel?.textAlignment = .center
-                let firstName = actingUser["firstName"] as! String
-                let lastName = actingUser["lastName"] as! String
-                cell!.locationButton.setTitle("\(firstName) \(lastName)", for: .normal)
-            
-                cell!.locationButton.setActionBlock(block: { (sender) -> Void in
-                    self.openUsername(username: actingUser["username"] as! String)
-                })
-                
-                cell!.locationButton.isHidden = false
-            })
-        } else if let location = entry.location {
+//        if let actingUser = entry.actingUser {
+//            actingUser.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) -> Void in
+//                cell!.locationButton.titleLabel?.textAlignment = .center
+//                let firstName = actingUser["firstName"] as! String
+//                let lastName = actingUser["lastName"] as! String
+//                cell!.locationButton.setTitle("\(firstName) \(lastName)", for: .normal)
+//
+//                cell!.locationButton.setActionBlock(block: { (sender) -> Void in
+//                    self.openUsername(username: actingUser["username"] as! String)
+//                })
+//
+//                cell!.locationButton.isHidden = false
+//            })
+//        } else if let location = entry.location {
 //            location.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) -> Void in
 //                cell!.locationButton.titleLabel?.textAlignment = .center
 //                cell!.locationButton.setTitle(location.name, for: .normal)
 //                cell!.locationButton.isHidden = false
 //            })
-        } else {
+//        } else {
             cell!.locationButton.setTitle("", for: .normal)
-        }
-        
-        if let date = entry.date {
-            let dateFormatter = DateFormatter()
+//        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        if let dateString = entry["date"] as? String, let date = dateFormatter.date(from: dateString)  {
+            
             dateFormatter.dateFormat = "MMM"
             cell!.monthLabel.text = dateFormatter.string(from: date).uppercased()
 
@@ -547,7 +560,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
             cell!.yearLabel.text = dateFormatter.string(from: date)
         }
         
-        if entry.isImage() {
+//        if entry.isImage() {
 //            if currentUserIsOwner {
 //                let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
 //                gestureRecognizer.minimumPressDuration = 1.0
@@ -561,9 +574,9 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
 //            doubleTapRecognizer.numberOfTapsRequired = 2
 //            tapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
 //            cell!.addGestureRecognizer(doubleTapRecognizer)
-        }
+//        }
         
-        return cell
+        return cell!
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -583,7 +596,7 @@ class AnimalTimelineTableViewController: PFQueryTableViewController, CLImageEdit
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "TimelineToEntryDetail") {
             let detailScene =  segue.destination as! TimelineEntryDetailViewController
-            detailScene.entryObject = self.object(at: self.selectedIndexPath) as? WRTimelineEntry
+//            detailScene.entryObject = self.object(at: self.selectedIndexPath) as? WRTimelineEntry
         }
     }
     

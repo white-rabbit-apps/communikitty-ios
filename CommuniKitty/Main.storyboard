@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VDF-2e-27L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VDF-2e-27L">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -2026,7 +2026,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PL3-Nc-dPM" customClass="ActiveLabel" customModule="ActiveLabel">
-                                    <rect key="frame" x="59" y="426" width="333" height="0.0"/>
+                                    <rect key="frame" x="59" y="426" width="333" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" id="smU-IW-yVZ">
                                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -2111,8 +2111,6 @@
                                     <exclude reference="Vaf-CG-geP"/>
                                     <exclude reference="juk-SZ-OuT"/>
                                     <exclude reference="shR-GV-EH4"/>
-                                    <exclude reference="9j9-a8-SrX"/>
-                                    <exclude reference="Lvl-3O-61c"/>
                                     <exclude reference="3iW-Jn-Zpw"/>
                                     <exclude reference="BgT-Yq-az0"/>
                                     <exclude reference="D2H-zX-dwF"/>
@@ -2121,6 +2119,8 @@
                                     <exclude reference="ZPB-re-32E"/>
                                     <exclude reference="bxN-5R-6Lc"/>
                                     <exclude reference="vqY-cp-YSi"/>
+                                    <exclude reference="9j9-a8-SrX"/>
+                                    <exclude reference="Lvl-3O-61c"/>
                                     <exclude reference="MyN-Ff-iYM"/>
                                     <exclude reference="Tcf-tG-j6O"/>
                                     <exclude reference="YES-1n-97L"/>
@@ -2144,8 +2144,6 @@
                                     <include reference="Vaf-CG-geP"/>
                                     <include reference="juk-SZ-OuT"/>
                                     <include reference="shR-GV-EH4"/>
-                                    <include reference="9j9-a8-SrX"/>
-                                    <include reference="Lvl-3O-61c"/>
                                     <include reference="3iW-Jn-Zpw"/>
                                     <exclude reference="BgT-Yq-az0"/>
                                     <exclude reference="D2H-zX-dwF"/>
@@ -2154,6 +2152,8 @@
                                     <exclude reference="ZPB-re-32E"/>
                                     <include reference="bxN-5R-6Lc"/>
                                     <include reference="vqY-cp-YSi"/>
+                                    <include reference="9j9-a8-SrX"/>
+                                    <include reference="Lvl-3O-61c"/>
                                     <include reference="MyN-Ff-iYM"/>
                                     <exclude reference="Tcf-tG-j6O"/>
                                     <include reference="YES-1n-97L"/>

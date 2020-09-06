@@ -110,7 +110,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
             self.loadAnimalFromUsername()
         }
         super.viewDidLoad()
-        
+        self.loadObjects()
         self.timelineView.isHidden = false
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
@@ -155,6 +155,44 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
         // setting scrollViewTopConstraint constant to correct value on second loading
         if !firstLoad {
             self.scrollViewTopConstraint.constant = -64
+        }
+    }
+    
+    
+    func loadObjects(){
+        if( GraphQLServiceManager.sharedManager.getUSer() == nil) {
+            return
+        }
+        
+        if let slug = currentAnimalObject?["slug"] as? String {
+           let params = ["slug": slug] as [String : Any]
+            let url =  GETANIMALDETAIL
+            self.showLoader()
+            GraphQLServiceManager.sharedManager.createGraphQLRequestWith(query: url, variableParam: params, success: { (response) in
+             
+                guard let dataToParse = response else {
+                    return
+                }
+                do {
+                    let data = try JSONSerialization.jsonObject(with: dataToParse, options: .mutableLeaves)
+                    if let animal = ((data as? [String:Any])?["data"] as? [String:Any])?["animal"] as? [String:Any]{
+                      
+                        self.currentAnimalObject = animal as AnyObject
+                        DispatchQueue.main.async {
+                            self.hideLoader()
+                            self.loadAnimal()
+                        }
+                        
+                    }
+                    
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+                
+            }) { (error) in
+                
+                print(error.userInfo["errorMessage"] as? String ?? error.localizedDescription)
+            }
         }
     }
     
@@ -321,41 +359,31 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
     }
     
     func loadAnimalFromUsername() {
-        let animalQuery = WRAnimal.query()!
-        if(self.username != nil) {
-            animalQuery.whereKey("username", equalTo: self.username!)
-        }
-        animalQuery.includeKey("owners")
-        animalQuery.includeKey("fosters")
-        animalQuery.includeKey("breed")
-        animalQuery.includeKey("coat")
-        animalQuery.includeKey("shelter")
-        animalQuery.includeKey("love")
-        self.showLoader()
-        
-        var animalObject : PFObject? = nil
-        do {
-            animalObject = try animalQuery.getFirstObject() as PFObject
-        } catch {
-            print("Error")
-        }
-        
-        if animalObject != nil {
-            let animal = animalObject as? WRAnimal
-            
-            self.currentAnimalObject = animal
+//        let animalQuery = WRAnimal.query()!
+//        if(self.username != nil) {
+//            animalQuery.whereKey("username", equalTo: self.username!)
+//        }
+//        animalQuery.includeKey("owners")
+//        animalQuery.includeKey("fosters")
+//        animalQuery.includeKey("breed")
+//        animalQuery.includeKey("coat")
+//        animalQuery.includeKey("shelter")
+//        animalQuery.includeKey("love")
+//        self.showLoader()
+//
+//        var animalObject : PFObject? = nil
+//        do {
+//            animalObject = try animalQuery.getFirstObject() as PFObject
+//        } catch {
+//            print("Error")
+//        }
             self.loadAnimal()
             
-            self.aboutViewController?.animalObject = animal
+            self.aboutViewController?.animalObject = self.currentAnimalObject as! [String : Any]
             self.aboutViewController?.loadAnimal()
             
-            self.timelineTableController?.animalObject = animal
-            if(self.timelineObjectId != nil) {
-                self.timelineTableController?.timelineObjectId = self.timelineObjectId
-                self.timelineObjectId = nil
-            }
+            self.timelineTableController?.animalObject = (currentAnimalObject as! [String : Any])
             self.timelineTableController?.loadObjects()
-        }
         
         self.hideLoader()
     }
@@ -518,12 +546,12 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
     func loadAnimal() {
         //TODO: Load Animal
         if let animal = currentAnimalObject as? [String: Any]{
-            if(self.timelineObjectId != nil) {
-                self.timelineTableController?.timelineObjectId = self.timelineObjectId
-                self.timelineObjectId = nil
-            }
-            self.animalImagesRepository?.loadAllImages()
-            
+                self.timelineTableController?.animalObject = animal
+            self.reloadTimeline()
+            self.aboutViewController?.animalObject = animal
+            self.aboutViewController?.loadAnimal()
+            self.photosCollectionViewController!.animalObject = animal
+            self.photosCollectionViewController!.setBackGroundView()
             self.checkOwner()
 
              if(currentUserIsOwner || currentUserIsFoster) {
@@ -689,14 +717,11 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
         }  else if(segue.identifier == "AnimalDetailProfileTabsEmbed") {
             self.checkOwner()
             
-//            let animalImagesRepository = AnimalImagesRepository(animalObject: self.currentAnimalObject!)
-//            self.animalImagesRepository = animalImagesRepository
-            
+          
             let timelineViewController = self.storyboard?.instantiateViewController(withIdentifier: "AnimalTimelineTable") as! AnimalTimelineTableViewController
             self.timelineTableController = timelineViewController
 //            self.timelineTableController!.animalObject = self.currentAnimalObject
             self.timelineTableController!.animalDetailController = self
-            self.timelineTableController!.animalImagesRepository = animalImagesRepository
             
             let aboutViewController = self.storyboard?.instantiateViewController(withIdentifier: "AnimalAbout") as! AnimalAboutViewController
             self.aboutViewController = aboutViewController
@@ -709,7 +734,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
             let photosViewController = self.storyboard?.instantiateViewController(withIdentifier: "AnimalPhotos") as! PhotosCollectionViewController
             self.photosCollectionViewController = photosViewController
             self.photosCollectionViewController!.animalTimelineController = self.timelineTableController
-            self.photosCollectionViewController!.animalImagesRepository = animalImagesRepository
+            self.photosCollectionViewController!.animalObject = currentAnimalObject as! [String : Any]
             
             self.timelineTableController?.photosCollectionViewController = self.photosCollectionViewController
             
@@ -818,38 +843,9 @@ open class AnimalImagesRepository {
         object?.deleteInBackground(block: { (success : Bool, error : Error?) -> Void in
             if(success) {
                 complHandler()
-                self.loadAllImages()
+//                self.loadAllImages()
             }
         })
     }
     
-    /**
-     Function to load all images for current animal object and call subscribers ImageLoaded method
-     */
-    func loadAllImages () {
-        let query : PFQuery = WRTimelineEntry.query()!
-        query.whereKey("animal", equalTo: self.animalObject!)
-        query.whereKey("type", equalTo: "image")
-        query.order(byDescending: "date")
-        query.limit = 1000
-        var imageEntries: [WRTimelineEntry]?
-        var imageIndexById : [String : Int]?
-        
-        query.findObjectsInBackground { (objects: [PFObject]?, error: Error?) -> Void in
-            imageIndexById = [String : Int]()
-            
-            imageEntries = objects! as? [WRTimelineEntry]
-            
-            for (index, object) in objects!.enumerated() {
-                imageIndexById![object.objectId!] = index
-
-            }
-            
-            if self.arrayOfSubscribers.count != 0 {
-                for subscriber in self.arrayOfSubscribers{
-                    subscriber.imagesLoaded(objects, imageIndexById: imageIndexById, imageEntries: imageEntries)
-                }
-            }
-        }
-    }
 }

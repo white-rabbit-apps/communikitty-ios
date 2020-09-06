@@ -34,6 +34,10 @@ class DashboardTableViewController: UITableViewController {
             tableView.addSubview(refreshControl!) // not required when using UITableViewController
         }
         
+        if let dashboard = self.parentView as? DashboardViewController {
+            dashboard.loadDashboard()
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,9 +50,7 @@ class DashboardTableViewController: UITableViewController {
     @objc func refresh(_ sender:AnyObject) {
         // Code to refresh table view
         
-        if let dashboard = self.parentView as? DashboardViewController {
-            dashboard.loadDashboard()
-        }
+        
         
         for widget in self.widgets {
             widget.reloadData()
@@ -235,7 +237,7 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
     }
     
     func reloadData() {
-        self.sourceArray = [AnyObject]()
+        
         self.nextPage = 1
         self.currentlyLoading = false
         self.loadData(self.nextPage)
@@ -268,6 +270,9 @@ class DashboardWidget: UITableViewCell,UICollectionViewDataSource,UICollectionVi
                 do {
                     let data = try JSONSerialization.jsonObject(with: dataToParse, options: .mutableLeaves)
                     if let userData = ((data as? [String:Any])?["data"] as? [String:Any])?["records"] as? [[String:Any]]{
+                        if self.nextPage ==  1{
+                            self.sourceArray = [AnyObject]()
+                        }
                         for object in userData {
                             self.sourceArray.append(object as AnyObject)
                         }

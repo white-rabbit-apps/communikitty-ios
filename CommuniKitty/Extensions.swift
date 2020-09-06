@@ -1435,11 +1435,9 @@ func openUserProfile(user: WRUser? = nil, push: Bool = true) {
                   if self is SKPhotoBrowser {
                     if type(of: vc) == AnimalTimelineTableViewController.self {
                         let animalTimeline = vc as! AnimalTimelineTableViewController
-                        animalTimeline.animalImagesRepository?.loadAllImages()
                         animalTimeline.loadObjects()
                     } else if type(of: vc) == PhotosCollectionViewController.self {
                         let photoCollection = vc as! PhotosCollectionViewController
-                        photoCollection.animalImagesRepository?.loadAllImages()
                         photoCollection.collectionView?.reloadData()
                         photoCollection.animalTimelineController?.loadObjects()
                     }
@@ -1577,6 +1575,34 @@ func openUserProfile(user: WRUser? = nil, push: Bool = true) {
     }
 }
 
+extension UITableViewController{
+    func replacePFLoadingView(verticalOffset:CGFloat=0) {
+           
+           // go through all of the subviews until you find a PFLoadingView subclass
+           for currentView in self.view.subviews {
+               
+               if NSStringFromClass(currentView.classForCoder) == "PFLoadingView" {
+                   
+                   // find and remove the loading label and loading activity indicator inside the PFLoadingView subviews
+                   for loadingViewSubview in currentView.subviews {
+                       if loadingViewSubview is UILabel {
+                           let label:UILabel = loadingViewSubview as! UILabel
+                           label.removeFromSuperview()
+                       }
+                       
+                       if loadingViewSubview is UIActivityIndicatorView {
+                           let indicator:UIActivityIndicatorView = loadingViewSubview as! UIActivityIndicatorView
+                           indicator.removeFromSuperview()
+                       }
+                   }
+                   
+                   let customIndicator = CustomActivityIndicator(parentView: currentView.superview!, verticalOffset: verticalOffset)
+                   currentView.addSubview(customIndicator)
+               }
+           }
+       }
+}
+
 extension PFQueryTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     public func initEmptyState() {
         self.tableView.emptyDataSetSource = self
@@ -1584,31 +1610,6 @@ extension PFQueryTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDele
         self.tableView.tableFooterView = UIView()
     }
     
-    func replacePFLoadingView(verticalOffset:CGFloat=0) {
-        
-        // go through all of the subviews until you find a PFLoadingView subclass
-        for currentView in self.view.subviews {
-            
-            if NSStringFromClass(currentView.classForCoder) == "PFLoadingView" {
-                
-                // find and remove the loading label and loading activity indicator inside the PFLoadingView subviews
-                for loadingViewSubview in currentView.subviews {
-                    if loadingViewSubview is UILabel {
-                        let label:UILabel = loadingViewSubview as! UILabel
-                        label.removeFromSuperview()
-                    }
-                    
-                    if loadingViewSubview is UIActivityIndicatorView {
-                        let indicator:UIActivityIndicatorView = loadingViewSubview as! UIActivityIndicatorView
-                        indicator.removeFromSuperview()
-                    }
-                }
-                
-                let customIndicator = CustomActivityIndicator(parentView: currentView.superview!, verticalOffset: verticalOffset)
-                currentView.addSubview(customIndicator)
-            }
-        }
-    }
     
     func stylePFLoadingView() {
         let activityIndicatorViewStyle = UIActivityIndicatorView.Style.gray

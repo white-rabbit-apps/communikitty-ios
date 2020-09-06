@@ -179,3 +179,203 @@ query getCurrentAnimals {
   }
 }
 """
+
+
+let GETANIMALDETAIL = """
+query getAnimal($slug: String!) {
+  animal(slug: $slug) {
+    id
+    name
+    intro
+    slug
+    username
+    gender
+    hairLength
+    traitIds
+    colors {
+      id
+      name
+      __typename
+    }
+    microchipId
+    facebookUrl
+    facebookPageName
+    twitterUrl
+    twitterUsername
+    instagramUrl
+    instagramUsername
+    youtubeUrl
+    youtubeUsername
+    tiktokUrl
+    tiktokUsername
+    donateMoneyLink
+    donateSuppliesLink
+    birthDate
+    age
+    loves {
+      id
+      text
+      __typename
+    }
+    hates {
+      id
+      text
+      __typename
+    }
+    photos {
+      id
+      thumbnailUrl
+      photoUrl
+      mediumPhotoUrl
+      circularPhotoUrl
+      sort
+      __typename
+    }
+    owners {
+      id
+      role
+      fullName
+      avatarUrl
+      slug
+      __typename
+    }
+    fosters {
+      id
+      role
+      fullName
+      avatarUrl
+      slug
+      __typename
+    }
+    traits {
+      name
+      image
+      __typename
+    }
+    breed {
+      id
+      name
+      slug
+      __typename
+    }
+    coat {
+      id
+      name
+      imageUrl
+      __typename
+    }
+    weightMeasurements {
+      id
+      takenAt
+      display
+      value
+      unit
+      __typename
+    }
+    lengthMeasurements {
+      id
+      takenAt
+      display
+      value
+      unit
+      __typename
+    }
+    city {
+      id
+      name
+      state
+      country
+      centerLat
+      centerLng
+      __typename
+    }
+    location {
+      id
+      name
+      slug
+      logoUrl
+      __typename
+    }
+    isFollowed
+    followersCount
+    avatarUrl
+    __typename
+  }
+}
+"""
+
+let GETANIMALTIMELINE = """
+query getAnimalStories($animalSlug: String!) {
+  animalStories(animalSlug: $animalSlug) {
+    id
+    title
+    thumbnailUrl
+    date
+    body
+    event
+    editable
+    photos {
+      id
+      mediaType
+      thumbnailUrl
+      photoUrl
+      mediumPhotoUrl
+      largeUrl
+      __typename
+    }
+    documents {
+      id
+      documentUrl
+      __typename
+    }
+    medicalProcedure {
+      id
+      name
+      description
+      __typename
+    }
+    externalResourceUrl
+    tags {
+      id
+      animalId
+      __typename
+    }
+    __typename
+  }
+  animalHealthStories(animalSlug: $animalSlug) {
+    id
+    title
+    thumbnailUrl
+    date
+    body
+    event
+    photos {
+      id
+      mediaType
+      thumbnailUrl
+      photoUrl
+      mediumPhotoUrl
+      largeUrl
+      __typename
+    }
+    documents {
+      id
+      documentUrl
+      __typename
+    }
+    medicalProcedure {
+      id
+      name
+      description
+      __typename
+    }
+    externalResourceUrl
+    tags {
+      id
+      animalId
+      __typename
+    }
+    __typename
+  }
+}
+"""

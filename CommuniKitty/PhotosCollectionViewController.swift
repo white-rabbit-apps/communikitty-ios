@@ -48,20 +48,11 @@ public var controllerHeight: CGFloat {
 
 class PhotosCollectionViewController: UICollectionViewController, PhotoCollectionViewDelegateLayout, ImagesLoadedHandler, FusumaDelegate, CLImageEditorDelegate {
     
-    var imageEntries: [WRTimelineEntry] = []
+    var animalObject: [String : Any] = [:]
     var imageIndexById : [String : Int] = [:]
     var animalTimelineController: AnimalTimelineTableViewController?
     var currentUserIsOwner : Bool = false
     var firstLoad: Bool = true
-    var animalImagesRepository:AnimalImagesRepository?{
-        didSet{
-            animalImagesRepository?.subscribeLoadAll(self)
-        }
-    }
-    
-    deinit {
-        animalImagesRepository?.unsubscribe(self)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +76,6 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
      */
     func imagesLoaded(_ objects: [PFObject]?, imageIndexById: [String : Int]? , imageEntries:[WRTimelineEntry]?){
         self.imageIndexById = imageIndexById ?? [String : Int]()
-        self.imageEntries = imageEntries ?? [WRTimelineEntry]()
         self.viewWillAppear(false)
     }
    
@@ -103,7 +93,7 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
      */
     func setBackGroundView(){
         
-        if imageEntries.count > 0 {
+        if ((animalObject["photos"] as? [[String:Any]])?.count ?? 0) > 0 {
             for subview in self.collectionView!.subviews{
                 subview.removeFromSuperview()
             }
@@ -147,20 +137,17 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageEntries.count
+        return (animalObject["photos"] as? [[String:Any]])?.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:PhotoViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoViewCell
     
         // Configure the cell
-        let entry = self.imageEntries[(indexPath as IndexPath).row]
+        let entry = (self.animalObject["photos"] as? [[String:Any]])?[(indexPath as IndexPath).row]
         
         cell.imageViewContent.kf.indicatorType = .activity
-        if let imageFile = entry.image {
-            cell.imageViewContent.kf.setImage(with: URL(string: imageFile.url!)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-            })
-        } else  if let imageUrl = entry.imageUrl {
+        if let imageUrl = entry?["thumbnailUrl"] as? String{
             cell.imageViewContent.kf.setImage(with: URL(string: imageUrl)!, placeholder: nil, options: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
             })
         }
@@ -173,11 +160,7 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
         let cell = collectionView.cellForItem(at: indexPath) as! PhotoViewCell
         let imageIndex = (indexPath as IndexPath).row
         
-        let object = self.imageEntries[imageIndex]
-        
-        let index = self.imageIndexById[object.objectId!]
-        
-        self.showImagesBrowser(entries: imageEntries, startIndex: index, animatedFromView: cell.imageViewContent, displayUser: false, vc: self)
+        self.showImagesBrowser(entries: (self.animalObject["photos"] as? [[String:Any]] ?? []) as [AnyObject], startIndex: imageIndex, animatedFromView: cell.imageViewContent, displayUser: false, vc: self)
      }
     
     override func didReceiveMemoryWarning() {
@@ -238,7 +221,7 @@ class PhotosCollectionViewController: UICollectionViewController, PhotoCollectio
                     detailScene.type = "image"
                     detailScene.image = image
                     detailScene.pickedImageDate = self.pickedImageDate as Date?
-                    detailScene.animalObject = self.animalTimelineController?.animalObject
+//                    detailScene.animalObject = self.animalTimelineController?.animalObject
                     detailScene.isFromTimelineController = true
                     detailScene.animalDetailController = self.animalTimelineController?.animalDetailController
                     detailScene.animalTimelineTableVC = self.animalTimelineController!

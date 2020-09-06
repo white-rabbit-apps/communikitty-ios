@@ -33,7 +33,7 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
     @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var trObViewHeightConstraint: NSLayoutConstraint!
-    var animalObject : WRAnimal?
+    var animalObject : [String:Any]?
     var traitObjects : [WRTrait?] = []
     var traitsArray: [String?] = []
     var loveObjects:[String?] = []
@@ -46,7 +46,7 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
     var animalTimelineViewController: AnimalTimelineTableViewController?
     
     @IBAction func breedButtonPressed(_ sender: AnyObject) {
-        if animalObject?.breed != nil {
+        if let breed =  animalObject?["breed"] as? [String: Any]{
             self.performSegue(withIdentifier: "AboutToBreedDetail", sender: self)
         } else if currentUserIsOwner {
             let breedRow = RowOf<Breed>(tag: "Breed")
@@ -59,16 +59,16 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
 //                    self.animalObject!.breed = breedValue.object!
 //                }
                 
-                self.animalObject!.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
-                    self.hideLoader()
-                    if error == nil {
-                        let appDelegate = AppDelegate.getAppDelegate()
-                        appDelegate.loadMyAnimals()
-                    }
-                    else {
-                        self.showError(message: error!.localizedDescription)
-                    }
-                })
+//                self.animalObject!.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
+//                    self.hideLoader()
+//                    if error == nil {
+//                        let appDelegate = AppDelegate.getAppDelegate()
+//                        appDelegate.loadMyAnimals()
+//                    }
+//                    else {
+//                        self.showError(message: error!.localizedDescription)
+//                    }
+//                })
                 
                 _ = vc.navigationController?.popViewController(animated: true)
             }
@@ -77,25 +77,25 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
     }
     
     @IBAction func coatButtonPressed(_ sender: AnyObject) {
-        if let _ = animalObject!.coat {
+        if let _ = animalObject?["coat"] as? [String: Any] {
         } else if currentUserIsOwner {
             let coatRow = RowOf<Coat>(tag: "Coat")
             let cvc = self.storyboard?.instantiateViewController(withIdentifier: "CoatsTableView") as! CoatsTableViewController
             
             cvc.row = coatRow
             cvc.completionCallback = { vc in
-                if let coatValue = coatRow.value {
-                    self.animalObject!.coat = coatValue.object
-                }
+//                if let coatValue = coatRow.value {
+//                    self.animalObject!.coat = coatValue.object
+//                }
                 
-                self.animalObject!.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
-                    self.hideLoader()
-                    if error == nil {
-                        AppDelegate.getAppDelegate().loadMyAnimals()
-                    } else {
-                        self.showError(message: error!.localizedDescription)
-                    }
-                })
+//                self.animalObject!.saveInBackground(block: { (success: Bool, error: Error?) -> Void in
+//                    self.hideLoader()
+//                    if error == nil {
+//                        AppDelegate.getAppDelegate().loadMyAnimals()
+//                    } else {
+//                        self.showError(message: error!.localizedDescription)
+//                    }
+//                })
                 
                 _ = vc.navigationController?.popViewController(animated: true)
             }
@@ -113,11 +113,11 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
     
     func loadLoves() {
         var text = ""
-        if let loves = animalObject?.loves{
+        if let loves = animalObject?["loves"] as? [[String:Any]]{
             if loves.count > 0 {
                 for love in loves {
                     let bulletPoint: String = "\u{2022}"
-                    let formattedString: String = "\(bulletPoint) \(love)\n"
+                    let formattedString: String = "\(bulletPoint) \(love["text"] as? String ?? "")\n"
                     text = text + formattedString
                 }
                 self.lovesLabel.text = text
@@ -133,11 +133,11 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
     
     func loadHates() {
         var text = ""
-        if let hates = animalObject?.hates{
+        if let hates = animalObject?["hates"] as? [[String:Any]]{
             if hates.count > 0 {
                 for hate in hates {
                     let bulletPoint: String = "\u{2022}"
-                    let formattedString: String = "\(bulletPoint) \(hate)\n"
+                    let formattedString: String = "\(bulletPoint) \(hate["text"] as? String ?? "")\n"
                     text = text + formattedString
                 }
                 self.hatesLabel.text = text
@@ -157,23 +157,15 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
         
         self.traitsArray = []
         
-        if let traits = self.animalObject?.traits{
+        if let traits = self.animalObject?["traits"] as? [[String:Any]]{
             if (traits.count > 0) {
                 for trait in traits {
-                    
-                    trait.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) -> Void in
-                        if object != nil {
-                            let trait = object as? WRTrait
-                            let name = trait?.name
+                            let name = trait["name"] as? String
                             if(name != nil) {
-                                
                                 self.traitsArray.append(name)
                                 self.addTraits()
                             }
                             self.traitsView.isHidden = false
-                            
-                        }
-                    })
                     
                 }
                 
@@ -277,10 +269,12 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
         
     }
     
+    
+    
     func loadAnimal() {
         if(self.animalObject != nil) {
             
-            if let intro = animalObject!.intro {
+            if let intro = animalObject?["intro"] as? String {
                 if !intro.isEmpty {
                     self.introLabel.text = intro
                     self.introView.isHidden = false
@@ -292,20 +286,18 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
                 self.introView.isHidden = true
             }
             
-            if let hometown = animalObject!.object(forKey: "hometown"){
-                self.locationLabel.text = hometown as? String
+            if let city = animalObject?["city"] as? [String:Any], let hometown = city["name"] as? String{
+                self.locationLabel.text = hometown
                 self.locationView.isHidden = false
                 self.setSeparator(view: self.locationView)
             } else {
                 self.locationView.isHidden = true
             }
             
-            if let breed = animalObject?.breed {
-                breed.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) -> Void in
-                    let name = breed.name
+            if let breed = animalObject?["breed"] as? [String:Any] {
+                    let name = breed["name"] as? String
                     self.breedButton.setTitle(name, for: .normal)
-                    self.breedObject = breed
-                })
+//                    self.breedObject = breed
             } else if currentUserIsOwner {
                 self.breedButton.setTitle("Choose One", for: .normal)
             } else {
@@ -314,11 +306,9 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
             }
             self.setSeparator(view: self.breedView)
             
-            if let coat = animalObject!.coat {
-                coat.fetchIfNeededInBackground(block: { (object: PFObject?, error: Error?) -> Void in
-                    let name = coat.name
+            if let coat = animalObject?["coat"] as? [String:Any]  {
+                    let name = coat["name"] as? String
                     self.coatButton.setTitle(name, for: .normal)
-                })
             } else if currentUserIsOwner {
                 self.coatButton.setTitle("Choose One", for: .normal)
             } else {
