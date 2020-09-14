@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VDF-2e-27L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VDF-2e-27L">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -1762,7 +1762,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CXI-8U-lPU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4414.5" y="-610.5"/>
+            <point key="canvasLocation" x="4414" y="183"/>
         </scene>
         <!--Activity Table View Controller-->
         <scene sceneID="enm-28-HiI">
@@ -2111,6 +2111,8 @@
                                     <exclude reference="Vaf-CG-geP"/>
                                     <exclude reference="juk-SZ-OuT"/>
                                     <exclude reference="shR-GV-EH4"/>
+                                    <exclude reference="9j9-a8-SrX"/>
+                                    <exclude reference="Lvl-3O-61c"/>
                                     <exclude reference="3iW-Jn-Zpw"/>
                                     <exclude reference="BgT-Yq-az0"/>
                                     <exclude reference="D2H-zX-dwF"/>
@@ -2119,8 +2121,6 @@
                                     <exclude reference="ZPB-re-32E"/>
                                     <exclude reference="bxN-5R-6Lc"/>
                                     <exclude reference="vqY-cp-YSi"/>
-                                    <exclude reference="9j9-a8-SrX"/>
-                                    <exclude reference="Lvl-3O-61c"/>
                                     <exclude reference="MyN-Ff-iYM"/>
                                     <exclude reference="Tcf-tG-j6O"/>
                                     <exclude reference="YES-1n-97L"/>
@@ -2144,6 +2144,8 @@
                                     <include reference="Vaf-CG-geP"/>
                                     <include reference="juk-SZ-OuT"/>
                                     <include reference="shR-GV-EH4"/>
+                                    <include reference="9j9-a8-SrX"/>
+                                    <include reference="Lvl-3O-61c"/>
                                     <include reference="3iW-Jn-Zpw"/>
                                     <exclude reference="BgT-Yq-az0"/>
                                     <exclude reference="D2H-zX-dwF"/>
@@ -2152,8 +2154,6 @@
                                     <exclude reference="ZPB-re-32E"/>
                                     <include reference="bxN-5R-6Lc"/>
                                     <include reference="vqY-cp-YSi"/>
-                                    <include reference="9j9-a8-SrX"/>
-                                    <include reference="Lvl-3O-61c"/>
                                     <include reference="MyN-Ff-iYM"/>
                                     <exclude reference="Tcf-tG-j6O"/>
                                     <include reference="YES-1n-97L"/>
@@ -3341,7 +3341,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0re-wC-Z0E">
-                                <rect key="frame" x="129.5" y="759" width="65" height="63"/>
+                                <rect key="frame" x="129.5" y="696" width="65" height="126"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="KiM-xU-TPt"/>
                                     <constraint firstAttribute="height" constant="90" id="vck-vU-CU9"/>
@@ -3369,7 +3369,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xi9-zO-3wX">
-                                <rect key="frame" x="219.5" y="759" width="65" height="63"/>
+                                <rect key="frame" x="219.5" y="696" width="65" height="126"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="Qc5-UN-g7N"/>
                                     <constraint firstAttribute="height" constant="90" id="t6F-Oy-er6"/>
