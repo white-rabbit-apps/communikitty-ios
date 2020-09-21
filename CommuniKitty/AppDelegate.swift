@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         initializeLibraries(launchOptions: launchOptions as [NSObject : AnyObject]?)
         
-        if(WRUser.current() != nil) {
+        if(GraphQLServiceManager.sharedManager.getUSer() != nil) {
             self.postLogin()
         }
         
@@ -412,7 +412,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loadMainController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-//        let homeController = storyboard.instantiateViewController(withIdentifier: "Home") as! HomeViewController
+        let homeController = storyboard.instantiateViewController(withIdentifier: "Home") as! HomeViewController
 //        homeController.checkForUser(populate: false)
         
 //        let dahsboardNavController = storyboard.instantiateViewController(withIdentifier: "DashboardNav") as! UINavigationController
@@ -421,17 +421,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let dahsboardNavController = UINavigationController(rootViewController: dashboard)
 
         
-//        homeController.mainViewController = dahsboardNavController
+        homeController.mainViewController = dahsboardNavController
         self.dashboardNavViewController = dahsboardNavController
         self.dashboardViewController = dashboard
 //        self.dashboardViewController = dashboardNavViewController?.topViewController as? DashboardViewController
         
         // set the width and scale of the slide menu
-//        SlideMenuOptions.contentViewScale = 1
-//        SlideMenuOptions.leftViewWidth = 240
+        SlideMenuOptions.contentViewScale = 1
+        SlideMenuOptions.leftViewWidth = 240
 //        
 //        // create the slide menu
-//        let slideMenuController = SlideMenuController(mainViewController: dashboardNavViewController!, leftMenuViewController: homeController)
+        let slideMenuController = SlideMenuController(mainViewController: dashboardNavViewController!, leftMenuViewController: homeController)
 //        
 //        let walkthroughStoryboard = UIStoryboard(name: "Walkthrough", bundle: nil)
 //        
@@ -460,9 +460,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        } else {
 //        }
         
-//        let window = UIWindow(frame: UIScreen.main.bounds)
-//        window.rootViewController = dahsboardNavController
-//        window.makeKeyAndVisible()
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = slideMenuController
+        window.makeKeyAndVisible()
     }
     
     

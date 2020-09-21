@@ -42,7 +42,6 @@ class AnimalAboutViewController: UIViewController, UIScrollViewDelegate{
     var currentUserIsOwner : Bool = false
     
     var animalDetailController : AnimalDetailViewController?
-    var animalFormViewController: AnimalFormViewController?
     var animalTimelineViewController: AnimalTimelineTableViewController?
     
     @IBAction func breedButtonPressed(_ sender: AnyObject) {

@@ -374,7 +374,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     func setUpMenuBarController(title: String) {
         self.setUpNavigationBar(title: title, showButton: false)
         
-//        self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "button_menu", action: #selector(UIViewController.showMenu), height: 20, width: 25)
+        self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "button_menu", action: #selector(UIViewController.showMenu), height: 20, width: 25)
     }
     
     func setUpMenuBarImageController(image: UIImage, height: CGFloat, title: String) {
@@ -427,12 +427,12 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     /**
      Show the slider menu
      */
-    func showMenu() {
-//        self.slideMenuController()?.openLeft()
+    @objc func showMenu() {
+        self.slideMenuController()?.openLeft()
     }
 
 func isLoggedIn() -> Bool {
-    return WRUser.current() != nil
+    return GraphQLServiceManager.sharedManager.getUSer() != nil
 }
 
 func openUserProfile(user: WRUser? = nil, push: Bool = true) {

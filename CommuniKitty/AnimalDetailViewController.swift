@@ -498,7 +498,7 @@ class AnimalDetailViewController: UIViewController, CLImageEditorDelegate, Fusum
         editScene.detailController = self
         //TODO: Set object for detail
 //        editScene.animalTableController = self.animalTableController
-//        editScene.animalObject = self.currentAnimalObject
+        editScene.animalObject = self.currentAnimalObject as! [String : Any]
         
         self.present(UINavigationController(rootViewController: editScene), animated: true, completion: nil)
     }

@@ -81,7 +81,7 @@ class DashboardViewController: UIViewController, FusumaDelegate, CLImageEditorDe
         self.navigationItem.rightBarButtonItem = self.getNavBarItem(imageId: "button_notifications", action: #selector(DashboardViewController.showNotifications), height: 25, width: 20)
         
         if(self.isLoggedIn()) {
-            self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "button_settings", action: #selector(DashboardViewController.openUserSettings), height: 25, width: 25)
+//            self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "button_settings", action: #selector(DashboardViewController.openUserSettings), height: 25, width: 25)
         } else {
             self.navigationItem.leftBarButtonItem = nil
         }
