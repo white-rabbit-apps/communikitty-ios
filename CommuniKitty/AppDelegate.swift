@@ -413,26 +413,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         let homeController = storyboard.instantiateViewController(withIdentifier: "Home") as! HomeViewController
-//        homeController.checkForUser(populate: false)
-        
+
+        //        homeController.checkForUser(completionBlock: {  })
+
+
 //        let dahsboardNavController = storyboard.instantiateViewController(withIdentifier: "DashboardNav") as! UINavigationController
         
         let dashboard = storyboard.instantiateViewController(withIdentifier: "Dashboard") as! DashboardViewController
         let dahsboardNavController = UINavigationController(rootViewController: dashboard)
-
-        
-        homeController.mainViewController = dahsboardNavController
         self.dashboardNavViewController = dahsboardNavController
         self.dashboardViewController = dashboard
+        homeController.mainViewController = dahsboardNavController
 //        self.dashboardViewController = dashboardNavViewController?.topViewController as? DashboardViewController
         
         // set the width and scale of the slide menu
         SlideMenuOptions.contentViewScale = 1
         SlideMenuOptions.leftViewWidth = 240
-//        
-//        // create the slide menu
+//
+        // create the slide menu
         let slideMenuController = SlideMenuController(mainViewController: dashboardNavViewController!, leftMenuViewController: homeController)
-//        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = slideMenuController
+        self.window?.makeKeyAndVisible()
+        
+//
 //        let walkthroughStoryboard = UIStoryboard(name: "Walkthrough", bundle: nil)
 //        
 //        let walkthrough = walkthroughStoryboard.instantiateViewController(withIdentifier: "walk") as! BWWalkthroughViewController
@@ -460,9 +464,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        } else {
 //        }
         
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = slideMenuController
-        window.makeKeyAndVisible()
     }
     
     

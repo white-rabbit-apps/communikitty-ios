@@ -1762,7 +1762,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CXI-8U-lPU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4414.5" y="-610.5"/>
+            <point key="canvasLocation" x="4414" y="183"/>
         </scene>
         <!--Activity Table View Controller-->
         <scene sceneID="enm-28-HiI">
@@ -2026,7 +2026,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PL3-Nc-dPM" customClass="ActiveLabel" customModule="ActiveLabel">
-                                    <rect key="frame" x="59" y="426" width="333" height="14"/>
+                                    <rect key="frame" x="59" y="426" width="333" height="0.0"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" id="smU-IW-yVZ">
                                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -3341,7 +3341,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0re-wC-Z0E">
-                                <rect key="frame" x="129.5" y="759" width="65" height="63"/>
+                                <rect key="frame" x="129.5" y="696" width="65" height="126"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="KiM-xU-TPt"/>
                                     <constraint firstAttribute="height" constant="90" id="vck-vU-CU9"/>
@@ -3369,7 +3369,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xi9-zO-3wX">
-                                <rect key="frame" x="219.5" y="759" width="65" height="63"/>
+                                <rect key="frame" x="219.5" y="696" width="65" height="126"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="Qc5-UN-g7N"/>
                                     <constraint firstAttribute="height" constant="90" id="t6F-Oy-er6"/>

@@ -17,6 +17,7 @@ PODS:
     - AFNetworking/NSURLSession
   - Alamofire (5.2.2)
   - Bolts/Tasks (1.9.1)
+  - BTNavigationDropdownMenu (0.5)
   - BWWalkthrough (4.0.0)
   - CLImageEditor (0.2.4):
     - CLImageEditor/Core (= 0.2.4)
@@ -71,6 +72,7 @@ DEPENDENCIES:
   - ActiveLabel
   - AFNetworking
   - Alamofire
+  - BTNavigationDropdownMenu
   - BWWalkthrough
   - CLImageEditor
   - CLImageEditor/SplashTool
@@ -103,6 +105,7 @@ SPEC REPOS:
     - AFNetworking
     - Alamofire
     - Bolts
+    - BTNavigationDropdownMenu
     - BWWalkthrough
     - CLImageEditor
     - CRToast
@@ -129,6 +132,7 @@ SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  BTNavigationDropdownMenu: ba3a26fdb6a56c4721c31df8a0875106c259663a
   BWWalkthrough: 9f46edbd1a145c74f3e5287b01cb4a884c840bf2
   CLImageEditor: dc3e5358f641368da3a76fc1c744a4c2ceb270ad
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
@@ -150,6 +154,6 @@ SPEC CHECKSUMS:
   SKPhotoBrowser: 343de95d89dc7913763c5dda243cc6e606e4a168
   SlideMenuControllerSwift: 021d6318201c53d4d4d3710517d43d6c556c7dd0
 
-PODFILE CHECKSUM: ba1ed16fae67c5dec358dc3950ef87b0b14e8f3c
+PODFILE CHECKSUM: b5defc07aaa14511412c42a6323164c3c60b4002
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

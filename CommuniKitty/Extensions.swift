@@ -196,9 +196,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
      - width: The width of the button to be produced
      */
     func getNavBarItem(imageId : String, action : Selector, height : CGFloat, width: CGFloat) -> UIBarButtonItem! {
-        let bundle =
-            
-            Bundle(path: "Resources/WhiteRabbitAssets.xcassets")
+        let bundle = Bundle(path: "Resources/WhiteRabbitAssets.xcassets")
         let editImage = UIImage(named: imageId, in: bundle, compatibleWith: nil)
         
         let editButton = UIButton(type: .custom)
@@ -373,14 +371,13 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     
     func setUpMenuBarController(title: String) {
         self.setUpNavigationBar(title: title, showButton: false)
-        
         self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "button_menu", action: #selector(UIViewController.showMenu), height: 20, width: 25)
     }
     
     func setUpMenuBarImageController(image: UIImage, height: CGFloat, title: String) {
         self.setUpNavigationBarImage(image: image, height: height, title: title, showButton: false)
         
-//        self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "button_menu", action: #selector(UIViewController.showMenu), height: 20, width: 25)
+        self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "button_menu", action: #selector(UIViewController.showMenu), height: 20, width: 25)
     }
     
     func setUpMenuBarImageController(image: UIImage, height: CGFloat) {
