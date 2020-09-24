@@ -126,12 +126,12 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
                 twitterButton.isHidden = true
             }
             
-            if let instagramId = location.instagramUsername {
-                let instagramUrl = SocialMediaUrl.instagramUrlSuffix + instagramId
-                instagramButton.setTitle(instagramUrl, for: .reserved)
-            } else {
-                instagramButton.isHidden = true
-            }
+//            if let instagramId = location.instagramUsername {
+//                let instagramUrl = SocialMediaUrl.instagramUrlSuffix + instagramId
+//                instagramButton.setTitle(instagramUrl, for: .reserved)
+//            } else {
+//                instagramButton.isHidden = true
+//            }
             
             if let pinterestUrl = location.pinterestId {
                 pinterestButton.setTitle(pinterestUrl, for: .reserved)
@@ -145,9 +145,9 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
                 websiteButton.isHidden = true
             }
             
-            if location.facebookPageId == nil && location.twitterId == nil && location.instagramUsername == nil && location.pinterestId == nil  && location.website == nil {
-                self.linksView.isHidden = true
-            }
+//            if location.facebookPageId == nil && location.twitterId == nil && location.instagramUsername == nil && location.pinterestId == nil  && location.website == nil {
+//                self.linksView.isHidden = true
+//            }
         }
         
     }
@@ -254,8 +254,8 @@ class LocationAboutViewController : UIViewController, UICollectionViewDataSource
     
     func getCoordinates() -> CLLocationCoordinate2D? {
         if let locationGeo = currentLocationObject!.geo {
-            let latitute:CLLocationDegrees =  Double(string: locationGeo.first ?? "0") ?? 0
-            let longitute:CLLocationDegrees =  Double(string: locationGeo.last ?? "0") ?? 0
+            let latitute:CLLocationDegrees =  locationGeo.latitude 
+            let longitute:CLLocationDegrees =  locationGeo.longitude 
             
             let coordinates = CLLocationCoordinate2DMake(latitute, longitute)
             

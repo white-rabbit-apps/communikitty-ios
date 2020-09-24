@@ -6,7 +6,7 @@
 //  Copyright © 2015 White Rabbit Technology. All rights reserved.
 //
 
-import ParseUI
+import Parse
 import MapKit
 
 class LocationsTableViewCell: PFTableViewCell {
@@ -44,50 +44,51 @@ class LocationsTableViewController: PFQueryTableViewController {
         super.viewDidLoad()
     }
     
-     func dataForTableAndMap() -> PFQuery {
-            let query = WRLocation.query()!
-            query.whereKey("types", containsString: self.selectedType)
-            query.whereKey("animals", containsString: "cats")
-            if(self.currentLocation != nil) {
-                query.whereKey("geo", nearGeoPoint:self.currentLocation!)
-                query.limit = 10
-                query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-                    if error == nil {
-                        if let objects = objects {
-                            print("\(objects.count)")
-                            for object in objects {
-                                self.query.append(object)
-                                let location = Location(locationObject: object as! WRLocation)
-                                location.loadImage({ (image:UIImage?) in
-                                    self.mapViewController!.addLocationToMap(location)
-                                })
-                                
-                            }
-                        }
-                    } else {
-                        print("There was an error")
-                    }
-                }
-
-            }
+    func dataForTableAndMap() -> PFQuery<PFObject> {
+//            let query = WRLocation.query()!
+//            query.whereKey("types", containsString: self.selectedType)
+//            query.whereKey("animals", containsString: "cats")
+//            if(self.currentLocation != nil) {
+//                query.whereKey("geo", nearGeoPoint:self.currentLocation!)
+//                query.limit = 10
+//                query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+//                    if error == nil {
+//                        if let objects = objects {
+//                            print("\(objects.count)")
+//                            for object in objects {
+//                                self.query.append(object)
+//                                let location = Location(locationObject: object as! WRLocation)
+//                                location.loadImage({ (image:UIImage?) in
+//                                    self.mapViewController!.addLocationToMap(location)
+//                                })
+//
+//                            }
+//                        }
+//                    } else {
+//                        print("There was an error")
+//                    }
+//                }
+//
+//            }
             
             //self.mapViewController!.clearMap()
         
                 //
 
-            return query
+//            return query
+        return PFQuery.init(className: "PFQuery")
         }
     
     
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
-     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("LocationCell", forIndexPath: indexPath) as? LocationsTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath as IndexPath) as? LocationsTableViewCell
         if cell == nil  {
-            cell = LocationsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "LocationCell")
+            cell = LocationsTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "LocationCell")
         }
         
         if self.query.count != 0 {
@@ -96,7 +97,7 @@ class LocationsTableViewController: PFQueryTableViewController {
         cell!.name.text = location.name
         
         if let logoFile = location.logo {
-            cell!.logo.kf_setImageWithURL(NSURL(string: logoFile.url!)!)
+//            cell!.logo.kf_setImageWithURL(NSURL(string: logoFile.url!)!)
         } else {
             cell!.logo.image = nil
         }
@@ -106,38 +107,38 @@ class LocationsTableViewController: PFQueryTableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if firstClick{
             firstClick = false
             let row = Int(indexPath.row)
             let locationObject = self.query[row] as? WRLocation
             self.selectedLocationObject = locationObject
             if locationObject != nil {
-            mapViewController!.centerOnLocation(locationObject)
+                mapViewController!.centerOnLocation(location: locationObject)
             }
         } else {
             let row = Int(indexPath.row)
             let locationObject = self.query[row] as? WRLocation
             if locationObject == self.selectedLocationObject{
-                performSegueWithIdentifier("LocationToLocationDetail", sender: self)
+                performSegue(withIdentifier: "LocationToLocationDetail", sender: self)
                 firstClick = true
             } else {
                 let row = Int(indexPath.row)
                 let locationObject = self.query[row] as? WRLocation
                 self.selectedLocationObject = locationObject
                 if locationObject != nil {
-                    mapViewController!.centerOnLocation(locationObject)
+                    mapViewController!.centerOnLocation(location: locationObject)
                 }
             }
         }
     }
     
         
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "LocationToLocationDetail") {
 
             // Get the new view controller
-            let detailScene = segue.destinationViewController as! LocationDetailViewController
+            let detailScene = segue.destination as! LocationDetailViewController
             
             // Pass the selected object to the destination view controller.
             if let indexPath = self.tableView.indexPathForSelectedRow {

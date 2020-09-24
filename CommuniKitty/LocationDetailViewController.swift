@@ -97,7 +97,7 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate {
             }
             
             
-            if let logoFile = location.logoUrl {
+//            if let logoFile = location.logoUrl {
                 //self.logoImage.kf.setImageWithURL(NSURL(string: logoFile.url!)!)
 //                logoFile.getDataInBackground(block: {
 //                    (data: Data?, error: Error?) -> Void in
@@ -109,7 +109,7 @@ class LocationDetailViewController: UIViewController,UITabBarDelegate {
 //                    }
 //                })
                 
-            }
+//            }
             
 //            Answers.logContentViewWithName("Profile",
 //                                           contentType: "Location",
