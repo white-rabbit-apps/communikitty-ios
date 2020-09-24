@@ -371,7 +371,6 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     
     func setUpMenuBarController(title: String) {
         self.setUpNavigationBar(title: title, showButton: false)
-                
         self.navigationItem.leftBarButtonItem = self.getNavBarItem(imageId: "button_menu", action: #selector(UIViewController.showMenu), height: 20, width: 25)
     }
     
@@ -430,7 +429,7 @@ extension UIViewController: MFMessageComposeViewControllerDelegate {
     }
 
 func isLoggedIn() -> Bool {
-    return WRUser.current() != nil
+    return GraphQLServiceManager.sharedManager.getUSer() != nil
 }
 
 func openUserProfile(user: WRUser? = nil, push: Bool = true) {
